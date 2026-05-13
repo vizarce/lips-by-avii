@@ -212,13 +212,28 @@ LIPS by AVII генерує два типи промптів:
 ## 🤖 AI-інтеграція
 
 - **Модель:** Claude Sonnet 4 (`claude-sonnet-4-20250514`) від Anthropic
-- **Endpoint:** `https://api.anthropic.com/v1/messages`
 - **API ключ:** вводиться вручну у верхній панелі, зберігається в `localStorage`
 - **Що робить AI:**
   - Аналізує жанр і дає рекомендації
   - Генерує теги для секцій пісні
   - Пише лірику з нуля або доопрацьовує вашу
   - Формує Lyrics-Prompt і Style-Prompt
+
+### Архітектура запитів
+
+На **Netlify** запити йдуть через серверну функцію-проксі (вирішує CORS):
+
+```
+Browser → /.netlify/functions/proxy → api.anthropic.com/v1/messages
+```
+
+Локально (відкрити `index.html` у браузері) — прямий виклик:
+
+```
+Browser → api.anthropic.com/v1/messages
+```
+
+Перемикання відбувається автоматично залежно від домену.
 
 ---
 
@@ -233,9 +248,23 @@ LIPS by AVII генерує два типи промптів:
 ## 🛠️ Технічний стек
 
 - Чистий HTML / CSS / JavaScript — без фреймворків і бандлерів
-- Один файл: `index.html`
 - Шрифти: IBM Plex Mono + Outfit (Google Fonts)
-- Деплой: статичний хостинг (GitHub Pages / Netlify)
+- Netlify Serverless Functions (Node.js) — проксі для Anthropic API
+- GitHub → Netlify автодеплой при кожному `git push`
+
+### Структура репозиторію
+
+```
+lips-by-avii/
+├── index.html                  # Весь застосунок (HTML + CSS + JS)
+├── netlify.toml                # Конфігурація Netlify (publish dir, functions dir)
+├── netlify/
+│   └── functions/
+│       └── proxy.js            # Serverless proxy → Anthropic API
+├── .gitignore
+├── README.md
+└── LICENSE
+```
 
 ---
 
