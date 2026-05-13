@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LIPS by AVI</title>
+<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap');
 :root{
-  --bg:#0a0c10;--p1:#0f1117;--p2:#161820;--p3:#1e2029;--p4:#252836;
-  --b0:rgba(255,255,255,.04);--b1:rgba(255,255,255,.08);--b2:rgba(255,255,255,.18);
-  --t0:#f0f2f8;--t1:#a8afc4;--t2:#5c6280;--t3:#2e3250;
+  --bg:#10121a;--p1:#181b26;--p2:#1f2333;--p3:#262b3d;--p4:#2e3450;
+  --b0:rgba(255,255,255,.06);--b1:rgba(255,255,255,.11);--b2:rgba(255,255,255,.22);
+  --t0:#f0f2f8;--t1:#b8bfd4;--t2:#6e78a0;--t3:#3a4060;
   --acc:#4d8fff;--acc-s:rgba(77,143,255,.1);
   --pur:#a855f7;--pur-s:rgba(168,85,247,.1);
   --teal:#2dd4bf;--teal-s:rgba(45,212,191,.1);
@@ -23,7 +23,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font);background:var(--bg);color:var(--t0);font-size:14px;line-height:1.5;overflow-x:hidden}
 .hdr{padding:12px 24px;border-bottom:1px solid var(--b0);display:flex;align-items:center;justify-content:space-between;background:var(--p1)}
-.brand-name{font-size:18px;font-weight:600;color:var(--t0)}.brand-name span{color:var(--acc)}
+.brand-name{font-size:15px;font-weight:600;color:var(--t0);letter-spacing:.2px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.brand-name span{color:var(--acc)}
+.copy-badge{font-size:11px;color:var(--t2)}
+.copy-year{font-size:11px;color:var(--t2)}
+.logo-svg svg{display:block;filter:drop-shadow(0 2px 8px rgba(77,143,255,.25))}
 .brand-tag{font-size:10px;color:var(--t2);font-family:var(--mono);letter-spacing:.5px;margin-top:1px}
 .steps{display:flex;align-items:center;gap:0;margin:20px 0 8px;flex-wrap:wrap;gap:4px}
 .step-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:var(--r);border:1px solid var(--b0);background:transparent;cursor:pointer;font-family:var(--font);font-size:12px;color:var(--t2);transition:all .2s}
@@ -60,7 +64,8 @@ textarea{resize:vertical;line-height:1.6}
 .pill:hover{border-color:var(--b2);color:var(--t1)}
 .pill.on{background:var(--teal-s);border-color:var(--teal);color:var(--teal)}
 .pill.on.gold{background:var(--gold-s);border-color:var(--gold);color:var(--gold)}
-.pill[data-tip]:hover::after{content:attr(data-tip);position:fixed;bottom:auto;top:auto;left:50%;transform:none;background:var(--p4);color:var(--t1);font-size:10px;padding:5px 9px;border-radius:5px;border:1px solid var(--b1);white-space:pre-wrap;z-index:9999;pointer-events:none;max-width:220px;text-align:center;line-height:1.4;min-width:140px}
+.pill[data-tip]:hover::after{display:none}
+#tooltip{position:fixed;background:var(--p4);color:var(--t1);font-size:11px;padding:6px 10px;border-radius:6px;border:1px solid var(--b1);white-space:pre-wrap;z-index:9999;pointer-events:none;max-width:240px;text-align:center;line-height:1.5;box-shadow:0 4px 16px rgba(0,0,0,.4);display:none;transition:opacity .1s}
 
 .pill-i{font-size:9px}
 .btn-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
@@ -145,13 +150,24 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
 </head>
 <body>
 <div class="hdr">
-  <div>
-    <div class="brand-name">LIPS<span>·</span>AVI</div>
-    <div class="brand-tag">Lyrics & Instrumentation Prompt Synthesizer</div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="logo-svg">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="8" fill="url(#lg)"/>
+        <path d="M10 26 L10 14 L14 10 L22 10 L26 14 L26 22 L22 26 Z" stroke="#fff" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+        <circle cx="18" cy="18" r="3" fill="#4d8fff"/>
+        <path d="M18 10 L18 15 M18 21 L18 26 M10 18 L15 18 M21 18 L26 18" stroke="rgba(255,255,255,.4)" stroke-width="1" stroke-linecap="round"/>
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#1a1f35"/><stop offset="1" stop-color="#0f1220"/></linearGradient></defs>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span></div>
+      <div class="brand-tag">Lyrics & Instrumentation Prompt Synthesizer · by @AVII</div>
+    </div>
   </div>
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:5px">
-      <span style="font-size:10px;color:var(--t2);white-space:nowrap">API Key:</span>
+      <span class="api-lbl" style="font-size:10px;color:var(--t2);white-space:nowrap">API Key:</span>
       <input type="password" id="api-key-input" placeholder="sk-ant-…" style="width:160px;font-size:11px;padding:4px 8px;font-family:var(--mono)" oninput="saveApiKey()" autocomplete="off">
       <span id="api-key-status" style="font-size:10px;width:14px;text-align:center">⬜</span>
     </div>
@@ -231,6 +247,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
               <option value="Indie-Pop, Alternative Indie-Pop">Indie-Pop / Alt Indie-Pop</option>
               <option value="Modern Pop">Modern Pop</option>
               <option value="female, confessional, alternative indie">Female Confessional Indie ✦</option>
+              <option value="male, confessional, alternative indie">Male Confessional Indie ✦</option>
             </optgroup>
             <optgroup label="── Chill / Lo-Fi ──">
               <option value="Chill, Lo-Fi">Chill / Lo-Fi</option>
@@ -340,9 +357,10 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
         <button class="btn sm" onclick="dndAdd()">+ Додати</button>
       </div>
       <div class="btn-row" style="margin-top:0">
-        <button class="btn sm" onclick="dndReset()">↺ Базова</button>
-        <button class="btn sm" onclick="dndAutoGenre()">⚡ Авто-жанр</button>
-        <button class="btn sm pur" onclick="dndRegenTags()">✦ AI теги</button>
+        <button class="btn sm" id="btn-reset" onclick="dndReset()">↺ Базова</button>
+        <button class="btn sm" id="btn-auto-genre" onclick="dndAutoGenre()">⚡ Авто-жанр</button>
+        <button class="btn sm pur" id="btn-ai-tags" onclick="dndRegenTags()">✦ AI теги</button>
+        <button class="btn sm pur" id="btn-ai-struct" onclick="dndAIStructure()">✦ AI структура+теги</button>
       </div>
     </div>
   </div>
@@ -426,7 +444,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
   </div>
   <div class="btn-row">
     <button class="btn" onclick="goStep(2)">← Назад</button>
-    <button class="btn gold" onclick="goStep(4)">Далі: Генерація →</button>
+    <button class="btn gold" id="btn-gen" onclick="goStep(4)">Далі: Генерація →</button>
   </div>
 </div>
 
@@ -441,7 +459,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     <div class="sugs" id="sugs-block"><div class="sugs-title">✦ AI Рекомендації</div><div id="sugs-list"></div></div>
     <div class="out-block">
       <div class="out-hdr">
-        <span class="out-title">🎵 Lyrics-prompt — ≤5000 зн.</span>
+        <span class="out-title" id="out-title-l">🎵 Lyrics-prompt — ≤5000 зн.</span>
         <div class="out-meta"><span class="ctr ok" id="ctr-l">0 / 5000</span><button class="cbtn" id="cbtn-l" onclick="cp('out-l','ctr-l',5000,'pf-l','cbtn-l')">Копіювати</button></div>
       </div>
       <textarea class="out" id="out-l" rows="22" oninput="updCtr('out-l','ctr-l',5000,'pf-l')"></textarea>
@@ -449,7 +467,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     </div>
     <div class="out-block">
       <div class="out-hdr">
-        <span class="out-title">🎛️ Style-prompt — ≤1000 зн.</span>
+        <span class="out-title" id="out-title-s">🎛️ Style-prompt — ≤1000 зн.</span>
         <div class="out-meta"><span class="ctr ok" id="ctr-s">0 / 1000</span><button class="cbtn" id="cbtn-s" onclick="cp('out-s','ctr-s',1000,'pf-s','cbtn-s')">Копіювати</button></div>
       </div>
       <textarea class="out" id="out-s" rows="11" oninput="updCtr('out-s','ctr-s',1000,'pf-s')"></textarea>
@@ -459,13 +477,13 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
       <div class="card-hdr"><span class="cdot pur"></span><span class="card-title">✦ Уточнення для AI</span></div>
       <div class="cb">
         <div class="fld"><label class="lbl">Коментарі — AI врахує і перегенерує</label><textarea id="refinement" rows="3" placeholder="напр. 'Більш емоційний приспів', 'Більше IT-термінів', 'Скороти куплет 1'…"></textarea></div>
-        <button class="btn pur" onclick="refine()">✦ AI покращує</button>
+        <button class="btn pur" id="btn-refine" onclick="refine()">✦ AI покращує</button>
       </div>
     </div>
     <div class="btn-row">
       <button class="btn" onclick="goStep(3)">← Назад</button>
-      <button class="btn" onclick="regen()">↺ Перегенерувати</button>
-      <button class="btn" onclick="goStep(1)">↺ Нова пісня</button>
+      <button class="btn" id="btn-regen" onclick="regen()">↺ Перегенерувати</button>
+      <button class="btn" id="btn-new" onclick="goStep(1)">↺ Нова пісня</button>
     </div>
     <div class="toast" id="toast"></div>
   </div>
@@ -646,12 +664,20 @@ buildCloud('sfx','sfx-cloud',true);
 
 // GENRE SUBS
 const SUBS={
-  house:['Deep House','Electro House','Tech House','Garage House','Future House','Hard House','French House','Bass House','Big Room House','Slap House','Lo-Fi House','Afro House','Chicago House','Latin House','Organic House','Drift Phonk House','G-House','Chill House','Disco House','Piano House','Soulful House','Progressive House','Haunted House'],
-  EDM:['Big Room','Trance','Dubstep','Drum & Bass','Hardstyle','Future Bass','Electro','Psy-Trance','Progressive Trance','Happy Hardcore','Future Rave','Vocal Trance','Midtempo'],
+  house:['Deep House','Electro House','Tech House','Garage House','Ambient House','Future House','Hard House','French House','Bass House','Big Room House','Slap House','Lo-Fi House','Afro House','Chicago House','Fidget House','Latin House','Organic House','Drift Phonk House','Club House','G-House','Chill House','Disco House','Piano House','Soulful House','Progressive House','Tribal House','Scouse House','Haunted House'],
+  'Modern Pop':['Electropop','Synthpop','Experimental Pop','Urban Pop','Ethno-Pop','Alternative Pop','Dark Pop','Hyperpop','Bedroom Pop','Art Pop','Dance Pop','Sophisti-Pop','K-Pop','J-Pop','Alt-Pop'],
+  EDM:['Big Room','Trance','Dubstep','Trap','Drum & Bass','Hardstyle','Future Bass','Electro','Breaks','Psy-Trance','Progressive Trance','Happy Hardcore','Future Rave','Vocal Trance'],
   'New Wave':['Synthwave','Dreamwave','Retrowave','Darkwave','Coldwave','Vapor Synthwave','Outrun','Dark Synthwave','Chillwave','Futurepop','Electropop'],
-  Jazz:['Contemporary Jazz','Smooth Jazz','Jazz Fusion','Bebop','Cool Jazz','Post-Bop','Jazz Funk','Acid Jazz','Vocal Jazz','Piano Jazz','Nu Jazz','Swing','Dark Jazz'],
-  Rock:['Alternative Rock','Indie Rock','Hard Rock','Psychedelic Rock','Progressive Rock','Post-Rock','Shoegaze','Garage Rock','Grunge','Post-Punk'],
-  Metal:['Heavy Metal','Melodic Metal','Metalcore','Death Metal','Black Metal','Doom Metal','Thrash Metal','Power Metal','Symphonic Metal'],
+  'Chill, Lo-Fi':['Chill House','Progressive Chill','Chill-Out','ChillHop','Chillsynth','Chillstep','Chillwave','Lo-Fi Hip-Hop','Study Beats','Late Night Lo-Fi'],
+  'Ethno, Folk':['Celtic Folk','Nordic Folk','African','Flamenco','Balkan Folk','Japanese Folk','Middle Eastern','Andean','Bossa Nova','Afrobeat','Ukrainian Folk','Cumbia','Irish Folk','Samba','Tango'],
+  Ambient:['Dark Ambient','Space Ambient','Drone Ambient','Nature Ambient','Binaural','New Age','Cinematic Ambient','Healing Ambient','Ritual Ambient'],
+  'Hip-Hop, Rap':['Boom Bap','Conscious','Trap Hip-Hop','East Coast','West Coast','Southern','Underground','Alternative','Hardcore','Instrumental','Lo-Fi Hip-Hop','Cloud Rap','Emo Rap','Drill','UK Drill'],
+  Trap:['Trap','Dark Trap','Trap Soul','Latin Trap','Trap Metal','Phonk Trap','Melodic Trap'],
+  Jazz:['Contemporary Jazz','Smooth Jazz','Jazz Fusion','Bebop','Cool Jazz','Post-Bop','Free Jazz','Jazz Funk','Acid Jazz','Vocal Jazz','Piano Jazz','Nu Jazz','Swing','Dark Jazz'],
+  Rock:['Alternative Rock','Indie Rock','Hard Rock','Psychedelic Rock','Progressive Rock','Post-Rock','Shoegaze','Dream Pop','Garage Rock','Grunge','Post-Punk'],
+  Metal:['Heavy Metal','Melodic Metal','Metalcore','Death Metal','Black Metal','Doom Metal','Thrash Metal','Progressive Metal','Power Metal','Symphonic Metal'],
+  Phonk:['Phonk','Drift Phonk','Dark Phonk','Rare Phonk','Brazilian Phonk','Hard Phonk'],
+  'City Pop, J-Pop':['City Pop','J-Pop','J-Rock','Shibuya-Kei','Kayōkyoku','Idol','Visual Kei','Anime','K-Pop','K-R&B'],
 };
 
 function onGenre(){
@@ -679,7 +705,7 @@ function onLyricMode(){const m=document.getElementById('lyric-mode').value;docum
 // BASS INTELLIGENCE
 const BASS_DOM=['house','Vocal House','Deep House','Bass House','Slap House','EDM','Trap','Hip-Hop','Funk','Reggaeton','Phonk'];
 const BASS_MOD=['R&B','Soul','Indie','Pop','Jazz','City Pop','Rock','New Wave','Chill','Lo-Fi'];
-const BASS_MIN=['female, confessional','Ambient','Electro-Orchestral','Ethno','Folk','Metal'];
+const BASS_MIN=['female, confessional','male, confessional','Ambient','Electro-Orchestral','Ethno','Folk','Metal'];
 
 const BASS_PRESETS={
   'Vocal House, Deep House':'L1:deep sub-bass floor,chest-rattling|L2:mid punchy walking groove,melodic drive|L3:high syncopated stab,dynamic|Sub-bass heartbeat half-time drop only.Bass=rhythm.',
@@ -757,22 +783,23 @@ const BASE=['Intro','Instrumental Transition 1','Hook 1','Drop 1','Verse 1','Pre
 let STRUCT=[...BASE],STAGS={},dragIdx=null;
 
 const SP={
-  'Intro':['Soft piano','No drums','Ambient pad','Boot-up SFX','Vinyl crackle','Vocal hook','Whispered','Sub-bass breath','Reverse strings','Modem hiss'],
+  'Intro':['Soft piano','Ambient pad','Boot-up SFX','Vinyl crackle','No drums','Vocal hook','Whispered','Sub-bass breath','Modem hiss','Reverse strings'],
   'Build-up':['Bass layers build','Hi-hat accelerates','Riser SFX','Snare roll','Filter opens','Tension grows','8 bars','16 bars'],
-  'Drop':['Bass layers 1+2','Sidechain pumping','Digital glitch','Vocal chop','4 bars','8 bars','Sub impact','All 3 bass layers'],
-  'Instrumental Drop':['No vocals','Bass maximum','Synth lead','Peak instrumental'],
-  'Vocal Drop':['Vocal chops','Bass layers','Stutter effect'],
-  'Bass Drop':['Sub-bass maximum','L1+L2+L3 simultaneous','Bass IS the moment'],
+  'Drop':['Bass layers 1+2','Sidechain pumping','Digital glitch','Server hum','Vocal chop','4 bars','8 bars','Sub impact','Filter sweep','Hard drop'],
+  'Instrumental Drop':['No vocals','Bass maximum','Synth lead','Peak instrumental','8 bars'],
+  'Vocal Drop':['Vocal chops prominent','Bass layers','Stutter effect','4 bars'],
+  'Bass Drop':['Sub-bass maximum','L1+L2+L3 simultaneous','Bass IS the moment','Sidechain peak'],
   'Half-Time Drop':['Kick gone','Sub-bass heartbeat only','Lone piano','Suspension 4 bars'],
-  'Verse':['Spoken-word','Keyboard clicks','Walking bass','Lo-fi groove','Intimate vocal','No percussion'],
-  'Pre-Chorus':['Sub-only bass','Pad swell','Snare roll','Bass layer 3','Rising piano','String swell','Choir enters'],
-  'Chorus':['Full piano hook','Polymorphic bass','Choir pad','Saxophone woven','Wide stereo','Anthemic'],
-  'Bridge':['Solo saxophone','Piano only','No percussion','Intimate','Breakdown','Emotional peak'],
-  'Hook':['Vocal chop echo','UI ping','Piano chord','Bass layer 1','Vinyl crackle','Whispered'],
-  'Instrumental Transition':['Binary whoosh','Filter sweep','Bass layer 3','Riser','6 bars','8 bars'],
-  'Outro':['Orchestra out','Solo piano','Saxophone front','Sub drone fade','Bass peels','Reverb tail'],
-  'Break':['Reverse piano','No drums','Airy','Sub breath'],
-  'default':['Piano','Saxophone','Bass layers','Sidechain','Reverb','Vocal chop']
+  'Verse':['Spoken-word','Keyboard clicks','Data beeps','Walking bass','Rhodes chords','Lo-fi groove','Intimate vocal','No percussion','Heartbeat kick','Dry vocal'],
+  'Pre-Chorus':['Sub-only bass','Pad swell','Snare roll','Bass layer 3','Data beeps','Rising piano','String swell','Breath FX','Vocal rises','Choir enters'],
+  'Chorus':['Full piano hook','Polymorphic bass','Choir pad','Saxophone woven','Layered harmonies','Deep sub impact','Wide stereo','Anthemic','Melodic synth','Crash cymbal'],
+  'Bridge':['Solo saxophone','Piano only','No percussion','Intimate','Breakdown','Matrix rain','Error alert FX','Emotional peak','Spoken-word','Quiet'],
+  'Hook':['Vocal chop echo','UI ping','Piano chord','Bass layer 1','Vinyl crackle','Whispered','Sidechain pulse','Saxophone breath','Minimal','Short'],
+  'Instrumental Transition':['Binary whoosh','Filter sweep','Bass layer 3','Riser','6 bars','8 bars','Hi-hat builds','Saxophone enters','Synth bloom','Tension build'],
+  'Outro':['Orchestra out','Solo piano','Saxophone front','Sub drone fade','Bass peels','Whispered','8-sec reverb','Modem hiss fades','Guitar harmonics','Silence'],
+  'Break':['Reverse piano','No drums','Airy','Vocal floats','Piano only','Sub breath','Breakdown','Half-time'],
+  'Post-Chorus':['Vocal hook repeat','Bass groove','Energy sustain','Short 4 bars'],
+  'default':['Piano','Saxophone','Bass layers','Sidechain','Reverb','Vocal chop','Digital glitch','Wide stereo']
 };
 
 function getSP(name){const n=name.toLowerCase();for(const k of Object.keys(SP)){if(n.includes(k.toLowerCase()))return SP[k]}return SP.default}
@@ -855,13 +882,74 @@ function dndAutoGenre(){
 }
 function dndRegenTags(){STAGS={};STRUCT.forEach(p=>{STAGS[p]=autoTag(p)});dndRender();showToast('Теги регенеровано')}
 
+async function dndAIStructure(){
+  const genre=getGenre();const bpm=getBpm();
+  const concept=document.getElementById('concept').value||'';
+  const mood=[...SEL.mood].join(',')||'romantic';
+  if(!getApiKey()){showToast(getLang()==='uk'?'Введіть API ключ':'Enter API key');return}
+  showToast(getLang()==='uk'?'AI генерує структуру…':'AI generating structure…');
+  try{
+    const raw=await callAI(`Expert Suno prompt engineer. Genre:"${genre}",${bpm}. Concept:"${concept}". Mood:${mood}.
+Generate optimal song structure AND concise tag-prompts for each section.
+Respond ONLY as JSON:
+{"structure":["Section Name 1","Section Name 2",...],"tags":{"Section Name 1":"tag1,tag2|tag3","Section Name 2":"tag1,tag2",...}}
+Use these section names: Intro, Hook 1-3, Drop 1-5, Build-up 1-3, Verse 1-3, Pre-Chorus 1-3, Chorus 1-2, Chorus Finale, Bridge, Break, Instrumental Transition 1-4, Outro Part 1-2, Post-Chorus, Guitar Solo, Rap Verse, Spoken Interlude.
+Tag-prompts: comma and pipe separated, concise, max 80 chars per section. Match genre and concept.`,800);
+    const data=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    if(data.structure?.length){
+      STRUCT=[...data.structure];
+      STAGS={};
+      if(data.tags){Object.assign(STAGS,data.tags)}
+      STRUCT.forEach(p=>{if(!STAGS[p])STAGS[p]=autoTag(p)});
+      dndRender();
+      showToast(getLang()==='uk'?'✦ Структуру і теги згенеровано AI':'✦ Structure generated by AI');
+    }
+  }catch(e){showToast('Error: '+e.message)}
+}
+
 function initDndSel(){const s=document.getElementById('dnd-sel');s.innerHTML='';ALL_PARTS.forEach(p=>{const o=document.createElement('option');o.value=o.textContent=p;s.appendChild(o)})}
 
 // VOCAL DESC
 const VD={
-  male:{house:'solo male,warm baritone,gravelly rasp,spoken-word verses,melodic authority chorus',indie:'solo male,warm melodic,gentle rasp,wide dynamic range,soaring chorus',cinematic:'solo male,deep cinematic baritone,spoken bridge,full voice finale',whisper:'solo male,baritone,whispering dominant,melodic chorus only',soul:'solo male,rich soulful tenor,gospel runs,emotional falsetto',reggaeton:'solo male,characteristic warm baritone,ultra-emotional spoken verses',rap:'solo male,confident lyrical flow,punchy articulation,melodic hooks',jazz:'solo male,warm smooth crooner,jazz phrasing,soft vibrato',rock:'solo male,powerful raspy rock tenor,anthemic chorus',metal:'solo male,powerful wide range,aggressive chorus,controlled screaming',confessional:'solo male,intimate quiet baritone,confessional spoken-word,vulnerable'},
-  female:{house:'solo female,pure clear bell-like tone,wide range,breathy verses,soaring chorus',indie:'solo female,warm breathy ultra-melodic,falsetto ad-libs,whisper verses',cinematic:'solo female,luminous operatic range,whispered verses,powerful finale',whisper:'solo female,airy breathy dominant,melodic chorus only',soul:'solo female,rich soulful mezzo-soprano,gospel runs,full voice chorus',reggaeton:'solo female,confident wide range,ultra-emotional,breathy verses',rap:'solo female,sharp confident flow,melodic hooks,playful growls',jazz:'solo female,sultry jazz alto,warm intimate,scatting ad-libs',rock:'solo female,powerful rock soprano,breathy verses,full-power chorus',metal:'solo female,operatic soprano,soaring chorus',confessional:'solo female,intimate confessional,pure unaffected tone,vulnerable quiet'},
-  duet:{house:'male-female duet — male warm rasp spoken-word; female pure clear soaring. Rich harmonies.',indie:'male-female duet — male warm melodic; female breathy wide range. Layered harmonies.',cinematic:'male-female duet — male cinematic baritone; female crystalline. Choral harmonies.',whisper:'male-female duet — both whispering. Male spoken bridge, female soaring chorus.',soul:'male-female duet — both soulful. Call-and-response, unison gospel chorus.',reggaeton:'male-female duet — male baritone spoken; female breathy soaring.',rap:'male-female duet — male lyrical flow; female melodic hooks.',jazz:'male-female duet — both jazz phrasing, call-and-response.',rock:'male-female duet — male raspy verse; female powerful soaring chorus.',metal:'male-female duet — male powerful/growl; female operatic soprano.',confessional:'male-female duet — both intimate confessional, hushed harmonies.'}
+  male:{
+    house:'solo male vocal — deeply characteristic, warm baritone, gravelly texture, slight rasp, raw emotional core, controlled power, never shouting. Spoken-word verses, melodic authority chorus.',
+    indie:'solo male vocal — warm, melodic, vulnerable. Gentle rasp, wide dynamic range. Spoken-word verses, soaring chorus.',
+    cinematic:'solo male vocal — deep cinematic baritone, gravelly, powerful yet restrained. Spoken-word bridge, full voice finale.',
+    whisper:'solo male vocal — mature baritone. Whispering and spoken-word dominant. Melodic chorus only.',
+    soul:'solo male vocal — rich soulful tenor, smooth and warm, gospel-inflected runs. Emotional falsetto bridges.',
+    reggaeton:'solo male vocal — young yet mature, deeply characteristic, wide range, ultra-emotional. Spoken verses.',
+    rap:'solo male vocal — confident lyrical flow, punchy articulation. Melodic hooks, ad-libs throughout.',
+    jazz:'solo male vocal — warm smooth crooner, jazz phrasing, soft vibrato on held notes.',
+    rock:'solo male vocal — powerful raspy rock tenor, raw energy. Anthemic full-voice chorus.',
+    metal:'solo male vocal — powerful, wide range. Controlled screaming in key sections. Melodic hooks.',
+    confessional:'solo male vocal — intimate quiet baritone, confessional spoken-word delivery, vulnerable and raw. Understated, precise enunciation, emotional restraint with deep undertow.'
+  },
+  female:{
+    house:'solo female vocal — pure, clear, bell-like tone, wide range, never shouting. Breathy intimacy verses, soaring clarity chorus.',
+    indie:'solo female vocal — warm, breathy, ultra-melodic. Delicate falsetto ad-libs. Whisper verses, anthemic chorus.',
+    cinematic:'solo female vocal — luminous, wide operatic range. Whispered verses, powerful soaring finale.',
+    whisper:'solo female vocal — airy, breathy, whispering dominant. Pure melodic voice chorus only.',
+    soul:'solo female vocal — rich soulful mezzo-soprano, warm and powerful. Gospel runs, emotional vibrato.',
+    reggaeton:'solo female vocal — young, confident, wide range, ultra-emotional. Breathy verses, soaring chorus.',
+    rap:'solo female vocal — sharp confident flow, rhythmic delivery. Melodic hooks, playful growls on transitions.',
+    jazz:'solo female vocal — sultry jazz alto, warm and intimate. Soft scatting ad-libs, vibrato on long notes.',
+    rock:'solo female vocal — powerful rock soprano, raw and expressive. Breathy verses, full-power anthemic chorus.',
+    metal:'solo female vocal — operatic soprano contrasting heavy instrumentation. Soaring powerful chorus.',
+    confessional:'solo female vocal — intimate confessional delivery, quiet precise enunciation, pure unaffected tone, vulnerable.'
+  },
+  duet:{
+    house:'male-female duet — male warm controlled rasp spoken-word verses; female pure clear emotive soaring chorus. Rich harmonies chorus and bridge.',
+    indie:'male-female duet — male warm melodic; female breathy bell-like wide range. Layered harmonies throughout.',
+    cinematic:'male-female duet — male deep cinematic baritone; female crystalline clarity. Choral harmonies finale.',
+    whisper:'male-female duet — both whispering verses and drops. Male spoken-word bridge, female soaring chorus.',
+    soul:'male-female duet — both soulful groovy delivery. Call-and-response verses, unison gospel chorus.',
+    reggaeton:'male-female duet — male characteristic warm baritone spoken-word; female breathy melodic soaring. Harmonies chorus.',
+    rap:'male-female duet — male lyrical flow verses; female melodic hooks and chorus. Back-and-forth exchange.',
+    jazz:'male-female duet — both warm jazz phrasing, call-and-response verses. Harmonies on chorus.',
+    rock:'male-female duet — male raspy rock verse; female powerful soaring chorus. Unison anthemic finale.',
+    metal:'male-female duet — male powerful clean or growl verses; female operatic soprano soaring. Contrast is key.',
+    confessional:'male-female duet — both intimate confessional delivery, hushed harmonies, understated and raw.'
+  }
 };
 function getVocalDesc(){const vt=document.getElementById('vt').value;const vs=document.getElementById('vs').value;const extra=document.getElementById('vocal-extra').value.trim();const base=(VD[vt]?.[vs])||VD.male.house;return extra?base+','+extra:base}
 
@@ -926,19 +1014,54 @@ function updateKeyStatus(k){
   else if(k&&k.length>5){el.textContent='⚠️';el.title='Перевірте ключ — має починатись з sk-ant-'}
   else{el.textContent='⬜';el.title='Введіть API ключ'}
 }
+// Proxy endpoints - tries direct first, then Netlify proxy
+const PROXY_URL='/.netlify/functions/proxy';
+const DIRECT_URL='https://api.anthropic.com/v1/messages';
+
 async function callAI(prompt,maxTokens=2000){
   const apiKey=getApiKey();
-  if(!apiKey){throw new Error('API ключ не введено. Вставте ключ у поле "API Key" у верхньому правому куті.')}
-  const headers={'Content-Type':'application/json'};
-  if(apiKey)headers['x-api-key']=apiKey;
-  const r=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers,
-    body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]})
-  });
+  if(!apiKey){throw new Error(getLang()==='uk'?'API ключ не введено. Вставте ключ у поле "API Key" у верхньому правому куті.':'API key not entered. Add your key in the top-right field.')}
+  const body=JSON.stringify({model:'claude-sonnet-4-5',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]});
+  // Try Netlify proxy first (works on deployed version)
+  const isNetlify=window.location.hostname.includes('netlify.app')||window.location.hostname.includes('github.io');
+  if(isNetlify){
+    try{
+      const r=await fetch(PROXY_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey,body:JSON.parse(body)})});
+      const d=await r.json();
+      if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
+      return d.content?.[0]?.text||'';
+    }catch(e){
+      if(!e.message.includes('Failed to fetch'))throw e;
+    }
+  }
+  // Direct call (works in Claude.ai artifact context)
+  const headers={'Content-Type':'application/json','x-api-key':apiKey};
+  const r=await fetch(DIRECT_URL,{method:'POST',headers,body});
   const d=await r.json();
   if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
   return d.content?.[0]?.text||'';
+}
+
+function getLang(){return document.getElementById('lang-ui')?.value||'uk'}
+
+const I18N={
+  uk:{step1:'Інпут',step2:'Жанр + Структура',step3:'Теги',step4:'Генерація',
+      apiLabel:'API Key:',lyricsTitle:'🎵 Lyrics-prompt — ≤5000 зн.',styleTitle:'🎛️ Style-prompt — ≤1000 зн.'},
+  en:{step1:'Input',step2:'Genre + Structure',step3:'Tags',step4:'Generate',
+      apiLabel:'API Key:',lyricsTitle:'🎵 Lyrics-prompt — ≤5000 chars',styleTitle:'🎛️ Style-prompt — ≤1000 chars'}
+};
+
+function onUILang(){
+  const lang=getLang();const t=I18N[lang];
+  const labels=[t.step1,t.step2,t.step3,t.step4];
+  document.querySelectorAll('.step-btn').forEach((btn,i)=>{
+    const num=btn.querySelector('.step-num');
+    if(num&&labels[i])btn.innerHTML=num.outerHTML+labels[i];
+  });
+  const al=document.querySelector('.api-lbl');if(al)al.textContent=t.apiLabel;
+  const otl=document.getElementById('out-title-l');if(otl)otl.textContent=t.lyricsTitle;
+  const ots=document.getElementById('out-title-s');if(ots)ots.textContent=t.styleTitle;
+  localStorage.setItem('lips_lang',lang);
 }
 
 async function initStep4(){
@@ -957,7 +1080,23 @@ async function initStep4(){
   const lyricMode=document.getElementById('lyric-mode').value;
   const vd=getVocalDesc();
   const mood=[...SEL.mood].join(',');const instr=[...SEL.instr].join(',');
-  const prod=[...SEL.prod].join(',');const vt=[...SEL.vocal].join(',');const sfx=[...SEL.sfx].join(',');
+  const prod=[...SEL.prod].join(',');const vt=[...SEL.vocal].join(',');
+  const sfxSelected=[...SEL.sfx].join(',');
+  const sfxByGenre={
+    'Vocal House, Deep House':'terminal boot-up, modem hiss, binary whoosh, UI pings, keyboard clicks, data beeps, hard drive pulse, error alert FX, server hum, digital glitch, matrix rain, vinyl crackle',
+    'Bass House':'deep bass impact, sub rumble, binary whoosh, digital glitch, sidechain pulse, vinyl crackle, vocal chop stutter',
+    'Slap House':'slap bass transients, vocal chop stutter, binary whoosh, digital glitch, vinyl crackle, UI ping',
+    'Trap':'hi-hat triplet rolls, 808 bass thud, trap snare snap, dark synth swell, digital glitch, vinyl crackle',
+    'Hip-Hop, Rap':'vinyl crackle, record scratch, boom bap hi-hat, vocal chop stutter, binary whoosh',
+    'Jazz':'brushed snare texture, upright bass pluck, piano pedal SFX, vinyl crackle, tape hiss, cymbal wash',
+    'Chill, Lo-Fi':'vinyl crackle, tape hiss, rain ambience, lo-fi drum creak, soft tone sweep',
+    'Ambient':'deep space drone, nature ambience, binaural tone sweeps, resonant bell fade, wind texture',
+    'female, confessional, alternative indie':'vinyl crackle, room ambience, acoustic guitar resonance, tape hiss, breath mic',
+    'male, confessional, alternative indie':'vinyl crackle, room ambience, acoustic guitar resonance, tape hiss faint, breath mic texture, piano resonance',
+    'Reggaeton, Acid Electro-Pop':'acid 303 squelch, reverse-reverb FX, binary whoosh, digital glitch, snappy snare, vinyl crackle',
+    default:'terminal boot-up, vinyl crackle, binary whoosh, digital glitch, server hum, UI pings'
+  };
+  const sfx=sfxSelected||(sfxByGenre[genre]||sfxByGenre.default);
   const bp=buildBassPrompt();
   const sectionTags=STRUCT.map(s=>`[${s}]\n[${STAGS[s]||autoTag(s)}]`).join('\n');
 
@@ -1092,8 +1231,30 @@ function loadState(st){
 
 function autoSave(){clearTimeout(window._ast);window._ast=setTimeout(()=>{try{localStorage.setItem('lips_autosave',JSON.stringify(getState()))}catch(e){}},2000)}
 
+// TOOLTIP ENGINE
+const ttEl=document.createElement('div');ttEl.id='tooltip';document.body.appendChild(ttEl);
+document.addEventListener('mouseover',e=>{
+  const p=e.target.closest('[data-tip]');
+  if(!p)return;
+  ttEl.textContent=p.dataset.tip;ttEl.style.display='block';
+});
+document.addEventListener('mousemove',e=>{
+  if(ttEl.style.display==='none')return;
+  let x=e.clientX+12,y=e.clientY-40;
+  const w=ttEl.offsetWidth,h=ttEl.offsetHeight;
+  if(x+w>window.innerWidth-8)x=e.clientX-w-12;
+  if(y<8)y=e.clientY+20;
+  if(y+h>window.innerHeight-8)y=window.innerHeight-h-8;
+  ttEl.style.left=x+'px';ttEl.style.top=y+'px';
+});
+document.addEventListener('mouseout',e=>{
+  if(!e.target.closest('[data-tip]'))ttEl.style.display='none';
+});
+
 // INIT
 onGenre();initDndSel();STRUCT.forEach(p=>{STAGS[p]=autoTag(p)});
+// Restore language
+try{const sl=localStorage.getItem('lips_lang');if(sl){const lui=document.getElementById('lang-ui');if(lui){lui.value=sl;onUILang()}}}catch(e){}
 try{const s=localStorage.getItem('lips_autosave');if(s){const st=JSON.parse(s);if(st.title||st.concept)loadState(st)}}catch(e){}
 // Restore API key
 try{
