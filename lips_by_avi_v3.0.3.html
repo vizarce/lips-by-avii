@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LIPS by AVI</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap');
+:root{
+  --bg:#0a0c10;--p1:#0f1117;--p2:#161820;--p3:#1e2029;--p4:#252836;
+  --b0:rgba(255,255,255,.04);--b1:rgba(255,255,255,.08);--b2:rgba(255,255,255,.18);
+  --t0:#f0f2f8;--t1:#a8afc4;--t2:#5c6280;--t3:#2e3250;
+  --acc:#4d8fff;--acc-s:rgba(77,143,255,.1);
+  --pur:#a855f7;--pur-s:rgba(168,85,247,.1);
+  --teal:#2dd4bf;--teal-s:rgba(45,212,191,.1);
+  --gold:#f59e0b;--gold-s:rgba(245,158,11,.1);
+  --grn:#22c55e;--grn-s:rgba(34,197,94,.1);
+  --red:#ef4444;
+  --font:'Outfit',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --r:8px;--rs:5px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--t0);font-size:14px;line-height:1.5;overflow-x:hidden}
+.hdr{padding:12px 24px;border-bottom:1px solid var(--b0);display:flex;align-items:center;justify-content:space-between;background:var(--p1)}
+.brand-name{font-size:18px;font-weight:600;color:var(--t0)}.brand-name span{color:var(--acc)}
+.brand-tag{font-size:10px;color:var(--t2);font-family:var(--mono);letter-spacing:.5px;margin-top:1px}
+.steps{display:flex;align-items:center;gap:0;margin:20px 0 8px;flex-wrap:wrap;gap:4px}
+.step-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:var(--r);border:1px solid var(--b0);background:transparent;cursor:pointer;font-family:var(--font);font-size:12px;color:var(--t2);transition:all .2s}
+.step-btn.done{color:var(--grn);border-color:rgba(34,197,94,.2);background:var(--grn-s)}
+.step-btn.active{color:var(--t0);border-color:var(--b2);background:var(--p2)}
+.step-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;background:var(--b0);flex-shrink:0}
+.step-btn.active .step-num{background:var(--acc);color:#fff}
+.step-btn.done .step-num{background:var(--grn);color:#fff}
+.step-btn[data-s="2"].active .step-num{background:var(--pur)}
+.step-btn[data-s="3"].active .step-num{background:var(--teal);color:#000}
+.step-btn[data-s="4"].active .step-num{background:var(--gold);color:#000}
+.step-arrow{color:var(--t3);font-size:12px;margin:0 2px}
+.wrap{max-width:840px;margin:0 auto;padding:0 20px 60px}
+.page{display:none}.page.active{display:block}
+.card{background:var(--p1);border:1px solid var(--b0);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.card-hdr{padding:9px 15px;border-bottom:1px solid var(--b0);display:flex;align-items:center;gap:7px;background:var(--p2)}
+.cdot{width:7px;height:7px;border-radius:50%;background:var(--acc);flex-shrink:0}
+.cdot.pur{background:var(--pur)}.cdot.teal{background:var(--teal)}.cdot.gold{background:var(--gold)}
+.card-title{font-size:11px;font-weight:600;color:var(--t1);text-transform:uppercase;letter-spacing:.6px}
+.cb{padding:13px 15px}
+label.lbl{font-size:11px;color:var(--t2);display:block;margin-bottom:4px;font-weight:500}
+input,textarea,select{font-family:var(--font);font-size:13px;color:var(--t0);background:var(--p2);border:1px solid var(--b1);border-radius:var(--rs);padding:7px 10px;width:100%;outline:none;transition:border-color .15s}
+input:focus,textarea:focus,select:focus{border-color:var(--acc)}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235c6280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;padding-right:26px}
+option,optgroup{background:var(--p2)}
+textarea{resize:vertical;line-height:1.6}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.fld{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.fld:last-child{margin-bottom:0}
+.hint{font-size:11px;color:var(--t2);margin-top:2px;line-height:1.4}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:2px}
+.pill{font-family:var(--font);font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--b1);background:transparent;color:var(--t2);cursor:pointer;transition:all .15s;position:relative;display:inline-flex;align-items:center;gap:4px;user-select:none}
+.pill:hover{border-color:var(--b2);color:var(--t1)}
+.pill.on{background:var(--teal-s);border-color:var(--teal);color:var(--teal)}
+.pill.on.gold{background:var(--gold-s);border-color:var(--gold);color:var(--gold)}
+.pill[data-tip]:hover::after{content:attr(data-tip);position:fixed;bottom:auto;top:auto;left:50%;transform:none;background:var(--p4);color:var(--t1);font-size:10px;padding:5px 9px;border-radius:5px;border:1px solid var(--b1);white-space:pre-wrap;z-index:9999;pointer-events:none;max-width:220px;text-align:center;line-height:1.4;min-width:140px}
+
+.pill-i{font-size:9px}
+.btn-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+button.btn{font-family:var(--font);font-size:13px;font-weight:500;padding:8px 18px;border-radius:var(--rs);border:1px solid var(--b1);background:transparent;color:var(--t1);cursor:pointer;transition:all .15s}
+button.btn:hover{background:var(--p2);border-color:var(--b2);color:var(--t0)}
+button.btn.pri{background:var(--acc-s);border-color:var(--acc);color:var(--acc)}
+button.btn.pur{background:var(--pur-s);border-color:var(--pur);color:var(--pur)}
+button.btn.teal{background:var(--teal-s);border-color:var(--teal);color:var(--teal)}
+button.btn.gold{background:var(--gold-s);border-color:var(--gold);color:var(--gold)}
+button.btn.sm{font-size:11px;padding:4px 11px}
+button.btn:active{transform:scale(.98)}
+.gi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gi-item{background:var(--p2);border:1px solid var(--b0);border-radius:var(--rs);padding:9px 11px}
+.gi-label{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;font-weight:500}
+.gi-value{font-size:12px;color:var(--t1);line-height:1.5}
+.gi-loader{display:flex;align-items:center;gap:8px;padding:8px;font-size:12px;color:var(--t2)}
+.mini-spin{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--b1);border-top-color:var(--acc);animation:spin .8s linear infinite;flex-shrink:0}
+.recs{background:var(--p2);border:1px solid rgba(77,143,255,.2);border-radius:var(--r);padding:11px 13px;margin-bottom:12px;display:none}
+.recs.show{display:block}
+.recs-title{font-size:10px;font-weight:600;color:var(--acc);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
+.rec-item{font-size:12px;color:var(--t1);padding:3px 0;border-bottom:1px solid var(--b0);line-height:1.5}
+.rec-item:last-child{border-bottom:none}
+.rec-item::before{content:"✦ ";color:var(--acc);font-size:10px}
+.genre-info{display:none}.genre-info.show{display:block;margin-bottom:10px}
+.dnd-list{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.dnd-item{background:var(--p2);border:1px solid var(--b0);border-radius:var(--rs);overflow:hidden;cursor:grab;transition:border-color .15s}
+.dnd-item:hover{border-color:var(--b1)}
+.dnd-item.dragging{opacity:.3}
+.dnd-item.over{border-color:var(--acc);border-style:dashed}
+.dnd-head{display:flex;align-items:center;gap:6px;padding:6px 10px}
+.dnd-grip{color:var(--t3);font-size:12px;cursor:grab;flex-shrink:0}
+.dnd-name{font-size:12px;font-weight:600;color:var(--t0);flex:1}
+.dnd-prev{font-size:10px;color:var(--t3);font-family:var(--mono);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dnd-btns{display:flex;gap:3px;flex-shrink:0}
+.dnd-btn{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--b0);background:transparent;color:var(--t3);cursor:pointer;font-family:var(--font);transition:all .15s}
+.dnd-btn:hover{color:var(--t1);border-color:var(--b1)}
+.dnd-btn.del:hover{color:var(--red);border-color:var(--red)}
+.dnd-body{display:none;padding:8px 10px;background:var(--p1);border-top:1px solid var(--b0)}
+.dnd-body.open{display:block}
+.dnd-ta{font-family:var(--mono);font-size:11px;background:var(--p2);border:1px solid var(--b0);border-radius:4px;padding:5px 7px;width:100%;color:var(--t1);resize:none;min-height:40px;line-height:1.5;margin-bottom:5px}
+.dnd-ps{display:flex;flex-wrap:wrap;gap:4px}
+.bass-block{background:var(--p2);border:1px solid rgba(245,158,11,.2);border-radius:var(--rs);padding:11px;margin-bottom:10px}
+.bass-title{font-size:10px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
+.bass-layer{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.bass-lbl{font-size:11px;color:var(--gold);font-weight:600;font-family:var(--mono);width:22px;flex-shrink:0}
+.bass-inp{flex:1;font-family:var(--mono);font-size:11px;background:var(--p3);border:1px solid rgba(245,158,11,.15);border-radius:4px;padding:4px 7px;color:var(--t1)}
+.bass-int{display:flex;gap:3px;flex-shrink:0}
+.bi{width:17px;height:17px;border-radius:3px;border:1px solid var(--b0);background:transparent;color:var(--t3);font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.bi.on{background:var(--gold-s);border-color:var(--gold);color:var(--gold)}
+.bass-modes{display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap}
+.bm-btn{font-size:10px;padding:3px 10px;border-radius:20px;border:1px solid var(--b0);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s}
+.bm-btn.on{background:var(--gold-s);border-color:var(--gold);color:var(--gold)}
+.loader{display:none;flex-direction:column;align-items:center;gap:12px;padding:44px 20px;text-align:center}
+.loader.show{display:flex}
+.loader-ring{width:42px;height:42px;border-radius:50%;border:2px solid var(--b1);border-top-color:var(--acc);animation:spin 1s linear infinite}
+.loader-txt{font-size:13px;color:var(--t1)}
+.loader-step{font-size:11px;color:var(--t2);font-family:var(--mono)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.out-block{background:var(--p1);border:1px solid var(--b0);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.out-hdr{display:flex;justify-content:space-between;align-items:center;padding:7px 13px;background:var(--p2);border-bottom:1px solid var(--b0)}
+.out-title{font-size:10px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.5px}
+.out-meta{display:flex;align-items:center;gap:9px}
+.ctr{font-family:var(--mono);font-size:11px;font-weight:500}
+.ctr.ok{color:var(--grn)}.ctr.warn{color:var(--gold)}.ctr.over{color:var(--red)}
+.cbtn{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--b1);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s}
+.cbtn:hover{color:var(--acc);border-color:var(--acc)}
+.cbtn.flash{color:var(--grn);border-color:var(--grn)}
+textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--mono);font-size:12px;line-height:1.75;color:var(--t0);width:100%}
+.pbar{height:2px;background:var(--b0)}.pfill{height:2px;transition:width .3s,background .3s}
+.sugs{background:var(--p2);border:1px solid rgba(168,85,247,.2);border-radius:var(--r);padding:11px 13px;margin-bottom:12px}
+.sugs-title{font-size:10px;font-weight:600;color:var(--pur);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
+.sug-item{font-size:12px;color:var(--t1);padding:3px 0;border-bottom:1px solid var(--b0);line-height:1.5}
+.sug-item:last-child{border-bottom:none}
+.sug-item::before{content:"→ ";color:var(--pur)}
+.badge{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;display:inline-flex;align-items:center}
+.badge.ai{background:var(--acc-s);color:var(--acc);border:1px solid rgba(77,143,255,.3)}
+.badge.opt{background:var(--p3);color:var(--t2);border:1px solid var(--b0)}
+.toast{display:block;width:100%;text-align:center;background:var(--grn-s);border:1px solid var(--grn);border-radius:var(--rs);padding:5px;font-size:12px;color:var(--grn);opacity:0;transition:opacity .2s;margin-top:8px}
+.toast.show{opacity:1}
+.tag-section-title{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;margin-top:10px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div>
+    <div class="brand-name">LIPS<span>·</span>AVI</div>
+    <div class="brand-tag">Lyrics & Instrumentation Prompt Synthesizer</div>
+  </div>
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:5px">
+      <span style="font-size:10px;color:var(--t2);white-space:nowrap">API Key:</span>
+      <input type="password" id="api-key-input" placeholder="sk-ant-…" style="width:160px;font-size:11px;padding:4px 8px;font-family:var(--mono)" oninput="saveApiKey()" autocomplete="off">
+      <span id="api-key-status" style="font-size:10px;width:14px;text-align:center">⬜</span>
+    </div>
+    <button class="btn sm" onclick="saveSession()">💾</button>
+    <button class="btn sm" onclick="loadSessionUI()">📂</button>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="steps">
+  <button class="step-btn active" data-s="1" onclick="goStep(1)"><span class="step-num">1</span>Інпут</button>
+  <span class="step-arrow">›</span>
+  <button class="step-btn" data-s="2" onclick="goStep(2)"><span class="step-num">2</span>Жанр + Структура</button>
+  <span class="step-arrow">›</span>
+  <button class="step-btn" data-s="3" onclick="goStep(3)"><span class="step-num">3</span>Теги</button>
+  <span class="step-arrow">›</span>
+  <button class="step-btn" data-s="4" onclick="goStep(4)"><span class="step-num">4</span>Генерація</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page active" id="pg1">
+  <div class="card">
+    <div class="card-hdr"><span class="cdot"></span><span class="card-title">Концепція</span></div>
+    <div class="cb">
+      <div class="fld"><label class="lbl">Назва пісні</label><input type="text" id="title" placeholder='"Auburn Dawn", "Love Sync"…' oninput="autoSave()"></div>
+      <div class="fld"><label class="lbl">Концепція, настрій, ідея <span class="badge ai">AI розширить</span></label><textarea id="concept" rows="3" placeholder="Опишіть настрій і тему — AI доповнить деталями стилю…" oninput="autoSave()"></textarea></div>
+      <div class="g2">
+        <div class="fld"><label class="lbl">Лірика</label>
+          <select id="lyric-mode" onchange="onLyricMode()">
+            <option value="user">Своя лірика</option>
+            <option value="ai">AI пише з нуля</option>
+            <option value="both">Обидва варіанти</option>
+          </select>
+        </div>
+        <div class="fld"><label class="lbl">Мова лірики</label>
+          <select id="lang">
+            <option value="English">English</option>
+            <option value="Ukrainian">Українська</option>
+            <option value="bilingual (Ukrainian + English)">Білінгвальна</option>
+            <option value="Spanish">Spanish</option>
+          </select>
+        </div>
+      </div>
+      <div class="fld" id="lyric-wrap"><label class="lbl">Лірика <span class="badge opt">необов'язково</span></label><textarea id="lyrics" rows="7" placeholder="Вставте лірику — AI оформить у формат Suno з тегами-промптами…" oninput="autoSave()"></textarea></div>
+      <div class="fld"><label class="lbl">Рима</label>
+        <select id="rhyme">
+          <option value="exact rhyme (priority)">Точна рима (пріоритет)</option>
+          <option value="balance rhyme + meaning">Баланс рима + зміст</option>
+          <option value="meaning priority">Зміст (рима другорядна)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><span class="cdot"></span><span class="card-title">Жанр та темп</span></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="fld"><label class="lbl">Жанр</label>
+          <select id="genre" onchange="onGenre()">
+            <optgroup label="── House ──">
+              <option value="house">House (піджанр →)</option>
+              <option value="Vocal House, Deep House">Vocal Melodic House</option>
+              <option value="Vocal House, Nu Disco, Lo-Fi Deep House">Vocal House / Nu Disco / Lo-Fi</option>
+              <option value="Deep House, Lo-Fi House, Late Night Deep House">Deep House / Lo-Fi / Late Night</option>
+              <option value="Bass House">Bass House</option>
+              <option value="Slap House">Slap House</option>
+            </optgroup>
+            <optgroup label="── Electronic ──">
+              <option value="EDM">EDM (піджанр →)</option>
+              <option value="Deep House, Melodic Techno">Deep House / Melodic Techno</option>
+              <option value="Dreamy Synthwave, Chamber Pop">Dreamy Synthwave / Chamber Pop</option>
+              <option value="New Wave">New Wave (піджанр →)</option>
+              <option value="Reggaeton, Acid Electro-Pop">Acid Reggaeton × Electro-Pop</option>
+              <option value="Melodic Reggaeton, Pop">Melodic Reggaeton / Pop</option>
+            </optgroup>
+            <optgroup label="── Pop / Indie ──">
+              <option value="Indie-Pop, Alternative Indie-Pop">Indie-Pop / Alt Indie-Pop</option>
+              <option value="Modern Pop">Modern Pop</option>
+              <option value="female, confessional, alternative indie">Female Confessional Indie ✦</option>
+            </optgroup>
+            <optgroup label="── Chill / Lo-Fi ──">
+              <option value="Chill, Lo-Fi">Chill / Lo-Fi</option>
+              <option value="Electro-Orchestral, Neo-Classical">Electro-Orchestral / Neo-Classical</option>
+            </optgroup>
+            <optgroup label="── Soul / Hip-Hop ──">
+              <option value="R&B, Soul">R&B / Soul</option>
+              <option value="Hip-Hop, Rap">Hip-Hop / Rap</option>
+              <option value="Trap">Trap</option>
+              <option value="Funk, Neo-Soul">Funk / Neo-Soul</option>
+            </optgroup>
+            <optgroup label="── Jazz / Rock ──">
+              <option value="Jazz">Jazz</option>
+              <option value="Rock">Rock</option>
+              <option value="Metal">Metal</option>
+            </optgroup>
+            <optgroup label="── World / Ambient ──">
+              <option value="Ethno, Folk">Ethno / Folk</option>
+              <option value="City Pop, J-Pop">City Pop / J-Pop</option>
+              <option value="Ambient">Ambient</option>
+              <option value="Phonk">Phonk</option>
+            </optgroup>
+            <option value="custom">Інший (вручну)</option>
+          </select>
+        </div>
+        <div class="fld" id="sub-wrap" style="display:none"><label class="lbl">Піджанр</label><select id="subgenre"><option value="">— не вибрано —</option></select></div>
+      </div>
+      <div class="fld" id="cg-wrap" style="display:none"><label class="lbl">Жанр вручну</label><input type="text" id="cg" placeholder="напр. Synthwave, Melodic Dubstep…"></div>
+      <div class="g3">
+        <div class="fld"><label class="lbl">BPM від</label><input type="number" id="bpm1" min="50" max="220" value="118" step="1"></div>
+        <div class="fld"><label class="lbl">BPM до</label><input type="number" id="bpm2" min="50" max="220" placeholder="необов'язково" step="1"></div>
+        <div class="fld"><label class="lbl">Пресет BPM</label>
+          <select id="bpm-pre" onchange="onBpmPre()">
+            <option value="">— обрати —</option>
+            <option value="70">70 — Slow Ballad</option><option value="80">80 — Soul</option>
+            <option value="85">85 — Lo-Fi/Jazz</option><option value="88">88 — Boom Bap</option>
+            <option value="90">90 — Hip-Hop</option><option value="92">92 — Reggaeton</option>
+            <option value="95">95 — R&amp;B</option><option value="98">98 — Indie-Pop</option>
+            <option value="105">105 — Chill House</option><option value="108">108 — Trap</option>
+            <option value="110">110 — Deep House</option><option value="115">115 — Nu Disco</option>
+            <option value="118">118 — Vocal House</option><option value="120">120 — House</option>
+            <option value="124">124 — Tech House</option><option value="128">128 — EDM</option>
+            <option value="138">138 — DnB</option><option value="140">140 — Dubstep</option>
+            <option value="174">174 — Hardstyle</option>
+          </select>
+        </div>
+      </div>
+      <div class="fld"><label class="lbl">Тональність</label>
+        <select id="key">
+          <option value="">— не вказувати —</option>
+          <option>A minor</option><option>A major</option><option>B minor</option><option>B major</option>
+          <option>C minor</option><option>C major</option><option>D minor</option><option>D major</option>
+          <option>E minor</option><option>E major</option><option>F minor</option><option>F major</option>
+          <option>G minor</option><option>G major</option><option>F# minor</option><option>F# major</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><span class="cdot pur"></span><span class="card-title">Вокал</span></div>
+    <div class="cb">
+      <div class="g3">
+        <div class="fld"><label class="lbl">Тип</label>
+          <select id="vt"><option value="male">Соло чоловічий</option><option value="female">Соло жіночий</option><option value="duet">Дует ч+ж</option></select>
+        </div>
+        <div class="fld"><label class="lbl">Стиль</label>
+          <select id="vs">
+            <option value="house">House — spoken-word</option><option value="indie">Indie — мелодійний</option>
+            <option value="cinematic">Cinematic</option><option value="whisper">Whisper-heavy</option>
+            <option value="soul">Soul / R&amp;B</option><option value="reggaeton">Reggaeton</option>
+            <option value="rap">Rap / Hip-Hop</option><option value="jazz">Jazz</option>
+            <option value="rock">Rock</option><option value="metal">Metal</option>
+            <option value="confessional">Confessional Indie</option>
+          </select>
+        </div>
+        <div class="fld"><label class="lbl">Додатково</label><input type="text" id="vocal-extra" placeholder='напр. "raspy, whispered ad-libs"'></div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-row"><button class="btn pri" onclick="goStep(2)">Далі: Жанр і структура →</button></div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="pg2">
+  <div class="card">
+    <div class="card-hdr"><span class="cdot"></span><span class="card-title" id="gi-card-title">Аналіз жанру</span></div>
+    <div class="cb">
+      <div class="gi-loader" id="gi-loader"><div class="mini-spin"></div><span>AI аналізує жанр…</span></div>
+      <div class="genre-info" id="genre-info">
+        <div class="gi-grid">
+          <div class="gi-item"><div class="gi-label">Опис</div><div class="gi-value" id="gi-desc">—</div></div>
+          <div class="gi-item"><div class="gi-label">Темп і структура</div><div class="gi-value" id="gi-tempo">—</div></div>
+          <div class="gi-item"><div class="gi-label">Продакшн</div><div class="gi-value" id="gi-prod">—</div></div>
+          <div class="gi-item"><div class="gi-label">Вокал</div><div class="gi-value" id="gi-vocal">—</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="recs" id="genre-recs"><div class="recs-title">✦ AI Рекомендації для цього стилю</div><div id="recs-list"></div></div>
+  <div class="card">
+    <div class="card-hdr"><span class="cdot pur"></span><span class="card-title">Структура пісні <span class="badge ai">AI-теги</span></span></div>
+    <div class="cb">
+      <p class="hint" style="margin-bottom:8px">Перетягуй ⠿ · Клік ✏️ — редагуй тег · Клік на пресет — додає · ✕ видалити</p>
+      <div class="dnd-list" id="dnd-list"></div>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <select id="dnd-sel" style="flex:1;font-size:12px"></select>
+        <button class="btn sm" onclick="dndAdd()">+ Додати</button>
+      </div>
+      <div class="btn-row" style="margin-top:0">
+        <button class="btn sm" onclick="dndReset()">↺ Базова</button>
+        <button class="btn sm" onclick="dndAutoGenre()">⚡ Авто-жанр</button>
+        <button class="btn sm pur" onclick="dndRegenTags()">✦ AI теги</button>
+      </div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn" onclick="goStep(1)">← Назад</button>
+    <button class="btn pur" onclick="goStep(3)">Далі: Теги →</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="pg3">
+  <div class="card">
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎭 Настрій</span></div>
+    <div class="cb"><div class="tag-cloud" id="mood-cloud"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎹 Інструменти</span></div>
+    <div class="cb"><div class="tag-cloud" id="instr-cloud"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎚️ Продакшн</span></div>
+    <div class="cb"><div class="tag-cloud" id="prod-cloud"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎤 Вокальні характеристики</span></div>
+    <div class="cb"><div class="tag-cloud" id="vocal-cloud"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><span class="cdot gold"></span><span class="card-title">⚡ SFX та спецефекти</span></div>
+    <div class="cb"><div class="tag-cloud" id="sfx-cloud"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><span class="cdot gold"></span><span class="card-title">🔊 Bass Structure <span class="badge ai">пресет по жанру</span></span></div>
+    <div class="cb">
+      <div id="bass-warn" style="font-size:12px;color:var(--t2);margin-bottom:8px;display:none">⚠️ Для цього жанру баси не є домінантними — рекомендовано мінімальний або без структури.</div>
+      <div class="bass-modes">
+        <span style="font-size:10px;color:var(--t2);align-self:center;margin-right:3px">Режим:</span>
+        <button class="bm-btn on" id="bm-full" onclick="setBassMode('full')">Повний (3 шари)</button>
+        <button class="bm-btn" id="bm-mid" onclick="setBassMode('mid')">Помірний (2 шари)</button>
+        <button class="bm-btn" id="bm-min" onclick="setBassMode('min')">Мінімальний</button>
+        <button class="bm-btn" id="bm-none" onclick="setBassMode('none')">Без басів</button>
+      </div>
+      <div id="bass-wrap">
+        <div class="bass-block">
+          <div class="bass-title">3-Layer Polymorphic Bass</div>
+          <div class="bass-layer">
+            <span class="bass-lbl">L1</span>
+            <input class="bass-inp" id="bl1" value="deep sub-bass floor,chest-rattling">
+            <div class="bass-int">
+              <button class="bi on" data-l="1" data-v="1" onclick="setBI(1,1)">●</button>
+              <button class="bi on" data-l="1" data-v="2" onclick="setBI(1,2)">●</button>
+              <button class="bi on" data-l="1" data-v="3" onclick="setBI(1,3)">●</button>
+            </div>
+          </div>
+          <div class="bass-layer">
+            <span class="bass-lbl">L2</span>
+            <input class="bass-inp" id="bl2" value="mid punchy walking groove,melodic drive">
+            <div class="bass-int">
+              <button class="bi on" data-l="2" data-v="1" onclick="setBI(2,1)">●</button>
+              <button class="bi on" data-l="2" data-v="2" onclick="setBI(2,2)">●</button>
+              <button class="bi" data-l="2" data-v="3" onclick="setBI(2,3)">●</button>
+            </div>
+          </div>
+          <div class="bass-layer" id="bl3-row">
+            <span class="bass-lbl">L3</span>
+            <input class="bass-inp" id="bl3" value="high syncopated percussive stab,dynamic">
+            <div class="bass-int">
+              <button class="bi on" data-l="3" data-v="1" onclick="setBI(3,1)">●</button>
+              <button class="bi" data-l="3" data-v="2" onclick="setBI(3,2)">●</button>
+              <button class="bi" data-l="3" data-v="3" onclick="setBI(3,3)">●</button>
+            </div>
+          </div>
+          <div style="margin-top:7px"><input class="bass-inp" id="bl-note" value="Sub-bass heartbeat half-time drop only.Bass=rhythm." style="width:100%"></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn sm gold" onclick="applyBassPreset()">⚡ Пресет для жанру</button>
+          <button class="btn sm" onclick="resetBass()">↺ Скинути</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn" onclick="goStep(2)">← Назад</button>
+    <button class="btn gold" onclick="goStep(4)">Далі: Генерація →</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="pg4">
+  <div class="loader" id="gen-loader">
+    <div class="loader-ring"></div>
+    <div class="loader-txt" id="gen-txt">AI генерує промпти…</div>
+    <div class="loader-step" id="gen-step">Ініціалізація…</div>
+  </div>
+  <div id="gen-result" style="display:none">
+    <div class="sugs" id="sugs-block"><div class="sugs-title">✦ AI Рекомендації</div><div id="sugs-list"></div></div>
+    <div class="out-block">
+      <div class="out-hdr">
+        <span class="out-title">🎵 Lyrics-prompt — ≤5000 зн.</span>
+        <div class="out-meta"><span class="ctr ok" id="ctr-l">0 / 5000</span><button class="cbtn" id="cbtn-l" onclick="cp('out-l','ctr-l',5000,'pf-l','cbtn-l')">Копіювати</button></div>
+      </div>
+      <textarea class="out" id="out-l" rows="22" oninput="updCtr('out-l','ctr-l',5000,'pf-l')"></textarea>
+      <div class="pbar"><div class="pfill" id="pf-l"></div></div>
+    </div>
+    <div class="out-block">
+      <div class="out-hdr">
+        <span class="out-title">🎛️ Style-prompt — ≤1000 зн.</span>
+        <div class="out-meta"><span class="ctr ok" id="ctr-s">0 / 1000</span><button class="cbtn" id="cbtn-s" onclick="cp('out-s','ctr-s',1000,'pf-s','cbtn-s')">Копіювати</button></div>
+      </div>
+      <textarea class="out" id="out-s" rows="11" oninput="updCtr('out-s','ctr-s',1000,'pf-s')"></textarea>
+      <div class="pbar"><div class="pfill" id="pf-s"></div></div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><span class="cdot pur"></span><span class="card-title">✦ Уточнення для AI</span></div>
+      <div class="cb">
+        <div class="fld"><label class="lbl">Коментарі — AI врахує і перегенерує</label><textarea id="refinement" rows="3" placeholder="напр. 'Більш емоційний приспів', 'Більше IT-термінів', 'Скороти куплет 1'…"></textarea></div>
+        <button class="btn pur" onclick="refine()">✦ AI покращує</button>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="goStep(3)">← Назад</button>
+      <button class="btn" onclick="regen()">↺ Перегенерувати</button>
+      <button class="btn" onclick="goStep(1)">↺ Нова пісня</button>
+    </div>
+    <div class="toast" id="toast"></div>
+  </div>
+</div>
+</div>
+
+<script>
+// TAG DATA
+const TAGS={
+  mood:[
+    {t:'romantic',i:'💕',tip:'✅ Універсальний — підходить до будь-якого жанру'},
+    {t:'melancholic',i:'🌧',tip:'✅ Чудово для Deep House, Indie, Lo-Fi'},
+    {t:'dark',i:'🖤',tip:'⚠️ Сильний тег — може зробити трек похмурим'},
+    {t:'energetic',i:'⚡',tip:'✅ Ідеально для EDM, Bass House, Trap'},
+    {t:'atmospheric',i:'🌫',tip:'✅ Посилює глибину — добре для Ambient, Deep House'},
+    {t:'passionate',i:'🔥',tip:'✅ Добре для Vocal House, R&B, Soul'},
+    {t:'warm',i:'☀️',tip:'✅ Рекомендовано — додає людяності'},
+    {t:'playful',i:'🎲',tip:'✅ Для Pop, Nu Disco, Afrobeat'},
+    {t:'ethereal',i:'✨',tip:'✅ Для Ambient, Dreamy Synthwave, Chamber Pop'},
+    {t:'bittersweet',i:'💧',tip:'✅ Глибокий контраст — для Indie, Soul'},
+    {t:'introspective',i:'🔮',tip:'✅ Для Confessional Indie, Lo-Fi, Ambient'},
+    {t:'hypnotic',i:'🌀',tip:'✅ Ідеально для Techno, Deep House, Phonk'},
+    {t:'uplifting',i:'🌅',tip:'✅ Для Trance, Progressive House, Gospel'},
+    {t:'mysterious',i:'🌙',tip:'✅ Для Dark Electronic, Trip-Hop'},
+    {t:'epic',i:'🏔',tip:'⚠️ Обережно — може перевантажити Indie та Chill'},
+    {t:'calm',i:'🕊',tip:'✅ Для Lo-Fi, Ambient, Acoustic'},
+    {t:'dreamy',i:'💭',tip:'✅ Для Synthwave, Shoegaze, Dream Pop'},
+    {t:'soulful',i:'💜',tip:'✅ Ідеально для R&B, Soul, Gospel'},
+    {t:'haunting',i:'👻',tip:'✅ Для Dark Ambient, Gothic, Post-Punk'},
+    {t:'triumphant',i:'🏆',tip:'⚠️ Краще для фіналу, не для всього треку'},
+    {t:'sensual',i:'🌹',tip:'✅ Для Reggaeton, R&B, Nu-Jazz'},
+    {t:'nostalgic',i:'📻',tip:'✅ Для City Pop, Chillwave, Lo-Fi'},
+    {t:'euphoric',i:'🎆',tip:'✅ Ідеально для Drop і Chorus в House / EDM'},
+    {t:'tender',i:'🌸',tip:'✅ Для Ballad, Indie, Confessional'},
+    {t:'raw',i:'⚙️',tip:'✅ Для Rock, Metal, Underground Hip-Hop'},
+    {t:'intimate',i:'🕯',tip:'✅ Для Confessional Indie, Acoustic, Jazz Vocal'},
+    {t:'futuristic',i:'🚀',tip:'✅ Для Synthwave, EDM, Cyberpunk'},
+    {t:'cinematic',i:'🎬',tip:'✅ Підсилює оркестровість — для Neo-Classical'},
+    {t:'tense',i:'😤',tip:'⚠️ Доречно у Bridge і Drop, не скрізь'},
+    {t:'lonely',i:'🌑',tip:'✅ Для Dark Pop, Indie, Lo-Fi Hip-Hop'},
+  ],
+  instr:[
+    {t:'piano',i:'🎹',tip:'✅ Найкращий базовий інструмент для більшості стилів'},
+    {t:'saxophone',i:'🎷',tip:'✅ Теплота — ідеально для Jazz, Deep House, Soul'},
+    {t:'acoustic guitar',i:'🎸',tip:'✅ Для Folk, Indie, Confessional — натуральний звук'},
+    {t:'electric guitar',i:'⚡',tip:'⚠️ Сильно змінює характер — краще для Rock, Metal'},
+    {t:'strings',i:'🎻',tip:'✅ Підсилює емоцію — добре для Chorus і Bridge'},
+    {t:'synthesizer',i:'🎛',tip:'✅ Базовий для електронних жанрів'},
+    {t:'bass guitar',i:'🎸',tip:'✅ Живий бас — для Funk, Rock, R&B'},
+    {t:'drums',i:'🥁',tip:'✅ Живі барабани — для Rock, Jazz, Funk, Soul'},
+    {t:'brass',i:'🎺',tip:'✅ Для Jazz, Funk, Afrobeat — додає енергії'},
+    {t:'choir',i:'👥',tip:'✅ Посилює кульмінації — ідеально для Chorus Finale'},
+    {t:'Rhodes',i:'🎹',tip:'✅ Vintage теплота — для Soul, R&B, Lo-Fi'},
+    {t:'flute',i:'🪈',tip:'✅ Для Folk, Ambient, Ethnic — повітряний тембр'},
+    {t:'cello',i:'🎻',tip:'✅ Для Cinematic, Chamber Pop — глибокий смичковий'},
+    {t:'trumpet',i:'🎺',tip:'✅ Для Jazz, Funk — яскравий акцент'},
+    {t:'harp',i:'🎵',tip:'✅ Для Cinematic, New Age, Ambient'},
+    {t:'organ',i:'🎹',tip:'✅ Для Gospel, Rock, Jazz — повний і потужний'},
+    {t:'vibraphone',i:'🎵',tip:'✅ Для Jazz, Ambient — металічна теплота'},
+    {t:'accordion',i:'🪗',tip:'✅ Для Folk, Ethno, French Chanson'},
+    {t:'marimba',i:'🎵',tip:'✅ Для Afrobeat, World Music, Cinematic'},
+    {t:'sitar',i:'🎸',tip:'⚠️ Тільки для Ethno, World, Psychedelic'},
+    {t:'Moog synthesizer',i:'🎛',tip:'✅ Класичний аналоговий синтезатор — для Synthwave, Psychedelic, Ambient'},
+    {t:'mellotron',i:'🎹',tip:'✅ Vintage семплер — для Prog Rock, Dream Pop, Cinematic'},
+    {t:'theremin',i:'🎵',tip:'⚠️ Специфічний ефірний звук — для Sci-Fi, Ambient, Experimental'},
+    {t:'Wurlitzer',i:'🎹',tip:'✅ Електричне піаніно — для Soul, R&B, Funk'},
+    {t:'clavinet',i:'🎹',tip:'✅ Funk і soul клавішні — для Funk, R&B, Jazz Fusion'},
+    {t:'contrabass',i:'🎻',tip:'✅ Акустичний контрабас — для Jazz, Classical, Folk'},
+    {t:'bongo drums',i:'🥁',tip:'✅ Латинська перкусія — для Afrobeat, Latin, World'},
+    {t:'pan flute',i:'🪈',tip:'✅ Для Ethno, World, Cinematic — особлива атмосфера'},
+    {t:'duduk',i:'🎵',tip:'✅ Вірменська флейта — для Ethnic, Cinematic, Dark Ambient'},
+  ],
+  prod:[
+    {t:'analog',i:'📼',tip:'✅ Рекомендовано — додає теплоти і характеру'},
+    {t:'lo-fi',i:'🌫',tip:'✅ Для Lo-Fi, Chillhop, Bedroom Pop'},
+    {t:'layered',i:'📚',tip:'✅ Багатошаровий — для повноти у Chorus'},
+    {t:'sidechain',i:'🔄',tip:'✅ Пульсуючий ефект — характерний для House і EDM'},
+    {t:'wide stereo',i:'↔️',tip:'✅ Розширює простір — для Chorus і Drop'},
+    {t:'minimal',i:'◻️',tip:'✅ Для Verse і Intro — контраст з Chorus'},
+    {t:'reverb heavy',i:'🌊',tip:'⚠️ Може розмити транзієнти у швидких треках'},
+    {t:'distorted',i:'🎸',tip:'⚠️ Тільки для Rock, Metal, Industrial'},
+    {t:'warm mix',i:'🔆',tip:'✅ Рекомендовано для більшості стилів'},
+    {t:'punchy',i:'👊',tip:'✅ Для Drop і Chorus — чіткий удар'},
+    {t:'cinematic',i:'🎬',tip:'✅ Оркестровий масштаб — для Finale і Bridge'},
+    {t:'vintage',i:'📻',tip:'✅ Для City Pop, Soul, Lo-Fi — ретро атмосфера'},
+    {t:'crisp',i:'💎',tip:'✅ Чіткий і деталізований — для Pop, EDM'},
+    {t:'atmospheric',i:'🌌',tip:'✅ Об\'ємний простір — для Ambient і Deep House'},
+    {t:'progressive build',i:'📈',tip:'✅ Поступова структура — для Trance і Progressive'},
+    {t:'trap production',i:'🎤',tip:'✅ Характерний для Trap — 808, triplet hi-hats'},
+    {t:'orchestral',i:'🎼',tip:'✅ Для Neo-Classical, Cinematic, Finale'},
+    {t:'compressed',i:'🔲',tip:'⚠️ Надмірна компресія вбиває динаміку'},
+    {t:'dry vocal',i:'🎤',tip:'✅ Чистий вокал без обробки — для Verse'},
+    {t:'tape saturation',i:'📼',tip:'✅ Аналогова теплота — для Lo-Fi, Vintage'},
+    {t:'frequency modulation',i:'📡',tip:'⚠️ FM синтез — для Electronic, Chiptune, Techno'},
+    {t:'glitch processing',i:'💾',tip:'✅ Цифрові артефакти — для Glitch, IDM, Dark Electronic'},
+    {t:'spatial audio',i:'🔊',tip:'✅ 3D звук — для Cinematic, Ambient, Immersive'},
+    {t:'lo-fi drums',i:'🥁',tip:'✅ Бита з характером — для Lo-Fi Hip-Hop, Chillhop'},
+    {t:'parallel compression',i:'🔲',tip:'✅ Потужність без втрати динаміки — для Drop і Chorus'},
+    {t:'vinyl mastering',i:'💿',tip:'✅ Теплий мастеринг — для Lo-Fi, Jazz, Soul'},
+    {t:'hard clipping',i:'📢',tip:'⚠️ Агресивне обрізання — тільки для Metal, Industrial'},
+  ],
+  vocal:[
+    {t:'raspy',i:'🔥',tip:'✅ Характерний голос — для House, Rock, Soul'},
+    {t:'breathy',i:'🌬',tip:'✅ Інтимний — для Verse і Intro'},
+    {t:'falsetto',i:'🎵',tip:'✅ Емоційний пік — для Pre-Chorus і Bridge'},
+    {t:'spoken word',i:'🗣',tip:'✅ Розповідна подача — для Verse в House і Hip-Hop'},
+    {t:'whispered',i:'🤫',tip:'✅ Інтимність — для Intro, Hook, Outro'},
+    {t:'vibrato',i:'〰️',tip:'✅ Класичний прийом — для Soul, Jazz, Ballad'},
+    {t:'gospel runs',i:'✝️',tip:'✅ Емоційні мелізми — для Chorus у Soul і R&B'},
+    {t:'ad-libs',i:'💬',tip:'✅ Фонові фрази — оживляють трек'},
+    {t:'harmonies',i:'🎶',tip:'✅ Шарування голосів — для Chorus і Bridge'},
+    {t:'baritone',i:'⬇️',tip:'✅ Теплий низький — для Vocal House, Jazz'},
+    {t:'soprano',i:'⬆️',tip:'✅ Яскравий — для Confessional, Opera, Pop'},
+    {t:'soulful',i:'💜',tip:'✅ Глибока емоція — для R&B і Soul'},
+    {t:'confessional',i:'💭',tip:'✅ Відверта особиста подача — для Indie і Folk'},
+    {t:'autotune',i:'🤖',tip:'⚠️ Характерний ефект — тільки для Trap, Pop, R&B'},
+    {t:'call-and-response',i:'🔄',tip:'✅ Вокальний діалог — для Gospel, Soul, Duet'},
+    {t:'powerhouse',i:'💪',tip:'✅ Повна сила — для Chorus Finale'},
+    {t:'growls',i:'😤',tip:'⚠️ Агресивний — для Metal і переходів'},
+    {t:'layered vocals',i:'📚',tip:'✅ Стек голосів — у Pop і R&B'},
+    {t:'intimate delivery',i:'🕯',tip:'✅ Близький мікрофонний — для Indie і Confessional'},
+    {t:'scatting',i:'🎵',tip:'✅ Джазова імпровізація — тільки для Jazz'},
+  ],
+  sfx:[
+    {t:'vinyl crackle',i:'📀',tip:'✅ Класичний lo-fi — для Intro і Outro'},
+    {t:'tape hiss',i:'📼',tip:'✅ Аналогова теплота — для Lo-Fi і Vintage'},
+    {t:'terminal boot-up',i:'💻',tip:'✅ IT-атмосфера — для Verse в Vocal House'},
+    {t:'binary whoosh',i:'💨',tip:'✅ Сучасний перехід — для Transition і Drop'},
+    {t:'digital glitch',i:'⚡',tip:'✅ Футуристичний — для Drop і Pre-Chorus'},
+    {t:'vocal chops',i:'✂️',tip:'✅ Ритмічна нарізка — для Hook і Transition'},
+    {t:'UI ping',i:'🔔',tip:'✅ IT-текстура — для Hook і Intro'},
+    {t:'server hum',i:'🖥',tip:'✅ IT-дрон — для Drop і Verse'},
+    {t:'modem hiss',i:'📡',tip:'✅ Ретро-цифровий — для Intro'},
+    {t:'rain ambience',i:'🌧',tip:'✅ Атмосфера — для Lo-Fi і Ambient'},
+    {t:'reverse reverb',i:'🔄',tip:'✅ Сюрреалістичний — для Transition і Bridge'},
+    {t:'sub rumble',i:'🔊',tip:'✅ Відчуття удару — для Drop і Bass Intro'},
+    {t:'bass impact',i:'💥',tip:'✅ Потужний удар — для Drop у Bass House'},
+    {t:'orchestral riser',i:'📈',tip:'✅ Наростання — для Pre-Chorus і Drop'},
+    {t:'crash cymbal',i:'🥁',tip:'✅ Акцент — для Chorus і Finale'},
+    {t:'spring birdsong',i:'🐦',tip:'✅ Природна атмосфера — для Intro і Outro'},
+    {t:'808 sub',i:'🔈',tip:'✅ Важкий бас — ключовий для Trap і Hip-Hop'},
+    {t:'white noise sweep',i:'🌊',tip:'✅ Плавний перехід — для Transition'},
+    {t:'matrix rain',i:'💾',tip:'✅ IT-атмосфера — для Bridge і Verse'},
+    {t:'hard drive pulse',i:'🔁',tip:'✅ Ритмічна IT-текстура — для Drop'},
+    {t:'error alert FX',i:'⚠️',tip:'✅ IT-сигнал помилки — для Bridge і Drama момент'},
+    {t:'keyboard typing',i:'⌨️',tip:'✅ IT-текстура — для Verse у Vocal House'},
+    {t:'door creak',i:'🚪',tip:'✅ Атмосферний — для Dark Ambient і Horror'},
+    {t:'crowd cheering',i:'👏',tip:'⚠️ Тільки для Rock Finale і EDM — може бути недоречним'},
+    {t:'heartbeat pulse',i:'❤️',tip:'✅ Емоційний ритм — для Slow Drop і Bridge'},
+    {t:'thunder crack',i:'⛈️',tip:'⚠️ Драматичний — для Dark Electronic і Metal'},
+    {t:'wind howl',i:'🌬️',tip:'✅ Атмосфера — для Ambient, Folk, Cinematic'},
+    {t:'tape rewind',i:'⏪',tip:'✅ Ретро ефект — для Lo-Fi, Transition'},
+    {t:'needle drop',i:'📀',tip:'✅ Vinyl старт — класичний для Lo-Fi Intro'},
+  ]
+};
+
+const SEL={mood:new Set(),instr:new Set(),prod:new Set(),vocal:new Set(),sfx:new Set()};
+
+function buildCloud(cat,elId,isGold){
+  const el=document.getElementById(elId); el.innerHTML='';
+  TAGS[cat].forEach(({t,i,tip})=>{
+    const p=document.createElement('span');
+    p.className='pill'+(isGold?' gold':'');
+    p.dataset.tip=tip;
+    p.innerHTML=`<span class="pill-i">${i}</span>${t}`;
+    p.onclick=()=>{
+      if(SEL[cat].has(t)){SEL[cat].delete(t);p.classList.remove('on')}
+      else{SEL[cat].add(t);p.classList.add('on')}
+    };
+    el.appendChild(p);
+  });
+}
+buildCloud('mood','mood-cloud',false);
+buildCloud('instr','instr-cloud',false);
+buildCloud('prod','prod-cloud',false);
+buildCloud('vocal','vocal-cloud',false);
+buildCloud('sfx','sfx-cloud',true);
+
+// GENRE SUBS
+const SUBS={
+  house:['Deep House','Electro House','Tech House','Garage House','Future House','Hard House','French House','Bass House','Big Room House','Slap House','Lo-Fi House','Afro House','Chicago House','Latin House','Organic House','Drift Phonk House','G-House','Chill House','Disco House','Piano House','Soulful House','Progressive House','Haunted House'],
+  EDM:['Big Room','Trance','Dubstep','Drum & Bass','Hardstyle','Future Bass','Electro','Psy-Trance','Progressive Trance','Happy Hardcore','Future Rave','Vocal Trance','Midtempo'],
+  'New Wave':['Synthwave','Dreamwave','Retrowave','Darkwave','Coldwave','Vapor Synthwave','Outrun','Dark Synthwave','Chillwave','Futurepop','Electropop'],
+  Jazz:['Contemporary Jazz','Smooth Jazz','Jazz Fusion','Bebop','Cool Jazz','Post-Bop','Jazz Funk','Acid Jazz','Vocal Jazz','Piano Jazz','Nu Jazz','Swing','Dark Jazz'],
+  Rock:['Alternative Rock','Indie Rock','Hard Rock','Psychedelic Rock','Progressive Rock','Post-Rock','Shoegaze','Garage Rock','Grunge','Post-Punk'],
+  Metal:['Heavy Metal','Melodic Metal','Metalcore','Death Metal','Black Metal','Doom Metal','Thrash Metal','Power Metal','Symphonic Metal'],
+};
+
+function onGenre(){
+  const g=document.getElementById('genre').value;
+  const sg=document.getElementById('subgenre');
+  const sw=document.getElementById('sub-wrap');
+  const cw=document.getElementById('cg-wrap');
+  cw.style.display=g==='custom'?'block':'none';
+  sg.innerHTML='<option value="">— не вибрано —</option>';
+  if(SUBS[g]){sw.style.display='flex';SUBS[g].forEach(s=>{const o=document.createElement('option');o.value=o.textContent=s;sg.appendChild(o)})}
+  else sw.style.display='none';
+  suggestBassMode(g);
+}
+
+function getGenre(){
+  const g=document.getElementById('genre').value;
+  if(g==='custom')return document.getElementById('cg').value.trim()||'Vocal House';
+  if(g==='house'){const s=document.getElementById('subgenre').value;return s?s:'Deep House'}
+  return g;
+}
+function getBpm(){const b1=document.getElementById('bpm1').value;const b2=document.getElementById('bpm2').value;return(b2&&b2!==b1)?`${b1}–${b2} BPM`:b1+' BPM'}
+function onBpmPre(){const v=document.getElementById('bpm-pre').value;if(v){document.getElementById('bpm1').value=v;document.getElementById('bpm2').value=''}}
+function onLyricMode(){const m=document.getElementById('lyric-mode').value;document.getElementById('lyric-wrap').style.display=m==='ai'?'none':'block'}
+
+// BASS INTELLIGENCE
+const BASS_DOM=['house','Vocal House','Deep House','Bass House','Slap House','EDM','Trap','Hip-Hop','Funk','Reggaeton','Phonk'];
+const BASS_MOD=['R&B','Soul','Indie','Pop','Jazz','City Pop','Rock','New Wave','Chill','Lo-Fi'];
+const BASS_MIN=['female, confessional','Ambient','Electro-Orchestral','Ethno','Folk','Metal'];
+
+const BASS_PRESETS={
+  'Vocal House, Deep House':'L1:deep sub-bass floor,chest-rattling|L2:mid punchy walking groove,melodic drive|L3:high syncopated stab,dynamic|Sub-bass heartbeat half-time drop only.Bass=rhythm.',
+  'Bass House':'L1:massive sub-bass,chest-shattering|L2:mid dirty slap groove,aggressive|L3:high percussive stab,max dynamic|Sidechain hard.Bass IS drop.',
+  'Slap House':'L1:sub-bass thud,body-shaking|L2:mid slap punch,rhythmic|L3:syncopated stab,sharp transient|Slap bass=rhythm engine.',
+  'Trap':'L1:808 sub-bass,deep sustained|L2:mid 808 melodic walk|808=identity.Sidechain.',
+  'Hip-Hop, Rap':'L1:boom bap sub,warm thud|L2:mid bass walk,melodic|Sub-bass anchor.Groove.',
+  'Jazz':'L1:upright bass,warm resonant|L2:walking bass,melodic swing|Acoustic feel.',
+  'R&B, Soul':'L1:warm sub floor|L2:mid melodic groove|Smooth.Bass supports,not dominates.',
+  'female, confessional, alternative indie':'Minimal bass only if needed.Vocals and guitar lead.',
+  'Ambient':'Subtle sub-bass drone only.No rhythmic bass.',
+  default:'L1:deep sub-bass floor,chest-rattling|L2:mid punchy walking groove,melodic drive|L3:high syncopated stab,dynamic|Bass IS rhythm engine.'
+};
+
+function suggestBassMode(g){
+  const gl=g.toLowerCase();
+  let mode='full';
+  if(BASS_MIN.some(x=>gl.includes(x.toLowerCase())))mode='min';
+  else if(BASS_MOD.some(x=>gl.includes(x.toLowerCase())))mode='mid';
+  setBassMode(mode);
+  document.getElementById('bass-warn').style.display=(mode==='min'||mode==='none')?'block':'none';
+}
+
+let bassMode='full';
+function setBassMode(m){
+  bassMode=m;
+  ['full','mid','min','none'].forEach(x=>document.getElementById('bm-'+x).classList.toggle('on',x===m));
+  const w=document.getElementById('bass-wrap');
+  const bl3=document.getElementById('bl3-row');
+  w.style.opacity=m==='none'?'.4':'1';
+  w.style.pointerEvents=m==='none'?'none':'auto';
+  bl3.style.display=(m==='full')?'flex':'none';
+}
+
+function setBI(l,v){document.querySelectorAll(`[data-l="${l}"]`).forEach(b=>b.classList.toggle('on',parseInt(b.dataset.v)<=v))}
+
+function applyBassPreset(){
+  const g=getGenre();
+  let p=BASS_PRESETS[g];
+  if(!p){for(const k of Object.keys(BASS_PRESETS)){if(g.toLowerCase().includes(k.toLowerCase())){p=BASS_PRESETS[k];break}}}
+  if(!p)p=BASS_PRESETS.default;
+  const parts=p.split('|');
+  const l1=parts.find(x=>x.startsWith('L1:'))?.replace('L1:','');
+  const l2=parts.find(x=>x.startsWith('L2:'))?.replace('L2:','');
+  const l3=parts.find(x=>x.startsWith('L3:'))?.replace('L3:','');
+  const note=parts.filter(x=>!x.match(/^L[123]:/)).join(' ');
+  if(l1)document.getElementById('bl1').value=l1;
+  if(l2)document.getElementById('bl2').value=l2;
+  if(l3)document.getElementById('bl3').value=l3;
+  if(note)document.getElementById('bl-note').value=note;
+  showToast('Пресет басів застосовано');
+}
+
+function resetBass(){
+  document.getElementById('bl1').value='deep sub-bass floor,chest-rattling';
+  document.getElementById('bl2').value='mid punchy walking groove,melodic drive';
+  document.getElementById('bl3').value='high syncopated percussive stab,dynamic';
+  document.getElementById('bl-note').value='Sub-bass heartbeat half-time drop only.Bass=rhythm.';
+}
+
+function buildBassPrompt(){
+  if(bassMode==='none')return'';
+  const l1=document.getElementById('bl1').value.trim();
+  const l2=document.getElementById('bl2').value.trim();
+  const l3=document.getElementById('bl3').value.trim();
+  const note=document.getElementById('bl-note').value.trim();
+  if(bassMode==='min')return`BASS:${l1}.${note}`;
+  if(bassMode==='mid')return`BASS[L1:${l1}|L2:${l2}|${note}]`;
+  return`BASS[L1:${l1}|L2:${l2}|L3:${l3}|${note}]`;
+}
+
+// DnD
+const ALL_PARTS=['Intro','Instrumental Transition 1','Instrumental Transition 2','Instrumental Transition 3','Hook 1','Hook 2','Hook 3','Build-up 1','Build-up 2','Build-up 3','Drop 1','Drop 2','Drop 3','Drop 4','Drop 5','Instrumental Drop','Vocal Drop','Bass Drop','Half-Time Drop','Verse 1','Verse 2','Verse 3','Pre-Chorus 1','Pre-Chorus 2','Pre-Chorus 3','Chorus 1','Chorus 2','Chorus Finale','Break','Bridge','Post-Chorus','Outro Part 1','Outro Part 2','Guitar Solo','Solo Section','Rap Verse','Spoken Interlude','Ad-Lib Section'];
+const BASE=['Intro','Instrumental Transition 1','Hook 1','Drop 1','Verse 1','Pre-Chorus 1','Instrumental Transition 2','Drop 2','Chorus 1','Instrumental Transition 3','Hook 2','Verse 2','Pre-Chorus 2','Drop 3','Chorus 2','Bridge','Pre-Chorus 3','Drop 4','Chorus Finale','Outro Part 1','Outro Part 2'];
+let STRUCT=[...BASE],STAGS={},dragIdx=null;
+
+const SP={
+  'Intro':['Soft piano','No drums','Ambient pad','Boot-up SFX','Vinyl crackle','Vocal hook','Whispered','Sub-bass breath','Reverse strings','Modem hiss'],
+  'Build-up':['Bass layers build','Hi-hat accelerates','Riser SFX','Snare roll','Filter opens','Tension grows','8 bars','16 bars'],
+  'Drop':['Bass layers 1+2','Sidechain pumping','Digital glitch','Vocal chop','4 bars','8 bars','Sub impact','All 3 bass layers'],
+  'Instrumental Drop':['No vocals','Bass maximum','Synth lead','Peak instrumental'],
+  'Vocal Drop':['Vocal chops','Bass layers','Stutter effect'],
+  'Bass Drop':['Sub-bass maximum','L1+L2+L3 simultaneous','Bass IS the moment'],
+  'Half-Time Drop':['Kick gone','Sub-bass heartbeat only','Lone piano','Suspension 4 bars'],
+  'Verse':['Spoken-word','Keyboard clicks','Walking bass','Lo-fi groove','Intimate vocal','No percussion'],
+  'Pre-Chorus':['Sub-only bass','Pad swell','Snare roll','Bass layer 3','Rising piano','String swell','Choir enters'],
+  'Chorus':['Full piano hook','Polymorphic bass','Choir pad','Saxophone woven','Wide stereo','Anthemic'],
+  'Bridge':['Solo saxophone','Piano only','No percussion','Intimate','Breakdown','Emotional peak'],
+  'Hook':['Vocal chop echo','UI ping','Piano chord','Bass layer 1','Vinyl crackle','Whispered'],
+  'Instrumental Transition':['Binary whoosh','Filter sweep','Bass layer 3','Riser','6 bars','8 bars'],
+  'Outro':['Orchestra out','Solo piano','Saxophone front','Sub drone fade','Bass peels','Reverb tail'],
+  'Break':['Reverse piano','No drums','Airy','Sub breath'],
+  'default':['Piano','Saxophone','Bass layers','Sidechain','Reverb','Vocal chop']
+};
+
+function getSP(name){const n=name.toLowerCase();for(const k of Object.keys(SP)){if(n.includes(k.toLowerCase()))return SP[k]}return SP.default}
+
+function autoTag(p){
+  const n=p.toLowerCase();
+  if(n.includes('intro'))return'Soft piano,ambient pad,no drums|boot-up SFX,vinyl crackle,modem hiss';
+  if(n.includes('build-up'))return'Bass layers build|hi-hat accelerates|riser SFX|snare roll|8 bars tension';
+  if(n.includes('drop 1'))return'Bass 1+2,hard drive pulse,digital glitch|sidechain pumping|4 bars';
+  if(n.includes('drop 2'))return'All 3 bass layers,saxophone stab|digital glitch,server hum|4 bars';
+  if(n.includes('drop 3'))return'Half-time,kick gone|sub-bass heartbeat only|lone piano|error alert FX|4 bars';
+  if(n.includes('drop 4'))return'Bass tsunami all 3 maximum|choir fortissimo,saxophone soars|orchestral riser|8 bars';
+  if(n.includes('half-time drop'))return'Kick gone|sub-bass heartbeat only|lone piano|4 bars suspension';
+  if(n.includes('bass drop'))return'All bass layers maximum|sub impact wall|sidechain peak';
+  if(n.includes('vocal drop'))return'Vocal chops prominent|bass layers|stutter FX|4 bars';
+  if(n.includes('instrumental drop'))return'No vocals|bass maximum|synth lead soars|8 bars';
+  if(n.includes('drop'))return'Bass layers,digital glitch|sidechain|4 bars';
+  if(n.includes('verse 1'))return'Piano+ambient,no percussion|keyboard clicks,data beeps|baritone spoken-word';
+  if(n.includes('verse 2'))return'Piano+guitar,heartbeat kick|bass 1+2|deeper emotive baritone';
+  if(n.includes('verse'))return'Bass groove,piano|keyboard clicks|intimate vocal';
+  if(n.includes('pre-chorus 1'))return'Analog pads,sub-bass,muted toms|bass layer 3|data beeps';
+  if(n.includes('pre-chorus 2'))return'Guitars,analog pads|deep percussion,choir|bass layer 3|more exposed than PC1';
+  if(n.includes('pre-chorus 3'))return'All 3 bass layers,piano cascade|choir,heartbeat kick|saxophone|peak';
+  if(n.includes('pre-chorus'))return'Analog pads,sub-bass|piano cascade|data beeps';
+  if(n.includes('chorus finale'))return'Full orchestra|choir forte|piano,bass waves,guitar hooks|saxophone counter-melody|peak';
+  if(n.includes('chorus 1'))return'Piano hook,layered octaves|deep sub,choir pad|saxophone|polymorphic bass locked';
+  if(n.includes('chorus 2'))return'Full bass,analog pads,piano hooks|cymbal,choir,sub hits|wider than C1';
+  if(n.includes('chorus'))return'Piano hook,choir pad|polymorphic bass locked';
+  if(n.includes('hook'))return'Bass layer 1|saxophone breath,piano chord|vocal chop echo|UI ping,vinyl crackle';
+  if(n.includes('bridge'))return'Piano+solo saxophone|no percussion|intimate|error alert FX|matrix rain';
+  if(n.includes('break'))return'Reverse piano|no drums|airy|sub breath';
+  if(n.includes('post-chorus'))return'Vocal hook repeat|bass groove|energy sustain|4 bars transition';
+  if(n.includes('transition'))return`Binary whoosh|bass layer 3,saxophone enters|UI ping|${n.includes('3')||n.includes('4')?'8':'6'} bars`;
+  if(n.includes('outro part 1'))return'Orchestra out|solo piano|saxophone front|guitar harmonics|sub drone fade|bass peels';
+  if(n.includes('outro part 2'))return'Single piano note|8-sec reverb|saxophone breath|vinyl crackle|modem hiss|silence';
+  if(n.includes('outro'))return'Solo piano|saxophone front|sub drone fade|bass peels';
+  if(n.includes('guitar solo'))return'Electric guitar lead|band stops|spotlight moment';
+  if(n.includes('rap verse'))return'Tight bass|hi-hat pattern|lyrical flow';
+  if(n.includes('spoken interlude'))return'Minimal pad or silence|spoken word only|intimate mic';
+  if(n.includes('ad-lib'))return'Vocal ad-libs background|bass groove continues';
+  return'Piano,bass,saxophone|sidechain,reverb';
+}
+
+function dndRender(){
+  const el=document.getElementById('dnd-list');el.innerHTML='';
+  STRUCT.forEach((part,i)=>{
+    const tag=STAGS[part]||autoTag(part);STAGS[part]=tag;
+    const d=document.createElement('div');d.className='dnd-item';d.draggable=true;
+    d.innerHTML=`<div class="dnd-head"><span class="dnd-grip">⠿</span><span class="dnd-name">${part}</span><span class="dnd-prev">[${tag.slice(0,40)}${tag.length>40?'…':''}]</span><div class="dnd-btns"><button class="dnd-btn" onclick="dndToggle(${i})">✏️</button><button class="dnd-btn del" onclick="dndRm(${i})">✕</button></div></div><div class="dnd-body" id="db-${i}"><label style="font-size:10px;color:var(--t2);display:block;margin-bottom:3px">Тег-промпт:</label><textarea class="dnd-ta" id="dt-${i}" onchange="saveTag(${i})">${tag}</textarea><div class="dnd-ps" id="dp-${i}"></div></div>`;
+    d.addEventListener('dragstart',()=>{dragIdx=i;setTimeout(()=>d.classList.add('dragging'),0)});
+    d.addEventListener('dragend',()=>{d.classList.remove('dragging');document.querySelectorAll('.dnd-item').forEach(x=>x.classList.remove('over'))});
+    d.addEventListener('dragover',e=>{e.preventDefault();document.querySelectorAll('.dnd-item').forEach(x=>x.classList.remove('over'));d.classList.add('over')});
+    d.addEventListener('drop',e=>{e.preventDefault();d.classList.remove('over');if(dragIdx!==null&&dragIdx!==i){const s=STRUCT.splice(dragIdx,1)[0];STRUCT.splice(i,0,s);dragIdx=null;dndRender()}});
+    el.appendChild(d);
+    const pp=document.getElementById(`dp-${i}`);
+    getSP(part).forEach(preset=>{
+      const sp=document.createElement('span');sp.className='pill';sp.style.fontSize='10px';sp.style.padding='2px 7px';sp.textContent=preset;
+      sp.onclick=()=>{const ta=document.getElementById(`dt-${i}`);if(!ta.value.includes(preset)){ta.value+=`,${preset}`;saveTag(i)}};
+      pp.appendChild(sp);
+    });
+  });
+}
+
+function dndToggle(i){document.getElementById(`db-${i}`).classList.toggle('open')}
+function saveTag(i){STAGS[STRUCT[i]]=document.getElementById(`dt-${i}`).value}
+function dndRm(i){STRUCT.splice(i,1);dndRender()}
+function dndAdd(){const v=document.getElementById('dnd-sel').value;if(v){STRUCT.push(v);dndRender()}}
+function dndReset(){STRUCT=[...BASE];STAGS={};dndRender();showToast('Структуру скинуто')}
+function dndAutoGenre(){
+  const g=getGenre().toLowerCase();
+  if(g.includes('ambient'))STRUCT=['Intro','Build-up 1','Hook 1','Verse 1','Drop 1','Chorus 1','Bridge','Chorus Finale','Outro Part 1','Outro Part 2'];
+  else if(g.includes('folk')||g.includes('ethno'))STRUCT=['Intro','Verse 1','Chorus 1','Instrumental Transition 1','Verse 2','Chorus 2','Bridge','Chorus Finale','Outro Part 1'];
+  else if(g.includes('r&b')||g.includes('soul'))STRUCT=['Intro','Hook 1','Verse 1','Pre-Chorus 1','Chorus 1','Hook 2','Verse 2','Pre-Chorus 2','Chorus 2','Bridge','Chorus Finale','Outro Part 1','Outro Part 2'];
+  else if(g.includes('hip-hop')||g.includes('rap')||g.includes('trap'))STRUCT=['Intro','Rap Verse','Hook 1','Rap Verse','Hook 2','Bridge','Hook 3','Outro Part 1'];
+  else if(g.includes('jazz'))STRUCT=['Intro','Hook 1','Verse 1','Solo Section','Hook 2','Bridge','Outro Part 1'];
+  else if(g.includes('metal')||g.includes('rock'))STRUCT=['Intro','Verse 1','Pre-Chorus 1','Chorus 1','Verse 2','Pre-Chorus 2','Chorus 2','Bridge','Guitar Solo','Chorus Finale','Outro Part 1'];
+  else if(g.includes('confessional')||g.includes('indie'))STRUCT=['Intro','Verse 1','Chorus 1','Verse 2','Chorus 2','Bridge','Chorus Finale','Outro Part 1','Outro Part 2'];
+  else STRUCT=[...BASE];
+  STAGS={};dndRender();showToast('Структуру оновлено');
+}
+function dndRegenTags(){STAGS={};STRUCT.forEach(p=>{STAGS[p]=autoTag(p)});dndRender();showToast('Теги регенеровано')}
+
+function initDndSel(){const s=document.getElementById('dnd-sel');s.innerHTML='';ALL_PARTS.forEach(p=>{const o=document.createElement('option');o.value=o.textContent=p;s.appendChild(o)})}
+
+// VOCAL DESC
+const VD={
+  male:{house:'solo male,warm baritone,gravelly rasp,spoken-word verses,melodic authority chorus',indie:'solo male,warm melodic,gentle rasp,wide dynamic range,soaring chorus',cinematic:'solo male,deep cinematic baritone,spoken bridge,full voice finale',whisper:'solo male,baritone,whispering dominant,melodic chorus only',soul:'solo male,rich soulful tenor,gospel runs,emotional falsetto',reggaeton:'solo male,characteristic warm baritone,ultra-emotional spoken verses',rap:'solo male,confident lyrical flow,punchy articulation,melodic hooks',jazz:'solo male,warm smooth crooner,jazz phrasing,soft vibrato',rock:'solo male,powerful raspy rock tenor,anthemic chorus',metal:'solo male,powerful wide range,aggressive chorus,controlled screaming',confessional:'solo male,intimate quiet baritone,confessional spoken-word,vulnerable'},
+  female:{house:'solo female,pure clear bell-like tone,wide range,breathy verses,soaring chorus',indie:'solo female,warm breathy ultra-melodic,falsetto ad-libs,whisper verses',cinematic:'solo female,luminous operatic range,whispered verses,powerful finale',whisper:'solo female,airy breathy dominant,melodic chorus only',soul:'solo female,rich soulful mezzo-soprano,gospel runs,full voice chorus',reggaeton:'solo female,confident wide range,ultra-emotional,breathy verses',rap:'solo female,sharp confident flow,melodic hooks,playful growls',jazz:'solo female,sultry jazz alto,warm intimate,scatting ad-libs',rock:'solo female,powerful rock soprano,breathy verses,full-power chorus',metal:'solo female,operatic soprano,soaring chorus',confessional:'solo female,intimate confessional,pure unaffected tone,vulnerable quiet'},
+  duet:{house:'male-female duet — male warm rasp spoken-word; female pure clear soaring. Rich harmonies.',indie:'male-female duet — male warm melodic; female breathy wide range. Layered harmonies.',cinematic:'male-female duet — male cinematic baritone; female crystalline. Choral harmonies.',whisper:'male-female duet — both whispering. Male spoken bridge, female soaring chorus.',soul:'male-female duet — both soulful. Call-and-response, unison gospel chorus.',reggaeton:'male-female duet — male baritone spoken; female breathy soaring.',rap:'male-female duet — male lyrical flow; female melodic hooks.',jazz:'male-female duet — both jazz phrasing, call-and-response.',rock:'male-female duet — male raspy verse; female powerful soaring chorus.',metal:'male-female duet — male powerful/growl; female operatic soprano.',confessional:'male-female duet — both intimate confessional, hushed harmonies.'}
+};
+function getVocalDesc(){const vt=document.getElementById('vt').value;const vs=document.getElementById('vs').value;const extra=document.getElementById('vocal-extra').value.trim();const base=(VD[vt]?.[vs])||VD.male.house;return extra?base+','+extra:base}
+
+// NAVIGATION
+let done=new Set();
+function goStep(n){
+  if(n===2){initStep2();return}
+  if(n===4){initStep4();return}
+  activatePage(n);
+}
+function activatePage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pg'+n).classList.add('active');
+  document.querySelectorAll('.step-btn').forEach(b=>{
+    const s=parseInt(b.dataset.s);
+    b.classList.remove('active','done');
+    if(s===n)b.classList.add('active');
+    else if(s<n||done.has(s))b.classList.add('done');
+  });
+  window.scrollTo(0,0);
+}
+
+async function initStep2(){
+  activatePage(2);initDndSel();done.add(1);
+  document.getElementById('gi-loader').style.display='flex';
+  document.getElementById('genre-info').classList.remove('show');
+  document.getElementById('genre-recs').classList.remove('show');
+  const genre=getGenre();const bpm=getBpm();
+  try{
+    const raw=await callAI(`Music production expert. Genre:"${genre}",${bpm}.\nRespond ONLY as JSON no markdown:\n{"title":"genre name","description":"2-3 sentences Ukrainian","tempo":"BPM range+structure Ukrainian","production":"instruments+techniques Ukrainian","vocal":"vocal style Ukrainian","tips":["tip1 Ukrainian","tip2 Ukrainian","tip3 Ukrainian","tip4 Ukrainian"]}`,500);
+    const info=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    document.getElementById('gi-card-title').textContent=info.title||genre;
+    document.getElementById('gi-desc').textContent=info.description||'—';
+    document.getElementById('gi-tempo').textContent=info.tempo||bpm;
+    document.getElementById('gi-prod').textContent=info.production||'—';
+    document.getElementById('gi-vocal').textContent=info.vocal||'—';
+    document.getElementById('genre-info').classList.add('show');
+    if(info.tips?.length){const rl=document.getElementById('recs-list');rl.innerHTML='';info.tips.forEach(t=>{const d=document.createElement('div');d.className='rec-item';d.textContent=t;rl.appendChild(d)});document.getElementById('genre-recs').classList.add('show')}
+    STRUCT.forEach(p=>{if(!STAGS[p])STAGS[p]=autoTag(p)});dndRender();
+  }catch(e){
+    document.getElementById('gi-desc').textContent='Не вдалося завантажити. Перевірте з\'єднання.';
+    document.getElementById('genre-info').classList.add('show');
+    STRUCT.forEach(p=>{if(!STAGS[p])STAGS[p]=autoTag(p)});dndRender();
+  }finally{document.getElementById('gi-loader').style.display='none'}
+  done.add(2);suggestBassMode(getGenre());
+}
+
+function getApiKey(){
+  const k=document.getElementById('api-key-input')?.value?.trim()||localStorage.getItem('lips_api_key')||'';
+  return k;
+}
+function saveApiKey(){
+  const k=document.getElementById('api-key-input').value.trim();
+  if(k){localStorage.setItem('lips_api_key',k)}
+  else{localStorage.removeItem('lips_api_key')}
+  updateKeyStatus(k);
+}
+function updateKeyStatus(k){
+  const el=document.getElementById('api-key-status');
+  if(!el)return;
+  if(k&&k.startsWith('sk-ant-')&&k.length>20){el.textContent='✅';el.title='Ключ виглядає правильно'}
+  else if(k&&k.length>5){el.textContent='⚠️';el.title='Перевірте ключ — має починатись з sk-ant-'}
+  else{el.textContent='⬜';el.title='Введіть API ключ'}
+}
+async function callAI(prompt,maxTokens=2000){
+  const apiKey=getApiKey();
+  if(!apiKey){throw new Error('API ключ не введено. Вставте ключ у поле "API Key" у верхньому правому куті.')}
+  const headers={'Content-Type':'application/json'};
+  if(apiKey)headers['x-api-key']=apiKey;
+  const r=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers,
+    body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]})
+  });
+  const d=await r.json();
+  if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
+  return d.content?.[0]?.text||'';
+}
+
+async function initStep4(){
+  activatePage(4);done.add(3);
+  document.getElementById('gen-loader').classList.add('show');
+  document.getElementById('gen-result').style.display='none';
+  const steps=['Аналізую концепцію…','Формую лірика-промпт…','Генерую style-prompt…','Перевіряю ліміти…','Рекомендації…'];
+  let si=0;const stI=setInterval(()=>{document.getElementById('gen-step').textContent=steps[si%steps.length];si++},1100);
+  const genre=getGenre();const bpm=getBpm();
+  const lang=document.getElementById('lang').value;
+  const rhyme=document.getElementById('rhyme').value;
+  const key=document.getElementById('key').value;
+  const title=document.getElementById('title').value;
+  const concept=document.getElementById('concept').value;
+  const lyrics=document.getElementById('lyrics').value;
+  const lyricMode=document.getElementById('lyric-mode').value;
+  const vd=getVocalDesc();
+  const mood=[...SEL.mood].join(',');const instr=[...SEL.instr].join(',');
+  const prod=[...SEL.prod].join(',');const vt=[...SEL.vocal].join(',');const sfx=[...SEL.sfx].join(',');
+  const bp=buildBassPrompt();
+  const sectionTags=STRUCT.map(s=>`[${s}]\n[${STAGS[s]||autoTag(s)}]`).join('\n');
+
+  const lR=`Expert Suno AI prompt engineer and lyricist.
+Song:"${title||'Untitled'}"|Genre:${genre},${bpm}${key?',Key:'+key:''}
+Language:${lang}|Rhyme:${rhyme}
+Concept:${concept||'romantic emotional song'}
+Vocal:${vd}
+Mood:${mood||'romantic,emotional'}
+Instruments:${instr||'piano,saxophone'}
+Production:${prod||'analog,layered'}
+Vocal characteristics:${vt}
+SFX:${sfx||'vinyl crackle,binary whoosh,digital glitch'}
+${bp?`Bass:${bp}`:''}
+
+Structure+tags:
+${sectionTags}
+
+${lyrics&&lyricMode!=='ai'?`USER LYRICS:\n${lyrics}`:'GENERATE original lyrics from concept.'}
+
+RULES:
+1. Total output MUST be ≤5000 chars. Absolute limit.
+2. Format:[SECTION NAME]\n[tag-prompt]\nlyrics
+3. Tags use commas and pipes,no spaces after commas where possible
+4. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
+5. Short drop/transition/hook tags — compress aggressively
+6. If near limit: shorten tags first,never cut lyrics mid-sentence
+7. Output ONLY the formatted lyrics-prompt.`;
+
+  const sR=`Expert Suno style-prompt.
+Genre:${genre},${bpm}${key?',Key:'+key:''}
+Mood:${mood||'romantic,atmospheric'}
+Vocal:${vd}
+Instruments:${instr||'piano,saxophone,bass'}
+Production:${prod||'analog,warm,layered'}
+SFX:${sfx||'vinyl crackle,binary whoosh'}
+${bp?`Bass:${bp}`:''}
+
+Compact Suno style-prompt. LIMIT:≤1000 chars ABSOLUTE.
+Use pipes. Remove spaces after commas.No linebreaks in lists.
+Format: Genre+BPM line|Vocal line|BASS compact|SFX line|Production line|Mood line
+Output ONLY the style-prompt.`;
+
+  const sgR=`Genre:${genre},Mood:${mood},Concept:${concept||'romantic song'}
+4 specific Suno improvement tips.Ukrainian.JSON:["s1","s2","s3","s4"]`;
+
+  try{
+    const[lr,sr,sgr]=await Promise.all([callAI(lR,2000),callAI(sR,600),callAI(sgR,350)]);
+    clearInterval(stI);
+    let fl=lr.trim();if(fl.length>5000)fl=fl.slice(0,4997)+'…';
+    let fs=sr.trim();if(fs.length>1000)fs=fs.slice(0,997)+'…';
+    document.getElementById('out-l').value=fl;
+    document.getElementById('out-s').value=fs;
+    updCtr('out-l','ctr-l',5000,'pf-l');updCtr('out-s','ctr-s',1000,'pf-s');
+    try{const sugs=JSON.parse(sgr.replace(/```json|```/g,'').trim());const sl=document.getElementById('sugs-list');sl.innerHTML='';sugs.forEach(s=>{const d=document.createElement('div');d.className='sug-item';d.textContent=s;sl.appendChild(d)})}catch(e){}
+    document.getElementById('gen-loader').classList.remove('show');
+    document.getElementById('gen-result').style.display='block';done.add(4);
+  }catch(e){
+    clearInterval(stI);
+    document.getElementById('gen-loader').classList.remove('show');
+    document.getElementById('out-l').value='Помилка: '+e.message;
+    document.getElementById('out-s').value='Помилка генерації.';
+    document.getElementById('gen-result').style.display='block';
+  }
+}
+
+async function regen(){document.getElementById('gen-result').style.display='none';document.getElementById('gen-loader').classList.add('show');await initStep4()}
+
+async function refine(){
+  const txt=document.getElementById('refinement').value.trim();
+  if(!txt){showToast('Введіть коментарі');return}
+  const ol=document.getElementById('out-l').value;const os=document.getElementById('out-s').value;
+  document.getElementById('gen-result').style.display='none';document.getElementById('gen-loader').classList.add('show');
+  document.getElementById('gen-txt').textContent='AI покращує…';document.getElementById('gen-step').textContent='Обробка…';
+  try{
+    const raw=await callAI(`Lyrics(${ol.length} chars,max 5000):\n${ol}\n\nStyle(${os.length} chars,max 1000):\n${os}\n\nRequest:"${txt}"\nApply carefully.CRITICAL:lyrics≤5000,style≤1000.\nRespond ONLY JSON:{"lyrics":"...","style":"..."}`,2500);
+    const data=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    let l=data.lyrics||ol;let s=data.style||os;
+    if(l.length>5000)l=l.slice(0,4997)+'…';if(s.length>1000)s=s.slice(0,997)+'…';
+    document.getElementById('out-l').value=l;document.getElementById('out-s').value=s;
+    updCtr('out-l','ctr-l',5000,'pf-l');updCtr('out-s','ctr-s',1000,'pf-s');
+    showToast('Покращено!');
+  }catch(e){showToast('Помилка: '+e.message)}
+  finally{document.getElementById('gen-loader').classList.remove('show');document.getElementById('gen-result').style.display='block';document.getElementById('gen-txt').textContent='AI генерує промпти…'}
+}
+
+function updCtr(tid,cid,lim,pfid){
+  const len=document.getElementById(tid).value.length;
+  const el=document.getElementById(cid);
+  el.textContent=`${len} / ${lim}`;
+  el.className='ctr '+(len>lim?'over':len>lim*.85?'warn':'ok');
+  if(pfid){const pf=document.getElementById(pfid);const pct=Math.min(100,Math.round(len/lim*100));pf.style.width=pct+'%';pf.style.background=len>lim?'#ef4444':len>lim*.85?'#f59e0b':'#22c55e'}
+}
+
+function cp(tid,cid,lim,pfid,btnid){
+  const t=document.getElementById(tid).value;if(!t)return;
+  navigator.clipboard.writeText(t).catch(()=>{document.getElementById(tid).select();document.execCommand('copy')});
+  const btn=document.getElementById(btnid);const old=btn.textContent;
+  btn.textContent='Скопійовано!';btn.classList.add('flash');
+  setTimeout(()=>{btn.textContent=old;btn.classList.remove('flash')},2000);
+}
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
+function getState(){
+  return{title:document.getElementById('title').value,concept:document.getElementById('concept').value,lyrics:document.getElementById('lyrics').value,lyricMode:document.getElementById('lyric-mode').value,lang:document.getElementById('lang').value,rhyme:document.getElementById('rhyme').value,genre:document.getElementById('genre').value,bpm1:document.getElementById('bpm1').value,bpm2:document.getElementById('bpm2').value,key:document.getElementById('key').value,vt:document.getElementById('vt').value,vs:document.getElementById('vs').value,vocalExtra:document.getElementById('vocal-extra').value,sel:{mood:[...SEL.mood],instr:[...SEL.instr],prod:[...SEL.prod],vocal:[...SEL.vocal],sfx:[...SEL.sfx]},struct:STRUCT,stags:STAGS,bassMode,bl1:document.getElementById('bl1').value,bl2:document.getElementById('bl2').value,bl3:document.getElementById('bl3').value,blNote:document.getElementById('bl-note').value,outL:document.getElementById('out-l').value,outS:document.getElementById('out-s').value,ts:Date.now()};
+}
+
+function saveSession(){const st=getState();try{localStorage.setItem('lips_s_'+st.ts,JSON.stringify(st));localStorage.setItem('lips_last','lips_s_'+st.ts);showToast('Збережено')}catch(e){showToast('Помилка')}}
+
+function loadSessionUI(){
+  const ss=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('lips_s_')){try{const s=JSON.parse(localStorage.getItem(k));ss.push({k,s})}catch(e){}}}
+  if(!ss.length){showToast('Немає збережених сесій');return}
+  ss.sort((a,b)=>b.s.ts-a.s.ts);const lat=ss[0].s;
+  if(confirm(`Завантажити "${lat.title||'без назви'}" від ${new Date(lat.ts).toLocaleString()}?`)){loadState(lat);showToast('Завантажено')}
+}
+
+function loadState(st){
+  if(!st)return;
+  const set=(id,v)=>{const el=document.getElementById(id);if(el&&v!==undefined)el.value=v};
+  set('title',st.title);set('concept',st.concept);set('lyrics',st.lyrics);set('lyric-mode',st.lyricMode);set('lang',st.lang);set('rhyme',st.rhyme);set('genre',st.genre);onGenre();setTimeout(()=>{},50);
+  set('bpm1',st.bpm1);set('bpm2',st.bpm2);set('key',st.key);set('vt',st.vt);set('vs',st.vs);set('vocal-extra',st.vocalExtra);
+  set('bl1',st.bl1);set('bl2',st.bl2);set('bl3',st.bl3);set('bl-note',st.blNote);
+  if(st.struct)STRUCT=[...st.struct];if(st.stags)Object.assign(STAGS,st.stags);
+  if(st.bassMode)setBassMode(st.bassMode);
+  if(st.sel){Object.keys(SEL).forEach(k=>{SEL[k].clear();(st.sel[k]||[]).forEach(t=>SEL[k].add(t))});
+    document.querySelectorAll('.pill').forEach(p=>{const txt=p.textContent.replace(/^[\s\S]{1}/,'').trim();p.classList.remove('on');Object.keys(SEL).forEach(k=>{if(SEL[k].has(txt))p.classList.add('on')})})}
+  if(st.outL)document.getElementById('out-l').value=st.outL;
+  if(st.outS)document.getElementById('out-s').value=st.outS;
+  onLyricMode();
+}
+
+function autoSave(){clearTimeout(window._ast);window._ast=setTimeout(()=>{try{localStorage.setItem('lips_autosave',JSON.stringify(getState()))}catch(e){}},2000)}
+
+// INIT
+onGenre();initDndSel();STRUCT.forEach(p=>{STAGS[p]=autoTag(p)});
+try{const s=localStorage.getItem('lips_autosave');if(s){const st=JSON.parse(s);if(st.title||st.concept)loadState(st)}}catch(e){}
+// Restore API key
+try{
+  const savedKey=localStorage.getItem('lips_api_key');
+  if(savedKey){
+    const inp=document.getElementById('api-key-input');
+    if(inp)inp.value=savedKey;
+    updateKeyStatus(savedKey);
+  }
+}catch(e){}
+</script>
+</body>
+</html>
