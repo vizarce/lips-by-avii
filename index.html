@@ -806,42 +806,257 @@ function getSP(name){const n=name.toLowerCase();for(const k of Object.keys(SP)){
 
 function autoTag(p){
   const n=p.toLowerCase();
-  if(n.includes('intro'))return'Soft piano,ambient pad,no drums|boot-up SFX,vinyl crackle,modem hiss';
-  if(n.includes('build-up'))return'Bass layers build|hi-hat accelerates|riser SFX|snare roll|8 bars tension';
-  if(n.includes('drop 1'))return'Bass 1+2,hard drive pulse,digital glitch|sidechain pumping|4 bars';
-  if(n.includes('drop 2'))return'All 3 bass layers,saxophone stab|digital glitch,server hum|4 bars';
-  if(n.includes('drop 3'))return'Half-time,kick gone|sub-bass heartbeat only|lone piano|error alert FX|4 bars';
-  if(n.includes('drop 4'))return'Bass tsunami all 3 maximum|choir fortissimo,saxophone soars|orchestral riser|8 bars';
-  if(n.includes('half-time drop'))return'Kick gone|sub-bass heartbeat only|lone piano|4 bars suspension';
-  if(n.includes('bass drop'))return'All bass layers maximum|sub impact wall|sidechain peak';
-  if(n.includes('vocal drop'))return'Vocal chops prominent|bass layers|stutter FX|4 bars';
-  if(n.includes('instrumental drop'))return'No vocals|bass maximum|synth lead soars|8 bars';
-  if(n.includes('drop'))return'Bass layers,digital glitch|sidechain|4 bars';
-  if(n.includes('verse 1'))return'Piano+ambient,no percussion|keyboard clicks,data beeps|baritone spoken-word';
-  if(n.includes('verse 2'))return'Piano+guitar,heartbeat kick|bass 1+2|deeper emotive baritone';
-  if(n.includes('verse'))return'Bass groove,piano|keyboard clicks|intimate vocal';
-  if(n.includes('pre-chorus 1'))return'Analog pads,sub-bass,muted toms|bass layer 3|data beeps';
-  if(n.includes('pre-chorus 2'))return'Guitars,analog pads|deep percussion,choir|bass layer 3|more exposed than PC1';
-  if(n.includes('pre-chorus 3'))return'All 3 bass layers,piano cascade|choir,heartbeat kick|saxophone|peak';
-  if(n.includes('pre-chorus'))return'Analog pads,sub-bass|piano cascade|data beeps';
-  if(n.includes('chorus finale'))return'Full orchestra|choir forte|piano,bass waves,guitar hooks|saxophone counter-melody|peak';
-  if(n.includes('chorus 1'))return'Piano hook,layered octaves|deep sub,choir pad|saxophone|polymorphic bass locked';
-  if(n.includes('chorus 2'))return'Full bass,analog pads,piano hooks|cymbal,choir,sub hits|wider than C1';
-  if(n.includes('chorus'))return'Piano hook,choir pad|polymorphic bass locked';
-  if(n.includes('hook'))return'Bass layer 1|saxophone breath,piano chord|vocal chop echo|UI ping,vinyl crackle';
-  if(n.includes('bridge'))return'Piano+solo saxophone|no percussion|intimate|error alert FX|matrix rain';
-  if(n.includes('break'))return'Reverse piano|no drums|airy|sub breath';
-  if(n.includes('post-chorus'))return'Vocal hook repeat|bass groove|energy sustain|4 bars transition';
-  if(n.includes('transition'))return`Binary whoosh|bass layer 3,saxophone enters|UI ping|${n.includes('3')||n.includes('4')?'8':'6'} bars`;
-  if(n.includes('outro part 1'))return'Orchestra out|solo piano|saxophone front|guitar harmonics|sub drone fade|bass peels';
-  if(n.includes('outro part 2'))return'Single piano note|8-sec reverb|saxophone breath|vinyl crackle|modem hiss|silence';
-  if(n.includes('outro'))return'Solo piano|saxophone front|sub drone fade|bass peels';
-  if(n.includes('guitar solo'))return'Electric guitar lead|band stops|spotlight moment';
-  if(n.includes('rap verse'))return'Tight bass|hi-hat pattern|lyrical flow';
-  if(n.includes('spoken interlude'))return'Minimal pad or silence|spoken word only|intimate mic';
-  if(n.includes('ad-lib'))return'Vocal ad-libs background|bass groove continues';
-  return'Piano,bass,saxophone|sidechain,reverb';
+  const g=getGenre().toLowerCase();
+  const bpm=document.getElementById('bpm1').value||'118';
+
+  // ── HOUSE / DEEP HOUSE / VOCAL HOUSE ──
+  const isHouse=g.includes('house')||g.includes('vocal');
+  // ── ELECTRONIC ──
+  const isEDM=g.includes('edm')||g.includes('trance')||g.includes('techno');
+  // ── HIP-HOP / TRAP ──
+  const isHip=g.includes('hip-hop')||g.includes('rap')||g.includes('trap');
+  // ── INDIE / CONFESSIONAL ──
+  const isIndie=g.includes('indie')||g.includes('confessional')||g.includes('folk');
+  // ── JAZZ / SOUL ──
+  const isJazz=g.includes('jazz')||g.includes('soul')||g.includes('r&b');
+  // ── ROCK / METAL ──
+  const isRock=g.includes('rock')||g.includes('metal');
+  // ── LO-FI / CHILL ──
+  const isLofi=g.includes('lo-fi')||g.includes('chill')||g.includes('ambient');
+
+  // helper
+  const pick=(...opts)=>opts[Math.floor(Math.random()*opts.length)];
+
+  // ── INTRO ──
+  if(n.includes('intro')){
+    if(isHouse) return 'Soft felt piano,warm pad,no drums,sub-bass breath|terminal boot-up SFX,modem hiss,vinyl crackle|atmospheric tension build';
+    if(isHip)   return 'Boom bap intro,no melody|vinyl crackle,record scratch|sub-bass heartbeat,hi-hat tick';
+    if(isIndie) return 'Solo acoustic guitar,room reverb,no drums|intimate mic breath|sparse piano note,birdsong';
+    if(isJazz)  return 'Upright bass intro,brushed snare|piano chord resonance,cymbal wash|warm jazz room reverb';
+    if(isRock)  return 'Guitar amp hum,single chord|drum count-off,room ambience|building tension';
+    if(isLofi)  return 'Vinyl crackle,tape hiss,rain ambience|soft piano melody,no drums|lo-fi warmth';
+    return 'Soft piano,ambient pad,no drums|vinyl crackle,atmospheric build';
+  }
+
+  // ── BUILD-UP ──
+  if(n.includes('build-up')||n.includes('buildup')){
+    if(isHouse) return 'Bass layer 1+2 building|hi-hat accelerates 16th notes|filter opens gradually,riser SFX|snare roll,clap on 4|tension crescendo '+bpm+' BPM';
+    if(isEDM)   return 'All instruments rise|white noise sweep,massive riser|kick drops out,snare every beat|crowd energy builds|filter wide open';
+    if(isHip)   return 'Beat intensifies|hi-hat doubles,bass thickens|vocal ad-libs escalate|snare fills';
+    return 'Energy builds|riser SFX,hi-hat accelerates|snare roll|8 bars tension';
+  }
+
+  // ── DROP variants ──
+  if(n.includes('drop 1')){
+    if(isHouse) return 'Bass L1+L2 slam simultaneously|digital glitch stutter,server hum|sidechain pumping hard|4 bars|vocal chop echo';
+    if(isEDM)   return 'All synths hit,kick returns|white noise cuts,bass slams|massive sub impact|4 bars full energy';
+    if(isHip)   return '808 bass hits,trap snare|hi-hat triplets lock in|hard drop 4 bars';
+    return 'Bass layers 1+2,digital glitch|sidechain pumping|4 bars';
+  }
+  if(n.includes('drop 2')){
+    if(isHouse) return 'All 3 bass layers simultaneous|saxophone stab,digital glitch cascade|server hum drone,vinyl crackle|4 bars|wider than drop 1';
+    if(isEDM)   return 'Maximum bass,all synths|distortion wall,white noise|massive sub|4 bars euphoric';
+    if(isHip)   return '808 melodic bass,darker snare|hi-hat pattern shifts|4 bars deeper drop';
+    return 'All 3 bass layers,saxophone stab|digital glitch cascade|4 bars';
+  }
+  if(n.includes('drop 3')){
+    if(isHouse) return 'Half-time feel,kick removed|sub-bass heartbeat only,lone piano|error alert FX,digital glitch fades|4 bars suspension|breathe before finale';
+    if(isEDM)   return 'Half-time breakdown|minimal beat,pad drone|4 bars breathing space';
+    if(isHip)   return 'Beat drops to half-time|808 sub pulse only|4 bars minimal';
+    return 'Half-time,kick gone|sub-bass heartbeat only,lone piano|error alert FX|4 bars';
+  }
+  if(n.includes('drop 4')){
+    if(isHouse) return 'Bass tsunami all 3 layers maximum|choir fortissimo,saxophone soars|orchestral riser,digital glitch wall|8 bars full release|peak of entire song';
+    if(isEDM)   return 'Biggest drop of track|all elements maximum|sub bass wall,melody peaks|8 bars grand release';
+    return 'Bass tsunami all 3 maximum|choir fortissimo,saxophone soars|orchestral riser|8 bars';
+  }
+  if(n.includes('drop 5')){
+    return 'Final drop,maximum energy|all bass layers,full orchestra|vocal finale|8 bars';
+  }
+  if(n.includes('instrumental drop')){
+    return 'No vocals|bass maximum,synth lead melody soars|polymorphic bass peak|8 bars pure instrumental';
+  }
+  if(n.includes('vocal drop')){
+    return 'Vocal chops prominent and rhythmic|bass layers underneath|stutter effect,pitched chops|4 bars vocal-led';
+  }
+  if(n.includes('bass drop')){
+    return 'Sub-bass maximum,chest-rattling|L1+L2+L3 hit simultaneously|sidechain peak|bass IS the moment';
+  }
+  if(n.includes('half-time drop')){
+    return 'Kick gone,half-time feel|sub-bass heartbeat pulse only|lone piano or pad|4 bars pure suspension';
+  }
+  if(n.includes('drop')){
+    return 'Bass layers,digital glitch|sidechain pumping|4 bars energy release';
+  }
+
+  // ── VERSE ──
+  if(n.includes('verse 1')){
+    if(isHouse) return 'Piano + light ambient,no percussion|keyboard clicks texture,data beeps|warm baritone spoken-word,dry vocal|bass L1+L2 walking';
+    if(isHip)   return 'Boom bap beat,walking bass|lyrical flow,dry vocal|minimal instrumentation|storytelling mode';
+    if(isIndie) return 'Acoustic guitar fingerpicking,sparse|intimate vocal close-mic|room ambience,breath mic|no percussion';
+    if(isJazz)  return 'Walking upright bass,brushed snare|piano chords light,jazz guitar comping|smooth vocal phrasing';
+    if(isRock)  return 'Clean electric guitar,bass guitar|steady drum groove|raw vocal delivery';
+    if(isLofi)  return 'Lo-fi piano,vinyl crackle|heartbeat kick,lazy hi-hat|intimate vocal,tape warmth';
+    return 'Piano + ambient,no percussion|keyboard clicks|spoken-word vocal';
+  }
+  if(n.includes('verse 2')){
+    if(isHouse) return 'Piano + electric guitar,heartbeat kick introduced|bass L1+L2,keyboard clicks|deeper emotive baritone|more intensity than V1';
+    if(isHip)   return 'Beat builds slightly,bass thickens|second verse energy higher|more complex flow';
+    if(isIndie) return 'Guitar + subtle piano,gentle kick enters|vocal more open,less restrained|building toward chorus';
+    if(isJazz)  return 'Bass more melodic,piano comping richer|dynamics rise toward bridge|vocal phrasing deepens';
+    if(isRock)  return 'Heavier guitar tone,full drums|vocal raw energy increases|building tension';
+    if(isLofi)  return 'Lo-fi groove deeper,bass more prominent|vocal more emotive|leading to finale';
+    return 'Piano + guitar,heartbeat kick|bass L1+L2|deeper emotive vocal';
+  }
+  if(n.includes('verse 3')){
+    return 'Maximum verse energy|full instrumentation|most emotional vocal delivery|leading directly to finale';
+  }
+  if(n.includes('rap verse')){
+    return 'Tight trap beat or boom bap|hi-hat pattern precise|808 bass or sub thud|lyrical flow,dry vocal,no reverb|minimal melodic elements';
+  }
+  if(n.includes('verse')){
+    return 'Groove,piano|intimate vocal|bass walking';
+  }
+
+  // ── PRE-CHORUS ──
+  if(n.includes('pre-chorus 1')){
+    if(isHouse) return 'Bass drops to sub-only heartbeat|analog pads swell,muted toms enter|bass layer 3 stab appears|data beeps SFX|snare roll builds|vocal rises emotional';
+    if(isHip)   return 'Beat intensifies,bass thickens|vocal hooks preview chorus melody|energy escalates';
+    if(isIndie) return 'Guitar and piano layer|subtle kick enters|vocal more open|string swell begins';
+    if(isRock)  return 'Full band tightens|guitar power chords|snare doubles|tension toward chorus';
+    return 'Analog pads,sub-only bass|bass layer 3|snare roll builds|vocal rises';
+  }
+  if(n.includes('pre-chorus 2')){
+    if(isHouse) return 'Guitars expand,analog pads|deep percussion layered|choir pad rises|bass layer 3 active|more exposed and raw than PC1|string swell';
+    if(isRock)  return 'Full band maximum|guitar distortion|snare every beat|maximum tension';
+    return 'Guitars,analog pads|deep percussion,choir rises|bass layer 3|more exposed than PC1';
+  }
+  if(n.includes('pre-chorus 3')){
+    if(isHouse) return 'All 3 bass layers return simultaneously|piano cascade urgent|choir fortissimo|heartbeat kick|saxophone builds|peak pre-chorus intensity|leads to finale';
+    return 'All 3 bass layers,piano cascade|choir,heartbeat kick|saxophone builds|peak intensity';
+  }
+  if(n.includes('pre-chorus')){
+    return 'Analog pads,sub-bass|piano cascade|snare builds|vocal rises';
+  }
+
+  // ── CHORUS ──
+  if(n.includes('chorus finale')||n.includes('final chorus')){
+    if(isHouse) return 'Full orchestra,choir forte|piano rolls,warm bass waves|saxophone counter-melody soaring|polymorphic bass absolute peak|vinyl crackle swells|layered harmonies|everything maximum';
+    if(isRock)  return 'Full band maximum|guitar walls,drum fills|crowd singalong energy|biggest chorus of track';
+    return 'Full orchestra|choir forte|piano rolls,bass waves,guitar hooks|saxophone counter-melody|peak';
+  }
+  if(n.includes('chorus 1')){
+    if(isHouse) return 'Full piano hook,layered piano octaves|deep sub impact,wide choir pad|saxophone woven between phrases|polymorphic bass locked to kick|wide stereo|anthemic';
+    if(isHip)   return '808 bass melodic,full trap beat|hook melody catchy|harmonies underneath|wide mix';
+    if(isIndie) return 'Full band enters,piano prominent|vocal soars,wide reverb|anthemic chorus energy|guitar strumming open';
+    if(isJazz)  return 'Full jazz ensemble,piano chord hits|brass accents on beats|saxophone lead|swinging feel';
+    if(isRock)  return 'Power chords,full drums|vocal powerful and raw|bass guitar drives|anthemic';
+    if(isLofi)  return 'Lo-fi beat fuller,piano melody|vocal warm and close|slightly wider stereo|emotional peak';
+    return 'Piano hook,layered octaves|deep sub,choir pad|saxophone|polymorphic bass locked';
+  }
+  if(n.includes('chorus 2')){
+    if(isHouse) return 'Wider stereo than C1|backing oohs added|saxophone solo between lines|strings layer added|more euphoric|bass polymorphic peak';
+    if(isRock)  return 'Heavier than C1|guitar added layer|vocal more powerful|drum fills between phrases';
+    return 'Full bass,analog pads,piano hooks|cymbal,choir,sub hits|wider than C1|more euphoric';
+  }
+  if(n.includes('chorus')){
+    return 'Piano hook,choir pad|polymorphic bass locked|wide stereo|anthemic';
+  }
+
+  // ── HOOK ──
+  if(n.includes('hook 1')||n.includes('hook 2')||n.includes('hook 3')){
+    if(isHouse) return 'Bass layer 1 only|saxophone breath,warm piano chord|vocal chop echo pitched|UI ping SFX,vinyl crackle|intimate and minimal|teaser phrase';
+    if(isHip)   return 'Catchy melodic phrase|bass groove underneath|vocal hook melody|short 2-4 bars';
+    if(isIndie) return 'Solo guitar or piano|whispered or intimate vocal|minimal and atmospheric|birdsong or room tone';
+    if(isLofi)  return 'Lo-fi piano hook|vinyl crackle,tape hiss|soft vocal phrase|warm and intimate';
+    return 'Bass layer 1|saxophone breath,piano chord|vocal chop echo|UI ping,vinyl crackle';
+  }
+  if(n.includes('hook')){
+    return 'Melodic hook phrase|minimal instrumentation|vocal chop or motif|short catchy';
+  }
+
+  // ── BRIDGE ──
+  if(n.includes('bridge')){
+    if(isHouse) return 'Piano + solo saxophone full wrap|no percussion|intimate spoken-word|error alert FX faint|matrix rain texture|emotional breakdown|saxophone slowly rebuilds|low drum pulse returns';
+    if(isHip)   return 'Beat stripped to minimal|spoken word or rap|personal emotional content|bass only|leading to final chorus';
+    if(isIndie) return 'Solo acoustic guitar or piano|most vulnerable vocal moment|no percussion|emotional climax|whispered or raw';
+    if(isJazz)  return 'Solo instrument feature|band drops to minimal|improvised feel|dynamic shift';
+    if(isRock)  return 'Quiet guitar only|vocal exposed and raw|emotional contrast|building back to finale';
+    if(isLofi)  return 'Solo piano,rain ambience|most intimate moment|vocals close and raw|tape hiss prominent';
+    return 'Piano + solo saxophone|no percussion|intimate|emotional breakdown|error alert FX';
+  }
+
+  // ── BREAK ──
+  if(n.includes('break')){
+    if(isHouse) return 'Reverse piano,no drums|airy and open|vocal phrase floats|sub-bass breath only|complete tension release|4-8 bars';
+    if(isEDM)   return 'All music drops|silence or minimal pad|crowd breath moment|4 bars';
+    return 'Reverse piano|no drums|airy,sub breath|breakdown 4 bars';
+  }
+
+  // ── POST-CHORUS ──
+  if(n.includes('post-chorus')){
+    if(isHouse) return 'Bass groove continues|vocal hook repeat or ad-libs|energy sustained|saxophone motif|transitioning to next verse|4 bars';
+    if(isHip)   return 'Ad-libs over beat|vocal hook loops|energy sustain|2-4 bars';
+    return 'Vocal hook repeat|bass groove|energy sustain|4 bars transition';
+  }
+
+  // ── TRANSITION ──
+  if(n.includes('transition 1')){
+    if(isHouse) return 'Binary whoosh sweeps wide|bass layer 3 syncopated stab enters|saxophone breath appears|UI ping SFX|hi-hat ticks|6 bars building';
+    return 'Binary whoosh|bass layer 3 enters,saxophone|UI ping|6 bars';
+  }
+  if(n.includes('transition 2')){
+    if(isHouse) return 'Binary whoosh wide stereo|all bass layers building|nu-disco synth chord bloom|sidechain intensifies|saxophone swells|6 bars';
+    return 'Binary whoosh|bass builds,saxophone|synth bloom|6 bars';
+  }
+  if(n.includes('transition 3')){
+    if(isHouse) return 'Filter sweeps down|half-time feel|bass strips to layer 1 only|matrix rain texture appears|lone piano note|8 bars tender space|breathe';
+    return 'Filter sweeps down|half-time|bass layer 1 only|matrix rain|8 bars';
+  }
+  if(n.includes('transition 4')){
+    if(isHouse) return 'Bass strips to pulse|saxophone enters slow and warm|piano single chord|space and air|8 bars contemplative';
+    return 'Bass layer 1 pulse|saxophone enters warm|piano chord|8 bars space';
+  }
+  if(n.includes('transition')){
+    return 'Binary whoosh|bass layer 3,saxophone|riser SFX|6 bars';
+  }
+
+  // ── OUTRO ──
+  if(n.includes('outro part 1')||n.includes('outro 1')){
+    if(isHouse) return 'Orchestra drops out|solo piano returns|saxophone front and solo|guitar harmonics shimmer|deep sub drone fades|bass peels layer by layer|vocals warm and distant';
+    if(isHip)   return 'Beat fades gradually|bass softens|vocal ad-libs distant|loop fades';
+    if(isIndie) return 'Solo guitar|vocal whisper|room ambience|fade to silence';
+    return 'Orchestra out|solo piano|saxophone front|guitar harmonics|sub drone fade|bass peels';
+  }
+  if(n.includes('outro part 2')||n.includes('outro 2')){
+    if(isHouse) return 'Single piano note only|8-second reverb tail|saxophone final breath|vinyl crackle swells|modem hiss fades|complete silence';
+    if(isIndie) return 'Single guitar note,long reverb|birdsong or room tone|fade to complete silence';
+    return 'Single piano note|8-sec reverb|saxophone breath|vinyl crackle|modem hiss|silence';
+  }
+  if(n.includes('outro')){
+    return 'Solo piano|saxophone front|sub drone fade|bass peels|fade to silence';
+  }
+
+  // ── SOLO / SPECIAL ──
+  if(n.includes('guitar solo')){
+    return 'Electric guitar lead spotlight|band drops to minimal|sustained melodic notes|wide reverb|climactic moment|16 bars';
+  }
+  if(n.includes('solo section')){
+    return 'Featured instrument solo|band comping minimal|improvised feel|expressive and dynamic|16 bars';
+  }
+  if(n.includes('spoken interlude')){
+    return 'No music or minimal drone pad|spoken word only|intimate mic close|personal and raw|no reverb';
+  }
+  if(n.includes('ad-lib')){
+    return 'Vocal ad-libs background layer|bass groove continues|energetic texture|call-and-response feel';
+  }
+  if(n.includes('head')){
+    return 'Main jazz theme|full ensemble|stated clearly|swinging feel|8-16 bars';
+  }
+
+  return 'Piano,bass|saxophone motif|sidechain,reverb|vocal';
 }
+
 
 function dndRender(){
   const el=document.getElementById('dnd-list');el.innerHTML='';
@@ -990,7 +1205,13 @@ async function initStep2(){
     if(info.tips?.length){const rl=document.getElementById('recs-list');rl.innerHTML='';info.tips.forEach(t=>{const d=document.createElement('div');d.className='rec-item';d.textContent=t;rl.appendChild(d)});document.getElementById('genre-recs').classList.add('show')}
     STRUCT.forEach(p=>{if(!STAGS[p])STAGS[p]=autoTag(p)});dndRender();
   }catch(e){
-    document.getElementById('gi-desc').textContent='Не вдалося завантажити. Перевірте з\'єднання.';
+    const msg=e.message||'Unknown error';
+    document.getElementById('gi-desc').textContent=
+      (getLang()==='uk'?'⚠️ Помилка: ':'⚠️ Error: ')+msg+
+      (getLang()==='uk'?'. Перевірте API ключ і з\'єднання.':'. Check your API key and connection.');
+    document.getElementById('gi-tempo').textContent='—';
+    document.getElementById('gi-prod').textContent='—';
+    document.getElementById('gi-vocal').textContent='—';
     document.getElementById('genre-info').classList.add('show');
     STRUCT.forEach(p=>{if(!STAGS[p])STAGS[p]=autoTag(p)});dndRender();
   }finally{document.getElementById('gi-loader').style.display='none'}
@@ -1020,26 +1241,48 @@ const DIRECT_URL='https://api.anthropic.com/v1/messages';
 
 async function callAI(prompt,maxTokens=2000){
   const apiKey=getApiKey();
-  if(!apiKey){throw new Error(getLang()==='uk'?'API ключ не введено. Вставте ключ у поле "API Key" у верхньому правому куті.':'API key not entered. Add your key in the top-right field.')}
-  const body=JSON.stringify({model:'claude-sonnet-4-5',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]});
-  // Try Netlify proxy first (works on deployed version)
-  const isNetlify=window.location.hostname.includes('netlify.app')||window.location.hostname.includes('github.io');
-  if(isNetlify){
+  if(!apiKey){
+    throw new Error(getLang()==='uk'
+      ?'API ключ не введено. Вставте ключ у верхній панелі.'
+      :'API key not entered. Add your key in the top panel.');
+  }
+  const payload={model:'claude-sonnet-4-5',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]};
+  const isDeployed=window.location.hostname.includes('netlify.app')
+    ||window.location.hostname.includes('github.io')
+    ||window.location.protocol==='file:';
+
+  // On deployed or local file: try proxy first, then direct
+  if(isDeployed){
     try{
-      const r=await fetch(PROXY_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey,body:JSON.parse(body)})});
-      const d=await r.json();
-      if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
-      return d.content?.[0]?.text||'';
+      const r=await fetch(PROXY_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({apiKey,body:payload})
+      });
+      if(r.ok){
+        const d=await r.json();
+        if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
+        return d.content?.[0]?.text||'';
+      }
     }catch(e){
-      if(!e.message.includes('Failed to fetch'))throw e;
+      // Proxy not available - fall through to direct
+      if(e.message&&!e.message.includes('fetch'))throw e;
     }
   }
-  // Direct call (works in Claude.ai artifact context)
-  const headers={'Content-Type':'application/json','x-api-key':apiKey};
-  const r=await fetch(DIRECT_URL,{method:'POST',headers,body});
-  const d=await r.json();
-  if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
-  return d.content?.[0]?.text||'';
+
+  // Direct call - works in Claude.ai artifact and when CORS allowed
+  try{
+    const r=await fetch(DIRECT_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+      body:JSON.stringify(payload)
+    });
+    const d=await r.json();
+    if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
+    return d.content?.[0]?.text||'';
+  }catch(e){
+    throw new Error((getLang()==='uk'?'Помилка API: ':'API Error: ')+e.message);
+  }
 }
 
 function getLang(){return document.getElementById('lang-ui')?.value||'uk'}
