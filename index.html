@@ -1194,8 +1194,22 @@ async function initStep2(){
   document.getElementById('genre-recs').classList.remove('show');
   const genre=getGenre();const bpm=getBpm();
   try{
-    const raw=await callAI(`Music production expert. Genre:"${genre}",${bpm}.\nRespond ONLY as JSON no markdown:\n{"title":"genre name","description":"2-3 sentences Ukrainian","tempo":"BPM range+structure Ukrainian","production":"instruments+techniques Ukrainian","vocal":"vocal style Ukrainian","tips":["tip1 Ukrainian","tip2 Ukrainian","tip3 Ukrainian","tip4 Ukrainian"]}`,500);
-    const info=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    const raw=await callAI(`Music production expert. Genre:"${genre}",${bpm}.
+Respond ONLY as JSON, no markdown, keep values SHORT (max 20 words each):
+{"title":"short genre name","description":"1-2 sentences UA","tempo":"BPM+structure UA short","production":"key instruments UA short","vocal":"vocal style UA short","tips":["tip1 UA short","tip2 UA short","tip3 UA short"]}`,800);
+    // Repair potentially truncated JSON
+    let cleaned=raw.replace(/```json|```/g,'').trim();
+    // If JSON is truncated, try to close it
+    if(!cleaned.endsWith('}')){
+      // Remove last incomplete key-value pair and close
+      cleaned=cleaned.replace(/,?\s*"[^"]*"\s*:\s*[^,}\]]*$/,'');
+      // Close any open arrays
+      const openArr=(cleaned.match(/\[/g)||[]).length-(cleaned.match(/\]/g)||[]).length;
+      for(let i=0;i<openArr;i++)cleaned+='"]';
+      // Close object
+      if(!cleaned.endsWith('}'))cleaned+='}';
+    }
+    const info=JSON.parse(cleaned);
     document.getElementById('gi-card-title').textContent=info.title||genre;
     document.getElementById('gi-desc').textContent=info.description||'—';
     document.getElementById('gi-tempo').textContent=info.tempo||bpm;
