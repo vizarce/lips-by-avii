@@ -270,6 +270,22 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
               <option value="Ambient">Ambient</option>
               <option value="Phonk">Phonk</option>
             </optgroup>
+            <optgroup label="── ⟨Z⟩ Zifferblatt ──">
+              <option value="zifferblatt-fr-1">FR ① French Touch (Daft Punk×Air ~112BPM F-min)</option>
+              <option value="zifferblatt-fr-2">FR ② Nu-Disco Deep House (Parcels×Kraak ~114BPM G-min)</option>
+              <option value="zifferblatt-fr-3">FR ③ Deep Trip-hop House (Massive Attack×Bonobo ~110BPM D-min)</option>
+              <option value="zifferblatt-es-1">ES ① Trip-hop House (Massive Attack×Nicola Cruz ~112BPM D-min)</option>
+              <option value="zifferblatt-es-2">ES ② Flamenco Electronic (Rosalía×Four Tet ~110BPM A-min)</option>
+              <option value="zifferblatt-es-3">ES ③ Iberian Cinematic (Morricone×Zimmer ~114BPM E-min)</option>
+              <option value="zifferblatt-de-1">DE ① Trip-hop House (Massive Attack×Moderat ~112BPM D-min)</option>
+              <option value="zifferblatt-de-2">DE ② Berlin Dark House (Moderat×Kalkbrenner ~118BPM C-min)</option>
+              <option value="zifferblatt-de-3">DE ③ Cabaret Electronic (Dietrich aesthetic ~108BPM F-min)</option>
+              <option value="zifferblatt-de-4">DE ④ Krautrock (Can×Kraftwerk×Tangerine Dream ~114BPM E-min)</option>
+              <option value="zifferblatt-it-1">IT ① Trip-hop House (Massive Attack×Einaudi×Bonobo ~112BPM D-min)</option>
+              <option value="zifferblatt-it-2">IT ② Italian Cinematic (Morricone×Einaudi ~110BPM F-maj/D-min)</option>
+              <option value="zifferblatt-it-3">IT ③ Italo House Deep (classic 90s Italo×modern deep ~120BPM G-maj)</option>
+              <option value="zifferblatt-it-4">IT ④ Mediterranean Deep (Nicola Cruz×Thievery Corp ~108BPM A-maj)</option>
+            </optgroup>
             <option value="custom">Інший (вручну)</option>
           </select>
         </div>
@@ -292,6 +308,14 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
             <option value="124">124 — Tech House</option><option value="128">128 — EDM</option>
             <option value="138">138 — DnB</option><option value="140">140 — Dubstep</option>
             <option value="174">174 — Hardstyle</option>
+            <optgroup label="── Zifferblatt ──">
+              <option value="108">108 — Zifferblatt (IT④/DE③)</option>
+              <option value="110">110 — Zifferblatt (FR③/ES②)</option>
+              <option value="112">112 — Zifferblatt (FR①/ES①/DE①)</option>
+              <option value="114">114 — Zifferblatt (FR②/ES③/DE④)</option>
+              <option value="118">118 — Zifferblatt (DE②)</option>
+              <option value="120">120 — Zifferblatt (IT③)</option>
+            </optgroup>
           </select>
         </div>
       </div>
@@ -431,6 +455,15 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
               <button class="bi on" data-l="3" data-v="1" onclick="setBI(3,1)">●</button>
               <button class="bi" data-l="3" data-v="2" onclick="setBI(3,2)">●</button>
               <button class="bi" data-l="3" data-v="3" onclick="setBI(3,3)">●</button>
+            </div>
+          </div>
+          <div class="bass-layer" id="bl4-row" style="display:none">
+            <span class="bass-lbl" style="color:var(--pur)">L4</span>
+            <input class="bass-inp" id="bl4" value="" placeholder="Layer 4 — Zifferblatt extra wave…" style="border-color:rgba(168,85,247,.15)">
+            <div class="bass-int">
+              <button class="bi" data-l="4" data-v="1" onclick="setBI(4,1)">●</button>
+              <button class="bi" data-l="4" data-v="2" onclick="setBI(4,2)">●</button>
+              <button class="bi" data-l="4" data-v="3" onclick="setBI(4,3)">●</button>
             </div>
           </div>
           <div style="margin-top:7px"><input class="bass-inp" id="bl-note" value="Sub-bass heartbeat half-time drop only.Bass=rhythm." style="width:100%"></div>
@@ -678,6 +711,20 @@ const SUBS={
   Metal:['Heavy Metal','Melodic Metal','Metalcore','Death Metal','Black Metal','Doom Metal','Thrash Metal','Progressive Metal','Power Metal','Symphonic Metal'],
   Phonk:['Phonk','Drift Phonk','Dark Phonk','Rare Phonk','Brazilian Phonk','Hard Phonk'],
   'City Pop, J-Pop':['City Pop','J-Pop','J-Rock','Shibuya-Kei','Kayōkyoku','Idol','Visual Kei','Anime','K-Pop','K-R&B'],
+  'zifferblatt-fr-1':['French Touch','Filtered Disco House','Warm Funk House','Vocal Filter House'],
+  'zifferblatt-fr-2':['Nu-Disco Deep House','Groove Deep House','Vintage Keys House','Floating Harmony House'],
+  'zifferblatt-fr-3':['Deep Trip-hop House','Cinematic Lo-Fi House','Slow Wave Deep House','Atmospheric House'],
+  'zifferblatt-es-1':['Trip-hop House','Flamenco Trip-hop','Latin Deep House','Cajon House'],
+  'zifferblatt-es-2':['Flamenco Electronic','Phrygian Electronic','Neo-Flamenco','Zapateado Electronic'],
+  'zifferblatt-es-3':['Iberian Cinematic','Spanish Orchestral','Mediterranean Epic','Andalusian Cinematic'],
+  'zifferblatt-de-1':['DE Trip-hop House','Berlin Trip-hop','Dark Mechanical House','Dual Vocal Dark House'],
+  'zifferblatt-de-2':['Berlin Dark House','Industrial Deep House','Dark Techno House','Kalkbrenner Style'],
+  'zifferblatt-de-3':['Cabaret Electronic','Neo-Cabaret','Weimar Electronic','Jazz Cabaret House'],
+  'zifferblatt-de-4':['Krautrock','Motorik Electronic','Kosmische Musik','Prog Krautrock'],
+  'zifferblatt-it-1':['IT Trip-hop House','Bel Canto House','Italian Atmospheric House','Einaudi House'],
+  'zifferblatt-it-2':['Italian Cinematic','Morricone Electronic','Neo-Italian Cinema','Strings Electronic'],
+  'zifferblatt-it-3':['Italo House Deep','Classic Italo House','Piano Hook House','90s Italo Revival'],
+  'zifferblatt-it-4':['Mediterranean Deep','Bossa Mediterranean','Guitar Rhodes Deep','Thievery Corp Style'],
 };
 
 function onGenre(){
@@ -696,6 +743,11 @@ function getGenre(){
   const g=document.getElementById('genre').value;
   if(g==='custom')return document.getElementById('cg').value.trim()||'Vocal House';
   if(g==='house'){const s=document.getElementById('subgenre').value;return s?s:'Deep House'}
+  // Zifferblatt - return with subgenre if selected
+  if(g.startsWith('zifferblatt')){
+    const s=document.getElementById('subgenre').value;
+    return s?g+', '+s:g;
+  }
   return g;
 }
 function getBpm(){const b1=document.getElementById('bpm1').value;const b2=document.getElementById('bpm2').value;return(b2&&b2!==b1)?`${b1}–${b2} BPM`:b1+' BPM'}
@@ -703,7 +755,7 @@ function onBpmPre(){const v=document.getElementById('bpm-pre').value;if(v){docum
 function onLyricMode(){const m=document.getElementById('lyric-mode').value;document.getElementById('lyric-wrap').style.display=m==='ai'?'none':'block'}
 
 // BASS INTELLIGENCE
-const BASS_DOM=['house','Vocal House','Deep House','Bass House','Slap House','EDM','Trap','Hip-Hop','Funk','Reggaeton','Phonk'];
+const BASS_DOM=['house','Vocal House','Deep House','Bass House','Slap House','EDM','Trap','Hip-Hop','Funk','Reggaeton','Phonk','zifferblatt-fr','zifferblatt-es','zifferblatt-de-1','zifferblatt-de-2','zifferblatt-it'];
 const BASS_MOD=['R&B','Soul','Indie','Pop','Jazz','City Pop','Rock','New Wave','Chill','Lo-Fi'];
 const BASS_MIN=['female, confessional','male, confessional','Ambient','Electro-Orchestral','Ethno','Folk','Metal'];
 
@@ -717,16 +769,35 @@ const BASS_PRESETS={
   'R&B, Soul':'L1:warm sub floor|L2:mid melodic groove|Smooth.Bass supports,not dominates.',
   'female, confessional, alternative indie':'Minimal bass only if needed.Vocals and guitar lead.',
   'Ambient':'Subtle sub-bass drone only.No rhythmic bass.',
+  // Zifferblatt 4-layer polymorphic bass presets
+  'zifferblatt-fr-1':'L1:deep sub-bass floor,warm analog pulse|L2:mid filtered funk groove,melodic drive|L3:high syncopated house stab,dynamic|L4:slow breathing sidechain wave,rhythmic warmth|Bass enters in waves.Sub alone intro,full 4L chorus.',
+  'zifferblatt-fr-2':'L1:deep sub-bass floor,warm thud|L2:mid groove walking bass,vintage feel|L3:melodic floating bass line,harmonics|L4:syncopated stab,floating|4-layer groove.Bass flows like water.',
+  'zifferblatt-fr-3':'L1:deep sub-bass,slow wave pulse|L2:mid trip-hop groove,heavy|L3:walking melodic line,cinematic|L4:slow atmospheric sub wave|Brush-kit feel.Bass breathes,not pumps.',
+  'zifferblatt-es-1':'L1:dark sub-bass floor,deep rumble|L2:mid cajon-driven bass groove|L3:Latin walking melodic line|L4:flamenco staccato bass stab|Cajon+palmas drive rhythm.Bass=heartbeat.',
+  'zifferblatt-es-2':'L1:Phrygian sub drone,dark|L2:mid flamenco groove bass|L3:zapateado-synced staccato line|L4:high syncopated stab,raw|Bass follows footwork.Flamenco pulse.',
+  'zifferblatt-es-3':'L1:orchestral sub-bass,epic|L2:mid Spanish guitar bass walk|L3:strings-doubled bass line|L4:choir-synced bass pulse|Cinematic grandeur.Bass=orchestral foundation.',
+  'zifferblatt-de-1':'L1:dark mechanical sub,industrial pulse|L2:mid brushed-snare groove bass|L3:walking melodic line,cold|L4:clock-tick synced stab|Mechanical heartbeat.Bass=dark motor.',
+  'zifferblatt-de-2':'L1:industrial sub-bass,heavy|L2:mid Berlin techno groove|L3:dark syncopated stab|L4:pounding industrial pulse|Hard kick drives.Bass=Berlin underground.',
+  'zifferblatt-de-3':'L1:jazz sub-bass,warm|L2:mid accordion-resonant groove|L3:cabaret walking line,theatrical|L4:Rhodes-synced stab|Cabaret swing.Bass=theatrical heartbeat.',
+  'zifferblatt-de-4':'L1:motorik sub drone,hypnotic|L2:mid Moog walking groove|L3:repetitive melodic line,trance|L4:motorik kick-synced pulse|Motorik rhythm.Bass=eternal machine.',
+  'zifferblatt-it-1':'L1:warm sub-bass floor,bel canto|L2:mid brush-drum groove,Italian|L3:violin-doubled melodic line|L4:slow trip-hop wave,warm|Bel canto warmth.Bass=operatic foundation.',
+  'zifferblatt-it-2':'L1:orchestral sub,cinematic|L2:mid strings-supported groove|L3:solo violin doubled bass|L4:choir-synced pulse|Morricone grandeur.Bass=cinematic soul.',
+  'zifferblatt-it-3':'L1:classic Italo sub,punchy|L2:mid piano-hook groove|L3:high syncopated house stab|L4:string stab accent|Piano hooks drive.Bass=Italo euphoria.',
+  'zifferblatt-it-4':'L1:Mediterranean sub,warm|L2:mid guitar+mandolin groove|L3:Rhodes melodic walk|L4:bossa-synced stab,light|Bossa-Mediterranean flow.Bass=sunny warmth.',
   default:'L1:deep sub-bass floor,chest-rattling|L2:mid punchy walking groove,melodic drive|L3:high syncopated stab,dynamic|Bass IS rhythm engine.'
 };
 
 function suggestBassMode(g){
   const gl=g.toLowerCase();
   let mode='full';
-  if(BASS_MIN.some(x=>gl.includes(x.toLowerCase())))mode='min';
+  if(gl.includes('zifferblatt-de-3')||gl.includes('zifferblatt-es-3')||gl.includes('zifferblatt-it-2'))mode='mid';
+  else if(gl.startsWith('zifferblatt'))mode='full';
+  else if(BASS_MIN.some(x=>gl.includes(x.toLowerCase())))mode='min';
   else if(BASS_MOD.some(x=>gl.includes(x.toLowerCase())))mode='mid';
   setBassMode(mode);
   document.getElementById('bass-warn').style.display=(mode==='min'||mode==='none')?'block':'none';
+  // Auto-apply Zifferblatt bass preset
+  if(gl.startsWith('zifferblatt'))setTimeout(()=>applyBassPreset(),100);
 }
 
 let bassMode='full';
@@ -735,9 +806,13 @@ function setBassMode(m){
   ['full','mid','min','none'].forEach(x=>document.getElementById('bm-'+x).classList.toggle('on',x===m));
   const w=document.getElementById('bass-wrap');
   const bl3=document.getElementById('bl3-row');
+  const bl4=document.getElementById('bl4-row');
   w.style.opacity=m==='none'?'.4':'1';
   w.style.pointerEvents=m==='none'?'none':'auto';
-  bl3.style.display=(m==='full')?'flex':'none';
+  bl3.style.display=(m==='full'||m==='mid')?'flex':'none';
+  // L4 only for Zifferblatt
+  const isZ=getGenre().toLowerCase().startsWith('zifferblatt');
+  if(bl4)bl4.style.display=(m==='full'&&isZ)?'flex':'none';
 }
 
 function setBI(l,v){document.querySelectorAll(`[data-l="${l}"]`).forEach(b=>b.classList.toggle('on',parseInt(b.dataset.v)<=v))}
@@ -751,12 +826,18 @@ function applyBassPreset(){
   const l1=parts.find(x=>x.startsWith('L1:'))?.replace('L1:','');
   const l2=parts.find(x=>x.startsWith('L2:'))?.replace('L2:','');
   const l3=parts.find(x=>x.startsWith('L3:'))?.replace('L3:','');
-  const note=parts.filter(x=>!x.match(/^L[123]:/)).join(' ');
+  const l4=parts.find(x=>x.startsWith('L4:'))?.replace('L4:','');
+  const note=parts.filter(x=>!x.match(/^L[1234]:/)).join(' ');
   if(l1)document.getElementById('bl1').value=l1;
   if(l2)document.getElementById('bl2').value=l2;
   if(l3)document.getElementById('bl3').value=l3;
+  const l4el=document.getElementById('bl4');
+  if(l4&&l4el)l4el.value=l4;
   if(note)document.getElementById('bl-note').value=note;
-  showToast('Пресет басів застосовано');
+  // Show L4 if present
+  const bl4row=document.getElementById('bl4-row');
+  if(bl4row)bl4row.style.display=l4?'flex':'none';
+  showToast('Пресет басів застосовано ✦ Zifferblatt');
 }
 
 function resetBass(){
@@ -771,9 +852,13 @@ function buildBassPrompt(){
   const l1=document.getElementById('bl1').value.trim();
   const l2=document.getElementById('bl2').value.trim();
   const l3=document.getElementById('bl3').value.trim();
+  const l4El=document.getElementById('bl4');
+  const l4=l4El?l4El.value.trim():'';
   const note=document.getElementById('bl-note').value.trim();
   if(bassMode==='min')return`BASS:${l1}.${note}`;
   if(bassMode==='mid')return`BASS[L1:${l1}|L2:${l2}|${note}]`;
+  if(l4&&getGenre().toLowerCase().startsWith('zifferblatt'))
+    return`BASS[L1:${l1}|L2:${l2}|L3:${l3}|L4:${l4}|${note}]`;
   return`BASS[L1:${l1}|L2:${l2}|L3:${l3}|${note}]`;
 }
 
@@ -1137,7 +1222,11 @@ const VD={
     jazz:'solo male vocal — warm smooth crooner, jazz phrasing, soft vibrato on held notes.',
     rock:'solo male vocal — powerful raspy rock tenor, raw energy. Anthemic full-voice chorus.',
     metal:'solo male vocal — powerful, wide range. Controlled screaming in key sections. Melodic hooks.',
-    confessional:'solo male vocal — intimate quiet baritone, confessional spoken-word delivery, vulnerable and raw. Understated, precise enunciation, emotional restraint with deep undertow.'
+    confessional:'solo male vocal — intimate quiet baritone, confessional spoken-word delivery, vulnerable and raw. Understated, precise enunciation, emotional restraint with deep undertow.',
+    zifferblatt_fr:'solo mezzo-soprano — warm French phrasing, breathy intimacy, subtle vibrato. Spoken-word verses, soaring melodic hooks. Never shouting.',
+    zifferblatt_es:'solo contralto — deep Spanish warmth, rhythmic flamenco delivery, passionate growls on transitions. Breathy verses, soaring chorus.',
+    zifferblatt_de:'dual vocal — Marlene mezzo + lyric soprano. Cabaret-inflected spoken-word, breathy whisper, soaring duet chorus.',
+    zifferblatt_it:'dual bel canto — warm mezzo + lyric soprano. Italian operatic phrasing, vibrato on held notes, intimate spoken bridge.'
   },
   female:{
     house:'solo female vocal — pure, clear, bell-like tone, wide range, never shouting. Breathy intimacy verses, soaring clarity chorus.',
@@ -1150,7 +1239,11 @@ const VD={
     jazz:'solo female vocal — sultry jazz alto, warm and intimate. Soft scatting ad-libs, vibrato on long notes.',
     rock:'solo female vocal — powerful rock soprano, raw and expressive. Breathy verses, full-power anthemic chorus.',
     metal:'solo female vocal — operatic soprano contrasting heavy instrumentation. Soaring powerful chorus.',
-    confessional:'solo female vocal — intimate confessional delivery, quiet precise enunciation, pure unaffected tone, vulnerable.'
+    confessional:'solo female vocal — intimate confessional delivery, quiet precise enunciation, pure unaffected tone, vulnerable.',
+    zifferblatt_fr:'solo female mezzo — warm French chanson phrasing, airy tone, subtle vibrato, breathing sidechain feel.',
+    zifferblatt_es:'solo female contralto — deep Iberian warmth, flamenco rhythmic delivery, passionate and hypnotic.',
+    zifferblatt_de:'female dual — Marlene mezzo + soprano. Cabaret-dramatic, whispered verses, soaring duet.',
+    zifferblatt_it:'female bel canto — lyric soprano warmth, Italian operatic phrasing, vibrato, intimate bridge.'
   },
   duet:{
     house:'male-female duet — male warm controlled rasp spoken-word verses; female pure clear emotive soaring chorus. Rich harmonies chorus and bridge.',
@@ -1351,6 +1444,20 @@ async function initStep4(){
     'female, confessional, alternative indie':'vinyl crackle, room ambience, acoustic guitar resonance, tape hiss, breath mic',
     'male, confessional, alternative indie':'vinyl crackle, room ambience, acoustic guitar resonance, tape hiss faint, breath mic texture, piano resonance',
     'Reggaeton, Acid Electro-Pop':'acid 303 squelch, reverse-reverb FX, binary whoosh, digital glitch, snappy snare, vinyl crackle',
+    'zifferblatt-fr-1':'vinyl crackle, Rhodes resonance, filter sweep SFX, warm sidechain pulse, French Touch chord stab, breathing pad',
+    'zifferblatt-fr-2':'vinyl crackle, vintage keys resonance, floating pad sweep, warm sidechain, jazz brush snap',
+    'zifferblatt-fr-3':'vinyl crackle, tape hiss, brush snare texture, clock SFX heartbeat, Rhodes solo resonance, rain ambience',
+    'zifferblatt-es-1':'cajon transient SFX, palmas clap, guitarra flamenca resonance, vinyl crackle, dark pad sweep',
+    'zifferblatt-es-2':'zapateado footwork SFX, clock tick flamenco, palmas, guitarra Phrygian resonance',
+    'zifferblatt-es-3':'orchestral riser, Spanish guitar resonance, choir breath, strings swell SFX, epic sub impact',
+    'zifferblatt-de-1':'mechanical clock SFX, brushed snare texture, vinyl crackle, dark pad drone, cold reverb',
+    'zifferblatt-de-2':'industrial kick SFX, dark pad swell, Berlin reverb, mechanical pulse, vinyl crackle',
+    'zifferblatt-de-3':'jazz brush SFX, accordion breath, Rhodes resonance, cabaret applause faint, vinyl crackle',
+    'zifferblatt-de-4':'motorik drum texture, Moog sweep, Kraftwerk ping, infinite reverb drone, clock pulse',
+    'zifferblatt-it-1':'brush drum texture, violin resonance, clock SFX heartbeat, warm pad breath, vinyl crackle',
+    'zifferblatt-it-2':'orchestral riser, solo violin SFX, choir breath, strings swell, Morricone-style whistle',
+    'zifferblatt-it-3':'piano hook SFX, Italo string stab, vintage synth sweep, vinyl crackle, 90s house chord',
+    'zifferblatt-it-4':'guitar+mandolin resonance, Rhodes warmth, bossa percussion, Mediterranean ambience, vinyl crackle',
     default:'terminal boot-up, vinyl crackle, binary whoosh, digital glitch, server hum, UI pings'
   };
   const sfx=sfxSelected||(sfxByGenre[genre]||sfxByGenre.default);
