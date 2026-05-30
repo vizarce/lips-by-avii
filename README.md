@@ -3,7 +3,7 @@
 **Lyrics & Instrumentation Prompt Synthesizer** — веб-застосунок для створення професійних промптів для AI-музичних генераторів (Suno та ін.) з допомогою Claude Sonnet 4.
 
 > AVII = **A**rtificial + **V**italiy + **I**ryna **I**ntelligence
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/69eabcc2-71e9-4c8f-940e-b260c187a112/deploy-status)](https://app.netlify.com/projects/lips-by-avii/deploys)
 ---
 
 ## 🌐 Живі версії
