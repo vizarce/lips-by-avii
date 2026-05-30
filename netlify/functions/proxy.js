@@ -1,24 +1,22 @@
 // netlify/functions/proxy.js
-// Proxy для Anthropic API — вирішує CORS проблему при деплої на Netlify/GitHub Pages
-// Розміщення: netlify/functions/proxy.js у корені репозиторію
+// Node.js 18+ має вбудований fetch, але для сумісності використовуємо node-fetch
+
+const https = require('https');
 
 exports.handler = async (event) => {
-  const corsHeaders = {
+  const cors = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json',
   };
 
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers: corsHeaders, body: '' };
+    return { statusCode: 200, headers: cors, body: '' };
   }
 
   if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: { message: 'Method not allowed' } }),
-    };
+    return { statusCode: 405, headers: cors, body: JSON.stringify({ error: { message: 'Method not allowed' } }) };
   }
 
   try {
@@ -27,32 +25,54 @@ exports.handler = async (event) => {
     if (!apiKey || !apiKey.startsWith('sk-ant-')) {
       return {
         statusCode: 401,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        headers: cors,
         body: JSON.stringify({ error: { message: 'Invalid or missing API key' } }),
       };
     }
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify(body),
+    const payload = JSON.stringify(body);
+
+    const result = await new Promise((resolve, reject) => {
+      const options = {
+        hostname: 'api.anthropic.com',
+        path: '/v1/messages',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(payload),
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+        },
+      };
+
+      const req = https.request(options, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+          try {
+            resolve({ status: res.statusCode, body: JSON.parse(data) });
+          } catch (e) {
+            resolve({ status: res.statusCode, body: { error: { message: data } } });
+          }
+        });
+      });
+
+      req.on('error', reject);
+      req.setTimeout(55000, () => { req.destroy(new Error('Timeout')); });
+      req.write(payload);
+      req.end();
     });
 
-    const data = await response.json();
-
     return {
-      statusCode: response.status,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      statusCode: result.status,
+      headers: cors,
+      body: JSON.stringify(result.body),
     };
+
   } catch (error) {
     return {
       statusCode: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      headers: cors,
       body: JSON.stringify({ error: { message: error.message || 'Internal server error' } }),
     };
   }

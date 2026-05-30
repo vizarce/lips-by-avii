@@ -1,9 +1,12 @@
-# netlify.toml — конфігурація для LIPS by AVII
-# Розміщення: корінь репозиторію (поряд з index.html)
-
 [build]
   publish = "."
   functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[context.production.environment]
+  NODE_VERSION = "18"
 
 [[headers]]
   for = "/*"
