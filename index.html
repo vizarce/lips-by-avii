@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026</title>
+<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026 v4.0.0</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap');
 :root{
@@ -146,6 +146,39 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
 .toast{display:block;width:100%;text-align:center;background:var(--grn-s);border:1px solid var(--grn);border-radius:var(--rs);padding:5px;font-size:12px;color:var(--grn);opacity:0;transition:opacity .2s;margin-top:8px}
 .toast.show{opacity:1}
 .tag-section-title{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;margin-top:10px;font-weight:600}
+.ver-badge{font-size:9px;padding:1px 6px;border-radius:10px;background:var(--acc-s);color:var(--acc);border:1px solid rgba(77,143,255,.25);font-family:var(--mono);letter-spacing:.3px;font-weight:500;vertical-align:middle;margin-left:4px}
+.lang-toggle{font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:20px;border:1px solid var(--b1);background:transparent;color:var(--t2);cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.lang-toggle:hover{color:var(--acc);border-color:var(--acc)}
+.lang-toggle.active{background:var(--acc-s);border-color:var(--acc);color:var(--acc)}
+
+/* ── LIBRARY ── */
+.lib-tabs{display:flex;gap:0;border-bottom:1px solid var(--b0);margin-bottom:16px;background:var(--p1);padding:0 20px}
+.lib-tab{font-family:var(--font);font-size:12px;font-weight:500;padding:9px 16px;border:none;background:transparent;color:var(--t2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px}
+.lib-tab.on{color:var(--acc);border-bottom-color:var(--acc)}
+.lib-empty{text-align:center;padding:40px 20px;color:var(--t2);font-size:13px}
+.lib-empty-icon{font-size:32px;margin-bottom:8px}
+.lib-card{background:var(--p1);border:1px solid var(--b0);border-radius:var(--r);margin-bottom:10px;overflow:hidden;transition:border-color .15s}
+.lib-card:hover{border-color:var(--b1)}
+.lib-card-hdr{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer}
+.lib-icon{font-size:18px;flex-shrink:0}
+.lib-meta{flex:1;min-width:0}
+.lib-title{font-size:13px;font-weight:600;color:var(--t0);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lib-sub{font-size:11px;color:var(--t2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lib-badge{font-size:10px;padding:2px 8px;border-radius:20px;background:var(--acc-s);color:var(--acc);border:1px solid rgba(77,143,255,.2);flex-shrink:0;font-family:var(--mono)}
+.lib-badge.z{background:var(--pur-s);color:var(--pur);border-color:rgba(168,85,247,.2)}
+.lib-actions{display:flex;gap:4px;flex-shrink:0}
+.lib-btn{font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--b0);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s;white-space:nowrap}
+.lib-btn:hover{color:var(--t0);border-color:var(--b1)}
+.lib-btn.del:hover{color:var(--red);border-color:var(--red)}
+.lib-btn.load{color:var(--acc);border-color:rgba(77,143,255,.3)}
+.lib-btn.load:hover{background:var(--acc-s)}
+.lib-preview{display:none;padding:10px 14px;background:var(--p2);border-top:1px solid var(--b0)}
+.lib-preview.open{display:block}
+.lib-preview-ta{font-family:var(--mono);font-size:11px;color:var(--t1);background:var(--p3);border:1px solid var(--b0);border-radius:4px;padding:8px 10px;width:100%;resize:none;line-height:1.6}
+.lib-preview-label{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-weight:600}
+.lib-count{font-size:11px;color:var(--t2);font-family:var(--mono);margin-left:auto;padding-right:4px}
+.save-btn-wrap{display:none;margin-top:10px}
+.save-btn-wrap.show{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -161,7 +194,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
       </svg>
     </div>
     <div>
-      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span></div>
+      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span><span class="ver-badge">v4.0.0</span></div>
       <div class="brand-tag">Lyrics & Instrumentation Prompt Synthesizer · by @AVII</div>
     </div>
   </div>
@@ -171,8 +204,11 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
       <input type="password" id="api-key-input" placeholder="sk-ant-…" style="width:160px;font-size:11px;padding:4px 8px;font-family:var(--mono)" oninput="saveApiKey()" autocomplete="off">
       <span id="api-key-status" style="font-size:10px;width:14px;text-align:center">⬜</span>
     </div>
+    <button class="lang-toggle" id="lang-ua-btn" onclick="setUILang('uk')">UA</button>
+    <button class="lang-toggle" id="lang-en-btn" onclick="setUILang('en')">EN</button>
     <button class="btn sm" onclick="saveSession()">💾</button>
     <button class="btn sm" onclick="loadSessionUI()">📂</button>
+    <button class="btn sm teal" id="btn-open-lib" onclick="openLibrary()" title="Бібліотека пісень">📚 <span data-i18n="btn.library">Бібліотека</span></button>
   </div>
 </div>
 
@@ -190,42 +226,43 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
 <!-- PAGE 1 -->
 <div class="page active" id="pg1">
   <div class="card">
-    <div class="card-hdr"><span class="cdot"></span><span class="card-title">Концепція</span></div>
+    <div class="card-hdr"><span class="cdot"></span><span class="card-title" data-i18n="ct.concept">Концепція</span></div>
     <div class="cb">
-      <div class="fld"><label class="lbl">Назва пісні</label><input type="text" id="title" placeholder='"Auburn Dawn", "Love Sync"…' oninput="autoSave()"></div>
-      <div class="fld"><label class="lbl">Концепція, настрій, ідея <span class="badge ai">AI розширить</span></label><textarea id="concept" rows="3" placeholder="Опишіть настрій і тему — AI доповнить деталями стилю…" oninput="autoSave()"></textarea></div>
+      <div class="fld"><label class="lbl" data-i18n="lbl.songTitle">Назва пісні</label><input type="text" id="title" placeholder='"Auburn Dawn", "Love Sync"…' oninput="autoSave()"></div>
+      <div class="fld"><label class="lbl" data-i18n-prefix="lbl.concept">Концепція, настрій, ідея <span class="badge ai" data-i18n="badge.aiExpand">AI розширить</span></label><textarea id="concept" rows="3" placeholder="Опишіть настрій і тему — AI доповнить деталями стилю…" data-i18n-ph="ph.concept" oninput="autoSave()"></textarea></div>
       <div class="g2">
-        <div class="fld"><label class="lbl">Лірика</label>
+        <div class="fld"><label class="lbl" data-i18n="lbl.lyricsMode">Лірика</label>
           <select id="lyric-mode" onchange="onLyricMode()">
-            <option value="user">Своя лірика</option>
-            <option value="ai">AI пише з нуля</option>
-            <option value="both">Обидва варіанти</option>
+            <option value="user" data-i18n="opt.lyricsUser">Своя лірика</option>
+            <option value="ai" data-i18n="opt.lyricsAI">AI пише з нуля</option>
+            <option value="both" data-i18n="opt.lyricsBoth">Обидва варіанти</option>
           </select>
         </div>
-        <div class="fld"><label class="lbl">Мова лірики</label>
+        <div class="fld"><label class="lbl" data-i18n="lbl.lyricsLang">Мова лірики</label>
           <select id="lang">
             <option value="English">English</option>
             <option value="Ukrainian">Українська</option>
             <option value="bilingual (Ukrainian + English)">Білінгвальна</option>
             <option value="Spanish">Spanish</option>
+            <option value="French">Français</option>
           </select>
         </div>
       </div>
-      <div class="fld" id="lyric-wrap"><label class="lbl">Лірика <span class="badge opt">необов'язково</span></label><textarea id="lyrics" rows="7" placeholder="Вставте лірику — AI оформить у формат Suno з тегами-промптами…" oninput="autoSave()"></textarea></div>
-      <div class="fld"><label class="lbl">Рима</label>
+      <div class="fld" id="lyric-wrap"><label class="lbl" data-i18n-prefix="lbl.lyricsText">Лірика <span class="badge opt" data-i18n="badge.optional">необов'язково</span></label><textarea id="lyrics" rows="7" placeholder="Вставте лірику — AI оформить у формат Suno з тегами-промптами…" data-i18n-ph="ph.lyrics" oninput="autoSave()"></textarea></div>
+      <div class="fld"><label class="lbl" data-i18n="lbl.rhyme">Рима</label>
         <select id="rhyme">
-          <option value="exact rhyme (priority)">Точна рима (пріоритет)</option>
-          <option value="balance rhyme + meaning">Баланс рима + зміст</option>
-          <option value="meaning priority">Зміст (рима другорядна)</option>
+          <option value="exact rhyme (priority)" data-i18n="opt.rhymeExact">Точна рима (пріоритет)</option>
+          <option value="balance rhyme + meaning" data-i18n="opt.rhymeBalance">Баланс рима + зміст</option>
+          <option value="meaning priority" data-i18n="opt.rhymeMeaning">Зміст (рима другорядна)</option>
         </select>
       </div>
     </div>
   </div>
   <div class="card">
-    <div class="card-hdr"><span class="cdot"></span><span class="card-title">Жанр та темп</span></div>
+    <div class="card-hdr"><span class="cdot"></span><span class="card-title" data-i18n="ct.genreTempo">Жанр та темп</span></div>
     <div class="cb">
       <div class="g2">
-        <div class="fld"><label class="lbl">Жанр</label>
+        <div class="fld"><label class="lbl" data-i18n="lbl.genre">Жанр</label>
           <select id="genre" onchange="onGenre()">
             <optgroup label="── House ──">
               <option value="house">House (піджанр →)</option>
@@ -289,13 +326,13 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
             <option value="custom">Інший (вручну)</option>
           </select>
         </div>
-        <div class="fld" id="sub-wrap" style="display:none"><label class="lbl">Піджанр</label><select id="subgenre"><option value="">— не вибрано —</option></select></div>
+        <div class="fld" id="sub-wrap" style="display:none"><label class="lbl" data-i18n="lbl.subgenre">Піджанр</label><select id="subgenre"><option value="">— не вибрано —</option></select></div>
       </div>
-      <div class="fld" id="cg-wrap" style="display:none"><label class="lbl">Жанр вручну</label><input type="text" id="cg" placeholder="напр. Synthwave, Melodic Dubstep…"></div>
+      <div class="fld" id="cg-wrap" style="display:none"><label class="lbl" data-i18n="lbl.customGenre">Жанр вручну</label><input type="text" id="cg" placeholder="напр. Synthwave, Melodic Dubstep…" data-i18n-ph="ph.customGenre"></div>
       <div class="g3">
-        <div class="fld"><label class="lbl">BPM від</label><input type="number" id="bpm1" min="50" max="220" value="118" step="1"></div>
-        <div class="fld"><label class="lbl">BPM до</label><input type="number" id="bpm2" min="50" max="220" placeholder="необов'язково" step="1"></div>
-        <div class="fld"><label class="lbl">Пресет BPM</label>
+        <div class="fld"><label class="lbl" data-i18n="lbl.bpmFrom">BPM від</label><input type="number" id="bpm1" min="50" max="220" value="118" step="1"></div>
+        <div class="fld"><label class="lbl" data-i18n="lbl.bpmTo">BPM до</label><input type="number" id="bpm2" min="50" max="220" placeholder="необов'язково" step="1"></div>
+        <div class="fld"><label class="lbl" data-i18n="lbl.bpmPreset">Пресет BPM</label>
           <select id="bpm-pre" onchange="onBpmPre()">
             <option value="">— обрати —</option>
             <option value="70">70 — Slow Ballad</option><option value="80">80 — Soul</option>
@@ -319,7 +356,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
           </select>
         </div>
       </div>
-      <div class="fld"><label class="lbl">Тональність</label>
+      <div class="fld"><label class="lbl" data-i18n="lbl.key">Тональність</label>
         <select id="key">
           <option value="">— не вказувати —</option>
           <option>A minor</option><option>A major</option><option>B minor</option><option>B major</option>
@@ -331,13 +368,13 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     </div>
   </div>
   <div class="card">
-    <div class="card-hdr"><span class="cdot pur"></span><span class="card-title">Вокал</span></div>
+    <div class="card-hdr"><span class="cdot pur"></span><span class="card-title" data-i18n="ct.vocal">Вокал</span></div>
     <div class="cb">
       <div class="g3">
-        <div class="fld"><label class="lbl">Тип</label>
-          <select id="vt"><option value="male">Соло чоловічий</option><option value="female">Соло жіночий</option><option value="duet">Дует ч+ж</option></select>
+        <div class="fld"><label class="lbl" data-i18n="lbl.vocalType">Тип</label>
+          <select id="vt"><option value="male" data-i18n="opt.vtMale">Соло чоловічий</option><option value="female" data-i18n="opt.vtFemale">Соло жіночий</option><option value="duet" data-i18n="opt.vtDuet">Дует ч+ж</option></select>
         </div>
-        <div class="fld"><label class="lbl">Стиль</label>
+        <div class="fld"><label class="lbl" data-i18n="lbl.vocalStyle">Стиль</label>
           <select id="vs">
             <option value="house">House — spoken-word</option><option value="indie">Indie — мелодійний</option>
             <option value="cinematic">Cinematic</option><option value="whisper">Whisper-heavy</option>
@@ -347,17 +384,17 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
             <option value="confessional">Confessional Indie</option>
           </select>
         </div>
-        <div class="fld"><label class="lbl">Додатково</label><input type="text" id="vocal-extra" placeholder='напр. "raspy, whispered ad-libs"'></div>
+        <div class="fld"><label class="lbl" data-i18n="lbl.vocalExtra">Додатково</label><input type="text" id="vocal-extra" placeholder='напр. "raspy, whispered ad-libs"'></div>
       </div>
     </div>
   </div>
-  <div class="btn-row"><button class="btn pri" onclick="goStep(2)">Далі: Жанр і структура →</button></div>
+  <div class="btn-row"><button class="btn pri" data-i18n="btn.nextStep2" onclick="goStep(2)">Далі: Жанр і структура →</button></div>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="pg2">
   <div class="card">
-    <div class="card-hdr"><span class="cdot"></span><span class="card-title" id="gi-card-title">Аналіз жанру</span></div>
+    <div class="card-hdr"><span class="cdot"></span><span class="card-title" id="gi-card-title" data-i18n="ct.genreAnalysis">Аналіз жанру</span></div>
     <div class="cb">
       <div class="gi-loader" id="gi-loader"><div class="mini-spin"></div><span>AI аналізує жанр…</span></div>
       <div class="genre-info" id="genre-info">
@@ -372,60 +409,60 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
   </div>
   <div class="recs" id="genre-recs"><div class="recs-title">✦ AI Рекомендації для цього стилю</div><div id="recs-list"></div></div>
   <div class="card">
-    <div class="card-hdr"><span class="cdot pur"></span><span class="card-title">Структура пісні <span class="badge ai">AI-теги</span></span></div>
+    <div class="card-hdr"><span class="cdot pur"></span><span class="card-title" data-i18n-prefix="ct.songStructure">Структура пісні <span class="badge ai" data-i18n="badge.aiTags">AI-теги</span></span></div>
     <div class="cb">
-      <p class="hint" style="margin-bottom:8px">Перетягуй ⠿ · Клік ✏️ — редагуй тег · Клік на пресет — додає · ✕ видалити</p>
+      <p class="hint" style="margin-bottom:8px" data-i18n="structHint">Перетягуй ⠿ · Клік ✏️ — редагуй тег · Клік на пресет — додає · ✕ видалити</p>
       <div class="dnd-list" id="dnd-list"></div>
       <div style="display:flex;gap:6px;margin-bottom:8px">
         <select id="dnd-sel" style="flex:1;font-size:12px"></select>
         <button class="btn sm" onclick="dndAdd()">+ Додати</button>
       </div>
       <div class="btn-row" style="margin-top:0">
-        <button class="btn sm" id="btn-reset" onclick="dndReset()">↺ Базова</button>
-        <button class="btn sm" id="btn-auto-genre" onclick="dndAutoGenre()">⚡ Авто-жанр</button>
-        <button class="btn sm pur" id="btn-ai-tags" onclick="dndRegenTags()">✦ AI теги</button>
-        <button class="btn sm pur" id="btn-ai-struct" onclick="dndAIStructure()">✦ AI структура+теги</button>
+        <button class="btn sm" id="btn-reset" data-i18n="btn.reset" onclick="dndReset()">↺ Базова</button>
+        <button class="btn sm" id="btn-auto-genre" data-i18n="btn.autoGenre" onclick="dndAutoGenre()">⚡ Авто-жанр</button>
+        <button class="btn sm pur" id="btn-ai-tags" data-i18n="btn.aiTags" onclick="dndRegenTags()">✦ AI теги</button>
+        <button class="btn sm pur" id="btn-ai-struct" data-i18n="btn.aiStruct" onclick="dndAIStructure()">✦ AI структура+теги</button>
       </div>
     </div>
   </div>
   <div class="btn-row">
-    <button class="btn" onclick="goStep(1)">← Назад</button>
-    <button class="btn pur" onclick="goStep(3)">Далі: Теги →</button>
+    <button class="btn" data-i18n="btn.back" onclick="goStep(1)">← Назад</button>
+    <button class="btn pur" data-i18n="btn.nextStep3" onclick="goStep(3)">Далі: Теги →</button>
   </div>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="pg3">
   <div class="card">
-    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎭 Настрій</span></div>
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title" data-i18n="ct.mood">🎭 Настрій</span></div>
     <div class="cb"><div class="tag-cloud" id="mood-cloud"></div></div>
   </div>
   <div class="card">
-    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎹 Інструменти</span></div>
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title" data-i18n="ct.instruments">🎹 Інструменти</span></div>
     <div class="cb"><div class="tag-cloud" id="instr-cloud"></div></div>
   </div>
   <div class="card">
-    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎚️ Продакшн</span></div>
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title" data-i18n="ct.production">🎚️ Продакшн</span></div>
     <div class="cb"><div class="tag-cloud" id="prod-cloud"></div></div>
   </div>
   <div class="card">
-    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎤 Вокальні характеристики</span></div>
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title" data-i18n="ct.vocalTags">🎤 Вокальні характеристики</span></div>
     <div class="cb"><div class="tag-cloud" id="vocal-cloud"></div></div>
   </div>
   <div class="card">
-    <div class="card-hdr"><span class="cdot gold"></span><span class="card-title">⚡ SFX та спецефекти</span></div>
+    <div class="card-hdr"><span class="cdot gold"></span><span class="card-title" data-i18n="ct.sfx">⚡ SFX та спецефекти</span></div>
     <div class="cb"><div class="tag-cloud" id="sfx-cloud"></div></div>
   </div>
   <div class="card">
-    <div class="card-hdr"><span class="cdot gold"></span><span class="card-title">🔊 Bass Structure <span class="badge ai">пресет по жанру</span></span></div>
+    <div class="card-hdr"><span class="cdot gold"></span><span class="card-title" data-i18n-prefix="ct.bassStructure">🔊 Bass Structure <span class="badge ai" data-i18n="badge.bassPreset">пресет по жанру</span></span></div>
     <div class="cb">
-      <div id="bass-warn" style="font-size:12px;color:var(--t2);margin-bottom:8px;display:none">⚠️ Для цього жанру баси не є домінантними — рекомендовано мінімальний або без структури.</div>
+      <div id="bass-warn" data-i18n="bassWarn" style="font-size:12px;color:var(--t2);margin-bottom:8px;display:none">⚠️ Для цього жанру баси не є домінантними — рекомендовано мінімальний або без структури.</div>
       <div class="bass-modes">
-        <span style="font-size:10px;color:var(--t2);align-self:center;margin-right:3px">Режим:</span>
-        <button class="bm-btn on" id="bm-full" onclick="setBassMode('full')">Повний (3 шари)</button>
-        <button class="bm-btn" id="bm-mid" onclick="setBassMode('mid')">Помірний (2 шари)</button>
-        <button class="bm-btn" id="bm-min" onclick="setBassMode('min')">Мінімальний</button>
-        <button class="bm-btn" id="bm-none" onclick="setBassMode('none')">Без басів</button>
+        <span style="font-size:10px;color:var(--t2);align-self:center;margin-right:3px" data-i18n="lbl.bassMode">Режим:</span>
+        <button class="bm-btn on" id="bm-full" data-i18n="bassFull" onclick="setBassMode('full')">Повний (3 шари)</button>
+        <button class="bm-btn" id="bm-mid" data-i18n="bassMid" onclick="setBassMode('mid')">Помірний (2 шари)</button>
+        <button class="bm-btn" id="bm-min" data-i18n="bassMin" onclick="setBassMode('min')">Мінімальний</button>
+        <button class="bm-btn" id="bm-none" data-i18n="bassNone" onclick="setBassMode('none')">Без басів</button>
       </div>
       <div id="bass-wrap">
         <div class="bass-block">
@@ -476,8 +513,8 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     </div>
   </div>
   <div class="btn-row">
-    <button class="btn" onclick="goStep(2)">← Назад</button>
-    <button class="btn gold" id="btn-gen" onclick="goStep(4)">Далі: Генерація →</button>
+    <button class="btn" data-i18n="btn.back" onclick="goStep(2)">← Назад</button>
+    <button class="btn gold" id="btn-gen" data-i18n="btn.nextStep4" onclick="goStep(4)">Далі: Генерація →</button>
   </div>
 </div>
 
@@ -493,7 +530,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     <div class="out-block">
       <div class="out-hdr">
         <span class="out-title" id="out-title-l">🎵 Lyrics-prompt — ≤5000 зн.</span>
-        <div class="out-meta"><span class="ctr ok" id="ctr-l">0 / 5000</span><button class="cbtn" id="cbtn-l" onclick="cp('out-l','ctr-l',5000,'pf-l','cbtn-l')">Копіювати</button></div>
+        <div class="out-meta"><span class="ctr ok" id="ctr-l">0 / 5000</span><button class="cbtn" id="cbtn-l" data-i18n="btn.copy" onclick="cp('out-l','ctr-l',5000,'pf-l','cbtn-l')">Копіювати</button></div>
       </div>
       <textarea class="out" id="out-l" rows="22" oninput="updCtr('out-l','ctr-l',5000,'pf-l')"></textarea>
       <div class="pbar"><div class="pfill" id="pf-l"></div></div>
@@ -501,24 +538,46 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     <div class="out-block">
       <div class="out-hdr">
         <span class="out-title" id="out-title-s">🎛️ Style-prompt — ≤1000 зн.</span>
-        <div class="out-meta"><span class="ctr ok" id="ctr-s">0 / 1000</span><button class="cbtn" id="cbtn-s" onclick="cp('out-s','ctr-s',1000,'pf-s','cbtn-s')">Копіювати</button></div>
+        <div class="out-meta"><span class="ctr ok" id="ctr-s">0 / 1000</span><button class="cbtn" id="cbtn-s" data-i18n="btn.copy" onclick="cp('out-s','ctr-s',1000,'pf-s','cbtn-s')">Копіювати</button></div>
       </div>
       <textarea class="out" id="out-s" rows="11" oninput="updCtr('out-s','ctr-s',1000,'pf-s')"></textarea>
       <div class="pbar"><div class="pfill" id="pf-s"></div></div>
     </div>
     <div class="card">
-      <div class="card-hdr"><span class="cdot pur"></span><span class="card-title">✦ Уточнення для AI</span></div>
+      <div class="card-hdr"><span class="cdot pur"></span><span class="card-title" data-i18n="ct.refinement">✦ Уточнення для AI</span></div>
       <div class="cb">
-        <div class="fld"><label class="lbl">Коментарі — AI врахує і перегенерує</label><textarea id="refinement" rows="3" placeholder="напр. 'Більш емоційний приспів', 'Більше IT-термінів', 'Скороти куплет 1'…"></textarea></div>
-        <button class="btn pur" id="btn-refine" onclick="refine()">✦ AI покращує</button>
+        <div class="fld"><label class="lbl" data-i18n="lbl.refinement">Коментарі — AI врахує і перегенерує</label><textarea id="refinement" rows="3" placeholder="напр. 'Більш емоційний приспів', 'Більше IT-термінів', 'Скороти куплет 1'…" data-i18n-ph="ph.refinement"></textarea></div>
+        <button class="btn pur" id="btn-refine" data-i18n="btn.refine" onclick="refine()">✦ AI покращує</button>
       </div>
     </div>
+    <div class="save-btn-wrap" id="save-btn-wrap">
+      <button class="btn teal" data-i18n="btn.saveLib" onclick="saveToLibrary()">💾 Зберегти в бібліотеку</button>
+      <button class="btn" data-i18n="btn.exportHtml" onclick="exportAsHtml()">↓ Зберегти HTML</button>
+      <span style="font-size:11px;color:var(--grn)" id="save-status"></span>
+    </div>
     <div class="btn-row">
-      <button class="btn" onclick="goStep(3)">← Назад</button>
-      <button class="btn" id="btn-regen" onclick="regen()">↺ Перегенерувати</button>
-      <button class="btn" id="btn-new" onclick="goStep(1)">↺ Нова пісня</button>
+      <button class="btn" data-i18n="btn.back" onclick="goStep(3)">← Назад</button>
+      <button class="btn" id="btn-regen" data-i18n="btn.regen" onclick="regen()">↺ Перегенерувати</button>
+      <button class="btn" id="btn-new" data-i18n="btn.newSong" onclick="goStep(1)">↺ Нова пісня</button>
     </div>
     <div class="toast" id="toast"></div>
+  </div>
+</div>
+
+<!-- PAGE LIBRARY -->
+<div class="page" id="pg-lib">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+    <span style="font-size:22px">📚</span>
+    <div>
+      <div style="font-size:15px;font-weight:600;color:var(--t0)" data-i18n="libTitle">Бібліотека пісень</div>
+      <div style="font-size:11px;color:var(--t2)" data-i18n="libSub">Збережені lyrics- та style-промпти</div>
+    </div>
+    <span class="lib-count" id="lib-count"></span>
+  </div>
+  <div id="lib-list"></div>
+  <div class="btn-row" style="margin-top:8px">
+    <button class="btn" data-i18n="btn.closeLib" onclick="closeLibrary()">← Назад до генератора</button>
+    <button class="btn" style="color:var(--red);border-color:rgba(239,68,68,.3)" data-i18n="btn.clearLib" onclick="clearLibrary()">🗑 Очистити все</button>
   </div>
 </div>
 </div>
@@ -810,16 +869,24 @@ function setBassMode(m){
   w.style.opacity=m==='none'?'.4':'1';
   w.style.pointerEvents=m==='none'?'none':'auto';
   bl3.style.display=(m==='full'||m==='mid')?'flex':'none';
-  // L4 only for Zifferblatt
-  const isZ=getGenre().toLowerCase().startsWith('zifferblatt');
+  // L4 only for Zifferblatt — use raw select value (getGenre() may not be safe at init)
+  const rawK=document.getElementById('genre')?.value||'';
+  const isZ=rawK.startsWith('zifferblatt');
   if(bl4)bl4.style.display=(m==='full'&&isZ)?'flex':'none';
 }
 
 function setBI(l,v){document.querySelectorAll(`[data-l="${l}"]`).forEach(b=>b.classList.toggle('on',parseInt(b.dataset.v)<=v))}
 
+function getRawGenreKey(){return document.getElementById('genre').value}
+
 function applyBassPreset(){
+  const rawKey=getRawGenreKey();
   const g=getGenre();
-  let p=BASS_PRESETS[g];
+  // 1) exact raw key (e.g. 'zifferblatt-fr-1' without subgenre suffix)
+  let p=BASS_PRESETS[rawKey];
+  // 2) exact full genre string
+  if(!p)p=BASS_PRESETS[g];
+  // 3) partial match
   if(!p){for(const k of Object.keys(BASS_PRESETS)){if(g.toLowerCase().includes(k.toLowerCase())){p=BASS_PRESETS[k];break}}}
   if(!p)p=BASS_PRESETS.default;
   const parts=p.split('|');
@@ -834,10 +901,9 @@ function applyBassPreset(){
   const l4el=document.getElementById('bl4');
   if(l4&&l4el)l4el.value=l4;
   if(note)document.getElementById('bl-note').value=note;
-  // Show L4 if present
   const bl4row=document.getElementById('bl4-row');
   if(bl4row)bl4row.style.display=l4?'flex':'none';
-  showToast('Пресет басів застосовано ✦ Zifferblatt');
+  showToast(rawKey.startsWith('zifferblatt')?'Пресет басів застосовано ✦ Zifferblatt':'Пресет басів застосовано');
 }
 
 function resetBass(){
@@ -1392,25 +1458,92 @@ async function callAI(prompt,maxTokens=2000){
   }
 }
 
-function getLang(){return document.getElementById('lang-ui')?.value||'uk'}
+function getLang(){return localStorage.getItem('lips_lang')||'uk'}
 
 const I18N={
-  uk:{step1:'Інпут',step2:'Жанр + Структура',step3:'Теги',step4:'Генерація',
-      apiLabel:'API Key:',lyricsTitle:'🎵 Lyrics-prompt — ≤5000 зн.',styleTitle:'🎛️ Style-prompt — ≤1000 зн.'},
-  en:{step1:'Input',step2:'Genre + Structure',step3:'Tags',step4:'Generate',
-      apiLabel:'API Key:',lyricsTitle:'🎵 Lyrics-prompt — ≤5000 chars',styleTitle:'🎛️ Style-prompt — ≤1000 chars'}
+  uk:{
+    step1:'Інпут',step2:'Жанр + Структура',step3:'Теги',step4:'Генерація',
+    apiLabel:'API Key:',
+    lyricsTitle:'🎵 Lyrics-prompt — ≤5000 зн.',styleTitle:'🎛️ Style-prompt — ≤1000 зн.',
+    ct:{concept:'Концепція',genreTempo:'Жанр та темп',vocal:'Вокал',genreAnalysis:'Аналіз жанру',songStructure:'Структура пісні',mood:'🎭 Настрій',instruments:'🎹 Інструменти',production:'🎚️ Продакшн',vocalTags:'🎤 Вокальні характеристики',sfx:'⚡ SFX та спецефекти',bassStructure:'🔊 Bass Structure',refinement:'✦ Уточнення для AI'},
+    lbl:{songTitle:'Назва пісні',concept:'Концепція, настрій, ідея',lyricsMode:'Лірика',lyricsLang:'Мова лірики',lyricsText:'Лірика',rhyme:'Рима',genre:'Жанр',subgenre:'Піджанр',customGenre:'Жанр вручну',bpmFrom:'BPM від',bpmTo:'BPM до',bpmPreset:'Пресет BPM',key:'Тональність',vocalType:'Тип',vocalStyle:'Стиль',vocalExtra:'Додатково',refinement:'Коментарі — AI врахує і перегенерує',bassMode:'Режим:'},
+    ph:{concept:'Опишіть настрій і тему — AI доповнить деталями стилю…',lyrics:'Вставте лірику — AI оформить у формат Suno з тегами-промптами…',customGenre:'напр. Synthwave, Melodic Dubstep…',refinement:"напр. 'Більш емоційний приспів', 'Більше IT-термінів', 'Скороти куплет 1'…"},
+    btn:{nextStep2:'Далі: Жанр і структура →',back:'← Назад',nextStep3:'Далі: Теги →',nextStep4:'Далі: Генерація →',reset:'↺ Базова',autoGenre:'⚡ Авто-жанр',aiTags:'✦ AI теги',aiStruct:'✦ AI структура+теги',regen:'↺ Перегенерувати',newSong:'↺ Нова пісня',saveLib:'💾 Зберегти в бібліотеку',refine:'✦ AI покращує',closeLib:'← Назад до генератора',clearLib:'🗑 Очистити все',exportHtml:'↓ Зберегти HTML',copy:'Копіювати',library:'Бібліотека'},
+    opt:{lyricsUser:'Своя лірика',lyricsAI:'AI пише з нуля',lyricsBoth:'Обидва варіанти',rhymeExact:'Точна рима (пріоритет)',rhymeBalance:'Баланс рима + зміст',rhymeMeaning:'Зміст (рима другорядна)',vtMale:'Соло чоловічий',vtFemale:'Соло жіночий',vtDuet:'Дует ч+ж'},
+    badge:{aiExpand:'AI розширить',optional:"необов'язково",aiTags:'AI-теги',bassPreset:'пресет по жанру'},
+    structHint:'Перетягуй ⠿ · Клік ✏️ — редагуй тег · Клік на пресет — додає · ✕ видалити',
+    bassFull:'Повний (3 шари)',bassMid:'Помірний (2 шари)',bassMin:'Мінімальний',bassNone:'Без басів',
+    bassWarn:'⚠️ Для цього жанру баси не є домінантними — рекомендовано мінімальний або без структури.',
+    libTitle:'Бібліотека пісень',libSub:'Збережені lyrics- та style-промпти',
+    libBtnLoad:'↗ Завантажити',libBtnDel:'🗑',
+    confirmDeleteLib:'Видалити пісню з бібліотеки?',confirmClearLib:'Очистити всю бібліотеку? Це незворотньо.',
+    sugsTitle:'✦ AI Рекомендації',genreRecs:'✦ AI Рекомендації для цього стилю',
+  },
+  en:{
+    step1:'Input',step2:'Genre + Structure',step3:'Tags',step4:'Generate',
+    apiLabel:'API Key:',
+    lyricsTitle:'🎵 Lyrics-prompt — ≤5000 chars',styleTitle:'🎛️ Style-prompt — ≤1000 chars',
+    ct:{concept:'Concept',genreTempo:'Genre & Tempo',vocal:'Vocal',genreAnalysis:'Genre Analysis',songStructure:'Song Structure',mood:'🎭 Mood',instruments:'🎹 Instruments',production:'🎚️ Production',vocalTags:'🎤 Vocal Characteristics',sfx:'⚡ SFX & Effects',bassStructure:'🔊 Bass Structure',refinement:'✦ AI Refinement'},
+    lbl:{songTitle:'Song Title',concept:'Concept, mood, idea',lyricsMode:'Lyrics',lyricsLang:'Lyrics Language',lyricsText:'Lyrics',rhyme:'Rhyme',genre:'Genre',subgenre:'Subgenre',customGenre:'Custom Genre',bpmFrom:'BPM from',bpmTo:'BPM to',bpmPreset:'BPM Preset',key:'Key',vocalType:'Type',vocalStyle:'Style',vocalExtra:'Extra',refinement:'Comments — AI will consider and regenerate',bassMode:'Mode:'},
+    ph:{concept:'Describe the mood and theme — AI will fill in style details…',lyrics:'Paste lyrics — AI will format for Suno with prompt tags…',customGenre:'e.g. Synthwave, Melodic Dubstep…',refinement:"e.g. 'More emotional chorus', 'More IT terms', 'Shorten verse 1'…"},
+    btn:{nextStep2:'Next: Genre & Structure →',back:'← Back',nextStep3:'Next: Tags →',nextStep4:'Next: Generate →',reset:'↺ Default',autoGenre:'⚡ Auto-genre',aiTags:'✦ AI Tags',aiStruct:'✦ AI Structure+Tags',regen:'↺ Regenerate',newSong:'↺ New Song',saveLib:'💾 Save to Library',refine:'✦ AI Improve',closeLib:'← Back to Generator',clearLib:'🗑 Clear All',exportHtml:'↓ Save HTML',copy:'Copy',library:'Library'},
+    opt:{lyricsUser:'My Lyrics',lyricsAI:'AI writes from scratch',lyricsBoth:'Both options',rhymeExact:'Exact rhyme (priority)',rhymeBalance:'Balance rhyme + meaning',rhymeMeaning:'Meaning priority',vtMale:'Solo male',vtFemale:'Solo female',vtDuet:'Duet m+f'},
+    badge:{aiExpand:'AI expands',optional:'optional',aiTags:'AI-tags',bassPreset:'genre preset'},
+    structHint:'Drag ⠿ · Click ✏️ — edit tag · Click preset — adds · ✕ remove',
+    bassFull:'Full (3 layers)',bassMid:'Moderate (2 layers)',bassMin:'Minimal',bassNone:'No bass',
+    bassWarn:'⚠️ Bass is not dominant for this genre — minimal or no bass recommended.',
+    libTitle:'Song Library',libSub:'Saved lyrics & style prompts',
+    libBtnLoad:'↗ Load',libBtnDel:'🗑',
+    confirmDeleteLib:'Delete song from library?',confirmClearLib:'Clear the entire library? This cannot be undone.',
+    sugsTitle:'✦ AI Recommendations',genreRecs:'✦ AI Recommendations for this style',
+  }
 };
 
+function _t(key){const lang=getLang();let v=I18N[lang]||I18N.uk;const parts=key.split('.');for(const p of parts){if(v&&typeof v==='object')v=v[p];else return key}return typeof v==='string'?v:key}
+
+function setUILang(lang){
+  localStorage.setItem('lips_lang',lang);
+  onUILang();
+}
+
 function onUILang(){
-  const lang=getLang();const t=I18N[lang];
+  const lang=getLang();const t=I18N[lang]||I18N.uk;
+  // UI lang buttons active state
+  const uaBtn=document.getElementById('lang-ua-btn');const enBtn=document.getElementById('lang-en-btn');
+  if(uaBtn)uaBtn.classList.toggle('active',lang==='uk');
+  if(enBtn)enBtn.classList.toggle('active',lang==='en');
+  // Step buttons
   const labels=[t.step1,t.step2,t.step3,t.step4];
   document.querySelectorAll('.step-btn').forEach((btn,i)=>{
     const num=btn.querySelector('.step-num');
     if(num&&labels[i])btn.innerHTML=num.outerHTML+labels[i];
   });
+  // data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const val=_t(el.dataset.i18n);
+    if(val&&val!==el.dataset.i18n)el.textContent=val;
+  });
+  // data-i18n-prefix: update first text node only (keeps child spans)
+  document.querySelectorAll('[data-i18n-prefix]').forEach(el=>{
+    const val=_t(el.dataset.i18nPrefix);
+    if(!val||val===el.dataset.i18nPrefix)return;
+    const tn=[...el.childNodes].find(n=>n.nodeType===3);
+    if(tn)tn.textContent=val+' ';
+  });
+  // data-i18n-ph: update placeholder
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const val=_t(el.dataset.i18nPh);
+    if(val&&val!==el.dataset.i18nPh)el.placeholder=val;
+  });
+  // API label
   const al=document.querySelector('.api-lbl');if(al)al.textContent=t.apiLabel;
+  // Output titles
   const otl=document.getElementById('out-title-l');if(otl)otl.textContent=t.lyricsTitle;
   const ots=document.getElementById('out-title-s');if(ots)ots.textContent=t.styleTitle;
+  // (song structure card handled by data-i18n-prefix)
+  // AI recs block
+  const rt=document.querySelector('.recs-title');if(rt)rt.textContent=_t('genreRecs');
+  const st=document.querySelector('.sugs-title');if(st)st.textContent=_t('sugsTitle');
   localStorage.setItem('lips_lang',lang);
 }
 
@@ -1517,7 +1650,9 @@ Output ONLY the style-prompt.`;
     updCtr('out-l','ctr-l',5000,'pf-l');updCtr('out-s','ctr-s',1000,'pf-s');
     try{const sugs=JSON.parse(sgr.replace(/```json|```/g,'').trim());const sl=document.getElementById('sugs-list');sl.innerHTML='';sugs.forEach(s=>{const d=document.createElement('div');d.className='sug-item';d.textContent=s;sl.appendChild(d)})}catch(e){}
     document.getElementById('gen-loader').classList.remove('show');
-    document.getElementById('gen-result').style.display='block';done.add(4);
+    document.getElementById('gen-result').style.display='block';
+    const _sbw=document.getElementById('save-btn-wrap');if(_sbw)_sbw.classList.add('show');
+    done.add(4);
   }catch(e){
     clearInterval(stI);
     document.getElementById('gen-loader').classList.remove('show');
@@ -1559,11 +1694,87 @@ function cp(tid,cid,lim,pfid,btnid){
   const t=document.getElementById(tid).value;if(!t)return;
   navigator.clipboard.writeText(t).catch(()=>{document.getElementById(tid).select();document.execCommand('copy')});
   const btn=document.getElementById(btnid);const old=btn.textContent;
-  btn.textContent='Скопійовано!';btn.classList.add('flash');
+  btn.textContent=getLang()==='en'?'Copied!':'Скопійовано!';btn.classList.add('flash');
   setTimeout(()=>{btn.textContent=old;btn.classList.remove('flash')},2000);
 }
 
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
+function exportAsHtml(entry){
+  const isLib=!!entry;
+  const title=isLib?(entry.title||'Song'):(document.getElementById('title').value||'Song');
+  const lyricsPrompt=isLib?(entry.lyrics||''):(document.getElementById('out-l').value||'');
+  const stylePrompt=isLib?(entry.style||''):(document.getElementById('out-s').value||'');
+  if(!lyricsPrompt&&!stylePrompt){showToast(_t('ph.noData')||'No data to export');return}
+  const genre=isLib?(entry.genre||''):(getGenre());
+  const dateStr=new Date().toLocaleDateString('uk-UA',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const html=`<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(title)} — LIPS by AVII v4.0.0</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Mono',monospace,system-ui;background:#10121a;color:#f0f2f8;min-height:100vh;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+.hdr{text-align:center;margin-bottom:36px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.app-name{font-size:13px;color:#4d8fff;font-weight:600;letter-spacing:.5px;margin-bottom:6px}
+.song-title{font-size:26px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:6px}
+.meta{font-size:11px;color:#6e78a0}
+.block{background:#181b26;border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;margin-bottom:20px}
+.block-hdr{padding:8px 16px;background:#1f2333;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
+.block-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:#b8bfd4}
+.block-chars{font-size:10px;color:#6e78a0}
+.block-body{padding:16px;font-size:12px;line-height:1.8;color:#f0f2f8;white-space:pre-wrap;word-break:break-word}
+.footer{text-align:center;margin-top:32px;font-size:10px;color:#3a4060}
+.copy-btn{background:rgba(77,143,255,.1);border:1px solid rgba(77,143,255,.3);color:#4d8fff;font-size:10px;padding:2px 10px;border-radius:12px;cursor:pointer;font-family:inherit;transition:all .15s}
+.copy-btn:hover{background:rgba(77,143,255,.2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="app-name">ᯓ𝄞 LIPS by AVII — v4.0.0</div>
+    <div class="song-title">${esc(title)}</div>
+    <div class="meta">${esc(genre)} · ${esc(dateStr)}</div>
+  </div>
+  <div class="block">
+    <div class="block-hdr">
+      <span class="block-title">🎵 Lyrics-prompt</span>
+      <span class="block-chars">${lyricsPrompt.length} / 5000 chars</span>
+    </div>
+    <div class="block-body">${esc(lyricsPrompt)}</div>
+  </div>
+  <div class="block">
+    <div class="block-hdr">
+      <span class="block-title">🎛️ Style-prompt</span>
+      <span class="block-chars">${stylePrompt.length} / 1000 chars</span>
+    </div>
+    <div class="block-body">${esc(stylePrompt)}</div>
+  </div>
+  <div class="footer">ᯓ𝄞 LIPS by AVII © 2026 · by @AVII (Vitaliy + Iryna + AI)</div>
+</div>
+<script>
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.onclick=function(){
+    const body=this.closest('.block').querySelector('.block-body');
+    navigator.clipboard.writeText(body.textContent).then(()=>{const old=this.textContent;this.textContent='Copied!';setTimeout(()=>this.textContent=old,1500)});
+  }
+});
+<\/script>
+</body>
+</html>`;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  const safeName=title.replace(/[^\wЀ-ӿ\s-]/g,'').replace(/\s+/g,'-').slice(0,60);
+  a.download=safeName+'-prompts.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  showToast((getLang()==='en'?'HTML saved: ':'HTML збережено: ')+title);
+}
 
 function getState(){
   return{title:document.getElementById('title').value,concept:document.getElementById('concept').value,lyrics:document.getElementById('lyrics').value,lyricMode:document.getElementById('lyric-mode').value,lang:document.getElementById('lang').value,rhyme:document.getElementById('rhyme').value,genre:document.getElementById('genre').value,bpm1:document.getElementById('bpm1').value,bpm2:document.getElementById('bpm2').value,key:document.getElementById('key').value,vt:document.getElementById('vt').value,vs:document.getElementById('vs').value,vocalExtra:document.getElementById('vocal-extra').value,sel:{mood:[...SEL.mood],instr:[...SEL.instr],prod:[...SEL.prod],vocal:[...SEL.vocal],sfx:[...SEL.sfx]},struct:STRUCT,stags:STAGS,bassMode,bl1:document.getElementById('bl1').value,bl2:document.getElementById('bl2').value,bl3:document.getElementById('bl3').value,blNote:document.getElementById('bl-note').value,outL:document.getElementById('out-l').value,outS:document.getElementById('out-s').value,ts:Date.now()};
@@ -1615,10 +1826,168 @@ document.addEventListener('mouseout',e=>{
   if(!e.target.closest('[data-tip]'))ttEl.style.display='none';
 });
 
+
+// ── LIBRARY ──
+const LIB_PREFIX='song:';
+
+async function saveToLibrary(){
+  const title=document.getElementById('title').value.trim()||'Без назви';
+  const lyrics=document.getElementById('out-l').value.trim();
+  const style=document.getElementById('out-s').value.trim();
+  if(!lyrics&&!style){showToast('Немає даних для збереження');return}
+  const genre=getRawGenreKey();
+  const entry={title,genre,lyrics,style,ts:Date.now()};
+  const key=LIB_PREFIX+entry.ts;
+  const statusEl=document.getElementById('save-status');
+  try{
+    const res=await window.storage.set(key,JSON.stringify(entry));
+    if(res){
+      statusEl.textContent='Збережено: '+title;
+      showToast('Збережено в бібліотеку: '+title);
+      setTimeout(()=>{statusEl.textContent=''},3000);
+    }else{throw new Error('storage null')}
+  }catch(e){
+    try{
+      localStorage.setItem('lips_lib_'+entry.ts,JSON.stringify(entry));
+      statusEl.textContent='Збережено локально: '+title;
+      showToast('Збережено (local): '+title);
+      setTimeout(()=>{statusEl.textContent=''},3000);
+    }catch(e2){showToast('Помилка збереження')}
+  }
+}
+
+function libMakeCard(e,idx){
+  const isZ=(e.genre||'').startsWith('zifferblatt');
+  const date=new Date(e.ts).toLocaleDateString('uk-UA',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  const genreShort=(e.genre||'—').replace(/^zifferblatt-/,'Z-').slice(0,28);
+  const card=document.createElement('div');
+  card.className='lib-card';
+  const hdr=document.createElement('div');
+  hdr.className='lib-card-hdr';
+  hdr.onclick=function(){this.nextElementSibling.classList.toggle('open')};
+  const icon=document.createElement('span');icon.className='lib-icon';icon.textContent='🎵';
+  const meta=document.createElement('div');meta.className='lib-meta';
+  const tit=document.createElement('div');tit.className='lib-title';tit.textContent=e.title||'Без назви';
+  const sub=document.createElement('div');sub.className='lib-sub';sub.textContent=genreShort+' · '+date;
+  meta.appendChild(tit);meta.appendChild(sub);
+  const badge=document.createElement('span');badge.className='lib-badge'+(isZ?' z':'');badge.textContent='#'+(idx+1);
+  const acts=document.createElement('div');acts.className='lib-actions';
+  acts.onclick=function(ev){ev.stopPropagation()};
+  const btnLoad=document.createElement('button');btnLoad.className='lib-btn load';btnLoad.textContent=_t('libBtnLoad');
+  btnLoad.onclick=function(){libLoad(e.ts)};
+  const btnExp=document.createElement('button');btnExp.className='lib-btn';btnExp.textContent='↓ HTML';
+  btnExp.onclick=function(){exportAsHtml(e)};
+  const btnDel=document.createElement('button');btnDel.className='lib-btn del';btnDel.textContent='🗑';
+  btnDel.onclick=function(){libDelete(e.ts,btnDel)};
+  acts.appendChild(btnLoad);acts.appendChild(btnExp);acts.appendChild(btnDel);
+  hdr.appendChild(icon);hdr.appendChild(meta);hdr.appendChild(badge);hdr.appendChild(acts);
+  const prev=document.createElement('div');prev.className='lib-preview';
+  const lbl1=document.createElement('div');lbl1.className='lib-preview-label';lbl1.textContent='Lyrics-prompt (перші 300 зн.)';
+  const ta1=document.createElement('textarea');ta1.className='lib-preview-ta';ta1.rows=3;ta1.readOnly=true;
+  const ls=(e.lyrics||'').slice(0,300);ta1.value=ls+(e.lyrics&&e.lyrics.length>300?'…':'');
+  const lbl2=document.createElement('div');lbl2.className='lib-preview-label';lbl2.style.marginTop='8px';lbl2.textContent='Style-prompt';
+  const ta2=document.createElement('textarea');ta2.className='lib-preview-ta';ta2.rows=2;ta2.readOnly=true;
+  const ss=(e.style||'').slice(0,300);ta2.value=ss+(e.style&&e.style.length>300?'…':'');
+  prev.appendChild(lbl1);prev.appendChild(ta1);prev.appendChild(lbl2);prev.appendChild(ta2);
+  card.appendChild(hdr);card.appendChild(prev);
+  return card;
+}
+
+async function loadLibrary(){
+  const list=document.getElementById('lib-list');
+  const countEl=document.getElementById('lib-count');
+  list.innerHTML='<div class="lib-empty"><div class="lib-empty-icon">⏳</div>Завантаження…</div>';
+  let entries=[];
+  try{
+    const keys=await window.storage.list(LIB_PREFIX);
+    if(keys&&keys.keys&&keys.keys.length){
+      for(const k of keys.keys){
+        try{const r=await window.storage.get(k);if(r)entries.push(JSON.parse(r.value))}catch(e){}
+      }
+    }
+  }catch(e){}
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k&&k.startsWith('lips_lib_')){
+      try{const s=JSON.parse(localStorage.getItem(k));if(s&&s.ts)entries.push(s)}catch(e){}
+    }
+  }
+  const seen=new Set();
+  entries=entries.filter(e=>{if(seen.has(e.ts))return false;seen.add(e.ts);return true});
+  entries.sort((a,b)=>b.ts-a.ts);
+  countEl.textContent=entries.length?entries.length+' пісень':'';
+  if(!entries.length){
+    list.innerHTML='<div class="lib-empty"><div class="lib-empty-icon">📭</div>Бібліотека порожня.<br><span style="font-size:12px">Згенеруйте промпт і натисніть «Зберегти в бібліотеку»</span></div>';
+    return;
+  }
+  list.innerHTML='';
+  window._libEntries=entries;
+  entries.forEach((e,idx)=>list.appendChild(libMakeCard(e,idx)));
+}
+
+function libLoad(ts){
+  const e=(window._libEntries||[]).find(x=>x.ts===ts);
+  if(!e){showToast('Помилка: пісню не знайдено');return}
+  const titleEl=document.getElementById('title');if(titleEl)titleEl.value=e.title||'';
+  const outL=document.getElementById('out-l');const outS=document.getElementById('out-s');
+  if(outL){outL.value=e.lyrics||'';updCtr('out-l','ctr-l',5000,'pf-l')}
+  if(outS){outS.value=e.style||'';updCtr('out-s','ctr-s',1000,'pf-s')}
+  const sbw=document.getElementById('save-btn-wrap');if(sbw)sbw.classList.add('show');
+  closeLibrary();
+  activatePage(4);
+  document.getElementById('gen-loader').classList.remove('show');
+  document.getElementById('gen-result').style.display='block';
+  showToast('Завантажено: '+(e.title||'пісня'));
+}
+
+async function libDelete(ts,btn){
+  if(!confirm(_t('confirmDeleteLib')))return;
+  try{await window.storage.delete(LIB_PREFIX+ts)}catch(e){}
+  try{localStorage.removeItem('lips_lib_'+ts)}catch(e){}
+  const card=btn.closest('.lib-card');if(card)card.remove();
+  const rem=document.querySelectorAll('.lib-card').length;
+  const countEl=document.getElementById('lib-count');
+  if(countEl)countEl.textContent=rem?rem+' пісень':'';
+  if(!rem){const list=document.getElementById('lib-list');if(list)list.innerHTML='<div class="lib-empty"><div class="lib-empty-icon">📭</div>Бібліотека порожня.</div>'}
+  showToast('Видалено');
+}
+
+async function clearLibrary(){
+  if(!confirm(_t('confirmClearLib')))return;
+  try{const keys=await window.storage.list(LIB_PREFIX);if(keys&&keys.keys){for(const k of keys.keys){try{await window.storage.delete(k)}catch(e){}}}}catch(e){}
+  const toRm=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('lips_lib_'))toRm.push(k)}
+  toRm.forEach(k=>localStorage.removeItem(k));
+  loadLibrary();showToast('Бібліотеку очищено');
+}
+
+let _prevPage=1;
+function openLibrary(){
+  const active=document.querySelector('.page.active');
+  if(active){const pid=active.id.replace('pg','');_prevPage=isNaN(parseInt(pid))?1:parseInt(pid)}
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pg-lib').classList.add('active');
+  document.querySelectorAll('.step-btn').forEach(b=>b.classList.remove('active','done'));
+  window.scrollTo(0,0);
+  loadLibrary();
+}
+
+function closeLibrary(){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg=document.getElementById('pg'+_prevPage)||document.getElementById('pg1');
+  pg.classList.add('active');
+  document.querySelectorAll('.step-btn').forEach(b=>{
+    const s=parseInt(b.dataset.s);
+    b.classList.remove('active','done');
+    if(s===_prevPage)b.classList.add('active');
+    else if(s<_prevPage)b.classList.add('done');
+  });
+  window.scrollTo(0,0);
+}
+
 // INIT
 onGenre();initDndSel();STRUCT.forEach(p=>{STAGS[p]=autoTag(p)});
-// Restore language
-try{const sl=localStorage.getItem('lips_lang');if(sl){const lui=document.getElementById('lang-ui');if(lui){lui.value=sl;onUILang()}}}catch(e){}
+// Restore language & apply UI
+try{onUILang()}catch(e){}
 try{const s=localStorage.getItem('lips_autosave');if(s){const st=JSON.parse(s);if(st.title||st.concept)loadState(st)}}catch(e){}
 // Restore API key
 try{
