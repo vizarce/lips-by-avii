@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026 v5.0.1</title>
+<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026 v5.2.0</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap');
 :root{
@@ -179,6 +179,59 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
 .lib-count{font-size:11px;color:var(--t2);font-family:var(--mono);margin-left:auto;padding-right:4px}
 .save-btn-wrap{display:none;margin-top:10px}
 .save-btn-wrap.show{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+/* ── Artist DNA Block ── */
+.artist-dna-block{background:var(--p2);border:1px solid rgba(99,102,241,.2);border-radius:var(--r);padding:12px;margin-top:8px}
+.artist-dna-title{font-size:10px;font-weight:700;color:var(--indigo,#818cf8);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.artist-dna-hint{font-size:9px;color:var(--t2);font-weight:400;text-transform:none;letter-spacing:0}
+.artist-dna-tabs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+.adna-tab{font-size:10px;padding:2px 9px;border-radius:12px;border:1px solid var(--b1);background:transparent;color:var(--t2);cursor:pointer;transition:all .12s;font-family:var(--mono)}
+.adna-tab:hover{border-color:var(--teal);color:var(--teal)}
+.adna-tab.on{background:var(--teal-s);border-color:var(--teal);color:var(--teal)}
+.artist-pills-wrap{display:flex;flex-wrap:wrap;gap:4px;min-height:28px;margin-bottom:5px}
+.apill{font-size:10px;padding:2px 9px;border-radius:12px;border:1px solid var(--b1);background:transparent;color:var(--t1);cursor:pointer;transition:all .12s;user-select:none;display:flex;align-items:center;gap:4px}
+.apill:hover{border-color:var(--pur);color:var(--pur)}
+.apill.on{background:var(--pur-s);border-color:var(--pur);color:var(--pur)}
+.apill .apill-flag{font-size:9px;opacity:.6}
+.artist-dna-preview{font-family:var(--mono);font-size:10px;color:var(--teal);background:var(--p3);border:1px solid rgba(45,212,191,.15);border-radius:4px;padding:5px 8px;line-height:1.5;margin-bottom:5px}
+.artist-dna-apply-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+
+/* ── Triple-Stack Vocal Builder ── */
+.vocal-builder{background:var(--p2);border:1px solid rgba(168,85,247,.2);border-radius:var(--r);padding:12px;margin-top:8px}
+.vb-title{font-size:10px;font-weight:600;color:var(--pur);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.vb-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}
+.vb-col{}
+.vb-lbl{font-size:10px;color:var(--t2);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.vb-pills{display:flex;flex-wrap:wrap;gap:3px}
+.vb-pill{font-size:10px;padding:2px 7px;border-radius:12px;border:1px solid var(--b1);background:transparent;color:var(--t2);cursor:pointer;transition:all .12s;user-select:none}
+.vb-pill:hover{border-color:var(--pur);color:var(--pur)}
+.vb-pill.on{background:var(--pur-s);border-color:var(--pur);color:var(--pur)}
+.vb-preview{font-family:var(--mono);font-size:11px;color:var(--teal);background:var(--p3);border:1px solid var(--b0);border-radius:4px;padding:5px 8px;margin-top:4px;min-height:28px;line-height:1.5}
+.vb-tier{font-size:9px;margin-left:3px;opacity:.7}
+
+/* ── Style Formula Builder ── */
+.formula-card{background:var(--p2);border:1px solid rgba(45,212,191,.2);border-radius:var(--r);padding:12px;margin-bottom:10px}
+.formula-title{font-size:10px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.formula-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.formula-item{background:var(--p3);border:1px solid var(--b0);border-radius:var(--rs);padding:6px 9px;cursor:pointer;transition:all .12s}
+.formula-item:hover{border-color:var(--teal);background:var(--teal-s)}
+.formula-item.on{border-color:var(--teal);background:var(--teal-s)}
+.formula-name{font-size:11px;font-weight:600;color:var(--t1)}
+.formula-bpm{font-size:9px;color:var(--teal);font-family:var(--mono)}
+.formula-tags{font-size:10px;color:var(--t2);margin-top:2px;line-height:1.4}
+.formula-preview{font-family:var(--mono);font-size:11px;color:var(--teal);background:var(--p3);border:1px solid rgba(45,212,191,.15);border-radius:4px;padding:5px 8px;margin-top:4px;line-height:1.6}
+
+/* ── Negative Prompting ── */
+.neg-card{background:var(--p2);border:1px solid rgba(239,68,68,.15);border-radius:var(--r);padding:12px;margin-bottom:10px}
+.neg-title{font-size:10px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.neg-cloud{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.neg-pill{font-size:10px;padding:2px 8px;border-radius:12px;border:1px solid rgba(239,68,68,.2);background:transparent;color:var(--t2);cursor:pointer;transition:all .12s}
+.neg-pill:hover{border-color:var(--red);color:var(--red)}
+.neg-pill.on{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red)}
+.neg-input{font-family:var(--mono);font-size:11px;background:var(--p3);border:1px solid rgba(239,68,68,.15);border-radius:4px;padding:4px 8px;width:100%;color:var(--t1);margin-top:4px}
+
+/* ── BPM Reference Badge ── */
+.bpm-ref{font-size:10px;color:var(--teal);font-family:var(--mono);margin-top:3px;padding:2px 6px;background:var(--teal-s);border-radius:4px;display:inline-block}
+
 </style>
 </head>
 <body>
@@ -194,7 +247,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
       </svg>
     </div>
     <div>
-      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span><span class="ver-badge">v5.0.1</span></div>
+      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span><span class="ver-badge">v5.2.0</span></div>
       <div class="brand-tag">Lyrics & Instrumentation Prompt Synthesizer · by @AVII</div>
     </div>
   </div>
@@ -276,8 +329,17 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
             <optgroup label="── Electronic ──">
               <option value="EDM">EDM (піджанр →)</option>
               <option value="Deep House, Melodic Techno">Deep House / Melodic Techno</option>
+              <option value="Tech House">Tech House</option>
+              <option value="Minimal Techno">Minimal Techno</option>
               <option value="Dreamy Synthwave, Chamber Pop">Dreamy Synthwave / Chamber Pop</option>
               <option value="New Wave">New Wave (піджанр →)</option>
+              <option value="Future Bass">Future Bass (140–160 BPM)</option>
+              <option value="Dubstep">Dubstep (140 BPM, half-time)</option>
+              <option value="Drum and Bass">Drum & Bass (174 BPM)</option>
+              <option value="Liquid Drum and Bass">Liquid DnB (174 BPM)</option>
+              <option value="Trance">Trance (138 BPM)</option>
+              <option value="Hardstyle">Hardstyle (155 BPM)</option>
+              <option value="Big Room House">Big Room House (128 BPM)</option>
               <option value="Reggaeton, Acid Electro-Pop">Acid Reggaeton × Electro-Pop</option>
               <option value="Melodic Reggaeton, Pop">Melodic Reggaeton / Pop</option>
             </optgroup>
@@ -350,23 +412,68 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
         <div class="fld"><label class="lbl" data-i18n="lbl.bpmPreset">Пресет BPM</label>
           <select id="bpm-pre" onchange="onBpmPre()">
             <option value="">— обрати —</option>
-            <option value="70">70 — Slow Ballad</option><option value="80">80 — Soul</option>
-            <option value="85">85 — Lo-Fi/Jazz</option><option value="88">88 — Boom Bap</option>
-            <option value="90">90 — Hip-Hop</option><option value="92">92 — Reggaeton</option>
-            <option value="95">95 — R&amp;B</option><option value="98">98 — Indie-Pop</option>
-            <option value="105">105 — Chill House</option><option value="108">108 — Trap</option>
-            <option value="110">110 — Deep House</option><option value="115">115 — Nu Disco</option>
-            <option value="118">118 — Vocal House</option><option value="120">120 — House</option>
-            <option value="124">124 — Tech House</option><option value="128">128 — EDM</option>
-            <option value="138">138 — DnB</option><option value="140">140 — Dubstep</option>
-            <option value="174">174 — Hardstyle</option>
-            <optgroup label="── Zifferblatt ──">
-              <option value="108">108 — Zifferblatt (IT④/DE③)</option>
-              <option value="110">110 — Zifferblatt (FR③/ES②)</option>
-              <option value="112">112 — Zifferblatt (FR①/ES①/DE①)</option>
-              <option value="114">114 — Zifferblatt (FR②/ES③/DE④)</option>
-              <option value="118">118 — Zifferblatt (DE②)</option>
-              <option value="120">120 — Zifferblatt (IT③)</option>
+            <optgroup label="── Slow / Soul ──">
+              <option value="60">60 — Slow Ambient</option>
+              <option value="65">65 — Meditative Ambient</option>
+              <option value="70">70 — Slow Ballad</option>
+              <option value="72">72 — Neo-Soul / R&B slow</option>
+              <option value="75">75 — Lo-Fi Hip-Hop</option>
+              <option value="78">78 — R&B / Neo-Soul</option>
+              <option value="80">80 — Soul / Ballad</option>
+            </optgroup>
+            <optgroup label="── Mid-Tempo ──">
+              <option value="82">82 — Chillhop</option>
+              <option value="85">85 — Lo-Fi / Jazz</option>
+              <option value="88">88 — Boom Bap classic</option>
+              <option value="90">90 — Hip-Hop / Boom Bap</option>
+              <option value="92">92 — Reggaeton / R&B</option>
+              <option value="95">95 — R&B modern</option>
+              <option value="98">98 — Indie-Pop</option>
+              <option value="100">100 — Pop mid-tempo</option>
+              <option value="105">105 — Chill House / Downtempo</option>
+            </optgroup>
+            <optgroup label="── House ──">
+              <option value="108">108 — Trip-hop House / Downtempo</option>
+              <option value="110">110 — Deep House slow</option>
+              <option value="112">112 — Vocal House / French Touch</option>
+              <option value="114">114 — Nu Disco Deep</option>
+              <option value="116">116 — Future House</option>
+              <option value="118">118 — Vocal House / Indie Dance</option>
+              <option value="120">120 — House classic</option>
+              <option value="122">122 — Afro House</option>
+              <option value="124">124 — Tech House / Deep House</option>
+              <option value="126">126 — Big Room House</option>
+              <option value="128">128 — EDM / House classic</option>
+              <option value="130">130 — Bass House</option>
+              <option value="132">132 — Progressive House peak</option>
+            </optgroup>
+            <optgroup label="── EDM / Electronic ──">
+              <option value="135">135 — Techno / Minimal</option>
+              <option value="138">138 — Trance classic</option>
+              <option value="140">140 — Dubstep (half-time feel)</option>
+              <option value="140">140 — Trap standard</option>
+              <option value="143">143 — Psytrance</option>
+              <option value="145">145 — Trance uplifting</option>
+              <option value="150">150 — Future Bass</option>
+              <option value="155">155 — Hardstyle</option>
+              <option value="160">160 — Future Bass fast</option>
+              <option value="174">174 — Drum & Bass (canonical)</option>
+              <option value="176">176 — DnB fast</option>
+              <option value="180">180 — DnB / Jungle</option>
+            </optgroup>
+            <optgroup label="── Rock / Metal ──">
+              <option value="120">120 — Rock standard</option>
+              <option value="135">135 — Hard Rock</option>
+              <option value="160">160 — Metal fast</option>
+              <option value="180">180 — Metal extreme</option>
+            </optgroup>
+            <optgroup label="── ⟨Z⟩ Zifferblatt ──">
+              <option value="108">108 — Zifferblatt IT④/DE③</option>
+              <option value="110">110 — Zifferblatt FR③/ES②</option>
+              <option value="112">112 — Zifferblatt FR①/ES①/DE①</option>
+              <option value="114">114 — Zifferblatt FR②/ES③/DE④</option>
+              <option value="118">118 — Zifferblatt DE②</option>
+              <option value="120">120 — Zifferblatt IT③</option>
             </optgroup>
           </select>
         </div>
@@ -385,26 +492,100 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
   <div class="card" id="vocal-card">
     <div class="card-hdr"><span class="cdot pur"></span><span class="card-title" data-i18n="ct.vocal">Вокал</span></div>
     <div class="cb">
-      <div class="g3">
+      <div class="g2" style="margin-bottom:8px">
         <div class="fld"><label class="lbl" data-i18n="lbl.vocalType">Тип</label>
-          <select id="vt" onchange="onVocalType()"><option value="male" data-i18n="opt.vtMale">Соло чоловічий</option><option value="female" data-i18n="opt.vtFemale">Соло жіночий</option><option value="duet" data-i18n="opt.vtDuet">Дует ч+ж</option><option value="instrumental" data-i18n="opt.vtInstrumental">Інструментальна</option></select>
+          <select id="vt" onchange="onVocalType()">
+            <option value="male">Соло чоловічий</option>
+            <option value="female">Соло жіночий</option>
+            <option value="duet">Дует ч+ж</option>
+            <option value="instrumental">Інструментальна</option>
+          </select>
         </div>
-        <div class="fld"><label class="lbl" data-i18n="lbl.vocalStyle">Стиль</label>
+        <div class="fld"><label class="lbl" data-i18n="lbl.vocalStyle">Стиль (жанровий)</label>
           <select id="vs">
-            <option value="house">House — spoken-word</option><option value="indie">Indie — мелодійний</option>
-            <option value="cinematic">Cinematic</option><option value="whisper">Whisper-heavy</option>
-            <option value="soul">Soul / R&amp;B</option><option value="reggaeton">Reggaeton</option>
-            <option value="rap">Rap / Hip-Hop</option><option value="jazz">Jazz</option>
-            <option value="rock">Rock</option><option value="metal">Metal</option>
+            <option value="house">House — spoken-word</option>
+            <option value="indie">Indie — мелодійний</option>
+            <option value="cinematic">Cinematic</option>
+            <option value="whisper">Whisper-heavy</option>
+            <option value="soul">Soul / R&B</option>
+            <option value="reggaeton">Reggaeton</option>
+            <option value="rap">Rap / Hip-Hop</option>
+            <option value="jazz">Jazz</option>
+            <option value="rock">Rock</option>
+            <option value="metal">Metal</option>
             <option value="confessional">Confessional Indie</option>
           </select>
         </div>
-        <div class="fld"><label class="lbl" data-i18n="lbl.vocalExtra">Додатково</label><input type="text" id="vocal-extra" placeholder='напр. "raspy, whispered ad-libs"'></div>
-        <div class="fld" style="grid-column:1/-1">
-          <label class="lbl">✦ Стиль артиста / Artist Reference</label>
-          <div style="display:flex;gap:5px;flex-wrap:wrap" id="artist-pills"></div>
-          <input type="text" id="artist-ref" placeholder='напр. Massive Attack, Daft Punk, Dakha Brakha, Einaudi…' style="margin-top:5px">
+      </div>
+
+      <!-- ── Triple-Stack Vocal Builder ── -->
+      <div class="vocal-builder">
+        <div class="vb-title">🎙️ Triple-Stack Vocal Builder <span style="font-size:9px;color:var(--t2);font-weight:400;text-transform:none">(Character + Delivery + Effects — HookGenius formula)</span></div>
+        <div class="vb-row">
+          <div class="vb-col">
+            <div class="vb-lbl">1 · Character <span class="vb-tier" title="Tier 1: >80% надійно">●</span></div>
+            <div class="vb-pills" id="vb-char"></div>
+          </div>
+          <div class="vb-col">
+            <div class="vb-lbl">2 · Delivery <span class="vb-tier" title="Tier 1-2: надійно">●</span></div>
+            <div class="vb-pills" id="vb-deliv"></div>
+          </div>
+          <div class="vb-col">
+            <div class="vb-lbl">3 · Effects <span class="vb-tier" title="Tier 1-2: надійно">●</span></div>
+            <div class="vb-pills" id="vb-eff"></div>
+          </div>
         </div>
+        <div style="font-size:10px;color:var(--t2);margin-bottom:4px">✦ Складений вокальний промпт:</div>
+        <div class="vb-preview" id="vb-preview">— оберіть теги вище —</div>
+        <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+          <button class="btn sm pur" onclick="applyVocalStack()">↓ Застосувати до Extra</button>
+          <button class="btn sm" onclick="clearVocalStack()">✕ Скинути</button>
+          <span style="font-size:10px;color:var(--t2);align-self:center">⚠️ Плацебо: [Reverb:30%] [Bass:80%] [Stereo:Wide] — не працюють</span>
+        </div>
+      </div>
+
+      <div class="fld" style="margin-top:8px"><label class="lbl" data-i18n="lbl.vocalExtra">Extra / Vocal prompt (вільне поле)</label>
+        <input type="text" id="vocal-extra" placeholder='напр. "raspy female alto, close-mic, dry studio"'>
+      </div>
+      <!-- ══ ARTIST DNA BLOCK ══ -->
+      <div class="artist-dna-block">
+        <div class="artist-dna-title">🎤 Vocal DNA <span class="artist-dna-hint">— як артист СПІВАЄ</span></div>
+        <div class="artist-dna-tabs">
+          <button class="adna-tab on" onclick="setArtistTab('vocal',this)">Вокал</button>
+          <button class="adna-tab" onclick="setArtistTab('soul',this)">Soul/R&amp;B</button>
+          <button class="adna-tab" onclick="setArtistTab('pop',this)">Pop</button>
+          <button class="adna-tab" onclick="setArtistTab('indie',this)">Indie/Alt</button>
+          <button class="adna-tab" onclick="setArtistTab('world',this)">World</button>
+        </div>
+        <div class="artist-pills-wrap" id="vocal-dna-pills"></div>
+        <div class="artist-dna-preview" id="vocal-dna-preview" style="display:none"></div>
+        <div class="artist-dna-apply-row" id="vocal-dna-apply" style="display:none">
+          <button class="btn sm pur" onclick="applyVocalDNA()">↓ Застосувати vocal triple-stack</button>
+          <button class="btn sm" onclick="clearVocalDNA()">✕</button>
+        </div>
+
+        <div class="artist-dna-title" style="margin-top:12px">🎛️ Sound DNA <span class="artist-dna-hint">— як артист ЗВУЧИТЬ (продакшн)</span></div>
+        <div class="artist-dna-tabs">
+          <button class="adna-tab on" onclick="setSoundTab('electronic',this)">Electronic</button>
+          <button class="adna-tab" onclick="setSoundTab('hiphop',this)">Hip-Hop</button>
+          <button class="adna-tab" onclick="setSoundTab('edm',this)">EDM</button>
+          <button class="adna-tab" onclick="setSoundTab('cinematic',this)">Cinematic</button>
+          <button class="adna-tab" onclick="setSoundTab('rock',this)">Rock/Alt</button>
+        </div>
+        <div class="artist-pills-wrap" id="sound-dna-pills"></div>
+        <div class="artist-dna-preview" id="sound-dna-preview" style="display:none"></div>
+        <div class="artist-dna-apply-row" id="sound-dna-apply" style="display:none">
+          <label style="font-size:10px;color:var(--t2);display:flex;align-items:center;gap:5px;cursor:pointer">
+            <input type="checkbox" id="dna-apply-bpm" style="accent-color:var(--teal)"> підставити BPM і жанр
+          </label>
+          <button class="btn sm teal" onclick="applySoundDNA()">↓ Застосувати style DNA</button>
+          <button class="btn sm" onclick="clearSoundDNA()">✕</button>
+        </div>
+      </div>
+
+      <div class="fld" style="margin-top:8px">
+        <label class="lbl">✦ Власний Artist Reference (вільне поле)</label>
+        <input type="text" id="artist-ref" placeholder='напр. Massive Attack, Charlotte Lawrence, Kygo…'>
       </div>
     </div>
   </div>
@@ -453,6 +634,37 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
 
 <!-- PAGE 3 -->
 <div class="page" id="pg3">
+  <!-- ── Style Formula Builder ── -->
+  <div class="card">
+    <div class="card-hdr"><span class="cdot teal"></span><span class="card-title">🎛️ Style Formula Builder <span class="badge ai">HookGenius</span></span></div>
+    <div class="cb">
+      <p class="hint" style="margin-bottom:8px">Обери жанровий пресет → отримай готову style-формулу. Клік — застосовує до style-prompt у генерації.</p>
+      <div class="formula-grid" id="formula-grid"></div>
+      <div style="font-size:10px;color:var(--t2);margin-bottom:3px">✦ Style-prompt формула:</div>
+      <div class="formula-preview" id="formula-preview">— оберіть пресет вище —</div>
+      <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+        <button class="btn sm teal" onclick="applyStyleFormula()">↓ Використати в генерації</button>
+        <button class="btn sm" onclick="clearStyleFormula()">✕ Очистити</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Negative Prompting ── -->
+  <div class="card">
+    <div class="card-hdr"><span class="cdot" style="background:var(--red)"></span><span class="card-title">🚫 Negative Prompting <span style="font-size:9px;color:var(--t2);font-weight:400;text-transform:none">— виключити небажані елементи</span></span></div>
+    <div class="cb">
+      <p class="hint" style="margin-bottom:8px">Натисни щоб виключити. Додається в кінець style-prompt. ⚠️ Не більше 3-4 тегів одночасно.</p>
+      <div style="font-size:10px;color:var(--t2);margin-bottom:4px;font-weight:600">🎤 Вокал</div>
+      <div class="neg-cloud" id="neg-vocal"></div>
+      <div style="font-size:10px;color:var(--t2);margin-top:6px;margin-bottom:4px;font-weight:600">🎸 Інструменти</div>
+      <div class="neg-cloud" id="neg-instr"></div>
+      <div style="font-size:10px;color:var(--t2);margin-top:6px;margin-bottom:4px;font-weight:600">🎛️ Продакшн / Стиль</div>
+      <div class="neg-cloud" id="neg-prod"></div>
+      <div style="font-size:10px;color:var(--t2);margin-top:6px;margin-bottom:4px">✦ Зібрані negative теги:</div>
+      <div class="neg-input" id="neg-preview" style="min-height:24px;color:var(--red)">— нічого не вибрано —</div>
+      <button class="btn sm" style="margin-top:5px;color:var(--red);border-color:rgba(239,68,68,.3)" onclick="clearNegative()">✕ Скинути всі</button>
+    </div>
+  </div>
   <div class="card">
     <div class="card-hdr"><span class="cdot teal"></span><span class="card-title" data-i18n="ct.mood">🎭 Настрій</span></div>
     <div class="cb"><div class="tag-cloud" id="mood-cloud"></div></div>
@@ -694,45 +906,90 @@ const TAGS={
     {t:'nyckelharpa',i:'🎻',tip:'✅ Шведський народний — для Nordic Folk, Ambient'},
   ],
   prod:[
-    {t:'analog',i:'📼',tip:'✅ Рекомендовано — додає теплоти і характеру'},
+    {t:'analog',i:'📼',tip:'✅ Рекомендовано — додає теплоти і характеру',section:'🎛 Mix & Texture'},
     {t:'lo-fi',i:'🌫',tip:'✅ Для Lo-Fi, Chillhop, Bedroom Pop'},
     {t:'layered',i:'📚',tip:'✅ Багатошаровий — для повноти у Chorus'},
-    {t:'sidechain',i:'🔄',tip:'✅ Пульсуючий ефект — характерний для House і EDM'},
-    {t:'wide stereo',i:'↔️',tip:'✅ Розширює простір — для Chorus і Drop'},
-    {t:'minimal',i:'◻️',tip:'✅ Для Verse і Intro — контраст з Chorus'},
-    {t:'reverb heavy',i:'🌊',tip:'⚠️ Може розмити транзієнти у швидких треках'},
-    {t:'distorted',i:'🎸',tip:'⚠️ Тільки для Rock, Metal, Industrial'},
     {t:'warm mix',i:'🔆',tip:'✅ Рекомендовано для більшості стилів'},
-    {t:'punchy',i:'👊',tip:'✅ Для Drop і Chorus — чіткий удар'},
-    {t:'cinematic',i:'🎬',tip:'✅ Оркестровий масштаб — для Finale і Bridge'},
-    {t:'vintage',i:'📻',tip:'✅ Для City Pop, Soul, Lo-Fi — ретро атмосфера'},
     {t:'crisp',i:'💎',tip:'✅ Чіткий і деталізований — для Pop, EDM'},
-    {t:'atmospheric',i:'🌌',tip:'✅ Об\'ємний простір — для Ambient і Deep House'},
-    {t:'progressive build',i:'📈',tip:'✅ Поступова структура — для Trance і Progressive'},
-    {t:'trap production',i:'🎤',tip:'✅ Характерний для Trap — 808, triplet hi-hats'},
-    {t:'orchestral',i:'🎼',tip:'✅ Для Neo-Classical, Cinematic, Finale'},
-    {t:'compressed',i:'🔲',tip:'⚠️ Надмірна компресія вбиває динаміку'},
-    {t:'dry vocal',i:'🎤',tip:'✅ Чистий вокал без обробки — для Verse'},
-    {t:'tape saturation',i:'📼',tip:'✅ Аналогова теплота — для Lo-Fi, Vintage'},
-    {t:'frequency modulation',i:'📡',tip:'⚠️ FM синтез — для Electronic, Chiptune, Techno'},
-    {t:'glitch processing',i:'💾',tip:'✅ Цифрові артефакти — для Glitch, IDM, Dark Electronic'},
-    {t:'spatial audio',i:'🔊',tip:'✅ 3D звук — для Cinematic, Ambient, Immersive'},
-    {t:'lo-fi drums',i:'🥁',tip:'✅ Бита з характером — для Lo-Fi Hip-Hop, Chillhop'},
-    {t:'parallel compression',i:'🔲',tip:'✅ Потужність без втрати динаміки — для Drop і Chorus'},
-    {t:'vinyl mastering',i:'💿',tip:'✅ Теплий мастеринг — для Lo-Fi, Jazz, Soul'},
-    {t:'hard clipping',i:'📢',tip:'⚠️ Агресивне обрізання — тільки для Metal, Industrial'},
-    {t:'spectral layering',i:'🌈',tip:'✅ Частотні шари — для Cinematic, Ambient, Cosmic'},
-    {t:'harmonic saturation',i:'🔆',tip:'✅ Гармонійне насичення — для Warm Electronic, Soul'},
-    {t:'stereo widening',i:'↔️',tip:'✅ Розширення стерео — для Chorus, Drop'},
-    {t:'granular synthesis',i:'🌊',tip:'✅ Зернистий синтез — для Ambient, Experimental, Cosmic'},
-    {t:'convolution reverb',i:'🏛',tip:'✅ Просторовий реверб — для Cinematic, Orchestral'},
-    {t:'transient shaping',i:'💎',tip:'✅ Форма транзієнтів — для Punchy Drop і Groove'},
-    {t:'bus compression',i:'🔲',tip:'✅ Шинна компресія — для Glue і Cohesion'},
-    {t:'sub-harmonic boost',i:'🔉',tip:'✅ Підсилення суббасів — для Cosmic, Deep House'},
+    {t:'minimal',i:'◻️',tip:'✅ Для Verse і Intro — контраст з Chorus'},
+    {t:'vintage',i:'📻',tip:'✅ Для City Pop, Soul, Lo-Fi — ретро атмосфера'},
     {t:'organic texture',i:'🌿',tip:'✅ Органічна текстура — для Ethno, Folk, World'},
-    {t:'cosmic production',i:'🌌',tip:'✅ Для Infinite Embrace, Space Electronic, Cinematic'},
+    {t:'dry',i:'🎤',tip:"✅ Без обробки — для Verse, Rap, Confessional"},
+    {t:'wall of sound',i:'🔊',tip:'✅ Щільний звуковий масив — для Rock, Shoegaze'},
+    {t:'sidechain',i:'🔄',tip:'✅ Пульсуючий ефект — характерний для House і EDM',section:'⚡ Dynamics'},
     {t:'breathing sidechain',i:'🫁',tip:'✅ Дихаючий сайдчейн — для Zifferblatt, Trip-hop House'},
+    {t:'punchy',i:'👊',tip:'✅ Для Drop і Chorus — чіткий удар'},
+    {t:'compressed',i:'🔲',tip:'⚠️ Надмірна компресія вбиває динаміку'},
+    {t:'parallel compression',i:'🔲',tip:'✅ Потужність без втрати динаміки — для Drop і Chorus'},
+    {t:'bus compression',i:'🔲',tip:'✅ Шинна компресія — для Glue і Cohesion'},
+    {t:'transient shaping',i:'💎',tip:'✅ Форма транзієнтів — для Punchy Drop і Groove'},
+    {t:'hard clipping',i:'📢',tip:'⚠️ Агресивне обрізання — тільки для Metal, Industrial'},
+    {t:'sustained tension',i:'😤',tip:'✅ Тривала напруга — для Thriller, Dark Electronic'},
+    {t:'reverb heavy',i:'🌊',tip:'⚠️ Може розмити транзієнти у швидких треках',section:'🌌 Space & Reverb'},
+    {t:'convolution reverb',i:'🏛',tip:'✅ Просторовий реверб — для Cinematic, Orchestral'},
+    {t:'spatial audio',i:'🔊',tip:'✅ 3D звук — для Cinematic, Ambient, Immersive'},
+    {t:'wide stereo',i:'↔️',tip:'✅ Розширює простір — для Chorus і Drop'},
+    {t:'stereo widening',i:'↔️',tip:'✅ Розширення стерео — для Chorus, Drop'},
+    {t:'atmospheric',i:'🌌',tip:"✅ Об'ємний простір — для Ambient і Deep House"},
+    {t:'dark chord progression',i:'🖤',tip:'✅ Мінорна прогресія — для Dark House, Trip-hop'},
+    {t:'minor scale descent',i:'⬇️',tip:'✅ Мінорний спуск — для Tension і Drama'},
+    {t:'cinematic',i:'🎬',tip:'✅ Оркестровий масштаб — для Finale і Bridge',section:'🎬 Production Style'},
+    {t:'orchestral',i:'🎼',tip:'✅ Для Neo-Classical, Cinematic, Finale'},
+    {t:'trap production',i:'🎤',tip:'✅ Характерний для Trap — 808, triplet hi-hats'},
+    {t:'progressive build',i:'📈',tip:'✅ Поступова структура — для Trance і Progressive'},
     {t:'motorik groove',i:'🔁',tip:'✅ Motorik ритм — для Krautrock, Minimal Techno'},
+    {t:'jazz improvisation',i:'🎷',tip:'✅ Джазова імпровізація — для Jazz, Nu-Jazz'},
+    {t:'classical arrangement',i:'🎼',tip:'✅ Класичне аранжування — для Cinematic, Chamber'},
+    {t:'rock anthem',i:'🤘',tip:'✅ Рок-антем — для Rock Chorus, Power Chorus'},
+    {t:'cosmic production',i:'🌌',tip:'✅ Для Infinite Embrace, Space Electronic, Cinematic'},
+    {t:'acoustic fingerpicking',i:'🎸',tip:'✅ Перебір на акустиці — для Folk, Indie, Confessional'},
+    {t:'bluegrass banjo',i:'🪕',tip:'✅ Банджо — для Bluegrass, Country, Folk'},
+    {t:'tape saturation',i:'📼',tip:'✅ Аналогова теплота — для Lo-Fi, Vintage',section:'📼 Tape & Analog'},
+    {t:'vinyl mastering',i:'💿',tip:'✅ Теплий мастеринг — для Lo-Fi, Jazz, Soul'},
+    {t:'harmonic saturation',i:'🔆',tip:'✅ Гармонійне насичення — для Warm Electronic, Soul'},
+    {t:'dark synth',i:'🖤',tip:'✅ Темний синтезатор — для Darkwave, Industrial, Dark Electronic',section:'🎛 Electronic'},
+    {t:'frequency modulation',i:'📡',tip:'⚠️ FM синтез — для Electronic, Chiptune, Techno'},
+    {t:'granular synthesis',i:'🌊',tip:'✅ Зернистий синтез — для Ambient, Experimental, Cosmic'},
+    {t:'spectral layering',i:'🌈',tip:'✅ Частотні шари — для Cinematic, Ambient, Cosmic'},
+    {t:'sub-harmonic boost',i:'🔉',tip:'✅ Підсилення суббасів — для Cosmic, Deep House'},
+    {t:'glitch processing',i:'💾',tip:'✅ Цифрові артефакти — для Glitch, IDM, Dark Electronic'},
+    {t:'glitch breakdown',i:'💾',tip:'✅ Глітч-брейкдаун — для IDM, Glitch, Experimental'},
+    {t:'industrial noise',i:'⚙️',tip:'⚠️ Промисловий шум — для Industrial, Dark Metal'},
+    {t:'mechanical rhythms',i:'🔩',tip:'✅ Механічні ритми — для Krautrock, Industrial, Berlin'},
+    {t:'distorted samples',i:'🎸',tip:'⚠️ Спотворені семпли — для Industrial, Noise, Metal'},
+    {t:'ambient pad',i:'🌫',tip:'✅ Ambient подушка — для Deep House, Synthwave, Chill'},
+    {t:'synth solo',i:'🎛',tip:'✅ Синт-соло — для Synthwave, Progressive, Electronic'},
+    {t:'lo-fi drums',i:'🥁',tip:'✅ Бита з характером — для Lo-Fi Hip-Hop, Chillhop',section:'🥁 Rhythm'},
+    {t:'electronic beats',i:'🎛',tip:'✅ Електронні біти — для EDM, House, Pop'},
+    {t:'drum solo',i:'🥁',tip:'✅ Сольна партія барабанів — для Rock, Jazz, Funk'},
+    {t:'percussion break',i:'🪘',tip:'✅ Перкусійна пауза — для Afrobeat, Latin, World'},
+    {t:'heavy drums',i:'💪',tip:'⚠️ Важкі барабани — для Metal, Rock, Doom'},
+    {t:'heart-pounding rhythm',i:'❤️',tip:'✅ Серцебиття ритму — для Thriller, Tension Build'},
+    {t:'bass line',i:'🎸',tip:'✅ Басова лінія — ключовий елемент будь-якого жанру',section:'🔉 Bass'},
+    {t:'distorted bass',i:'⚡',tip:'⚠️ Спотворений бас — для Metal, Industrial, Doom'},
+    {t:'heavy bass drop',i:'💥',tip:'✅ Важкий бас-дроп — для EDM, Bass House, Trap'},
+    {t:'crushing low end',i:'🔊',tip:'✅ Давлячий низький — для Metal, Doom, Dark Bass'},
+    {t:'sub pulse',i:'💙',tip:'✅ Sub-пульс — для Intro і Half-Time Drop'},
+    {t:'dark ambient',i:'🖤',tip:'✅ Темний ембієнт — для Drone, Dark Electronic, Horror',section:'🌑 Atmosphere'},
+    {t:'ominous drone',i:'🔮',tip:'⚠️ Зловісний дрон — для Horror Soundtrack, Dark Ambient'},
+    {t:'haunting melody',i:'👻',tip:'✅ Переслідуюча мелодія — для Gothic, Dark Pop, Cinematic'},
+    {t:'sinister undertones',i:'😈',tip:'⚠️ Зловісні підтони — для Thriller, Dark Electronic'},
+    {t:'brooding atmosphere',i:'🌑',tip:'✅ Похмура атмосфера — для Trip-hop, Dark Indie'},
+    {t:'menacing build',i:'😤',tip:'✅ Загрозлива наростання — для Metal, Horror, Thriller'},
+    {t:'eerie silence',i:'🔇',tip:'✅ Моторошна тиша — для Horror, Psychological Thriller'},
+    {t:'foreboding',i:'⚡',tip:'✅ Передчуття — для Dark Ambient, Cinematic Horror'},
+    {t:'piercing highs',i:'🔔',tip:'⚠️ Різкі верхи — для Metal, Industrial, Harsh Noise',section:'🎨 Sound Design'},
+    {t:'feedback squeal',i:'🎸',tip:"⚠️ Скрегіт зворотного зв'язку — для Rock, Metal, Noise"},
+    {t:'distorted',i:'🎸',tip:'⚠️ Спотворення — тільки для Rock, Metal, Industrial'},
+    {t:'reversed guitar',i:'⏪',tip:'✅ Реверсна гітара — для Psychedelic, Dream Pop, Shoegaze'},
+    {t:'dissonant strings',i:'🎻',tip:'⚠️ Дисонуючі струнні — для Horror, Thriller, Experimental'},
+    {t:'white noise burst',i:'💨',tip:'✅ Вибух білого шуму — для Transition, Drop Build'},
+    {t:'reverse cymbal',i:'🥁',tip:'✅ Реверс тарілки — для Pre-Chorus, Build, Transition'},
+    {t:'string section',i:'🎻',tip:'✅ Струнна секція — для Cinematic, Orchestral, Finale',section:'🎼 Ensemble'},
+    {t:'brass section',i:'🎺',tip:'✅ Духова секція — для Jazz, Funk, Afrobeat, Cinematic'},
+    {t:'woodwind section',i:'🪈',tip:"✅ Дерев'яні духові — для Classical, Cinematic, Folk"},
+    {t:'full orchestra',i:'🎼',tip:'✅ Повний оркестр — для Cinematic Finale, Epic Soundtrack'},
+    {t:'chamber ensemble',i:'🎻',tip:'✅ Камерний ансамбль — для Neo-Classical, Intimate'},
   ],
   vocal:[
     {t:'raspy',i:'🔥',tip:'✅ Характерний голос — для House, Rock, Soul'},
@@ -821,7 +1078,14 @@ const SEL={mood:new Set(),instr:new Set(),prod:new Set(),vocal:new Set(),sfx:new
 
 function buildCloud(cat,elId,isGold){
   const el=document.getElementById(elId); el.innerHTML='';
-  TAGS[cat].forEach(({t,i,tip})=>{
+  let lastSection='';
+  TAGS[cat].forEach(({t,i,tip,section})=>{
+    if(section&&section!==lastSection){
+      lastSection=section;
+      const h=document.createElement('div');
+      h.className='tag-section-title';h.textContent=section;
+      el.appendChild(h);
+    }
     const p=document.createElement('span');
     p.className='pill'+(isGold?' gold':'');
     p.dataset.tip=tip;
@@ -855,7 +1119,15 @@ const SUBS={
   Metal:['Heavy Metal','Melodic Metal','Metalcore','Death Metal','Black Metal','Doom Metal','Thrash Metal','Progressive Metal','Power Metal','Symphonic Metal'],
   Phonk:['Phonk','Drift Phonk','Dark Phonk','Rare Phonk','Brazilian Phonk','Hard Phonk'],
   'City Pop, J-Pop':['City Pop','J-Pop','J-Rock','Shibuya-Kei','Kayōkyoku','Idol','Visual Kei','Anime','K-Pop','K-R&B'],
-  'zifferblatt-fr-1':['French Touch','Filtered Disco House','Warm Funk House','Vocal Filter House'],
+  'Future Bass':['Melodic Future Bass','Emotional Future Bass','Chill Future Bass','Aggressive Future Bass','Kawaii Future Bass'],
+  'Dubstep':['Brostep','Melodic Dubstep','Riddim','Chillstep','Deep Dubstep','Experimental Dubstep'],
+  'Drum and Bass':['Liquid DnB','Neurofunk','Jump Up','Jungle','Atmospheric DnB','Minimal DnB','Halftime DnB'],
+  'Liquid Drum and Bass':['Liquid Soul DnB','Atmospheric Liquid','Jazz-influenced Liquid','Vocal Liquid DnB'],
+  'Trance':['Uplifting Trance','Progressive Trance','Psytrance','Vocal Trance','Tech Trance','Dark Trance','Goa Trance'],
+  'Hardstyle':['Raw Hardstyle','Euphoric Hardstyle','Reverse Bass Hardstyle','Old School Hardstyle'],
+  'Big Room House':['Dutch House','Electro House Big Room','Progressive Big Room'],
+  'Tech House':['Dark Tech House','Funky Tech House','Minimal Tech House','Club Tech House'],
+  'Minimal Techno':['Berlin Minimal','Detroit Techno Minimal','Hypnotic Minimal','Industrial Minimal'],
   'zifferblatt-fr-2':['Nu-Disco Deep House','Groove Deep House','Vintage Keys House','Floating Harmony House'],
   'zifferblatt-fr-3':['Deep Trip-hop House','Cinematic Lo-Fi House','Slow Wave Deep House','Atmospheric House'],
   'zifferblatt-es-1':['Trip-hop House','Flamenco Trip-hop','Latin Deep House','Cajon House'],
@@ -917,7 +1189,7 @@ function onVocalType(){
 }
 
 // BASS INTELLIGENCE
-const BASS_DOM=['house','Vocal House','Deep House','Bass House','Slap House','EDM','Trap','Hip-Hop','Funk','Reggaeton','Phonk','zifferblatt-fr','zifferblatt-es','zifferblatt-de-1','zifferblatt-de-2','zifferblatt-it'];
+const BASS_DOM=['house','Vocal House','Deep House','Bass House','Slap House','EDM','Trap','Hip-Hop','Funk','Reggaeton','Phonk','Future Bass','Dubstep','Drum and Bass','Drum & Bass','Hardstyle','Big Room','Trance','Tech House','zifferblatt-fr','zifferblatt-es','zifferblatt-de-1','zifferblatt-de-2','zifferblatt-it'];
 const BASS_MOD=['R&B','Soul','Indie','Pop','Jazz','City Pop','Rock','New Wave','Chill','Lo-Fi'];
 const BASS_MIN=['female, confessional','male, confessional','Ambient','Electro-Orchestral','Ethno','Folk','Metal'];
 
@@ -1060,7 +1332,94 @@ function buildBassPrompt(){
 }
 
 // DnD
-const ALL_PARTS=['Intro','Instrumental Transition 1','Instrumental Transition 2','Instrumental Transition 3','Hook 1','Hook 2','Hook 3','Build-up 1','Build-up 2','Build-up 3','Drop 1','Drop 2','Drop 3','Drop 4','Drop 5','Instrumental Drop','Vocal Drop','Bass Drop','Half-Time Drop','Verse 1','Verse 2','Verse 3','Pre-Chorus 1','Pre-Chorus 2','Pre-Chorus 3','Chorus 1','Chorus 2','Chorus Finale','Break','Bridge','Post-Chorus','Outro Part 1','Outro Part 2','Guitar Solo','Solo Section','Rap Verse','Spoken Interlude','Ad-Lib Section'];
+// ── ALL PARTS: label → Udio official description ──
+const ALL_PARTS_DESC={
+  // ── Core Structure (Udio official) ──
+  'Intro':'[Intro] — Opening section that sets the tone of the song. Usually no vocals, builds atmosphere.',
+  'Verse 1':'[Verse] — Main narrative section. Tells the story. Typically sparse and intimate.',
+  'Verse 2':'[Verse] — Second verse. Builds on V1 with more intensity and deeper narrative.',
+  'Verse 3':'[Verse] — Third verse. Maximum verse energy before finale.',
+  'Pre-Chorus 1':'[Pre-chorus] — Builds tension before the chorus. Energy rises, anticipation mounts.',
+  'Pre-Chorus 2':'[Pre-chorus] — Second pre-chorus. More intense than first, deeper build.',
+  'Pre-Chorus 3':'[Pre-chorus] — Final pre-chorus. Peak pre-chorus intensity leading to finale.',
+  'Chorus 1':'[Chorus] — Repetitive, catchy section with the song\u2019s hook. Full energy, anthemic.',
+  'Chorus 2':'[Chorus] — Second chorus. Wider, more euphoric than first.',
+  'Chorus Finale':'[Chorus] — Final climactic chorus. All elements maximum. The peak of the song.',
+  'Bridge':'[Bridge] — Contrasting section connecting two main parts. Emotional breakdown, stripped.',
+  'Outro Part 1':'[Outro] — Closing section begins. Elements start fading. Reflective mood.',
+  'Outro Part 2':'[Outro] — Final closing. Single elements remain. Fade to silence.',
+  'Hook 1':'[Hook] — Catchy phrase or riff designed to grab attention. Short, minimal, teaser.',
+  'Hook 2':'[Hook] — Second hook. Slightly more developed than Hook 1.',
+  'Hook 3':'[Hook] — Third hook. Most developed, leads into finale.',
+  'Refrain':'[Refrain] — Repeated lyrical phrase or musical idea. Simpler than chorus.',
+  'Post-Chorus':'[Post-chorus] — Follows and extends the chorus. Sustains energy, add-lib zone.',
+  'Pre-Hook 1':'[Pre-hook] — Section that leads into the hook. Brief build.',
+  'Pre-Hook 2':'[Pre-hook] — Second pre-hook. More intense than first.',
+  'Pre-Drop 1':'[Pre-drop] — Build-up section before the drop in EDM. Maximum tension.',
+  'Pre-Drop 2':'[Pre-drop] — Second pre-drop. Even more intense, snare roll, riser.',
+  'Pre-Refrain':'[Pre-refrain] — Section leading into the refrain. Brief anticipation.',
+  'Drop 1':'[Drop] — Moment of musical climax. Bass hits, kick returns. 4 bars.',
+  'Drop 2':'[Drop] — Second drop. Wider and more euphoric than Drop 1.',
+  'Drop 3':'[Drop] — Third drop. Often half-time feel for contrast and breathing space.',
+  'Drop 4':'[Drop] — Fourth drop. Peak of the entire song. Maximum bass and energy.',
+  'Drop 5':'[Drop] — Final drop. All elements. Grand finale energy.',
+  'Instrumental Drop':'[Drop] — Drop without vocals. Pure instrumental climax. Synth lead soars.',
+  'Vocal Drop':'[Drop] — Drop featuring vocal chops as primary element.',
+  'Bass Drop':'[Drop] — Drop focused entirely on sub-bass. Chest-rattling maximum.',
+  'Half-Time Drop':'[Drop] — Half-time feel drop. Kick removed, sub heartbeat only. Suspension.',
+  'Build-up 1':'[Build] — Gradual increase in intensity. Hi-hat accelerates, riser rises.',
+  'Build-up 2':'[Build] — Second build-up. More intense than first.',
+  'Build-up 3':'[Build] — Third build-up. Maximum tension before finale drop.',
+  'Break':'[Break] — Brief pause or change in rhythm/melody. Complete tension release.',
+  'Breakdown':'[Breakdown] — Stripped-down section contrasting fuller sections. Minimal elements.',
+  'Interlude':'[Interlude] — Instrumental passage between sections. Transition and reflection.',
+  'Instrumental Transition 1':'[Instrumental] — Instrumental transition connecting sections. Riser, filter, bass.',
+  'Instrumental Transition 2':'[Instrumental] — Second instrumental transition. More developed.',
+  'Instrumental Transition 3':'[Instrumental] — Third instrumental transition. Leading to finale.',
+  'Instrumental Break':'[Instrumental Break] — Section without vocals showcasing instruments. Solo feature.',
+  'Instrumental':'[Instrumental] — Full section of music without any vocals.',
+  'Solo Section':'[Solo] — Section featuring a single instrument or voice. Expressive and dynamic.',
+  'Guitar Solo':'[Solo] — Electric guitar lead spotlight. Band drops to minimal underneath.',
+  'Ensemble Section':'[Ensemble] — Section featuring multiple instruments or voices together.',
+  'Choir Section':'[Choir] — Section featuring a group of singers. Powerful and uplifting.',
+  'Sample Section':'[Sample] — Use of a portion of another sound recording or motif.',
+  'Spoken Interlude':'[Spoken Word] — Poetic or prose section spoken rather than sung. No pitch.',
+  'Announcer':'[Announcer] — Spoken introduction or commentary, often in live recordings.',
+  'All':'[All] — Indicates all instruments or voices playing together. Full ensemble.',
+  'Ad-Lib Section':'[Ensemble] / ad-libs — Vocal ad-libs over continuing groove. Call-and-response.',
+  'Rap Verse':'[Verse] — Rap delivery. Tight rhythmic flow, dry vocal, minimal melodic elements.',
+  'Post-Hook 1':'[Post-hook] — Section that follows and extends the hook.',
+  'Post-Hook 2':'[Post-hook] — Second post-hook. More developed than first.',
+  'Fade Out':'[Outro] — Gradual fade to silence. Final elements disappear one by one.',
+  // ── Vocal Delivery Metatags (inline, place before/within lyrics lines) ──
+  '[Whispered]':'Vocal delivery: whispered, intimate, almost silent. Best for verse intros and bridge moments.',
+  '[Spoken]':'Vocal delivery: spoken word, no pitch. Conversational, narrative, no singing.',
+  '[Belted]':'Vocal delivery: full-power belting, chest voice maximum. For chorus and finale peaks.',
+  '[Falsetto]':'Vocal delivery: falsetto head voice. Ethereal upper register. For emotional peaks.',
+  '[Soft]':'Vocal delivery: gentle, quiet, subdued. Good for verse and intro.',
+  '[Powerful]':'Vocal delivery: intense, commanding, full projection.',
+  '[Breathy]':'Vocal delivery: airy, intimate, bedroom-whisper quality.',
+  '[Raspy]':'Vocal delivery: rough, textured, gritty vocal character.',
+  '[Harmonies]':'Vocal delivery: layered harmony vocals. Stacked voices.',
+  '[Ad-libs]':'Vocal delivery: improvisational background vocal phrases.',
+  '[Choir]':'Vocal delivery: full choir or group singing together.',
+  '[Rapped]':'Vocal delivery: rap flow, rhythmic lyrical delivery.',
+  '[Fast Rap]':'Vocal delivery: high-speed rap delivery, double-time.',
+  '[Slow Flow]':'Vocal delivery: deliberate slow rap pacing.',
+  '[Melodic Rap]':'Vocal delivery: melodic singing-rap hybrid.',
+  '[Double Time]':'Vocal delivery: double-speed lyrical delivery.',
+  '[Growled]':'Vocal delivery: low, growling, aggressive edge.',
+  '[Operatic]':'Vocal delivery: operatic wide vibrato and projection.',
+  '[Chant]':'Vocal delivery: repeated chanting, ritualistic feel.',
+  '[Staccato]':'Vocal delivery: short, clipped, detached notes.',
+  '[Legato]':'Vocal delivery: smooth, flowing, connected phrasing.',
+  '[Vibrato]':'Vocal delivery: controlled vibrato on held notes.',
+  '[Head Voice]':'Vocal delivery: light upper register, airy head placement.',
+  '[Chest Voice]':'Vocal delivery: full resonant lower register.',
+  '[Soulful]':'Vocal delivery: deep R&B soul expression with runs.',
+  '[Call and Response]':'Vocal delivery: alternating call-and-response between voices.',
+};
+const ALL_PARTS=Object.keys(ALL_PARTS_DESC);
 const BASE=['Intro','Instrumental Transition 1','Hook 1','Drop 1','Verse 1','Pre-Chorus 1','Instrumental Transition 2','Drop 2','Chorus 1','Instrumental Transition 3','Hook 2','Verse 2','Pre-Chorus 2','Drop 3','Chorus 2','Bridge','Pre-Chorus 3','Drop 4','Chorus Finale','Outro Part 1','Outro Part 2'];
 let STRUCT=[...BASE],STAGS={},dragIdx=null;
 
@@ -1345,7 +1704,8 @@ function dndRender(){
   STRUCT.forEach((part,i)=>{
     const tag=STAGS[part]||autoTag(part);STAGS[part]=tag;
     const d=document.createElement('div');d.className='dnd-item';d.draggable=true;
-    d.innerHTML=`<div class="dnd-head"><span class="dnd-grip">⠿</span><span class="dnd-name">${part}</span><span class="dnd-prev">[${tag.slice(0,40)}${tag.length>40?'…':''}]</span><div class="dnd-btns"><button class="dnd-btn" onclick="dndToggle(${i})">✏️</button><button class="dnd-btn del" onclick="dndRm(${i})">✕</button></div></div><div class="dnd-body" id="db-${i}"><label style="font-size:10px;color:var(--t2);display:block;margin-bottom:3px">Тег-промпт:</label><textarea class="dnd-ta" id="dt-${i}" onchange="saveTag(${i})">${tag}</textarea><div class="dnd-ps" id="dp-${i}"></div></div>`;
+    const descHint=ALL_PARTS_DESC[part]?`<div style="font-size:10px;color:var(--teal);margin-bottom:4px;line-height:1.4;font-family:var(--mono)">${ALL_PARTS_DESC[part]}</div>`:'';
+    d.innerHTML=`<div class="dnd-head"><span class="dnd-grip">⠿</span><span class="dnd-name">${part}</span><span class="dnd-prev">[${tag.slice(0,40)}${tag.length>40?'…':''}]</span><div class="dnd-btns"><button class="dnd-btn" onclick="dndToggle(${i})">✏️</button><button class="dnd-btn del" onclick="dndRm(${i})">✕</button></div></div><div class="dnd-body" id="db-${i}">${descHint}<label style="font-size:10px;color:var(--t2);display:block;margin-bottom:3px">Тег-промпт:</label><textarea class="dnd-ta" id="dt-${i}" onchange="saveTag(${i})">${tag}</textarea><div class="dnd-ps" id="dp-${i}"></div></div>`;
     d.addEventListener('dragstart',()=>{dragIdx=i;setTimeout(()=>d.classList.add('dragging'),0)});
     d.addEventListener('dragend',()=>{d.classList.remove('dragging');document.querySelectorAll('.dnd-item').forEach(x=>x.classList.remove('over'))});
     d.addEventListener('dragover',e=>{e.preventDefault();document.querySelectorAll('.dnd-item').forEach(x=>x.classList.remove('over'));d.classList.add('over')});
@@ -1386,12 +1746,14 @@ async function dndAIStructure(){
   if(!getApiKey()){showToast(getLang()==='uk'?'Введіть API ключ':'Enter API key');return}
   showToast(getLang()==='uk'?'AI генерує структуру…':'AI generating structure…');
   try{
-    const raw=await callAI(`Expert Suno prompt engineer. Genre:"${genre}",${bpm}. Concept:"${concept}". Mood:${mood}.
+    const raw=await callAI(TIER_RULES+`Expert Suno prompt engineer. Genre:"${genre}",${bpm}. Concept:"${concept}". Mood:${mood}.
 Generate optimal song structure AND concise tag-prompts for each section.
 Respond ONLY as JSON:
 {"structure":["Section Name 1","Section Name 2",...],"tags":{"Section Name 1":"tag1,tag2|tag3","Section Name 2":"tag1,tag2",...}}
 Use these section names: Intro, Hook 1-3, Drop 1-5, Build-up 1-3, Verse 1-3, Pre-Chorus 1-3, Chorus 1-2, Chorus Finale, Bridge, Break, Instrumental Transition 1-4, Outro Part 1-2, Post-Chorus, Guitar Solo, Rap Verse, Spoken Interlude.
-Tag-prompts: comma and pipe separated, concise, max 80 chars per section. Match genre and concept.`,800);
+Tag-prompts rules: comma and pipe separated, concise, max 80 chars per section. Match genre and concept.
+CRITICAL: NO placebo tags like [Reverb:XX%] [Bass:XX%] — use descriptive words instead.
+Instrument names must be specific (not "guitar" → "jangly Telecaster", not "piano" → "Rhodes electric").`,800);
     const data=JSON.parse(raw.replace(/```json|```/g,'').trim());
     if(data.structure?.length){
       STRUCT=[...data.structure];
@@ -1404,7 +1766,31 @@ Tag-prompts: comma and pipe separated, concise, max 80 chars per section. Match 
   }catch(e){showToast('Error: '+e.message)}
 }
 
-function initDndSel(){const s=document.getElementById('dnd-sel');s.innerHTML='';ALL_PARTS.forEach(p=>{const o=document.createElement('option');o.value=o.textContent=p;s.appendChild(o)})}
+function initDndSel(){
+  const s=document.getElementById('dnd-sel');s.innerHTML='';
+  const groups={
+    '── Основні секції ──':['Intro','Verse 1','Verse 2','Verse 3','Pre-Chorus 1','Pre-Chorus 2','Pre-Chorus 3','Chorus 1','Chorus 2','Chorus Finale','Bridge','Outro Part 1','Outro Part 2'],
+    '── Hook / Refrain ──':['Hook 1','Hook 2','Hook 3','Refrain','Post-Chorus','Pre-Hook 1','Pre-Hook 2','Post-Hook 1','Post-Hook 2','Pre-Refrain'],
+    '── Drop / Build ──':['Drop 1','Drop 2','Drop 3','Drop 4','Drop 5','Instrumental Drop','Vocal Drop','Bass Drop','Half-Time Drop','Pre-Drop 1','Pre-Drop 2','Build-up 1','Build-up 2','Build-up 3','Break','Breakdown','Fade Out'],
+    '── Інструментальні ──':['Interlude','Instrumental Transition 1','Instrumental Transition 2','Instrumental Transition 3','Instrumental Break','Instrumental','Solo Section','Guitar Solo'],
+    '── Спеціальні ──':['Ensemble Section','Choir Section','Sample Section','Spoken Interlude','Announcer','All','Ad-Lib Section','Rap Verse'],
+    '── 🎤 Vocal Delivery Tags ──':['[Whispered]','[Spoken]','[Belted]','[Falsetto]','[Soft]','[Powerful]','[Breathy]','[Raspy]','[Harmonies]','[Ad-libs]','[Choir]','[Rapped]','[Fast Rap]','[Slow Flow]','[Melodic Rap]','[Double Time]','[Growled]','[Operatic]','[Chant]','[Staccato]','[Legato]','[Vibrato]','[Head Voice]','[Chest Voice]','[Soulful]','[Call and Response]'],
+  };
+  Object.entries(groups).forEach(([grpLabel,parts])=>{
+    const og=document.createElement('optgroup');og.label=grpLabel;
+    parts.forEach(p=>{
+      const o=document.createElement('option');
+      o.value=p;
+      const desc=ALL_PARTS_DESC[p]||p;
+      // Show short desc after dash
+      const short=desc.replace(/^\[.*?\]\s*—?\s*/,'').slice(0,55);
+      o.textContent=`${p}  — ${short}`;
+      o.title=desc;
+      og.appendChild(o);
+    });
+    s.appendChild(og);
+  });
+}
 
 // VOCAL DESC
 const VD={
@@ -1484,9 +1870,9 @@ async function initStep2(){
   document.getElementById('genre-recs').classList.remove('show');
   const genre=getGenre();const bpm=getBpm();
   try{
-    const raw=await callAI(`Music production expert. Genre:"${genre}",${bpm}.
+    const raw=await callAI(TIER_RULES+`Music production expert for Suno AI. Genre:"${genre}",${bpm}.
 Respond ONLY as JSON, no markdown, keep values SHORT (max 20 words each):
-{"title":"short genre name","description":"1-2 sentences UA","tempo":"BPM+structure UA short","production":"key instruments UA short","vocal":"vocal style UA short","tips":["tip1 UA short","tip2 UA short","tip3 UA short"]}`,800);
+{"title":"short genre name","description":"1-2 sentences UA","tempo":"BPM+structure UA short","production":"key instruments UA short (specific names: Rhodes not piano, Telecaster not guitar)","vocal":"vocal style UA short (gender + triple-stack: character+delivery+effects)","tips":["tip1 UA — specific Suno tag advice","tip2 UA — specific instrument/BPM advice","tip3 UA — negative prompting tip if relevant"]}`,800);
     // Repair potentially truncated JSON
     let cleaned=raw.replace(/```json|```/g,'').trim();
     // If JSON is truncated, try to close it
@@ -1728,18 +2114,24 @@ async function initStep4(){
   const sfx=sfxSelected||(sfxByGenre[genre]||sfxByGenre.default);
   const bp=buildBassPrompt();
   const sectionTags=STRUCT.map(s=>`[${s}]\n[${STAGS[s]||autoTag(s)}]`).join('\n');
+  const negP=getNegativePrompt();
+  const styleF=window._styleFormula||'';
+  const vocalDNA=window._vocalDNA?`VOCAL DNA reference — "${window._vocalDNA.n}" style: ${window._vocalDNA.v}`:'';
+  const soundDNA=window._soundDNA?`SOUND DNA reference — "${window._soundDNA.n}" production: ${window._soundDNA.s}`:'';
 
-  const lR=`Expert Suno AI prompt engineer and lyricist.
+  const lR=TIER_RULES+`
+Expert Suno AI prompt engineer and lyricist.
 Song:"${title||'Untitled'}"|Genre:${genre},${bpm}${key?',Key:'+key:''}
 Language:${lang}|Rhyme:${rhyme}
 Concept:${concept||'romantic emotional song'}
-Vocal:${vd}
-Mood:${mood||'romantic,emotional'}
+Vocal:${vd}${vocalDNA?'\n'+vocalDNA:''}
+${soundDNA?soundDNA+'\n':''}Mood:${mood||'romantic,emotional'}
 Instruments:${instr||'piano,saxophone'}
 Production:${prod||'analog,layered'}
 Vocal characteristics:${vt}
 SFX:${sfx||'vinyl crackle,binary whoosh,digital glitch'}
 ${bp?`Bass:${bp}`:''}
+${negP?`EXCLUDE from generation (negative prompts):${negP}`:''}
 
 Structure+tags:
 ${sectionTags}
@@ -1749,28 +2141,45 @@ ${lyrics&&lyricMode!=='ai'?`USER LYRICS:\n${lyrics}`:'GENERATE original lyrics f
 RULES:
 1. Total output MUST be ≤5000 chars. Absolute limit.
 2. Format:[SECTION NAME]\n[tag-prompt]\nlyrics
-3. Tags use commas and pipes,no spaces after commas where possible
-4. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
-5. Short drop/transition/hook tags — compress aggressively
-6. If near limit: shorten tags first,never cut lyrics mid-sentence
-7. Output ONLY the formatted lyrics-prompt.`;
+3. Tags: commas and pipes, specific instruments (NOT "guitar" → "jangly Telecaster"), NO placebo tags like [Reverb:XX%]
+4. Vocal in tag-prompts: always include gender, triple-stack Character+Delivery+Effects${vocalDNA?'. Use Vocal DNA as primary reference.':''}
+5. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
+6. Short drop/transition/hook tags — compress aggressively
+7. If near limit: shorten tags first, never cut lyrics mid-sentence
+8. Output ONLY the formatted lyrics-prompt.`;
 
-  const sR=`Expert Suno style-prompt.
-Genre:${genre},${bpm}${key?',Key:'+key:''}
+  const sR=TIER_RULES+`
+Expert Suno style-prompt engineer.
+${styleF?`BASE FORMULA (use as foundation, adapt to concept):\n${styleF}\n`:''}${soundDNA?soundDNA+'\n':''}Genre:${genre},${bpm}${key?',Key:'+key:''}
 Mood:${mood||'romantic,atmospheric'}
-Vocal:${vd}
+Vocal:${vd}${vocalDNA?'\n'+vocalDNA:''}
 Instruments:${instr||'piano,saxophone,bass'}
 Production:${prod||'analog,warm,layered'}
 SFX:${sfx||'vinyl crackle,binary whoosh'}
 ${bp?`Bass:${bp}`:''}
+${negP?`NEGATIVE (add at END, after all positive tags):\n${negP}`:''}
+
+STYLE-PROMPT RULES:
+- Genre+subgenre FIRST (most weight)${soundDNA?'\n- Use Sound DNA as production foundation, adapt instruments and atmosphere':''}
+- Vocal TRIPLE-STACK: Character+Delivery+Effects${vocalDNA?'\n- Use Vocal DNA as vocal foundation':''}
+- Gender ALWAYS explicit: "female vocals" or "male vocals"
+- Specific instruments: NOT "guitar" → "jangly Telecaster"; NOT "piano" → "Rhodes electric"
+- At least 1 production tag (most underused but powerful)
+- NEVER use: [Reverb:XX%] [Bass:XX%] [Stereo:Wide] [Compression:Medium] — these are PLACEBO
+- Use instead: "reverb-drenched" / "dry close-mic" / "wide stereo image" / "compressed vocals"
+- 5-8 tags TOTAL sweet spot. Negative tags always LAST.
 
 Compact Suno style-prompt. LIMIT:≤1000 chars ABSOLUTE.
-Use pipes. Remove spaces after commas.No linebreaks in lists.
-Format: Genre+BPM line|Vocal line|BASS compact|SFX line|Production line|Mood line
+Use pipes. Remove spaces after commas. No linebreaks in lists.
+Format: [Genre+Subgenre,BPM]|[Gender+Vocal triple-stack]|[Instruments specific]|[Production]|[Mood]|[BASS compact]${negP?`|[Negative: ${negP}]`:''}
 Output ONLY the style-prompt.`;
 
-  const sgR=`Genre:${genre},Mood:${mood},Concept:${concept||'romantic song'}
-4 specific Suno improvement tips.Ukrainian.JSON:["s1","s2","s3","s4"]`;
+  const sgR=TIER_RULES+`Genre:${genre},Mood:${mood},Concept:${concept||'romantic song'}
+4 specific Suno improvement tips. Ukrainian. Practical, actionable. Include at least 1 tip about:
+- Tier 1 vocal tags that WILL work for this genre
+- Specific instrument names (not generic)
+- Negative prompting if relevant for this genre
+JSON:["tip1","tip2","tip3","tip4"]`;
 
   try{
     const[lr,sr,sgr]=await Promise.all([callAI(lR,2000),callAI(sR,600),callAI(sgR,350)]);
@@ -1803,7 +2212,7 @@ async function refine(){
   document.getElementById('gen-result').style.display='none';document.getElementById('gen-loader').classList.add('show');
   document.getElementById('gen-txt').textContent='AI покращує…';document.getElementById('gen-step').textContent='Обробка…';
   try{
-    const raw=await callAI(`Lyrics(${ol.length} chars,max 5000):\n${ol}\n\nStyle(${os.length} chars,max 1000):\n${os}\n\nRequest:"${txt}"\nApply carefully.CRITICAL:lyrics≤5000,style≤1000.\nRespond ONLY JSON:{"lyrics":"...","style":"..."}`,2500);
+    const raw=await callAI(TIER_RULES+`Lyrics(${ol.length} chars,max 5000):\n${ol}\n\nStyle(${os.length} chars,max 1000):\n${os}\n\nRequest:"${txt}"\nApply carefully. CRITICAL: lyrics≤5000, style≤1000.\nNEVER add placebo tags: [Reverb:XX%] [Bass:XX%] [Stereo:Wide] — use descriptive words.\nVocal: always gender+triple-stack. Instruments: specific names.\nRespond ONLY JSON:{"lyrics":"...","style":"..."}`,2500);
     const data=JSON.parse(raw.replace(/```json|```/g,'').trim());
     let l=data.lyrics||ol;let s=data.style||os;
     if(l.length>5000)l=l.slice(0,4997)+'…';if(s.length>1000)s=s.slice(0,997)+'…';
@@ -2244,34 +2653,659 @@ function initBassPresetPills(){
 }
 
 // ── ARTIST PILLS ──
-const ARTIST_REFS=[
-  'Massive Attack','Bonobo','Burial','Four Tet','Floating Points',
-  'Daft Punk','Air','Moderat','Nils Frahm','Ludovico Einaudi',
-  'Dakha Brakha','Thievery Corporation','Portishead','Björk',
-  'Kendrick Lamar','J. Cole','Drake','Travis Scott',
-  'Radiohead','Tame Impala','Florence + Machine','Arcade Fire',
-  'Miles Davis','John Coltrane','Chet Baker','Nina Simone',
-  'Beyoncé','Adele','Billie Eilish','The Weeknd',
-];
-function initArtistPills(){
-  const wrap=document.getElementById('artist-pills');if(!wrap)return;
-  ARTIST_REFS.forEach(name=>{
-    const p=document.createElement('span');
-    p.className='pill';p.textContent=name;p.style.fontSize='10px';p.style.padding='2px 8px';
-    p.onclick=function(){
-      const inp=document.getElementById('artist-ref');
-      if(!inp)return;
-      const cur=inp.value.trim();
-      if(cur&&!cur.includes(name))inp.value=cur?cur+', '+name:name;
-      else if(!cur)inp.value=name;
-      p.classList.toggle('on');
+
+// ══════════════════════════════════════════════════════════════════
+// ARTIST DNA SYSTEM — Vocal DNA + Sound DNA
+// ══════════════════════════════════════════════════════════════════
+
+// ── VOCAL DNA: how the artist SINGS ──
+const VOCAL_DNA = {
+  vocal:[
+    {n:'Billie Eilish',   v:'breathy whispered female, ASMR close-mic, dry studio, lo-fi filtered, intimate bedroom'},
+    {n:'Adele',           v:'powerful belted female alto, cathedral reverb, emotionally raw, wide dynamic range, soulful'},
+    {n:'Céline Dion',     v:'operatic powerful female soprano, pristine clarity, dramatic belting, hall reverb, vibrato'},
+    {n:'Jessie J',        v:'powerful belted female, runs and melisma, gospel-influenced, dynamic range, show-stopping'},
+    {n:'Halsey',          v:'breathy indie female, intimate delivery, alternating whisper and belt, slightly raspy, lo-fi edge'},
+    {n:'Charlotte Lawrence', v:'breathy intimate female, dark emotional delivery, slight rasp, dry close-mic, alt-pop'},
+    {n:'Lady Gaga',       v:'powerful dramatic female, theatrical delivery, wide range soprano to belting, polished studio'},
+    {n:'Rihanna',         v:'smooth husky female, effortlessly cool delivery, Caribbean lilt, laid-back, dry vocals'},
+    {n:'Sam Smith',       v:'soulful male falsetto, emotional vulnerability, gospel runs, powerful when belted, warm'},
+    {n:'RY X',            v:'breathy intimate male falsetto, fragile and raw, folk-inflected, close-mic, reverb-drenched'},
+    {n:'SYML',            v:'tender breathy male, intimate and fragile, falsetto-leaning, piano ballad delivery, emotional'},
+    {n:'Hozier',          v:'warm raspy male baritone, bluesy delivery, gospel-influenced, powerful chest voice, earthy'},
+    {n:'Ed Sheeran',      v:'warm conversational male tenor, storytelling delivery, looped vocals, intimate, slightly raspy'},
+    {n:'Shawn Mendes',    v:'earnest breathy male tenor, emotional delivery, pop-rock, warm, slight rasp on peaks'},
+    {n:'Zayn Malik',      v:'smooth silky male falsetto, R&B whisper-to-belt, layered harmonies, sensual delivery'},
+    {n:'Charlie Puth',    v:'clean precise male tenor, whistle register, analytical delivery, polished, studio-perfect'},
+    {n:'Khalid',          v:'smooth laid-back male, conversational R&B delivery, behind-the-beat, warm lo-fi'},
+  ],
+  soul:[
+    {n:'The Weeknd',      v:'smooth dark male falsetto, auto-tuned atmospheric, R&B whisper-belt, sensual, nocturnal'},
+    {n:'Frank Ocean',     v:'gentle breathy male, unconventional phrasing, falsetto moments, lo-fi intimate, introspective'},
+    {n:'Bruno Mars',      v:'versatile smooth male tenor, James Brown energy, funk delivery, powerful belt, old-school soul'},
+    {n:'Beyoncé',         v:'powerful female, gospel belting, runs and melisma, commanding delivery, wide dynamic range'},
+    {n:'SZA',             v:'breathy airy female, conversational R&B, vulnerable delivery, falsetto moments, raw'},
+    {n:'Alicia Keys',     v:'soulful warm female, piano-vocal delivery, powerful but controlled, smooth runs, honest'},
+  ],
+  pop:[
+    {n:'Kygo',            v:'warm breathy male guest vocalists, emotional anthemic, tropical feel, smooth, uplifting'},
+    {n:'Zedd',            v:'powerful polished female collaborators, anthemic chorus, clean studio, EDM vocal chops'},
+    {n:'Calvin Harris',   v:'smooth featured vocalists, uplifting dance delivery, catchy hooks, polished production'},
+    {n:'Alan Walker',     v:'distinctive vocoder/filtered vocals, melancholic delivery, distant ethereal, anthem-building'},
+    {n:'Imagine Dragons', v:'raspy powerful male, stadium rock delivery, building from whisper to belt, anthemic'},
+    {n:'HAEVN',           v:'ethereal layered female, choir-like harmonies, cinematic breathy delivery, wide reverb'},
+    {n:'Proximity',       v:'emotive breathy featured vocalists, future bass emotional peaks, airy and soaring'},
+  ],
+  indie:[
+    {n:'Portishead',      v:'haunting breathy female, trip-hop delivery, distant reverb, fragile and eerie, Beth Gibbons'},
+    {n:'Björk',           v:'unconventional expressive female, wide range, theatrical, Icelandic inflection, experimental'},
+    {n:'Florence + Machine', v:'powerful dramatic female, gothic delivery, wide vibrato, theatrical, reverb-cathedral'},
+    {n:'Tame Impala',     v:'dreamy falsetto male, lo-fi filtered, psychedelic haze, layered harmonies, Kevin Parker'},
+    {n:'Radiohead',       v:'fragile falsetto male, Thom Yorke phrasing, melancholic delivery, off-kilter, multi-layered'},
+    {n:'Skunk Anansie',   v:'powerful aggressive female, raw emotional delivery, rock-gospel, raspy and commanding'},
+    {n:'KOLA',            v:'intimate breathy female, atmospheric indie delivery, emotional vulnerability, reverb-drenched'},
+    {n:'LOKDWN',          v:'dark atmospheric male, electronic indie delivery, brooding, filtered, emotional'},
+    {n:'Nu Aspect',       v:'smooth electronic male, atmospheric delivery, cinematic indie, ethereal layered'},
+    {n:'VIBFY',           v:'ethereal dreamy female, indie electronic, breathy intimate, reverb-heavy, emotional'},
+  ],
+  world:[
+    {n:'Dakha Brakha',    v:'Ukrainian folk multi-voice, overtone singing, raw ethnographic, chest voice, percussive'},
+    {n:'Jamala',          v:'powerful Ukrainian female, operatic range, emotional intensity, folk-inflected, dramatic'},
+    {n:'M4S',             v:'Ukrainian electronic female, atmospheric delivery, breathy indie, modern folk fusion'},
+    {n:'The Hardkiss',    v:'Ukrainian indie rock female, powerful emotional delivery, raspy belt, atmospheric rock'},
+    {n:'Norah Jones',     v:'warm intimate female alto, jazz-pop delivery, conversational, piano-bar, understated'},
+    {n:'Nina Simone',     v:'deep powerful female contralto, jazz delivery, gospel soul, raw emotion, no vibrato'},
+  ],
+};
+
+// ── SOUND DNA: how the artist SOUNDS (production) ──
+const SOUND_DNA = {
+  electronic:[
+    {n:'Massive Attack',  bpm:98,  genre:'Trip-hop, Dark Electronic',
+     s:'trip-hop, dark cinematic, heavy sub-bass, Bristol sound, orchestral samples, menacing atmosphere, analog warmth'},
+    {n:'Bonobo',          bpm:110, genre:'Organic Electronic, Nu-Jazz',
+     s:'organic jazz-electronic, live drums, Rhodes piano, warm bass, atmospheric pads, sophisticated groove, adult contemporary'},
+    {n:'Burial',          bpm:138, genre:'UK Garage, Dark Ambient',
+     s:'UK garage, dark ambient, crackled vinyl texture, pitched vocal chops, 2-step rhythms, London night atmosphere, sub-bass'},
+    {n:'Four Tet',        bpm:120, genre:'Folktronica, Electronic',
+     s:'folktronica, organic samples, gentle IDM, warm analog, complex rhythms, intimate atmosphere, melodic fragments'},
+    {n:'Floating Points', bpm:118, genre:'Electronic, Jazz-fusion',
+     s:'electronic jazz-fusion, lush pads, complex harmony, warm analogue, live jazz elements, sophisticated dancefloor'},
+    {n:'Daft Punk',       bpm:126, genre:'French House, Disco-Funk',
+     s:'French house, filtered disco, vocoder harmonies, analog warmth, funk groove, vintage synth stabs, Nile Rodgers guitar'},
+    {n:'Air',             bpm:110, genre:'French Pop, Ambient Pop',
+     s:'French ambient pop, lush strings, analog synths, dreamy atmosphere, Rhodes piano, cinematic, understated cool'},
+    {n:'Moderat',         bpm:118, genre:'Electronic, Indie Electronic',
+     s:'Berlin electronic, melancholic synths, emotional bass, crisp drums, introspective atmosphere, dark melodic'},
+    {n:'Ben Böhmer',      bpm:124, genre:'Melodic House, Progressive',
+     s:'melodic house, emotional progression, uplifting synths, warm bass, festival-ready, organic melodic techno'},
+    {n:'Peggy Gou',       bpm:126, genre:'Tech House, Nu-Disco',
+     s:'Berlin tech house, playful nu-disco, retro synth stabs, four-on-the-floor, infectious groove, underground club'},
+    {n:'Thievery Corporation', bpm:98, genre:'Trip-hop, Global Bass',
+     s:'global trip-hop, bossa nova influenced, Middle Eastern textures, dub bass, eclectic world fusion, lounge'},
+    {n:'Portishead',      bpm:92,  genre:'Trip-hop, Dark Pop',
+     s:'dark trip-hop, cinematic string samples, vinyl crackle, scratched loops, Bristol sound, melancholic orchestral'},
+  ],
+  hiphop:[
+    {n:'Kanye West',      bpm:90,  genre:'Hip-Hop, Gospel Rap',
+     s:'maximalist hip-hop, soul samples chopped, orchestral swells, 808 bass, gospel choir, chipmunk soul, stadium scale'},
+    {n:'Kendrick Lamar',  bpm:92,  genre:'Conscious Hip-Hop, Jazz Rap',
+     s:'conscious hip-hop, West Coast jazz influence, complex layered samples, dynamic range, raw authentic, Compton grit'},
+    {n:'Drake',           bpm:88,  genre:'Rap, R&B',
+     s:'Toronto R&B rap, smooth melodic flows, 808 bass, atmospheric pads, luxury melancholy, polished mainstream'},
+    {n:'Travis Scott',    bpm:140, genre:'Trap, Psychedelic Rap',
+     s:'psychedelic trap, auto-tuned atmospherics, dark synth pads, 808 bass, warped textures, Houston aesthetic'},
+    {n:'Tyler the Creator', bpm:88, genre:'Alternative Rap, Neo-Soul',
+     s:'alternative rap, jazz-influenced, live instrumentation, eclectic samples, witty arrangements, Golf Wang aesthetic'},
+    {n:'J. Cole',         bpm:90,  genre:'Conscious Rap, Boom Bap',
+     s:'boom bap, soulful samples, live feel drums, honest lyricism, East Coast grit, organic warmth, minimal production'},
+  ],
+  edm:[
+    {n:'Kygo',            bpm:100, genre:'Tropical House, Future Pop',
+     s:'tropical house, piano hooks, organic percussion, emotional builds, uplifting drops, sun-soaked atmosphere, polished'},
+    {n:'Zedd',            bpm:128, genre:'Electro House, Future Bass',
+     s:'electro house, complex sound design, dramatic builds, anthemic drops, orchestral elements, festival-ready, polished'},
+    {n:'Tiësto',          bpm:130, genre:'Progressive House, Big Room',
+     s:'progressive house, festival anthem, massive build, euphoric drop, pounding kick, soaring synth lead, stadium scale'},
+    {n:'Calvin Harris',   bpm:128, genre:'Dance-Pop, EDM',
+     s:'dance-pop EDM, polished mainstream, four-on-the-floor, catchy hooks, radio-ready, summer anthems, clean production'},
+    {n:'Alan Walker',     bpm:120, genre:'Electronic Pop, Future Bass',
+     s:'electronic pop, iconic arpeggio lead, melancholic atmosphere, future bass elements, youth anthem, Nordic cool'},
+    {n:'Martin Garrix',   bpm:128, genre:'Progressive House, Big Room',
+     s:'progressive house, massive builds, emotional melody, arena-scale drops, animals-energy, youthful euphoria'},
+    {n:'Proximity',       bpm:150, genre:'Future Bass, Electronic',
+     s:'future bass, lush supersaw chords, emotional vocal chops, colorful euphoric drop, vibrant production, uplifting'},
+  ],
+  cinematic:[
+    {n:'Ludovico Einaudi', bpm:76, genre:'Neo-Classical, Minimalist',
+     s:'neo-classical piano, minimalist, sparse arrangement, emotional restraint, wide hall reverb, cinematic simplicity'},
+    {n:'Ólafur Arnalds',  bpm:80,  genre:'Neo-Classical, Ambient Electronic',
+     s:'neo-classical, piano and strings, subtle electronic textures, Icelandic atmosphere, emotional depth, ambient electronic'},
+    {n:'Nils Frahm',      bpm:82,  genre:'Neo-Classical, Electronic',
+     s:'prepared piano, electronic textures, intimate recording, studio ambience, organic synthesis, Berlin neo-classical'},
+    {n:'Max Richter',     bpm:72,  genre:'Post-Classical, Cinematic',
+     s:'post-classical orchestra, cinematic strings, minimalist repetition, emotional arc, Sleep-like, wide reverb, profound'},
+    {n:'Ennio Morricone',  bpm:85, genre:'Cinematic, Orchestral',
+     s:'cinematic orchestral, trumpet lead, dramatic strings, spaghetti western, choir moments, Italian film score, iconic'},
+    {n:'Georg Mickle',    bpm:88,  genre:'Cinematic Electronic, Ambient',
+     s:'cinematic electronic, ambient textures, atmospheric build, emotional soundscape, hybrid orchestral synthesis'},
+  ],
+  rock:[
+    {n:'Radiohead',       bpm:92,  genre:'Art Rock, Electronic Rock',
+     s:'art rock, Fender Telecaster clean, Jonny Greenwood strings, electronic textures, complex meters, melancholic'},
+    {n:'Tame Impala',     bpm:108, genre:'Psychedelic Pop, Neo-Psychedelia',
+     s:'psychedelic pop, thick reverb, woozy bass, layered multitracked vocals, analog warmth, Kevin Parker production'},
+    {n:'Imagine Dragons', bpm:120, genre:'Indie Pop-Rock, Stadium Rock',
+     s:'stadium indie rock, electronic drums, anthemic synths, massive reverb, build-and-release, commercial alt-rock'},
+    {n:'Hozier',          bpm:85,  genre:'Blues-Rock, Folk-Soul',
+     s:'bluesy folk-rock, organic guitar, gospel choir swells, Celtic undertones, raw authentic, Southern soul'},
+    {n:'Florence + Machine', bpm:128, genre:'Baroque Pop, Art Rock',
+     s:'baroque pop, orchestral swells, floor toms, harp arpeggios, gothic atmosphere, powerful dynamics, stadium folk'},
+    {n:'Skunk Anansie',   bpm:120, genre:'Alt-Rock, Post-Grunge',
+     s:'alternative rock, power chords, raw aggressive guitar, fierce energy, 90s Brit rock, dynamic contrast, fierce'},
+    {n:'The Hardkiss',    bpm:116, genre:'Indie Rock, Electronic Rock',
+     s:'Ukrainian indie rock, emotional guitar layers, electronic accents, anthemic builds, passionate delivery, modern rock'},
+  ],
+};
+
+// ── Active selections ──
+let selVocalDNA = null;
+let selSoundDNA = null;
+let curVocalTab = 'vocal';
+let curSoundTab = 'electronic';
+
+function setArtistTab(tab, btn){
+  curVocalTab = tab;
+  document.querySelectorAll('.artist-dna-tabs')[0]
+    .querySelectorAll('.adna-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderVocalPills();
+}
+
+function setSoundTab(tab, btn){
+  curSoundTab = tab;
+  document.querySelectorAll('.artist-dna-tabs')[1]
+    .querySelectorAll('.adna-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderSoundPills();
+}
+
+function renderVocalPills(){
+  const wrap = document.getElementById('vocal-dna-pills');
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  const list = VOCAL_DNA[curVocalTab] || [];
+  list.forEach(({n, v}) => {
+    const p = document.createElement('span');
+    p.className = 'apill' + (selVocalDNA?.n === n ? ' on' : '');
+    p.title = v;
+    p.textContent = n;
+    p.onclick = () => {
+      if(selVocalDNA?.n === n){
+        selVocalDNA = null;
+        p.classList.remove('on');
+      } else {
+        wrap.querySelectorAll('.apill').forEach(x=>x.classList.remove('on'));
+        selVocalDNA = {n, v};
+        p.classList.add('on');
+      }
+      updateVocalDNAPreview();
     };
     wrap.appendChild(p);
   });
 }
 
+function renderSoundPills(){
+  const wrap = document.getElementById('sound-dna-pills');
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  const list = SOUND_DNA[curSoundTab] || [];
+  list.forEach(({n, bpm, genre, s}) => {
+    const p = document.createElement('span');
+    p.className = 'apill' + (selSoundDNA?.n === n ? ' on' : '');
+    p.title = `${genre} | ${bpm} BPM\n${s}`;
+    p.innerHTML = `${n} <span class="apill-flag">${bpm}</span>`;
+    p.onclick = () => {
+      if(selSoundDNA?.n === n){
+        selSoundDNA = null;
+        p.classList.remove('on');
+      } else {
+        wrap.querySelectorAll('.apill').forEach(x=>x.classList.remove('on'));
+        selSoundDNA = {n, bpm, genre, s};
+        p.classList.add('on');
+      }
+      updateSoundDNAPreview();
+    };
+    wrap.appendChild(p);
+  });
+}
+
+function updateVocalDNAPreview(){
+  const prev = document.getElementById('vocal-dna-preview');
+  const applyRow = document.getElementById('vocal-dna-apply');
+  if(!prev) return;
+  if(selVocalDNA){
+    prev.textContent = `🎤 ${selVocalDNA.n}: ${selVocalDNA.v}`;
+    prev.style.display = 'block';
+    applyRow.style.display = 'flex';
+  } else {
+    prev.style.display = 'none';
+    applyRow.style.display = 'none';
+  }
+}
+
+function updateSoundDNAPreview(){
+  const prev = document.getElementById('sound-dna-preview');
+  const applyRow = document.getElementById('sound-dna-apply');
+  if(!prev) return;
+  if(selSoundDNA){
+    prev.textContent = `🎛️ ${selSoundDNA.n} | ${selSoundDNA.genre} | ${selSoundDNA.bpm} BPM\n${selSoundDNA.s}`;
+    prev.style.display = 'block';
+    applyRow.style.display = 'flex';
+  } else {
+    prev.style.display = 'none';
+    applyRow.style.display = 'none';
+  }
+}
+
+function applyVocalDNA(){
+  if(!selVocalDNA) return;
+  const inp = document.getElementById('vocal-extra');
+  if(inp) inp.value = selVocalDNA.v;
+  // Also update VB preview
+  const vbPrev = document.getElementById('vb-preview');
+  if(vbPrev) vbPrev.textContent = selVocalDNA.v;
+  // Store for AI
+  window._vocalDNA = selVocalDNA;
+  showToast(`✦ Vocal DNA «${selVocalDNA.n}» застосовано`);
+}
+
+function clearVocalDNA(){
+  selVocalDNA = null;
+  renderVocalPills();
+  updateVocalDNAPreview();
+  window._vocalDNA = null;
+}
+
+function applySoundDNA(){
+  if(!selSoundDNA) return;
+  // Store for AI generation
+  window._soundDNA = selSoundDNA;
+  // Apply BPM+genre if checkbox checked
+  const applyBpm = document.getElementById('dna-apply-bpm')?.checked;
+  if(applyBpm){
+    const bpm1 = document.getElementById('bpm1');
+    const bpm2 = document.getElementById('bpm2');
+    if(bpm1) bpm1.value = selSoundDNA.bpm;
+    if(bpm2) bpm2.value = '';
+    // Try to match genre in dropdown
+    const genreSel = document.getElementById('genre');
+    if(genreSel){
+      const opts = [...genreSel.options];
+      const match = opts.find(o =>
+        o.value.toLowerCase().includes(selSoundDNA.genre.split(',')[0].toLowerCase().trim()) ||
+        selSoundDNA.genre.toLowerCase().includes(o.value.toLowerCase().trim())
+      );
+      if(match){ genreSel.value = match.value; onGenre(); }
+    }
+    showToast(`✦ Sound DNA «${selSoundDNA.n}» + BPM ${selSoundDNA.bpm} застосовано`);
+  } else {
+    showToast(`✦ Sound DNA «${selSoundDNA.n}» збережено для AI`);
+  }
+}
+
+function clearSoundDNA(){
+  selSoundDNA = null;
+  renderSoundPills();
+  updateSoundDNAPreview();
+  window._soundDNA = null;
+}
+
+function initArtistDNA(){
+  renderVocalPills();
+  renderSoundPills();
+}
+
+// Keep old initArtistPills for compat (now calls initArtistDNA)
+function initArtistPills(){ initArtistDNA(); }
+
+
+
+// ══════════════════════════════════════════════════════════════════
+// TRIPLE-STACK VOCAL BUILDER (HookGenius methodology)
+// ══════════════════════════════════════════════════════════════════
+const VB_DATA = {
+  char: [
+    // Tier 1 (>80% reliable) — marked with ✓
+    {t:'raspy',tier:1,tip:'Tier 1 — дуже надійно. Грубий, текстурований голос.'},
+    {t:'breathy',tier:1,tip:'Tier 1 — надійно. Повітряний, інтимний тембр.'},
+    {t:'smooth',tier:1,tip:'Tier 1 — надійно. Рівний, шовковистий голос.'},
+    {t:'warm',tier:1,tip:'Tier 1 — надійно. Тепла, округла забарвленість.'},
+    {t:'gritty',tier:2,tip:'Tier 2 — 50-80%. Жорсткий, сирий характер.'},
+    {t:'silky',tier:2,tip:'Tier 2 — 50-80%. Шовковистий, полірований.'},
+    {t:'ethereal',tier:2,tip:'Tier 2 — 50-80%. Ефірний, неземний тембр.'},
+    {t:'gravelly',tier:2,tip:"Tier 2 — 50-80%. Хрипкуватий, кам\u2019янистий."},
+    {t:'sultry',tier:2,tip:'Tier 2 — 50-80%. Чуттєвий, звабливий тон.'},
+    {t:'husky',tier:2,tip:'Tier 2 — 50-80%. Глухуватий, приглушений.'},
+    {t:'velvety',tier:2,tip:"Tier 2 — 50-80%. Оксамитовий, м’який."},
+    {t:'dark',tier:2,tip:'Tier 2 — 50-80%. Темний, насичений тон.'},
+    {t:'operatic',tier:2,tip:'Tier 2 — 50-80%. Оперний, проекційний.'},
+    {t:'nasal',tier:3,tip:'Tier 3 — 30-50%. Носовий резонанс.'},
+    {t:'androgynous',tier:3,tip:'Tier 3 — 30-50%. Андрогінний — непередбачуваний.'},
+  ],
+  deliv: [
+    {t:'intimate',tier:1,tip:'Tier 1 — надійно. Близький, особистий спосіб подачі.'},
+    {t:'powerful belt',tier:1,tip:'Tier 1 — надійно. Повна потужність грудного голосу.'},
+    {t:'whispered',tier:1,tip:'Tier 1 — надійно. Пошепки, майже тихо.'},
+    {t:'spoken word',tier:1,tip:'Tier 1 — надійно. Розмовна подача без пітчу.'},
+    {t:'conversational',tier:2,tip:'Tier 2 — надійно. Невимушений, природний стиль.'},
+    {t:'soaring',tier:2,tip:'Tier 2 — 50-80%. Ширяючий, злетний характер.'},
+    {t:'laid-back',tier:2,tip:'Tier 2 — 50-80%. Розслаблений, без поспіху.'},
+    {t:'commanding',tier:2,tip:'Tier 2 — 50-80%. Владний, авторитетний.'},
+    {t:'declarative',tier:2,tip:'Tier 2 — 50-80%. Чіткий, ствердний.'},
+    {t:'behind-the-beat',tier:2,tip:'Tier 2 — 50-80%. Трохи відстаючий від ритму.'},
+    {t:'melismatic',tier:2,tip:'Tier 2 — 50-80%. З мелізмами і руладами.'},
+    {t:'staccato',tier:2,tip:'Tier 2 — 50-80%. Уривчасто, чітко.'},
+    {t:'falsetto',tier:2,tip:'Tier 2 — COIN-FLIP ~60%. Підсилюй і в style-prompt!'},
+    {t:'vibrato',tier:2,tip:'Tier 2 — 50-80%. Вібрато на тривалих нотах.'},
+    {t:'building',tier:1,tip:'Tier 1 — надійно. Наростання від тихого до потужного.'},
+  ],
+  eff: [
+    {t:'dry close-mic',tier:1,tip:'Tier 1 — надійно. Сухий, близький мікрофон без ревербу.'},
+    {t:'reverb-drenched',tier:1,tip:'Tier 1 — надійно. Насичений реверб. (краще ніж [Reverb:30%])'},
+    {t:'warm tape',tier:2,tip:'Tier 2 — 50-80%. Аналогова теплота стрічки.'},
+    {t:'lo-fi filtered',tier:2,tip:'Tier 2 — 50-80%. Lo-fi фільтрація — додає ретро характер.'},
+    {t:'wide stereo',tier:2,tip:'Tier 2 — 50-80%. Широке стерео. (краще ніж [Stereo:Wide])'},
+    {t:'compressed',tier:2,tip:'Tier 2 — 50-80%. Компресія. (краще ніж [Compression:Medium])'},
+    {t:'auto-tuned',tier:1,tip:'Tier 1 — надійно в стилі Trap/Pop. Авто-тюн.'},
+    {t:'doubled harmonies',tier:2,tip:'Tier 2 — 50-80%. Подвоєні гармонії.'},
+    {t:'hall reverb',tier:2,tip:'Tier 2 — 50-80%. Зальний реверб — великий простір.'},
+    {t:'plate reverb',tier:2,tip:'Tier 2 — 50-80%. Тарілчастий реверб — вінтажна полірованість.'},
+    {t:'church reverb',tier:2,tip:'Tier 2 — 50-80%. Соборний реверб — величний простір.'},
+    {t:'broadcast quality',tier:2,tip:'Tier 2 — 50-80%. Мовна якість — чіткий, професійний.'},
+    {t:'intimate room',tier:2,tip:'Tier 2 — 50-80%. Тісна кімната — домашнє відчуття.'},
+    {t:'stadium echo',tier:3,tip:'Tier 3 — 30-50%. Стадіонне відлуння.'},
+  ]
+};
+
+let VB_SEL = {char:null, deliv:null, eff:null};
+
+function initVocalBuilder(){
+  function makeGroup(id, items, key){
+    const wrap=document.getElementById(id);if(!wrap)return;
+    wrap.innerHTML='';
+    items.forEach(({t,tier,tip})=>{
+      const p=document.createElement('span');
+      p.className='vb-pill';
+      p.title=tip;
+      const tierCol=tier===1?'var(--grn)':tier===2?'var(--gold)':'var(--t2)';
+      p.innerHTML=`${t}<span class="vb-tier" style="color:${tierCol}">T${tier}</span>`;
+      p.onclick=()=>{
+        if(VB_SEL[key]===t){VB_SEL[key]=null;p.classList.remove('on')}
+        else{
+          wrap.querySelectorAll('.vb-pill').forEach(x=>x.classList.remove('on'));
+          VB_SEL[key]=t;p.classList.add('on');
+        }
+        updateVBPreview();
+      };
+      wrap.appendChild(p);
+    });
+  }
+  makeGroup('vb-char',VB_DATA.char,'char');
+  makeGroup('vb-deliv',VB_DATA.deliv,'deliv');
+  makeGroup('vb-eff',VB_DATA.eff,'eff');
+}
+
+function updateVBPreview(){
+  const parts=[VB_SEL.char,VB_SEL.deliv,VB_SEL.eff].filter(Boolean);
+  const vt=document.getElementById('vt')?.value||'';
+  const gender=vt==='female'?'female vocals':vt==='male'?'male vocals':vt==='duet'?'male and female vocals':'';
+  const preview=document.getElementById('vb-preview');
+  if(!preview)return;
+  if(!parts.length){preview.textContent='— оберіть теги вище —';return;}
+  const full=gender?`${gender}, ${parts.join(', ')}`:parts.join(', ');
+  preview.textContent=full;
+}
+
+function applyVocalStack(){
+  const inp=document.getElementById('vocal-extra');if(!inp)return;
+  const preview=document.getElementById('vb-preview')?.textContent;
+  if(!preview||preview.startsWith('—'))return;
+  inp.value=preview;
+  showToast('✦ Vocal stack застосовано');
+}
+
+function clearVocalStack(){
+  VB_SEL={char:null,deliv:null,eff:null};
+  document.querySelectorAll('.vb-pill').forEach(p=>p.classList.remove('on'));
+  const preview=document.getElementById('vb-preview');
+  if(preview)preview.textContent='— оберіть теги вище —';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// STYLE FORMULA BUILDER (HookGenius genre formulas)
+// ══════════════════════════════════════════════════════════════════
+const STYLE_FORMULAS = [
+  // ── House ──
+  {name:'Deep House',bpm:'122–124',cat:'house',
+   tags:'deep house, four-on-the-floor, warm rolling bassline, soulful vocal chops, late-night club, groovy and hypnotic, smooth progression'},
+  {name:'Tech House',bpm:'126–128',cat:'house',
+   tags:'tech house, punchy kicks, rolling bassline, percussive groove, peak time energy, tight production, dancefloor focused'},
+  {name:'Bass House',bpm:'128–130',cat:'house',
+   tags:'bass house, massive sub-bass, chest-shattering drop, dirty slap groove, aggressive sidechain, four-on-the-floor, club-ready'},
+  {name:'Progressive House',bpm:'128–132',cat:'house',
+   tags:'progressive house, building energy, melodic elements, euphoric progression, big room feel, emotional breakdown, anthemic'},
+  {name:'Acid House',bpm:'120–126',cat:'house',
+   tags:'acid house, 303 bassline, squelchy synths, 90s rave energy, hypnotic pattern, raw and energetic, classic sound'},
+  {name:'Afro House',bpm:'122–126',cat:'house',
+   tags:'afro house, organic percussion, African rhythms, warm bass, spiritual groove, hypnotic, soulful, late-night dancefloor'},
+  // ── Electronic / EDM ──
+  {name:'Synthwave',bpm:'100–120',cat:'electronic',
+   tags:'synthwave, analog synths, pulsing arpeggios, retro 80s vibe, neon atmosphere, driving beat, nostalgic and futuristic'},
+  {name:'Future Bass',bpm:'150–160',cat:'edm',
+   tags:'future bass, lush supersaw chords, pitched vocal chops, colorful euphoric drop, shimmering pads, emotional and energetic, bright production'},
+  {name:'Dubstep',bpm:'140',cat:'edm',
+   tags:'dubstep, 140 BPM, half-time drums, massive wobble bass, grinding synths, heavy drop, aggressive and dark, deep sub bass, filthy'},
+  {name:'Drum & Bass',bpm:'174',cat:'edm',
+   tags:'drum and bass, 174 BPM, fast breakbeats, rolling drums, deep sub bass, melodic pads, soulful atmosphere, liquid and smooth'},
+  {name:'Liquid DnB',bpm:'174',cat:'edm',
+   tags:'liquid drum and bass, smooth bass, lush pads, soulful vocals, rolling drums, uplifting, melodic, warm, 174 BPM'},
+  {name:'Trance',bpm:'138',cat:'edm',
+   tags:'trance, 138 BPM, rolling bassline, soaring pads, arpeggio synths, euphoric melody, building energy, ethereal breakdown, anthemic climax'},
+  {name:'Hardstyle',bpm:'155',cat:'edm',
+   tags:'hardstyle, 155 BPM, distorted kick, reverse bass, hard-hitting, euphoric lead melody, intense energy, powerful build, festival anthem'},
+  {name:'Big Room',bpm:'128',cat:'edm',
+   tags:'big room house, 128 BPM, massive drop, anthemic lead synth, punchy kicks, festival energy, building tension, crowd energy, stadium scale'},
+  {name:'Minimal Techno',bpm:'130–138',cat:'electronic',
+   tags:'minimal techno, stripped back, dark atmosphere, hypnotic loop, warehouse vibe, relentless beat, industrial textures'},
+  // ── Hip-Hop ──
+  {name:'Trap',bpm:'140–145',cat:'hiphop',
+   tags:'trap, dark and aggressive, melodic rap delivery, heavy 808 sub-bass, hi-hat rolls, atmospheric pads, modern hip-hop production, 140 BPM'},
+  {name:'Boom Bap',bpm:'88–92',cat:'hiphop',
+   tags:'boom bap, gritty confident mood, chopped soul sample, dusty drum break, vinyl crackle, punchy male rap flow, classic New York feel, 90 BPM'},
+  {name:'Lo-Fi Hip-Hop',bpm:'72–82',cat:'hiphop',
+   tags:'lo-fi hip-hop, dusty samples, vinyl crackle, mellow jazz chords, late night study vibe, warm and relaxed, instrumental, 75 BPM'},
+  {name:'Phonk',bpm:'130–140',cat:'hiphop',
+   tags:'phonk, dark and aggressive, Memphis rap influence, pitched-down vocal samples, cowbell, heavy 808, distorted bass, tape-saturated drums, lo-fi crunch'},
+  // ── Soul / R&B ──
+  {name:'Neo-Soul',bpm:'75–90',cat:'soul',
+   tags:'neo-soul, smooth and intimate, silky female vocals with runs, Rhodes electric piano, warm sub bass, brushed drums, layered harmonies, warm analog production, 78 BPM'},
+  {name:'R&B Modern',bpm:'80–95',cat:'soul',
+   tags:'contemporary R&B, smooth, female mezzo-soprano, intimate breathy vocals, warm Rhodes, 90 BPM, conversational delivery, layered harmonies in chorus'},
+  // ── Ambient / Chill ──
+  {name:'Ambient',bpm:'60–75',cat:'ambient',
+   tags:'ambient electronic, floating pads, evolving textures, spacious atmosphere, meditative, slow progression, ethereal, no drums, 65 BPM'},
+  {name:'Chillhop',bpm:'78–88',cat:'ambient',
+   tags:'chillhop, jazzy samples, smooth drums, warm bass, laid-back groove, coffee shop vibe, mellow and head-nodding, 82 BPM'},
+  {name:'Downtempo',bpm:'90–100',cat:'ambient',
+   tags:'downtempo, slow groove, atmospheric, electronic textures, late night, sophisticated chill, subtle complexity, trip-hop influence'},
+  // ── Cinematic ──
+  {name:'Cinematic Epic',bpm:'80–100',cat:'cinematic',
+   tags:'epic orchestral, cinematic, brass fanfare, soaring strings, no vocals, no humming, instrumental only, wide reverb, powerful, building intensity'},
+  {name:'Dark Cinematic',bpm:'85–100',cat:'cinematic',
+   tags:'dark cinematic, thriller soundtrack, tense strings, low brass, haunting atmosphere, building dread, no vocals, minimal, atmospheric'},
+];
+
+let selectedFormula = null;
+
+function initStyleFormulas(){
+  const grid=document.getElementById('formula-grid');if(!grid)return;
+  grid.innerHTML='';
+  STYLE_FORMULAS.forEach((f,i)=>{
+    const item=document.createElement('div');
+    item.className='formula-item';
+    item.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><span class="formula-name">${f.name}</span><span class="formula-bpm">${f.bpm} BPM</span></div><div class="formula-tags">${f.tags.split(',').slice(0,4).join(', ')}…</div>`;
+    item.onclick=()=>{
+      grid.querySelectorAll('.formula-item').forEach(x=>x.classList.remove('on'));
+      item.classList.add('on');
+      selectedFormula=f;
+      const prev=document.getElementById('formula-preview');
+      if(prev)prev.textContent=f.tags;
+    };
+    grid.appendChild(item);
+  });
+}
+
+function applyStyleFormula(){
+  if(!selectedFormula)return;
+  // Store for AI to use during generation
+  window._styleFormula=selectedFormula.tags;
+  showToast('✦ Формула «'+selectedFormula.name+'» збережена для генерації');
+}
+
+function clearStyleFormula(){
+  window._styleFormula=null;
+  selectedFormula=null;
+  document.querySelectorAll('.formula-item').forEach(x=>x.classList.remove('on'));
+  const prev=document.getElementById('formula-preview');
+  if(prev)prev.textContent='— оберіть пресет вище —';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// NEGATIVE PROMPTING
+// ══════════════════════════════════════════════════════════════════
+const NEG_TAGS = {
+  vocal:[
+    'no vocals','no singing','no autotune','no falsetto','no choir',
+    'no harmonies','no rap','no spoken word','no humming','no vocal samples',
+    'no backing vocals','no melisma','no screaming','no growling',
+  ],
+  instr:[
+    'no saxophone','no guitar','no electric guitar','no piano','no drums',
+    'no percussion','no bass guitar','no synths','no brass','no strings',
+    'no violin','no flute','no organ','no accordion','no banjo',
+    'no 808','no hi-hats','no electronic beats',
+  ],
+  prod:[
+    'no reverb','no distortion','no autotune','no lo-fi','no vinyl crackle',
+    'no sidechain','no EDM','no drops','no build-up','no half-time',
+    'no metal','no hip-hop elements','no jazz','no classical','no country twang',
+    'instrumental only','no sudden changes',
+  ]
+};
+
+let NEG_SEL = new Set();
+
+function initNegativePrompting(){
+  function makeNeg(id, items){
+    const wrap=document.getElementById(id);if(!wrap)return;
+    wrap.innerHTML='';
+    items.forEach(t=>{
+      const p=document.createElement('span');
+      p.className='neg-pill';
+      p.textContent=t;
+      p.onclick=()=>{
+        if(NEG_SEL.has(t)){NEG_SEL.delete(t);p.classList.remove('on')}
+        else{NEG_SEL.add(t);p.classList.add('on')}
+        updateNegPreview();
+      };
+      wrap.appendChild(p);
+    });
+  }
+  makeNeg('neg-vocal',NEG_TAGS.vocal);
+  makeNeg('neg-instr',NEG_TAGS.instr);
+  makeNeg('neg-prod',NEG_TAGS.prod);
+}
+
+function updateNegPreview(){
+  const prev=document.getElementById('neg-preview');if(!prev)return;
+  const arr=[...NEG_SEL];
+  prev.textContent=arr.length?arr.join(', '):'— нічого не вибрано —';
+  prev.style.color=arr.length?'var(--red)':'var(--t2)';
+}
+
+function clearNegative(){
+  NEG_SEL.clear();
+  document.querySelectorAll('.neg-pill').forEach(p=>p.classList.remove('on'));
+  updateNegPreview();
+}
+
+function getNegativePrompt(){
+  return [...NEG_SEL].join(', ');
+}
+
+
+
+// ══════════════════════════════════════════════════════════════════
+// TIER-LIST RULES BLOCK (HookGenius research, injected into all prompts)
+// ══════════════════════════════════════════════════════════════════
+const TIER_RULES = `
+SUNO PROMPT RULES (HookGenius tier-list, 400+ generations tested):
+
+TIER 1 — always include (>80% reliable):
+- Gender FIRST: "female vocals" or "male vocals" — never omit
+- Texture: raspy, breathy, smooth, warm (put these before delivery)
+- Delivery: [Whispered], [Belted], [Spoken Word] in lyrics
+- BPM as number, genre as specific subgenre
+- Negative tags at END of style-prompt: "no autotune", "no saxophone" etc.
+
+TIER 2 — reinforce in BOTH style-prompt AND lyrics (50-80%):
+- falsetto: write "falsetto vocals" in style AND [Falsetto] in lyrics
+- [Intro]: use "Short Instrumental Intro" — plain [Intro] often skipped
+- Age/character: "mature", "young", "weathered" — reinforce both places
+- Gender switches mid-song: use [Male Vocal] / [Female Vocal] per-section
+
+TIER 4 — NEVER USE (0% — pure placebo, Suno ignores completely):
+- [Reverb: XX%] — use "reverb-drenched" or "dry close-mic" instead
+- [Bass: XX%] — use "bass-forward", "deep sub-bass", "punchy low-end"
+- [Stereo Width: Wide] — use "wide stereo image" or "panoramic mix"
+- [Compression: Medium] — use "compressed vocals", "tight mix"
+- [Volume: XX%] — meaningless parameter tag
+- Any [Parameter: number] format — Suno reads descriptions, NOT DAW parameters
+
+STYLE-PROMPT FORMULA (5-part, 5-8 tags optimal):
+1. Genre+Subgenre (FIRST — most weight, 60-70% of output)
+2. Mood (2nd most impactful lever)
+3. Vocal (Character + Delivery + Effects triple-stack)
+4. Instruments (specific character, not just name)
+5. Production (at least 1 tag — massively underused but powerful)
+Negative tags always LAST.
+
+STYLE-PROMPT VOCAL TRIPLE-STACK FORMULA:
+Character (texture: raspy/breathy/smooth) + Delivery (intimate/belted/whispered) + Effects (dry close-mic/reverb-drenched/warm tape)
+Example: "raspy female alto, intimate close-mic delivery, dry studio recording"
+
+INSTRUMENT SPECIFICITY RULE:
+- NOT "guitar" → "clean jangly Telecaster" or "nylon-string fingerpicking"  
+- NOT "piano" → "Rhodes electric piano" or "honky-tonk upright"
+- NOT "drums" → "brushed jazz drums" or "808 trap drums"
+- NOT "synth" → "analog pad synth" or "Moog arpeggiated lead"
+
+ERA + GENRE COMBOS unlock unique sounds:
+- "70s funk, modern production" — retro-meets-contemporary
+- "90s grunge, lo-fi bedroom recording" — rawer than standard grunge
+- "80s synth-pop, dark and minimal" — splits from typical bright 80s
+
+UNIVERSAL UPGRADE TAG: "cinematic" — works with almost every genre, 
+elevates production quality (bigger reverbs, wider stereo, more dynamic range).
+
+TAG ORDER MATTERS: Suno front-loads processing. Put genre FIRST, 
+vocals EARLY — buried tags (position 40+) get diluted.
+TAG COUNT: 5-8 tags = sweet spot. <4 = too generic. >10 = conflicting signals.
+`;
+
 // INIT
-onGenre();initDndSel();STRUCT.forEach(p=>{STAGS[p]=autoTag(p)});initBassPresetPills();initArtistPills();
+onGenre();initDndSel();STRUCT.forEach(p=>{STAGS[p]=autoTag(p)});initBassPresetPills();initArtistPills();initVocalBuilder();initStyleFormulas();initNegativePrompting();
 // Restore language & apply UI
 try{onUILang()}catch(e){}
 try{const s=localStorage.getItem('lips_autosave');if(s){const st=JSON.parse(s);if(st.title||st.concept)loadState(st)}}catch(e){}
