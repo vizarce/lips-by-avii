@@ -4,6 +4,35 @@ All notable changes to this project are documented here.
 
 ---
 
+## [v5.2.0] — 2026-06-06
+
+### 🎤 Artist DNA System
+- **Vocal DNA**: 32 artists across 5 tabs (Vocal/Soul/R&B/Pop/Indie/World) with full triple-stack descriptions
+- **Sound DNA**: 32 artists across 5 tabs (Electronic/Hip-Hop/EDM/Cinematic/Rock) with BPM, genre and production formula per artist
+- Optional BPM+genre auto-fill checkbox when applying Sound DNA
+- Both DNA systems feed into AI generation as vocal/production references
+
+### 🎛️ Triple-Stack Vocal Builder
+- HookGenius methodology: Character + Delivery + Effects with Tier 1/2/3 indicators
+
+### 🎼 Style Formula Builder
+- 25 genre presets (Deep/Tech/Bass House, Future Bass, Dubstep, DnB, Trance, Hardstyle, Trap, Lo-Fi, Neo-Soul, Cinematic etc.)
+
+### 🚫 Negative Prompting
+- 47 tags across 3 groups (Vocal / Instruments / Production)
+
+### 🏆 Tier-List AI Prompts
+- TIER_RULES injected into all 7 AI functions — bans placebo tags `[Reverb:XX%]` `[Bass:XX%]` `[Stereo:Wide]`
+
+### 📋 Expanded Content
+- Structure tags: 60+ sections with descriptions and 5 grouped categories in dropdown
+- Production tags: 90+ tags across 11 named sections with section headers in UI
+- BPM presets: 19 → 40+ values with genre labels and grouped optgroups
+- New EDM subgenres: Future Bass, Dubstep, Liquid DnB, Trance, Hardstyle, Big Room, Tech House, Minimal Techno
+- Vocal Delivery metatags added to structure selector (26 tags)
+
+---
+
 ## [v5.0.1] — 2026-06-06
 
 ### 🐛 Bug Fix
