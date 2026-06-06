@@ -4,6 +4,22 @@ All notable changes to this project are documented here.
 
 ---
 
+## [v5.0.1] — 2026-06-06
+
+### 🐛 Bug Fix
+- Fixed `[Section]` tags not displaying in amber in HTML export — were being overwritten by second regex in `highlightLyrics()`
+
+### 🎨 Color Enhancement
+- tag-prompts in HTML export now have 4 semantic color categories:
+  - 🟣 **violet** — bass layers (L1–L5, sub bass, polymorphic, 808 sub)
+  - 🟢 **green** — instruments (piano, saxophone, choir, strings, sopilka…)
+  - 🟡 **gold** — mood/atmosphere (romantic, ethereal, euphoric, cinematic…)
+  - 🔵 **blue** — production/tech (sidechain, reverb, glitch, groove, bars…)
+  - 🩵 **teal** — other tag-prompts (fallback)
+- Legend in exported HTML updated with all 5 color categories
+
+---
+
 ## [v5.0.0] — 2026-06-02
 
 ### 🔊 Bass Architecture
