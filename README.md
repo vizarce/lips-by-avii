@@ -28,17 +28,17 @@ LIPS by AVII генерує два типи промптів:
 
 ---
 
-## 🆕 Що нового у v5.0.0
+## 🆕 Що нового у v5.2.0
 
-- **🔊 5-шаровий бас (L1–L5)** — новий режим "✦ Повний (5 шарів)" + панель іменованих пресетів
-- **∞ Infinite Embrace** — косміч. альбомні пресети (IE Cosmic / Stellar / Orbital)
-- **🇺🇦 Zifferblatt UA** — нові UA-пресети з сопілкою і хоровим обертоном
-- **🎸 Інструментальний режим** — ховає блоки лірики і вокалу для instrumental треків
-- **🎹 Нові жанри** — Instrumental (6 варіантів) та Infinite Embrace (4 варіанти)
-- **🎤 Поле Artist Reference** — посилання на 30 артистів (пілюлі швидкого вибору)
-- **🏷️ +54 нові теги** — продакшн, вокал, SFX, інструменти
-- **📄 HTML-експорт переосмислено** — JetBrains Mono, синтаксична підсвітка, 3 таби стилю, блок UA-акцентів
-- **🐛 Виправлено SyntaxError** — accent cells через `data-char` (без проблем з лапками)
+- **🎤 Artist DNA (Vocal)** — 32 артисти у 5 табах (Vocal/Soul/R&B/Pop/Indie/World) з повними triple-stack описами
+- **🎛️ Artist DNA (Sound)** — 32 артисти у 5 табах (Electronic/Hip-Hop/EDM/Cinematic/Rock) з BPM, жанром і формулою продакшну
+- **🎙️ Triple-Stack Vocal Builder** — HookGenius: Character + Delivery + Effects з Tier 1/2/3 індикаторами
+- **🎼 Style Formula Builder** — 25 жанрових пресетів (House, Future Bass, Dubstep, DnB, Trance, Trap, Lo-Fi, Cinematic тощо)
+- **🚫 Negative Prompting** — 47 тегів у 3 групах (Vocal / Instruments / Production)
+- **🏆 TIER_RULES** — впроваджено у всі 7 AI-функцій, забороняє placebo-теги
+- **📋 Структурні теги** — 60+ секцій з описами, 5 згрупованих категорій
+- **🎚️ Продакшн-теги** — 90+ тегів у 11 іменованих секціях
+- **⏱️ BPM пресети** — розширено з 19 до 40+ значень з новими EDM піджанрами
 
 ---
 
@@ -64,8 +64,10 @@ LIPS by AVII генерує два типи промптів:
 - AI-генерація тегів секцій (кнопка ✦ AI теги)
 
 ### Крок 3 — Теги
-Вибір тегів з хмар по категоріях: настрій, інструменти, продакшн, вокал, SFX.
-Також: **3-Layer Polymorphic Bass** — налаштування бас-структури (L1 sub-bass / L2 mid groove / L3 stab).
+Вибір тегів з хмар по категоріях: настрій, інструменти, продакшн (90+ тегів у 11 секціях), вокал, SFX.
+Також: **5-Layer Polymorphic Bass** — налаштування бас-структури (L1–L5) з іменованими пресетами.
+**Negative Prompting** — 47 тегів що виключаються з промпту (3 групи).
+**Style Formula Builder** — 25 жанрових формул для швидкого налаштування стилю.
 
 ### Крок 4 — Генерація
 - AI формує обидва промпти
@@ -239,17 +241,21 @@ LIPS by AVII генерує два типи промптів:
 
 ---
 
-## 🔊 3-Layer Polymorphic Bass
+## 🔊 5-Layer Polymorphic Bass
 
-Система налаштування бас-структури з трьома шарами:
+Система налаштування бас-структури з п'ятьма шарами:
 
-| Шар | Роль | За замовчуванням |
-|-----|------|-----------------|
-| L1 | Sub-bass floor | `deep sub-bass floor, chest-rattling` |
-| L2 | Mid groove | `mid punchy walking groove, melodic drive` |
-| L3 | High stab | `high syncopated percussive stab, dynamic` |
+| Шар | Роль |
+|-----|------|
+| L1 | Sub-bass floor |
+| L2 | Mid groove |
+| L3 | High stab |
+| L4 | Extra wave / overtone |
+| L5 | Cosmic / atmospheric layer |
 
-Режими: **Повний (3 шари)** / **Помірний (2 шари)** / **Мінімальний** / **Без басів**
+Режими: **✦ Повний (5 шарів)** / **Повний (3 шари)** / **Помірний (2 шари)** / **Мінімальний** / **Без басів**
+
+Іменовані пресети: **∞ IE Cosmic / Stellar / Orbital**, **Zifferblatt UA ①②**, FR/ES/DE/IT варіанти.
 
 Для жанрів без домінантного басу (Ambient, Folk, Jazz) застосовується автоматичне попередження.
 
@@ -308,6 +314,7 @@ lips-by-avii/
 ├── netlify/
 │   └── functions/
 │       └── proxy.js            # Serverless proxy → Anthropic API
+├── CHANGELOG.md
 ├── .gitignore
 ├── README.md
 └── LICENSE
@@ -319,6 +326,8 @@ lips-by-avii/
 
 | Версія | Що нового |
 |--------|-----------|
+| **v5.2.0** | Artist DNA, Triple-Stack Vocal Builder, Style Formula Builder, Negative Prompting, TIER_RULES, +90 теги, 40+ BPM пресетів |
+| **v5.0.1** | Виправлення кольору [Section] тегів, 4-кольорові категорії tag-prompt у HTML-експорті |
 | **v5.0.0** | 5-шаровий бас, Infinite Embrace, Zifferblatt UA, інструментальний режим, Artist Reference, +54 теги, HTML-експорт redesign |
 | **v4.0.0** | Бібліотека промптів, HTML-експорт, двомовний UI (UA/EN), французька мова лірики, версія в шапці |
 | **v3.5** | Виправлення аналізу жанру, покращення стабільності |
