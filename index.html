@@ -812,13 +812,20 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
 
 <!-- PAGE LIBRARY -->
 <div class="page" id="pg-lib">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-    <span style="font-size:22px">📚</span>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+    <span style="font-size:22px">🗄️</span>
     <div>
-      <div style="font-size:15px;font-weight:600;color:var(--t0)" data-i18n="libTitle">Бібліотека пісень</div>
-      <div style="font-size:11px;color:var(--t2)" data-i18n="libSub">Збережені lyrics- та style-промпти</div>
+      <div style="font-size:15px;font-weight:600;color:var(--t0)">Song Vault</div>
+      <div style="font-size:11px;color:var(--t2)">Збережені пісні · JSON · Supabase sync</div>
     </div>
     <span class="lib-count" id="lib-count"></span>
+    <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">
+      <label class="btn sm" style="cursor:pointer;background:rgba(62,201,139,.08);border-color:rgba(62,201,.3);color:var(--teal)" title="Завантажити .json файл пісні">
+        📂 Імпорт JSON
+        <input type="file" accept=".json" style="display:none" onchange="importSongJson(event)">
+      </label>
+      <button class="btn sm" onclick="syncVaultFromSupabase()" style="background:rgba(62,201,201,.08);border-color:rgba(62,201,201,.3);color:var(--teal)" title="Синхронізувати з Supabase">☁️ Sync</button>
+    </div>
   </div>
   <div id="lib-list"></div>
   <div class="btn-row" style="margin-top:8px">
@@ -826,6 +833,39 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     <button class="btn" style="color:var(--red);border-color:rgba(239,68,68,.3)" data-i18n="btn.clearLib" onclick="clearLibrary()">🗑 Очистити все</button>
   </div>
 </div>
+</div>
+
+<!-- JSON IMPORT MODAL -->
+<div id="json-import-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);overflow-y:auto">
+  <div style="max-width:680px;margin:40px auto;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 28px 24px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+      <span style="font-size:22px">📂</span>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--t0)" id="jim-title">Назва пісні</div>
+        <div style="font-size:11px;color:var(--t2)" id="jim-meta">жанр · мова · BPM</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px">
+        <button class="btn sm" onclick="prefillFromJson()" style="background:rgba(62,201,139,.1);border-color:rgba(62,201,139,.3);color:var(--teal)">🔄 Перегенерувати</button>
+        <button class="btn sm" onclick="document.getElementById('json-import-modal').style.display='none'">✕ Закрити</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+      <div>
+        <div style="font-size:10px;letter-spacing:.1em;color:var(--t3);text-transform:uppercase;margin-bottom:6px">Lyrics Prompt (перші 400 зн.)</div>
+        <div id="jim-lyrics" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;font-family:'JetBrains Mono',monospace;line-height:1.7;color:var(--t1);white-space:pre-wrap;max-height:260px;overflow-y:auto"></div>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:.1em;color:var(--t3);text-transform:uppercase;margin-bottom:6px">Style Prompt</div>
+        <div id="jim-style" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;font-family:'JetBrains Mono',monospace;line-height:1.7;color:var(--t1);white-space:pre-wrap;max-height:260px;overflow-y:auto"></div>
+      </div>
+    </div>
+    <div style="font-size:10px;letter-spacing:.1em;color:var(--t3);text-transform:uppercase;margin-bottom:6px">Структура пісні</div>
+    <div id="jim-structure" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px"></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="loadJsonIntoVault()" style="flex:1;background:rgba(62,201,139,.1);border-color:rgba(62,201,139,.3);color:var(--teal)">💾 Зберегти у Vault</button>
+      <button class="btn" onclick="prefillFromJson()" style="flex:1">🔄 Перегенерувати з цих даних</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -2457,13 +2497,299 @@ document.addEventListener('mouseout',e=>{
 // ── LIBRARY ──
 const LIB_PREFIX='song:';
 
+// ── SUPABASE CONFIG ──────────────────────────────────────────
+// Встав свої credentials після реєстрації на supabase.com
+const SUPA_URL = '';  // 'https://xxxx.supabase.co'
+const SUPA_KEY = '';  // anon public key
+
+async function supaFetch(method, path, body){
+  if(!SUPA_URL||!SUPA_KEY) return null;
+  try{
+    const res = await fetch(SUPA_URL+'/rest/v1/'+path,{
+      method,
+      headers:{
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer '+SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': method==='POST'?'resolution=merge-duplicates':''
+      },
+      body: body?JSON.stringify(body):undefined
+    });
+    if(!res.ok) return null;
+    return method==='GET'?await res.json():true;
+  }catch(e){return null}
+}
+
+// ── BUILD FULL SONG JSON ─────────────────────────────────────
+function buildSongJson(entry){
+  const st = entry._state || {};
+  const now = new Date().toISOString();
+  const id = entry.id || crypto.randomUUID();
+  // Парсимо структуру лірики на секції
+  const sequence = [];
+  const lyricsRaw = entry.lyrics || '';
+  const lines = lyricsRaw.split('\n');
+  let curSection = null;
+  let curLines = [];
+  let order = 1;
+  const sectionRx = /^\[([A-Z][^\]]{0,40})\]$/;
+  for(const line of lines){
+    const m = line.match(sectionRx);
+    if(m){
+      if(curSection){
+        sequence.push({
+          id: curSection.toLowerCase().replace(/[^a-z0-9]/g,'_'),
+          label: '['+curSection+']',
+          order: order++,
+          tags:{raw:'', layers:[]},
+          lyrics: curLines.join('\n').trim()
+        });
+      }
+      curSection = m[1];
+      curLines = [];
+    } else if(line.match(/^\[/)){
+      // inline tag — кладемо в tags.raw поточної секції
+      if(curSection) curLines.push(line);
+    } else {
+      if(curSection) curLines.push(line);
+    }
+  }
+  if(curSection){
+    sequence.push({
+      id: curSection.toLowerCase().replace(/[^a-z0-9]/g,'_'),
+      label: '['+curSection+']',
+      order: order++,
+      tags:{raw:'',layers:[]},
+      lyrics: curLines.join('\n').trim()
+    });
+  }
+  const components = sequence.map(s=>s.label.replace(/[\[\]]/g,''));
+
+  const json = {
+    schemaVersion: '1.0',
+    id,
+    meta:{
+      title: entry.title || 'Untitled',
+      artist: 'AVII',
+      genre: entry.genre || '',
+      lang: entry.lang || '',
+      bpm: st.bpm1||(entry.bpm)||'',
+      key: st.key||'',
+      mood: [...(SEL&&SEL.mood?SEL.mood:[])],
+      source: 'LIPS by AVII v5.3.0',
+      createdAt: new Date(entry.ts).toISOString(),
+      updatedAt: now
+    },
+    current:{
+      structure:{ components, sequence },
+      prompts:{
+        lyricsPrompt: entry.lyrics||'',
+        stylePrompts:[
+          {label:'① primary', text: entry.style||''}
+        ],
+        bassPreset:{
+          name: st.bassMode||'',
+          raw: [st.bl1,st.bl2,st.bl3].filter(Boolean).join('|')
+        }
+      },
+      stats:{
+        lyricsCharCount: (entry.lyrics||'').length,
+        styleCharCount: (entry.style||'').length
+      }
+    },
+    versions:[{
+      v:1,
+      savedAt: new Date(entry.ts).toISOString(),
+      note:'initial save from LIPS',
+      snapshot:{
+        lyricsPrompt: entry.lyrics||'',
+        stylePrompt: entry.style||''
+      }
+    }]
+  };
+  return json;
+}
+
+// ── EXPORT SONG AS .json ──────────────────────────────────────
+function exportSongJson(entry){
+  const json = buildSongJson(entry);
+  const blob = new Blob([JSON.stringify(json,null,2)],{type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = (entry.title||'song').replace(/[^a-zA-Zа-яА-ЯіІїЇєЄ0-9_\- ]/g,'_').slice(0,40);
+  a.href=url; a.download=safeName+'_lips.json'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('JSON збережено: '+safeName+'_lips.json');
+}
+
+// ── IMPORT SONG FROM .json FILE ───────────────────────────────
+let _importedJson = null;
+
+function importSongJson(event){
+  const file = event.target.files[0];
+  if(!file){return}
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const json = JSON.parse(e.target.result);
+      _importedJson = json;
+      showJsonImportModal(json);
+    }catch(err){
+      showToast('❌ Помилка: невалідний JSON файл');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value=''; // reset input
+}
+
+function showJsonImportModal(json){
+  const meta = json.meta||{};
+  const cur  = json.current||{};
+  const prompts = cur.prompts||{};
+  const struct  = cur.structure||{};
+
+  document.getElementById('jim-title').textContent = meta.title||'Без назви';
+  document.getElementById('jim-meta').textContent  =
+    [meta.genre, meta.lang, meta.bpm?meta.bpm+' BPM':'', meta.key].filter(Boolean).join(' · ');
+
+  const lyricsText = prompts.lyricsPrompt||'';
+  document.getElementById('jim-lyrics').textContent = lyricsText.slice(0,400)+(lyricsText.length>400?'…':'');
+
+  const styleText = (prompts.stylePrompts||[])[0]?.text||'';
+  document.getElementById('jim-style').textContent = styleText.slice(0,400)+(styleText.length>400?'…':'');
+
+  const structEl = document.getElementById('jim-structure');
+  structEl.innerHTML='';
+  (struct.components||[]).forEach(c=>{
+    const pill=document.createElement('span');
+    pill.style.cssText='background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;color:var(--t2)';
+    pill.textContent=c;
+    structEl.appendChild(pill);
+  });
+
+  document.getElementById('json-import-modal').style.display='block';
+}
+
+function loadJsonIntoVault(){
+  if(!_importedJson){return}
+  const json = _importedJson;
+  const meta = json.meta||{};
+  const cur  = json.current||{};
+  const prompts = cur.prompts||{};
+  const entry = {
+    id: json.id,
+    title: meta.title||'Untitled',
+    genre: meta.genre||'',
+    lang: meta.lang||'',
+    lyrics: prompts.lyricsPrompt||'',
+    style: (prompts.stylePrompts||[])[0]?.text||'',
+    ts: new Date(meta.createdAt).getTime()||Date.now(),
+    _fromJson: true
+  };
+  const key = LIB_PREFIX+entry.ts;
+  window.storage.set(key, JSON.stringify(entry)).catch(()=>{
+    localStorage.setItem('lips_lib_'+entry.ts, JSON.stringify(entry));
+  });
+  document.getElementById('json-import-modal').style.display='none';
+  loadLibrary();
+  showToast('💾 Збережено у Vault: '+entry.title);
+}
+
+function prefillFromJson(){
+  if(!_importedJson){return}
+  const json = _importedJson;
+  const meta = json.meta||{};
+  const cur  = json.current||{};
+  const prompts = cur.prompts||{};
+  const state = {
+    title:  meta.title||'',
+    genre:  meta.genre||'',
+    lang:   meta.lang||'',
+    bpm1:   meta.bpm||'',
+    key:    meta.key||'',
+    outL:   prompts.lyricsPrompt||'',
+    outS:   (prompts.stylePrompts||[])[0]?.text||''
+  };
+  // Заповнюємо форму
+  const set=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.value=v};
+  set('title', state.title);
+  set('genre', state.genre); if(state.genre) onGenre();
+  set('lang',  state.lang);
+  set('bpm1',  state.bpm1);
+  set('key',   state.key);
+  if(state.outL){
+    const ol=document.getElementById('out-l');
+    if(ol){ol.value=state.outL;updCtr('out-l','ctr-l',5000,'pf-l')}
+  }
+  if(state.outS){
+    const os=document.getElementById('out-s');
+    if(os){os.value=state.outS;updCtr('out-s','ctr-s',1000,'pf-s')}
+  }
+  // Відкриваємо Step 4 з результатом
+  document.getElementById('json-import-modal').style.display='none';
+  closeLibrary();
+  activatePage(4);
+  document.getElementById('gen-loader').classList.remove('show');
+  document.getElementById('gen-result').style.display='block';
+  const sbw=document.getElementById('save-btn-wrap');if(sbw)sbw.classList.add('show');
+  showToast('🔄 Дані завантажено — можна перегенерувати!');
+}
+
+// ── SUPABASE SYNC ──────────────────────────────────────────────
+async function syncToSupabase(entry){
+  if(!SUPA_URL||!SUPA_KEY) return;
+  const json = buildSongJson(entry);
+  await supaFetch('POST','songs',{
+    id: json.id,
+    title: json.meta.title,
+    genre: json.meta.genre,
+    lang:  json.meta.lang,
+    version: (json.versions||[]).length,
+    updated_at: json.meta.updatedAt,
+    data: json
+  });
+}
+
+async function syncVaultFromSupabase(){
+  if(!SUPA_URL||!SUPA_KEY){showToast('⚠️ Supabase не налаштовано — додай credentials у коді');return}
+  showToast('☁️ Синхронізація…');
+  const rows = await supaFetch('GET','songs?select=data&order=updated_at.desc&limit=100');
+  if(!rows){showToast("❌ Помилка з\u2019єднання з Supabase");return}
+  let added=0;
+  for(const row of rows){
+    const json = row.data;
+    if(!json||!json.current) continue;
+    const entry={
+      id: json.id,
+      title: json.meta?.title||'',
+      genre: json.meta?.genre||'',
+      lang:  json.meta?.lang||'',
+      lyrics: json.current.prompts?.lyricsPrompt||'',
+      style:  json.current.prompts?.stylePrompts?.[0]?.text||'',
+      ts: new Date(json.meta?.createdAt||Date.now()).getTime(),
+      _fromSupabase: true
+    };
+    const key=LIB_PREFIX+entry.ts;
+    try{
+      const exists=await window.storage.get(key);
+      if(!exists){await window.storage.set(key,JSON.stringify(entry));added++}
+    }catch(e){
+      if(!localStorage.getItem('lips_lib_'+entry.ts)){
+        localStorage.setItem('lips_lib_'+entry.ts,JSON.stringify(entry));added++;
+      }
+    }
+  }
+  loadLibrary();
+  showToast('☁️ Sync: '+added+' нових пісень з Supabase');
+}
+
 async function saveToLibrary(){
   const title=document.getElementById('title').value.trim()||'Без назви';
   const lyrics=document.getElementById('out-l').value.trim();
   const style=document.getElementById('out-s').value.trim();
   if(!lyrics&&!style){showToast('Немає даних для збереження');return}
   const genre=getRawGenreKey();
-  const lang=document.getElementById('lang')?.value||'';const entry={title,genre,lyrics,style,lang,ts:Date.now()};
+  const lang=document.getElementById('lang')?.value||'';const entry={title,genre,lyrics,style,lang,ts:Date.now(),_state:getState()};
   const key=LIB_PREFIX+entry.ts;
   const statusEl=document.getElementById('save-status');
   try{
@@ -2472,6 +2798,8 @@ async function saveToLibrary(){
       statusEl.textContent='Збережено: '+title;
       showToast('Збережено в бібліотеку: '+title);
       setTimeout(()=>{statusEl.textContent=''},3000);
+      // Supabase sync (fire & forget)
+      syncToSupabase(entry).catch(()=>{});
     }else{throw new Error('storage null')}
   }catch(e){
     try{
@@ -2504,9 +2832,12 @@ function libMakeCard(e,idx){
   btnLoad.onclick=function(){libLoad(e.ts)};
   const btnExp=document.createElement('button');btnExp.className='lib-btn';btnExp.textContent='↓ HTML';
   btnExp.onclick=function(){exportAsHtml(e)};
+  const btnJson=document.createElement('button');btnJson.className='lib-btn';btnJson.textContent='↓ JSON';
+  btnJson.title='Зберегти як .json файл';
+  btnJson.onclick=function(){exportSongJson(e)};
   const btnDel=document.createElement('button');btnDel.className='lib-btn del';btnDel.textContent='🗑';
   btnDel.onclick=function(){libDelete(e.ts,btnDel)};
-  acts.appendChild(btnLoad);acts.appendChild(btnExp);acts.appendChild(btnDel);
+  acts.appendChild(btnLoad);acts.appendChild(btnExp);acts.appendChild(btnJson);acts.appendChild(btnDel);
   hdr.appendChild(icon);hdr.appendChild(meta);hdr.appendChild(badge);hdr.appendChild(acts);
   const prev=document.createElement('div');prev.className='lib-preview';
   const lbl1=document.createElement('div');lbl1.className='lib-preview-label';lbl1.textContent='Lyrics-prompt (перші 300 зн.)';
