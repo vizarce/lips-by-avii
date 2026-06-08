@@ -198,7 +198,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
 /* ── Triple-Stack Vocal Builder ── */
 .vocal-builder{background:var(--p2);border:1px solid rgba(168,85,247,.2);border-radius:var(--r);padding:12px;margin-top:8px}
 .vb-title{font-size:10px;font-weight:600;color:var(--pur);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.vb-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}
+.vb-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px}
 .vb-col{}
 .vb-lbl{font-size:10px;color:var(--t2);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
 .vb-pills{display:flex;flex-wrap:wrap;gap:3px}
@@ -518,29 +518,42 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
         </div>
       </div>
 
-      <!-- ── Triple-Stack Vocal Builder ── -->
+      <!-- ── 5-Param Vocal Builder ── -->
       <div class="vocal-builder">
-        <div class="vb-title">🎙️ Triple-Stack Vocal Builder <span style="font-size:9px;color:var(--t2);font-weight:400;text-transform:none">(Character + Delivery + Effects — HookGenius formula)</span></div>
-        <div class="vb-row">
+        <div class="vb-title">🎙️ 5-Parameter Vocal Builder <span style="font-size:9px;color:var(--t2);font-weight:400;text-transform:none">(Register · Texture · Style · Delivery · Effects)</span></div>
+        <!-- Presets row -->
+        <div style="margin-bottom:8px">
+          <div class="vb-lbl" style="margin-bottom:4px">⚡ Пресети <span style="font-weight:400;color:var(--t2)">(один клік → 5 параметрів)</span></div>
+          <div class="vb-pills" id="vb-presets"></div>
+        </div>
+        <div class="vb-row" style="grid-template-columns:repeat(5,1fr)">
           <div class="vb-col">
-            <div class="vb-lbl">1 · Character <span class="vb-tier" title="Tier 1: >80% надійно">●</span></div>
+            <div class="vb-lbl">1 · Register</div>
+            <div class="vb-pills" id="vb-reg"></div>
+          </div>
+          <div class="vb-col">
+            <div class="vb-lbl">2 · Texture</div>
             <div class="vb-pills" id="vb-char"></div>
           </div>
           <div class="vb-col">
-            <div class="vb-lbl">2 · Delivery <span class="vb-tier" title="Tier 1-2: надійно">●</span></div>
+            <div class="vb-lbl">3 · Style</div>
+            <div class="vb-pills" id="vb-style"></div>
+          </div>
+          <div class="vb-col">
+            <div class="vb-lbl">4 · Delivery</div>
             <div class="vb-pills" id="vb-deliv"></div>
           </div>
           <div class="vb-col">
-            <div class="vb-lbl">3 · Effects <span class="vb-tier" title="Tier 1-2: надійно">●</span></div>
+            <div class="vb-lbl">5 · Effects</div>
             <div class="vb-pills" id="vb-eff"></div>
           </div>
         </div>
-        <div style="font-size:10px;color:var(--t2);margin-bottom:4px">✦ Складений вокальний промпт:</div>
-        <div class="vb-preview" id="vb-preview">— оберіть теги вище —</div>
+        <div style="font-size:10px;color:var(--t2);margin-bottom:4px;margin-top:6px">✦ Складений вокальний промпт (новий стандарт):</div>
+        <div class="vb-preview" id="vb-preview">— оберіть параметри або пресет вище —</div>
         <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
           <button class="btn sm pur" onclick="applyVocalStack()">↓ Застосувати до Extra</button>
           <button class="btn sm" onclick="clearVocalStack()">✕ Скинути</button>
-          <span style="font-size:10px;color:var(--t2);align-self:center">⚠️ Плацебо: [Reverb:30%] [Bass:80%] [Stereo:Wide] — не працюють</span>
+          <span style="font-size:10px;color:var(--t2);align-self:center">⚠️ Плацебо: [Reverb:30%] [Bass:80%] — не працюють</span>
         </div>
       </div>
 
@@ -2182,36 +2195,67 @@ RULES:
 1. Total output MUST be ≤5000 chars. Absolute limit.
 2. Format:[SECTION NAME]\n[tag-prompt]\nlyrics
 3. Tags: commas and pipes, specific instruments (NOT "guitar" → "jangly Telecaster"), NO placebo tags like [Reverb:XX%]
-4. Vocal in tag-prompts: always include gender, triple-stack Character+Delivery+Effects${vocalDNA?'. Use Vocal DNA as primary reference.':''}
-5. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
-6. Short drop/transition/hook tags — compress aggressively
-7. If near limit: shorten tags first, never cut lyrics mid-sentence
-8. Output ONLY the formatted lyrics-prompt.`;
+4. Vocal in tag-prompts: gender + 5-param (register+texture+style+delivery+effect). Use Vocal DNA as primary reference.
+5. BASS BUDGET — critical: MAX 1-2 bass directives per section in lyrics-prompt.
+   Full bass architecture belongs in style-prompt. In lyrics: one clear directive per section.
+   GOOD: "[L2 warm groove enters]" | BAD: "[L1+L2+L3+sidechain+808 all at once]"
+6. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
+7. Short drop/transition/hook tags — compress aggressively
+8. If near limit: shorten tags first, never cut lyrics mid-sentence
+9. Output ONLY the formatted lyrics-prompt.`;
+
+    // ── NEW STANDARD: style-prompt as artistic image, not tag concatenation ──
+  const vocalDesc5 = (()=>{
+    const vbs=VB_SEL;
+    const vtv=document.getElementById('vt')?.value||'';
+    const gender=vtv==='female'?'female vocals':vtv==='male'?'male vocals':vtv==='duet'?'male+female vocals':'';
+    if(vbs.reg||vbs.char||vbs.style||vbs.deliv||vbs.eff){
+      const reg=vbs.reg||''; const tex=vbs.char||''; const sty=vbs.style||'';
+      const del=vbs.deliv||''; const eff=vbs.eff||'';
+      return [gender,reg,reg&&tex?'—':'',tex,sty?sty+' texture':'',del?del+' delivery':'',eff].filter(Boolean).join(' ');
+    }
+    return vd;
+  })();
 
   const sR=TIER_RULES+`
-Expert Suno style-prompt engineer.
-${styleF?`BASE FORMULA (use as foundation, adapt to concept):\n${styleF}\n`:''}${soundDNA?soundDNA+'\n':''}Genre:${genre},${bpm}${key?',Key:'+key:''}
-Mood:${mood||'romantic,atmospheric'}
-Vocal:${vd}${vocalDNA?'\n'+vocalDNA:''}
-Instruments:${instr||'piano,saxophone,bass'}
-Production:${prod||'analog,warm,layered'}
-SFX:${sfx||'vinyl crackle,binary whoosh'}
-${bp?`Bass:${bp}`:''}
-${negP?`NEGATIVE (add at END, after all positive tags):\n${negP}`:''}
+You are an expert Suno/Udio style-prompt artist. Build the style-prompt as a UNIFIED ARTISTIC IMAGE.
 
-STYLE-PROMPT RULES:
-- Genre+subgenre FIRST (most weight)${soundDNA?'\n- Use Sound DNA as production foundation, adapt instruments and atmosphere':''}
-- Vocal TRIPLE-STACK: Character+Delivery+Effects${vocalDNA?'\n- Use Vocal DNA as vocal foundation':''}
-- Gender ALWAYS explicit: "female vocals" or "male vocals"
-- Specific instruments: NOT "guitar" → "jangly Telecaster"; NOT "piano" → "Rhodes electric"
-- At least 1 production tag (most underused but powerful)
-- NEVER use: [Reverb:XX%] [Bass:XX%] [Stereo:Wide] [Compression:Medium] — these are PLACEBO
-- Use instead: "reverb-drenched" / "dry close-mic" / "wide stereo image" / "compressed vocals"
-- 5-8 tags TOTAL sweet spot. Negative tags always LAST.
+NEW STANDARD (follow strictly):
+1. GENRE LINE: "[descriptive adjective]-inspired [genre] meets [subgenre], [decade/era]"
+   Example: "cosmic bass-driven future house meets orchestral progressive house, 2020s"
+   ${soundDNA?'Sound DNA: '+soundDNA:''}
+   ${styleF?'Base formula: '+styleF:''}
 
-Compact Suno style-prompt. LIMIT:≤1000 chars ABSOLUTE.
-Use pipes. Remove spaces after commas. No linebreaks in lists.
-Format: [Genre+Subgenre,BPM]|[Gender+Vocal triple-stack]|[Instruments specific]|[Production]|[Mood]|[BASS compact]${negP?`|[Negative: ${negP}]`:''}
+2. BPM WITH ADJECTIVE: "[mood-word] [number] BPM"
+   Examples: driving / pulsing / floating / hypnotic / soaring / surging / gentle
+   Reference: ${bpm}${key?', Key:'+key:''}
+
+3. VOCAL — 5 criteria (register + texture + style + delivery + effect):
+   Format: "[gender] [register] — [texture] [style] texture, [delivery] delivery, [effect]"
+   Example: "female soprano — airy cinematic texture, soaring delivery, wide stereo shimmer reverb"
+   Reference: ${vocalDesc5}${vocalDNA?'\nVocal DNA: '+vocalDNA:''}
+
+4. BASS — narrative progression (NOT a tag list):
+   Describe as a journey: "sub drone awakens → warm groove enters → melodic stab drops → orbital bridge → shimmer finale"
+   MAX 2 bass descriptors in style-prompt. Full architecture lives HERE, not in lyrics.
+   ${bp?'Bass reference: '+bp:''}
+
+5. INSTRUMENTS — specific names only:
+   NOT "guitar" → "jangly Telecaster" | NOT "piano" → "Rhodes electric" | NOT "strings" → "lush string quartet"
+   Reference: ${instr||'piano,strings,bass'}
+
+6. PRODUCTION + MOOD: ${prod||'analog,warm,layered'} | ${mood||'romantic,atmospheric'}
+
+7. SFX — only genre-defining, max 3: ${sfx||'vinyl crackle,shimmer sweep'}
+
+${negP?'8. NEGATIVE (always LAST): '+negP:''}
+
+HARD RULES:
+- NEVER: [Reverb:XX%] [Bass:XX%] [Stereo:Wide] — PLACEBO
+- Use: "reverb-drenched" / "dry close-mic" / "wide stereo shimmer" / "compressed punch"
+- Gender ALWAYS explicit | Total ≤1000 chars ABSOLUTE
+- Pipes between sections
+
 Output ONLY the style-prompt.`;
 
   const sgR=TIER_RULES+`Genre:${genre},Mood:${mood},Concept:${concept||'romantic song'}
@@ -3306,60 +3350,117 @@ function initArtistPills(){ initArtistDNA(); }
 // TRIPLE-STACK VOCAL BUILDER (HookGenius methodology)
 // ══════════════════════════════════════════════════════════════════
 const VB_DATA = {
+  // ── REGISTER (новий параметр 1) ───────────────────────────────
+  reg: [
+    {t:'soprano',       tier:1, tip:'Tier 1 — надійно. Найвищий жіночий регістр — чистий, дзвінкий.'},
+    {t:'mezzo-soprano', tier:1, tip:'Tier 1 — надійно. Тепліший жіночий — між soprano і alto.'},
+    {t:'alto',          tier:1, tip:'Tier 1 — надійно. Глибокий жіночий регістр — земний, насичений.'},
+    {t:'tenor',         tier:1, tip:'Tier 1 — надійно. Вищий чоловічий — ліричний, яскравий.'},
+    {t:'baritone',      tier:1, tip:'Tier 1 — надійно. Центральний чоловічий — теплий, авторитетний.'},
+    {t:'bass',          tier:2, tip:'Tier 2 — 50-80%. Найнижчий чоловічий — глибокий, монументальний.'},
+    {t:'countertenor',  tier:2, tip:'Tier 2 — 50-80%. Чоловічий фальцет у верхньому регістрі.'},
+    {t:'contralto',     tier:2, tip:'Tier 2 — 50-80%. Найнижчий жіночий — темний, драматичний.'},
+  ],
+  // ── TEXTURE (параметр 2, колишній Character) ─────────────────
   char: [
-    // Tier 1 (>80% reliable) — marked with ✓
-    {t:'raspy',tier:1,tip:'Tier 1 — дуже надійно. Грубий, текстурований голос.'},
-    {t:'breathy',tier:1,tip:'Tier 1 — надійно. Повітряний, інтимний тембр.'},
-    {t:'smooth',tier:1,tip:'Tier 1 — надійно. Рівний, шовковистий голос.'},
-    {t:'warm',tier:1,tip:'Tier 1 — надійно. Тепла, округла забарвленість.'},
-    {t:'gritty',tier:2,tip:'Tier 2 — 50-80%. Жорсткий, сирий характер.'},
-    {t:'silky',tier:2,tip:'Tier 2 — 50-80%. Шовковистий, полірований.'},
-    {t:'ethereal',tier:2,tip:'Tier 2 — 50-80%. Ефірний, неземний тембр.'},
-    {t:'gravelly',tier:2,tip:"Tier 2 — 50-80%. Хрипкуватий, кам\u2019янистий."},
-    {t:'sultry',tier:2,tip:'Tier 2 — 50-80%. Чуттєвий, звабливий тон.'},
-    {t:'husky',tier:2,tip:'Tier 2 — 50-80%. Глухуватий, приглушений.'},
-    {t:'velvety',tier:2,tip:"Tier 2 — 50-80%. Оксамитовий, м’який."},
-    {t:'dark',tier:2,tip:'Tier 2 — 50-80%. Темний, насичений тон.'},
-    {t:'operatic',tier:2,tip:'Tier 2 — 50-80%. Оперний, проекційний.'},
-    {t:'nasal',tier:3,tip:'Tier 3 — 30-50%. Носовий резонанс.'},
-    {t:'androgynous',tier:3,tip:'Tier 3 — 30-50%. Андрогінний — непередбачуваний.'},
+    {t:'breathy',     tier:1, tip:'Tier 1 — надійно. Повітряний, інтимний тембр — ASMR-якість.'},
+    {t:'raspy',       tier:1, tip:'Tier 1 — надійно. Грубий, текстурований голос — R&B, Rock.'},
+    {t:'smooth',      tier:1, tip:'Tier 1 — надійно. Рівний, шовковистий голос — Pop, Soul.'},
+    {t:'warm',        tier:1, tip:'Tier 1 — надійно. Тепла, округла забарвленість — House, Indie.'},
+    {t:'airy',        tier:1, tip:'Tier 1 — надійно. Легкий, повітряний — Future House, Indie Pop.'},
+    {t:'gritty',      tier:2, tip:'Tier 2 — 50-80%. Жорсткий, сирий характер — Blues, Garage.'},
+    {t:'silky',       tier:2, tip:'Tier 2 — 50-80%. Шовковистий, полірований — Neo-Soul, R&B.'},
+    {t:'ethereal',    tier:2, tip:'Tier 2 — 50-80%. Ефірний, неземний тембр — Ambient, Cinematic.'},
+    {t:'gravelly',    tier:2, tip:'Tier 2 — 50-80%. Хрипкуватий, кам\u2019янистий — Rock, Country.'},
+    {t:'sultry',      tier:2, tip:'Tier 2 — 50-80%. Чуттєвий, звабливий тон — Deep House, R&B.'},
+    {t:'husky',       tier:2, tip:'Tier 2 — 50-80%. Глухуватий, приглушений — Trip-hop, Indie.'},
+    {t:'velvety',     tier:2, tip:'Tier 2 — 50-80%. Оксамитовий, м\u2019який — Jazz, Soul.'},
+    {t:'dark',        tier:2, tip:'Tier 2 — 50-80%. Темний, насичений тон — Dark House, Gothic.'},
+    {t:'bell-like',   tier:2, tip:'Tier 2 — 50-80%. Дзвінкий, кристальний — Future House, Trance.'},
+    {t:'crystalline', tier:2, tip:'Tier 2 — 50-80%. Кристально чистий — Ambient, Cinematic.'},
+    {t:'smoky',       tier:2, tip:'Tier 2 — 50-80%. Димчастий, джазовий тембр — Jazz, Blues.'},
+    {t:'operatic',    tier:2, tip:'Tier 2 — 50-80%. Оперний, проекційний — Cinematic, Epic.'},
+    {t:'nasal',       tier:3, tip:'Tier 3 — 30-50%. Носовий резонанс — нестандартний.'},
   ],
+  // ── STYLE (новий параметр 3) ──────────────────────────────────
+  style: [
+    {t:'cinematic',         tier:1, tip:'Tier 1 — надійно. Кінематографічний — великий простір.'},
+    {t:'lo-fi',             tier:1, tip:'Tier 1 — надійно. Lo-fi — приглушений, домашній характер.'},
+    {t:'bedroom pop',       tier:1, tip:'Tier 1 — надійно. Bedroom pop — інтимна домашня атмосфера.'},
+    {t:'gospel-influenced', tier:2, tip:'Tier 2 — 50-80%. Госпельний вплив — душевність, сила.'},
+    {t:'jazz-inflected',    tier:2, tip:'Tier 2 — 50-80%. Джазовий відтінок — свінг, імпровізація.'},
+    {t:'indie folk',        tier:2, tip:'Tier 2 — 50-80%. Indie folk — природній, нефільтрований.'},
+    {t:'R&B influenced',    tier:2, tip:'Tier 2 — 50-80%. R&B вплив — рани, мелізми, груув.'},
+    {t:'classical',         tier:2, tip:'Tier 2 — 50-80%. Класична техніка — дихання, дикція.'},
+    {t:'bel canto',         tier:2, tip:'Tier 2 — 50-80%. Bel canto — довга лінія, кантілена.'},
+    {t:'folk-inflected',    tier:2, tip:'Tier 2 — 50-80%. Народний відтінок — автентичність.'},
+    {t:'electronic pop',    tier:2, tip:'Tier 2 — 50-80%. Електронний поп — чіткість, поліш.'},
+    {t:'confessional',      tier:2, tip:'Tier 2 — 50-80%. Конфесійний — відверто, особисто.'},
+    {t:'trip-hop',          tier:2, tip:'Tier 2 — 50-80%. Trip-hop стиль — повільний, меланхолійний.'},
+    {t:'soul',              tier:1, tip:'Tier 1 — надійно. Soul стиль — глибоко емоційний.'},
+    {t:'operatic',          tier:2, tip:'Tier 2 — 50-80%. Оперний стиль — вібрато, проекція.'},
+  ],
+  // ── DELIVERY (параметр 4, колишній Delivery) ─────────────────
   deliv: [
-    {t:'intimate',tier:1,tip:'Tier 1 — надійно. Близький, особистий спосіб подачі.'},
-    {t:'powerful belt',tier:1,tip:'Tier 1 — надійно. Повна потужність грудного голосу.'},
-    {t:'whispered',tier:1,tip:'Tier 1 — надійно. Пошепки, майже тихо.'},
-    {t:'spoken word',tier:1,tip:'Tier 1 — надійно. Розмовна подача без пітчу.'},
-    {t:'conversational',tier:2,tip:'Tier 2 — надійно. Невимушений, природний стиль.'},
-    {t:'soaring',tier:2,tip:'Tier 2 — 50-80%. Ширяючий, злетний характер.'},
-    {t:'laid-back',tier:2,tip:'Tier 2 — 50-80%. Розслаблений, без поспіху.'},
-    {t:'commanding',tier:2,tip:'Tier 2 — 50-80%. Владний, авторитетний.'},
-    {t:'declarative',tier:2,tip:'Tier 2 — 50-80%. Чіткий, ствердний.'},
-    {t:'behind-the-beat',tier:2,tip:'Tier 2 — 50-80%. Трохи відстаючий від ритму.'},
-    {t:'melismatic',tier:2,tip:'Tier 2 — 50-80%. З мелізмами і руладами.'},
-    {t:'staccato',tier:2,tip:'Tier 2 — 50-80%. Уривчасто, чітко.'},
-    {t:'falsetto',tier:2,tip:'Tier 2 — COIN-FLIP ~60%. Підсилюй і в style-prompt!'},
-    {t:'vibrato',tier:2,tip:'Tier 2 — 50-80%. Вібрато на тривалих нотах.'},
-    {t:'building',tier:1,tip:'Tier 1 — надійно. Наростання від тихого до потужного.'},
+    {t:'intimate',        tier:1, tip:'Tier 1 — надійно. Близький, особистий спосіб подачі.'},
+    {t:'powerful belt',   tier:1, tip:'Tier 1 — надійно. Повна потужність грудного голосу.'},
+    {t:'whispered',       tier:1, tip:'Tier 1 — надійно. Пошепки, майже тихо.'},
+    {t:'spoken word',     tier:1, tip:'Tier 1 — надійно. Розмовна подача без пітчу.'},
+    {t:'soaring',         tier:2, tip:'Tier 2 — 50-80%. Ширяючий, злетний характер.'},
+    {t:'breathy intimate',tier:1, tip:'Tier 1 — надійно. Поєднання повітряності і близькості.'},
+    {t:'conversational',  tier:2, tip:'Tier 2 — 50-80%. Невимушений, природній стиль.'},
+    {t:'commanding',      tier:2, tip:'Tier 2 — 50-80%. Владний, авторитетний.'},
+    {t:'behind-the-beat', tier:2, tip:'Tier 2 — 50-80%. Трохи відстаючий від ритму — lazy groove.'},
+    {t:'melismatic',      tier:2, tip:'Tier 2 — 50-80%. З мелізмами і руладами — R&B, Gospel.'},
+    {t:'falsetto',        tier:2, tip:'Tier 2 — COIN-FLIP ~60%. Підсилюй і в style-prompt!'},
+    {t:'vibrato',         tier:2, tip:'Tier 2 — 50-80%. Вібрато на тривалих нотах.'},
+    {t:'building',        tier:1, tip:'Tier 1 — надійно. Наростання від тихого до потужного.'},
+    {t:'staccato',        tier:2, tip:'Tier 2 — 50-80%. Уривчасто, чітко — акцентовано.'},
+    {t:'laid-back',       tier:2, tip:'Tier 2 — 50-80%. Розслаблений, без поспіху.'},
+    {t:'declarative',     tier:2, tip:'Tier 2 — 50-80%. Чіткий, ствердний — впевнений.'},
   ],
+  // ── EFFECTS (параметр 5, колишній Effects) ───────────────────
   eff: [
-    {t:'dry close-mic',tier:1,tip:'Tier 1 — надійно. Сухий, близький мікрофон без ревербу.'},
-    {t:'reverb-drenched',tier:1,tip:'Tier 1 — надійно. Насичений реверб. (краще ніж [Reverb:30%])'},
-    {t:'warm tape',tier:2,tip:'Tier 2 — 50-80%. Аналогова теплота стрічки.'},
-    {t:'lo-fi filtered',tier:2,tip:'Tier 2 — 50-80%. Lo-fi фільтрація — додає ретро характер.'},
-    {t:'wide stereo',tier:2,tip:'Tier 2 — 50-80%. Широке стерео. (краще ніж [Stereo:Wide])'},
-    {t:'compressed',tier:2,tip:'Tier 2 — 50-80%. Компресія. (краще ніж [Compression:Medium])'},
-    {t:'auto-tuned',tier:1,tip:'Tier 1 — надійно в стилі Trap/Pop. Авто-тюн.'},
-    {t:'doubled harmonies',tier:2,tip:'Tier 2 — 50-80%. Подвоєні гармонії.'},
-    {t:'hall reverb',tier:2,tip:'Tier 2 — 50-80%. Зальний реверб — великий простір.'},
-    {t:'plate reverb',tier:2,tip:'Tier 2 — 50-80%. Тарілчастий реверб — вінтажна полірованість.'},
-    {t:'church reverb',tier:2,tip:'Tier 2 — 50-80%. Соборний реверб — величний простір.'},
-    {t:'broadcast quality',tier:2,tip:'Tier 2 — 50-80%. Мовна якість — чіткий, професійний.'},
-    {t:'intimate room',tier:2,tip:'Tier 2 — 50-80%. Тісна кімната — домашнє відчуття.'},
-    {t:'stadium echo',tier:3,tip:'Tier 3 — 30-50%. Стадіонне відлуння.'},
+    {t:'dry close-mic',       tier:1, tip:'Tier 1 — надійно. Сухий, близький мікрофон без ревербу.'},
+    {t:'reverb-drenched',     tier:1, tip:'Tier 1 — надійно. Насичений реверб — великий простір.'},
+    {t:'wide stereo shimmer', tier:1, tip:'Tier 1 — надійно. Широке стерео + shimmer — Future House.'},
+    {t:'warm tape',           tier:2, tip:'Tier 2 — 50-80%. Аналогова теплота стрічки.'},
+    {t:'lo-fi filtered',      tier:2, tip:'Tier 2 — 50-80%. Lo-fi фільтрація — ретро характер.'},
+    {t:'auto-tuned',          tier:1, tip:'Tier 1 — надійно в стилі Trap/Pop. Авто-тюн ефект.'},
+    {t:'doubled harmonies',   tier:2, tip:'Tier 2 — 50-80%. Подвоєні гармонії — ширина.'},
+    {t:'hall reverb',         tier:2, tip:'Tier 2 — 50-80%. Зальний реверб — великий простір.'},
+    {t:'plate reverb',        tier:2, tip:'Tier 2 — 50-80%. Тарілчастий реверб — вінтаж.'},
+    {t:'church reverb',       tier:2, tip:'Tier 2 — 50-80%. Соборний реверб — величний.'},
+    {t:'intimate room',       tier:2, tip:'Tier 2 — 50-80%. Тісна кімната — домашнє відчуття.'},
+    {t:'subtle delay',        tier:2, tip:'Tier 2 — 50-80%. Легкий delay — глибина без шуму.'},
+    {t:'granular shimmer',    tier:2, tip:'Tier 2 — 50-80%. Гранулярний shimmer — космічна текстура.'},
+    {t:'compressed',          tier:2, tip:'Tier 2 — 50-80%. Компресія — щільність і punch.'},
+    {t:'broadcast quality',   tier:2, tip:'Tier 2 — 50-80%. Мовна якість — чіткий, професійний.'},
   ]
 };
 
-let VB_SEL = {char:null, deliv:null, eff:null};
+// ── VOCAL PRESETS (5-param combos) ────────────────────────────────
+const VOCAL_PRESETS = [
+  {name:'Bell-like Future House', reg:'soprano', char:'bell-like', style:'cinematic', deliv:'soaring', eff:'wide stereo shimmer',
+   tip:'Ідеально для Future House / Progressive House — Infinite Embrace formula'},
+  {name:'Smoky Alto Lo-Fi',       reg:'alto',    char:'smoky',    style:'lo-fi', deliv:'breathy intimate', eff:'warm tape',
+   tip:'Глибокий джазовий характер — Trip-hop, Deep House, Zifferblatt'},
+  {name:'Breathy Bedroom Pop',    reg:'mezzo-soprano', char:'breathy', style:'bedroom pop', deliv:'intimate', eff:'dry close-mic',
+   tip:'Billie Eilish / Lana Del Rey тип — Indie, Confessional, Lo-Fi'},
+  {name:'Powerful Soul Belt',     reg:'mezzo-soprano', char:'warm',    style:'soul', deliv:'powerful belt', eff:'reverb-drenched',
+   tip:'Beyoncé / Whitney тип — Soul, R&B, Gospel-influenced'},
+  {name:'Raspy Indie Rock',       reg:'alto',    char:'raspy',    style:'indie folk', deliv:'conversational', eff:'intimate room',
+   tip:'Hozier / The Hardkiss тип — Indie Rock, Alternative'},
+  {name:'Ethereal Cinematic',     reg:'soprano', char:'crystalline', style:'cinematic', deliv:'building', eff:'hall reverb',
+   tip:'Ólafur Arnalds / Cinematic тип — Ambient, Film Score, Epic'},
+  {name:'Warm Baritone Jazz',     reg:'baritone', char:'warm',    style:'jazz-inflected', deliv:'laid-back', eff:'plate reverb',
+   tip:'Frank Sinatra / Michael Bublé тип — Jazz, Swing, Easy Listening'},
+  {name:'Dark Trip-Hop',          reg:'contralto', char:'dark',   style:'trip-hop', deliv:'whispered', eff:'lo-fi filtered',
+   tip:'Massive Attack / Portishead тип — Trip-hop, Dark Ambient'},
+];
+
+let VB_SEL = {reg:null, char:null, style:null, deliv:null, eff:null};
+
 
 function initVocalBuilder(){
   function makeGroup(id, items, key){
@@ -3374,7 +3475,7 @@ function initVocalBuilder(){
       p.onclick=()=>{
         if(VB_SEL[key]===t){VB_SEL[key]=null;p.classList.remove('on')}
         else{
-          wrap.querySelectorAll('.vb-pill').forEach(x=>x.classList.remove('on'));
+          wrap.querySelectorAll('#'+id+' .vb-pill').forEach(x=>x.classList.remove('on'));
           VB_SEL[key]=t;p.classList.add('on');
         }
         updateVBPreview();
@@ -3382,19 +3483,64 @@ function initVocalBuilder(){
       wrap.appendChild(p);
     });
   }
-  makeGroup('vb-char',VB_DATA.char,'char');
-  makeGroup('vb-deliv',VB_DATA.deliv,'deliv');
-  makeGroup('vb-eff',VB_DATA.eff,'eff');
+  makeGroup('vb-reg',   VB_DATA.reg,   'reg');
+  makeGroup('vb-char',  VB_DATA.char,  'char');
+  makeGroup('vb-style', VB_DATA.style, 'style');
+  makeGroup('vb-deliv', VB_DATA.deliv, 'deliv');
+  makeGroup('vb-eff',   VB_DATA.eff,   'eff');
+  // Presets
+  const pw=document.getElementById('vb-presets');
+  if(pw){
+    pw.innerHTML='';
+    VOCAL_PRESETS.forEach(preset=>{
+      const p=document.createElement('span');
+      p.className='vb-pill';
+      p.title=preset.tip;
+      p.style.cssText='background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.3);font-size:10px';
+      p.textContent='⚡ '+preset.name;
+      p.onclick=()=>{
+        // Set all 5 params
+        VB_SEL={reg:preset.reg, char:preset.char, style:preset.style, deliv:preset.deliv, eff:preset.eff};
+        // Update pill highlights
+        ['reg','char','style','deliv','eff'].forEach(key=>{
+          const wrap=document.getElementById('vb-'+key);
+          if(!wrap)return;
+          wrap.querySelectorAll('.vb-pill').forEach(x=>{
+            x.classList.toggle('on', x.textContent.replace(/T[123]$/,'').trim()===VB_SEL[key]);
+          });
+        });
+        pw.querySelectorAll('.vb-pill').forEach(x=>x.classList.remove('on'));
+        p.classList.add('on');
+        updateVBPreview();
+        showToast('⚡ '+preset.name+' застосовано');
+      };
+      pw.appendChild(p);
+    });
+  }
 }
 
 function updateVBPreview(){
-  const parts=[VB_SEL.char,VB_SEL.deliv,VB_SEL.eff].filter(Boolean);
   const vt=document.getElementById('vt')?.value||'';
-  const gender=vt==='female'?'female vocals':vt==='male'?'male vocals':vt==='duet'?'male and female vocals':'';
+  const gender=vt==='female'?'female vocals':vt==='male'?'male vocals':vt==='duet'?'male+female vocals':'';
   const preview=document.getElementById('vb-preview');
   if(!preview)return;
-  if(!parts.length){preview.textContent='— оберіть теги вище —';return;}
-  const full=gender?`${gender}, ${parts.join(', ')}`:parts.join(', ');
+  const {reg,char,style,deliv,eff}=VB_SEL;
+  if(!reg&&!char&&!style&&!deliv&&!eff){preview.textContent='— оберіть параметри або пресет вище —';return;}
+  // New standard: "gender register — texture style, delivery delivery, effect effect"
+  const regStr=reg||'';
+  const charStr=char||'';
+  const styleStr=style||'';
+  const delivStr=deliv||'';
+  const effStr=eff||'';
+  // Format: "female soprano — airy cinematic texture, soaring delivery, wide stereo shimmer reverb"
+  let parts=[];
+  if(regStr&&charStr) parts.push(regStr+' — '+charStr+(styleStr?' '+styleStr+' texture':''));
+  else if(regStr) parts.push(regStr);
+  else if(charStr) parts.push(charStr+(styleStr?' '+styleStr:''));
+  if(delivStr) parts.push(delivStr+' delivery');
+  if(effStr) parts.push(effStr);
+  const vocal=parts.join(', ');
+  const full=gender?(gender+', '+vocal):vocal;
   preview.textContent=full;
 }
 
@@ -3407,10 +3553,10 @@ function applyVocalStack(){
 }
 
 function clearVocalStack(){
-  VB_SEL={char:null,deliv:null,eff:null};
+  VB_SEL={reg:null,char:null,style:null,deliv:null,eff:null};
   document.querySelectorAll('.vb-pill').forEach(p=>p.classList.remove('on'));
   const preview=document.getElementById('vb-preview');
-  if(preview)preview.textContent='— оберіть теги вище —';
+  if(preview)preview.textContent='— оберіть параметри або пресет вище —';
 }
 
 // ══════════════════════════════════════════════════════════════════
