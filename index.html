@@ -2193,6 +2193,19 @@ async function initStep4(){
   const vocalDNA=window._vocalDNA?`VOCAL DNA reference — "${window._vocalDNA.n}" style: ${window._vocalDNA.v}`:'';
   const soundDNA=window._soundDNA?`SOUND DNA reference — "${window._soundDNA.n}" production: ${window._soundDNA.s}`:'';
 
+  // ── NEW STANDARD: style-prompt as artistic image, not tag concatenation ──
+  const vocalDesc5 = (()=>{
+    const vbs=VB_SEL;
+    const vtv=document.getElementById('vt')?.value||'';
+    const gender=vtv==='female'?'female vocals':vtv==='male'?'male vocals':vtv==='duet'?'male+female vocals':'';
+    if(vbs.reg||vbs.char||vbs.style||vbs.deliv||vbs.eff){
+      const reg=vbs.reg||''; const tex=vbs.char||''; const sty=vbs.style||'';
+      const del=vbs.deliv||''; const eff=vbs.eff||'';
+      return [gender,reg,reg&&tex?'—':'',tex,sty?sty+' texture':'',del?del+' delivery':'',eff].filter(Boolean).join(' ');
+    }
+    return vd;
+  })();
+
   const lR=TIER_RULES+`
 Expert Suno AI prompt engineer and lyricist.
 Song:"${title||'Untitled'}"|Genre:${genre},${bpm}${key?',Key:'+key:''}
@@ -2231,20 +2244,7 @@ RULES:
 10. If near limit: shorten tags first, never cut lyrics mid-sentence
 11. Output ONLY the formatted lyrics-prompt.`;
 
-    // ── NEW STANDARD: style-prompt as artistic image, not tag concatenation ──
-  const vocalDesc5 = (()=>{
-    const vbs=VB_SEL;
-    const vtv=document.getElementById('vt')?.value||'';
-    const gender=vtv==='female'?'female vocals':vtv==='male'?'male vocals':vtv==='duet'?'male+female vocals':'';
-    if(vbs.reg||vbs.char||vbs.style||vbs.deliv||vbs.eff){
-      const reg=vbs.reg||''; const tex=vbs.char||''; const sty=vbs.style||'';
-      const del=vbs.deliv||''; const eff=vbs.eff||'';
-      return [gender,reg,reg&&tex?'—':'',tex,sty?sty+' texture':'',del?del+' delivery':'',eff].filter(Boolean).join(' ');
-    }
-    return vd;
-  })();
-
-  const sR=TIER_RULES+`
+    const sR=TIER_RULES+`
 You are an expert Suno/Udio style-prompt artist. Build the style-prompt as a UNIFIED ARTISTIC IMAGE.
 
 NEW STANDARD — ORDER IS CRITICAL (tokenizer weights first tokens most):
