@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026 v5.2.0</title>
+<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026 v5.5.0</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap');
 :root{
@@ -247,7 +247,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
       </svg>
     </div>
     <div>
-      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span><span class="ver-badge">v5.2.0</span></div>
+      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span><span class="ver-badge">v5.5.0</span></div>
       <div class="brand-tag">Lyrics & Instrumentation Prompt Synthesizer · by @AVII</div>
     </div>
   </div>
@@ -797,9 +797,9 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     <div class="out-block">
       <div class="out-hdr">
         <span class="out-title" id="out-title-s">🎛️ Style-prompt — ≤1000 зн.</span>
-        <div class="out-meta"><span class="ctr ok" id="ctr-s">0 / 1000</span><button class="cbtn" id="cbtn-s" data-i18n="btn.copy" onclick="cp('out-s','ctr-s',1000,'pf-s','cbtn-s')">Копіювати</button></div>
+        <div class="out-meta"><span id="tag-counter-s" style="font-size:10px;color:var(--t2);margin-right:6px"></span><span class="ctr ok" id="ctr-s">0 / 1000</span><button class="cbtn" id="cbtn-s" data-i18n="btn.copy" onclick="cp('out-s','ctr-s',1000,'pf-s','cbtn-s')">Копіювати</button></div>
       </div>
-      <textarea class="out" id="out-s" rows="11" oninput="updCtr('out-s','ctr-s',1000,'pf-s')"></textarea>
+      <textarea class="out" id="out-s" rows="11" oninput="updCtr('out-s','ctr-s',1000,'pf-s');updateTagCounter()"></textarea>
       <div class="pbar"><div class="pfill" id="pf-s"></div></div>
     </div>
     <div class="card">
@@ -814,6 +814,12 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
       <button class="btn" data-i18n="btn.exportHtml" onclick="exportAsHtml()">↓ HTML</button>
       <button class="btn" onclick="exportCurrentSongJson()" title="Зберегти поточну пісню як .json файл" style="background:rgba(62,201,139,.08);border-color:rgba(62,201,139,.3);color:var(--teal)">↓ JSON</button>
       <span style="font-size:11px;color:var(--grn)" id="save-status"></span>
+    </div>
+    <div style="margin-top:8px;padding:8px 12px;background:rgba(232,168,51,.06);border:1px solid rgba(232,168,51,.2);border-radius:8px;font-size:11px;color:var(--t2);line-height:1.6">
+      <span style="color:var(--amber);font-weight:600">⚡ Extend Protocol:</span>
+      При розширенні треку в Suno — завжди копіюй повний <strong style="color:var(--t1)">Style Prompt</strong> назад у поле Style.
+      Додай новий структурний тег у Lyrics (<code style="color:var(--teal)">[Bridge]</code>, <code style="color:var(--teal)">[Guitar Solo]</code>).
+      Якщо трек втрачає енергію — додай <code style="color:var(--teal)">sustained energy, no fade</code> в Style.
     </div>
     <div class="btn-row">
       <button class="btn" data-i18n="btn.back" onclick="goStep(3)">← Назад</button>
@@ -1044,6 +1050,20 @@ const TAGS={
     {t:'woodwind section',i:'🪈',tip:"✅ Дерев'яні духові — для Classical, Cinematic, Folk"},
     {t:'full orchestra',i:'🎼',tip:'✅ Повний оркестр — для Cinematic Finale, Epic Soundtrack'},
     {t:'chamber ensemble',i:'🎻',tip:'✅ Камерний ансамбль — для Neo-Classical, Intimate'},
+    {t:'swirling reverb',i:'🌀',tip:'✅ Розмите туманне звучання — для Psychedelic, Dream Pop, Shoegaze',section:'🌊 New Textures'},
+    {t:'hazy reverb',i:'🌫',tip:'✅ Туманний реверб — для Dream Pop, Shoegaze, Atmospheric'},
+    {t:'tube-amp warmth',i:'🔆',tip:'✅ Лампове перевантаження — для Blues, Rock, Indie'},
+    {t:'dusty vinyl texture',i:'📀',tip:'✅ Пилова вінілова текстура — для Lo-Fi, Hip-Hop, Vintage'},
+    {t:'white noise risers',i:'📢',tip:'✅ Білий шум-рисер — для Pre-Drop, Transition, EDM Build'},
+    {t:'chest-rattling pulse',i:'💙',tip:'✅ Фізична вібрація саб-баса — для Bass House, Trap, Drop 3'},
+    {t:'bass drives rhythm',i:'🎸',tip:'✅ Бас як головний ритмічний рушій — для Funk, House, Electronic'},
+    {t:'sub heartbeat',i:'❤️',tip:'✅ Sub = серцебиття — для Half-Time Drop, Intimate Break'},
+    {t:'808 sub floor',i:'🔈',tip:'✅ 808 саб-основа — для Trap, Bass House, Dark Electronic'},
+    {t:'polished studio mix',i:'💿',tip:'✅ Відшліфований студійний мікс — замість "professional"'},
+    {t:'vocal-forward mix',i:'🎤',tip:'✅ Вокал на передньому плані — для Pop, Soul, Ballad'},
+    {t:'broadcast-ready',i:'📡',tip:'✅ Готовий до трансляції — технічний аналог "radio-ready"'},
+    {t:'deep reverb tails',i:'🌊',tip:'✅ Довгі хвости реверберації — для Melodic Techno, Progressive House'},
+    {t:'stadium reverb',i:'🏟',tip:'✅ Стадіонний реверб — для Epic, Cinematic, Rock Anthem'},
   ],
   vocal:[
     {t:'raspy',i:'🔥',tip:'✅ Характерний голос — для House, Rock, Soul'},
@@ -2178,11 +2198,10 @@ Expert Suno AI prompt engineer and lyricist.
 Song:"${title||'Untitled'}"|Genre:${genre},${bpm}${key?',Key:'+key:''}
 Language:${lang}|Rhyme:${rhyme}
 Concept:${concept||'romantic emotional song'}
-Vocal:${vd}${vocalDNA?'\n'+vocalDNA:''}
+Vocal:${vocalDesc5||vd}${vocalDNA?'\n'+vocalDNA:''}
 ${soundDNA?soundDNA+'\n':''}Mood:${mood||'romantic,emotional'}
 Instruments:${instr||'piano,saxophone'}
 Production:${prod||'analog,layered'}
-Vocal characteristics:${vt}
 SFX:${sfx||'vinyl crackle,binary whoosh,digital glitch'}
 ${bp?`Bass:${bp}`:''}
 ${negP?`EXCLUDE from generation (negative prompts):${negP}`:''}
@@ -2196,14 +2215,21 @@ RULES:
 1. Total output MUST be ≤5000 chars. Absolute limit.
 2. Format:[SECTION NAME]\n[tag-prompt]\nlyrics
 3. Tags: commas and pipes, specific instruments (NOT "guitar" → "jangly Telecaster"), NO placebo tags like [Reverb:XX%]
-4. Vocal in tag-prompts: gender + 5-param (register+texture+style+delivery+effect). Use Vocal DNA as primary reference.
-5. BASS BUDGET — critical: MAX 1-2 bass directives per section in lyrics-prompt.
+4. VOCAL — always first in each tag-prompt (before genre/instruments):
+   Format: "[gender] [register] — [texture] [style], [delivery] delivery, [effect] | [genre tags...]"
+   ALWAYS duplicate gender in Lyrics field: add [Male Vocal] or [Female Vocal] as first tag in EVERY section.
+   5-param reference: ${vocalDesc5||vd}. Use Vocal DNA as primary reference.
+5. ROUND BRACKETS ( ) = sung/spoken content (backing vocals, ad-libs, whispers, echoes).
+   Square brackets [ ] = structural/technical instructions (NEVER sung).
+   Example: "(whispered echo)" is sung. "[whispered]" is a directive.
+6. BASS BUDGET — critical: MAX 1-2 bass directives per section in lyrics-prompt.
    Full bass architecture belongs in style-prompt. In lyrics: one clear directive per section.
    GOOD: "[L2 warm groove enters]" | BAD: "[L1+L2+L3+sidechain+808 all at once]"
-6. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
-7. Short drop/transition/hook tags — compress aggressively
-8. If near limit: shorten tags first, never cut lyrics mid-sentence
-9. Output ONLY the formatted lyrics-prompt.`;
+7. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
+8. Chorus: minimum 4 lines (AI rushes short choruses — always pad to 4+ lines)
+9. Short drop/transition/hook tags — compress aggressively
+10. If near limit: shorten tags first, never cut lyrics mid-sentence
+11. Output ONLY the formatted lyrics-prompt.`;
 
     // ── NEW STANDARD: style-prompt as artistic image, not tag concatenation ──
   const vocalDesc5 = (()=>{
@@ -2221,7 +2247,11 @@ RULES:
   const sR=TIER_RULES+`
 You are an expert Suno/Udio style-prompt artist. Build the style-prompt as a UNIFIED ARTISTIC IMAGE.
 
-NEW STANDARD (follow strictly):
+NEW STANDARD — ORDER IS CRITICAL (tokenizer weights first tokens most):
+0. VOCAL FIRST (before genre, for vocal tracks): "[gender] [register] — [texture] [style] texture, [delivery] delivery, [effect]"
+   This gets maximum tokenizer weight. Skip only for pure instrumental.
+   Reference: ${vocalDesc5||vd}
+
 1. GENRE LINE: "[descriptive adjective]-inspired [genre] meets [subgenre], [decade/era]"
    Example: "cosmic bass-driven future house meets orchestral progressive house, 2020s"
    ${soundDNA?'Sound DNA: '+soundDNA:''}
@@ -2308,6 +2338,18 @@ async function refine(){
   finally{document.getElementById('gen-loader').classList.remove('show');document.getElementById('gen-result').style.display='block';document.getElementById('gen-txt').textContent='AI генерує промпти…'}
 }
 
+function updateTagCounter(){
+  const s=document.getElementById('out-s')?.value||'';
+  const el=document.getElementById('tag-counter-s');
+  if(!el)return;
+  const tokens=s.split(/[,|]+/).map(t=>t.trim()).filter(t=>t.length>1);
+  const count=tokens.length;
+  if(count>10){el.textContent=count+' тегів ⚠️';el.style.color='var(--red)';el.title='Більше 10 — модель ігнорує останні! Оптимум: 4-7';}
+  else if(count>7){el.textContent=count+' тегів ⚠️';el.style.color='var(--gold)';el.title='На межі. Рекомендовано: 4-7';}
+  else if(count>=4){el.textContent=count+' тегів ✓';el.style.color='var(--grn)';el.title='Оптимальна кількість (4-7)';}
+  else{el.textContent=count?count+' тегів':'';el.style.color='var(--t2)';el.title='Менше 4 — результат може бути загальним';}
+}
+
 function updCtr(tid,cid,lim,pfid){
   const len=document.getElementById(tid).value.length;
   const el=document.getElementById(cid);
@@ -2366,7 +2408,7 @@ function exportAsHtml(entry){
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)} — LIPS by AVII v5.0.1</title>
+<title>${esc(title)} — LIPS by AVII v5.5.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Unbounded:wght@300;700&display=swap" rel="stylesheet">
 <style>
@@ -2424,7 +2466,7 @@ body{background:var(--bg);color:var(--white);font-family:'JetBrains Mono',monosp
     <div class="badge"><span>style</span><span class="val" id="activeStyleCount">—</span><span style="color:var(--muted)"> / 1000</span></div>
   </div>
 </div>
-<div class="meta-row">${esc(genre)} · ${esc(dateStr)} · LIPS by AVII v5.0.1</div>
+<div class="meta-row">${esc(genre)} · ${esc(dateStr)} · LIPS by AVII v5.5.0</div>
 <div class="layout">
 <div class="lyrics-wrap">
 <div class="code-block" id="lyricsBlock">${highlightLyrics(lyricsPrompt)}</div>
@@ -2621,7 +2663,7 @@ function buildSongJson(entry){
       bpm: st.bpm1||(entry.bpm)||'',
       key: st.key||'',
       mood: [...(SEL&&SEL.mood?SEL.mood:[])],
-      source: 'LIPS by AVII v5.3.0',
+      source: 'LIPS by AVII v5.5.0',
       createdAt: new Date(entry.ts).toISOString(),
       updatedAt: now
     },
