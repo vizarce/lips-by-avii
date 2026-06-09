@@ -2228,21 +2228,33 @@ RULES:
 1. Total output MUST be ≤5000 chars. Absolute limit.
 2. Format:[SECTION NAME]\n[tag-prompt]\nlyrics
 3. Tags: commas and pipes, specific instruments (NOT "guitar" → "jangly Telecaster"), NO placebo tags like [Reverb:XX%]
-4. VOCAL — always first in each tag-prompt (before genre/instruments):
-   Format: "[gender] [register] — [texture] [style], [delivery] delivery, [effect] | [genre tags...]"
-   ALWAYS duplicate gender in Lyrics field: add [Male Vocal] or [Female Vocal] as first tag in EVERY section.
-   5-param reference: ${vocalDesc5||vd}. Use Vocal DNA as primary reference.
+4. VOCAL — set ONCE at the start, then only on character changes:
+   - In style-prompt: full 5-param vocal description (already handled separately)
+   - In lyrics first section ONLY: state gender once e.g. [Female Vocal] or [Male Vocal]
+   - In subsequent sections: use ONLY delivery changes [Whispered] / [Belted] / [Falsetto] / [Spoken Word]
+   - NEVER repeat [Female Vocal] / [Male Vocal] in every section — it wastes token budget
+   - 5-param reference: ${vocalDesc5||vd}. Use Vocal DNA as primary reference.
 5. ROUND BRACKETS ( ) = sung/spoken content (backing vocals, ad-libs, whispers, echoes).
    Square brackets [ ] = structural/technical instructions (NEVER sung).
    Example: "(whispered echo)" is sung. "[whispered]" is a directive.
-6. BASS BUDGET — critical: MAX 1-2 bass directives per section in lyrics-prompt.
-   Full bass architecture belongs in style-prompt. In lyrics: one clear directive per section.
-   GOOD: "[L2 warm groove enters]" | BAD: "[L1+L2+L3+sidechain+808 all at once]"
+6. BASS BUDGET — contextual rules per section type:
+   Intro/Verse: 1 simple → "[L1 sub drone]" or "[L2 warm groove enters]"
+   Pre-Chorus: 1-2 max → "[L2+L3 building]" OK
+   Hook: 1 → "[L4 nebula wave]"
+   Drop 1/2: 1 powerful → "[full 5L bass]" — OK here
+   Bridge: 1 minimal → "[L1 sub only]"
+   Break: 0-1 → "[bass drops out]"
+   Build-up: 1 rising → "[L1→L5 sequential re-entry]" — OK here
+   Drop 3: 1 maximum → "[full 5L monumental]" — OK here
+   Outro: 1 fading → "[L1 final decay]"
+   NEVER stack 3+ bass directives in non-Drop/Build-up sections.
 7. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
 8. Chorus: minimum 4 lines (AI rushes short choruses — always pad to 4+ lines)
 9. Short drop/transition/hook tags — compress aggressively
 10. If near limit: shorten tags first, never cut lyrics mid-sentence
-11. Output ONLY the formatted lyrics-prompt.`;
+11. NEVER ask questions or request clarification — generate directly.
+12. Output starts immediately with [First Section] — no preamble or explanation.
+13. Output ONLY the formatted lyrics-prompt.`;
 
     const sR=TIER_RULES+`
 You are an expert Suno/Udio style-prompt artist. Build the style-prompt as a UNIFIED ARTISTIC IMAGE.
@@ -2286,8 +2298,11 @@ HARD RULES:
 - Use: "reverb-drenched" / "dry close-mic" / "wide stereo shimmer" / "compressed punch"
 - Gender ALWAYS explicit | Total ≤1000 chars ABSOLUTE
 - Pipes between sections
+- NEVER ask questions or request more info — generate directly from provided data
+- NEVER output meta-instructions or explanations — output the style-prompt text ONLY
+- Output starts immediately with the vocal/genre description, no preamble
 
-Output ONLY the style-prompt.`;
+Output ONLY the style-prompt. Do not ask questions. Do not explain. Start directly with the prompt text.`;
 
   const sgR=TIER_RULES+`Genre:${genre},Mood:${mood},Concept:${concept||'romantic song'}
 4 specific Suno improvement tips. Ukrainian. Practical, actionable. Include at least 1 tip about:
@@ -3801,7 +3816,8 @@ TIER 2 — reinforce in BOTH style-prompt AND lyrics (50-80%):
 - falsetto: write "falsetto vocals" in style AND [Falsetto] in lyrics
 - [Intro]: use "Short Instrumental Intro" — plain [Intro] often skipped
 - Age/character: "mature", "young", "weathered" — reinforce both places
-- Gender switches mid-song: use [Male Vocal] / [Female Vocal] per-section
+- Gender switches mid-song ONLY: use [Male Vocal] / [Female Vocal] ONLY when voice changes
+- Do NOT repeat [Female Vocal] / [Male Vocal] in every section — set it ONCE in style-prompt
 
 TIER 4 — NEVER USE (0% — pure placebo, Suno ignores completely):
 - [Reverb: XX%] — use "reverb-drenched" or "dry close-mic" instead
