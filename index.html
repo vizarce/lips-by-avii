@@ -811,7 +811,8 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
     </div>
     <div class="save-btn-wrap" id="save-btn-wrap">
       <button class="btn teal" data-i18n="btn.saveLib" onclick="saveToLibrary()">💾 Зберегти в бібліотеку</button>
-      <button class="btn" data-i18n="btn.exportHtml" onclick="exportAsHtml()">↓ Зберегти HTML</button>
+      <button class="btn" data-i18n="btn.exportHtml" onclick="exportAsHtml()">↓ HTML</button>
+      <button class="btn" onclick="exportCurrentSongJson()" title="Зберегти поточну пісню як .json файл" style="background:rgba(62,201,139,.08);border-color:rgba(62,201,139,.3);color:var(--teal)">↓ JSON</button>
       <span style="font-size:11px;color:var(--grn)" id="save-status"></span>
     </div>
     <div class="btn-row">
@@ -2664,6 +2665,24 @@ function exportSongJson(entry){
   a.href=url; a.download=safeName+'_lips.json'; a.click();
   URL.revokeObjectURL(url);
   showToast('JSON збережено: '+safeName+'_lips.json');
+}
+
+// ── EXPORT CURRENT SONG (Step 4) as .json ────────────────────
+function exportCurrentSongJson(){
+  const title = document.getElementById('title')?.value?.trim() || 'Untitled';
+  const lyrics = document.getElementById('out-l')?.value?.trim() || '';
+  const style  = document.getElementById('out-s')?.value?.trim() || '';
+  if(!lyrics && !style){ showToast('Немає даних — спочатку згенеруйте промпт'); return; }
+  const entry = {
+    title,
+    genre: getRawGenreKey(),
+    lang:  document.getElementById('lang')?.value || '',
+    lyrics,
+    style,
+    ts: Date.now(),
+    _state: getState()
+  };
+  exportSongJson(entry);
 }
 
 // ── IMPORT SONG FROM .json FILE ───────────────────────────────
