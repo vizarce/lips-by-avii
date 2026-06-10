@@ -4,6 +4,88 @@ All notable changes to this project are documented here.
 
 ---
 
+## [v5.5.3] — 2026-06-10
+
+### 🧬 DNA Differentiation & Multi-Select Vocal
+- **Vocal DNA**: тепер описує лише характеристики голосу артиста (тембр, манера співу) — без жанру/стилю
+- **Sound DNA**: тепер лише текстура продакшну — без жанру і темпу артиста
+- Нова кнопка **⊕ Комбінувати з 5-param** (`combineVocalDNA()`) — об'єднує базу з Vocal DNA зі специфікою обраних 5-параметрів
+- 5-Parameter Vocal Builder: мульти-вибір до 2 опцій на групу
+- AI lyrics: відновлено щільність 3-5 директив на tag-prompt (попередня версія була занадто розрідженою)
+- AI style-prompt: явне правило — використовувати ЖАНР користувача, DNA лише для збагачення текстури
+- Дует-вокал: обидва голоси описуються окремо, кожен зі своїм 5-параметровим профілем
+
+---
+
+## [v5.5.2] — 2026-06-10
+
+### 🐛 Bug Fixes & Bass Budget
+- Виправлено баг мета-відповідей у style-prompt (AI інколи ставив питання/пояснення замість промпту)
+- `[Female Vocal]` / `[Male Vocal]` більше не дублюється в кожній секції — встановлюється один раз на початку
+- **Bass Budget**: контекстна таблиця за типом секції (Drop = повні 5 шарів ОК, Verse = 1 простий шар, Build-up = послідовний re-entry тощо)
+
+---
+
+## [v5.5.1] — 2026-06-09
+
+### 🐛 Bug Fix
+- Виправлено TDZ-помилку (`vocalDesc5` використовувався до оголошення) — функцію переміщено перед `lR`
+
+---
+
+## [v5.5.0] — 2026-06-09
+
+### 🎙️ Vocal-First Standard & New Production Tags
+- AI style-prompt: вокал тепер ставиться ПЕРШИМ (перед жанром) — максимальна вага токенізатора
+- AI lyrics: правило `()` = заспіваний/проговорений контент, `[]` = технічна директива (ніколи не співається)
+- Гендер вокалу вказується один раз на пісню, далі — лише зміни подачі
+- Chorus: мінімум 4 рядки (AI більше не скорочує приспіви)
+- Лічильник тегів у полі Style-prompt (зелений 4-7 / жовтий 8-10 / червоний >10)
+- **Extend Protocol** — підказка під кнопками збереження для розширення треків у Suno
+- 14 нових продакшн-тегів: `swirling reverb`, `hazy reverb`, `tube-amp warmth`, `chest-rattling pulse`, `bass drives rhythm`, `sub heartbeat`, `808 sub floor`, `polished studio mix`, `vocal-forward mix`, `broadcast-ready`, `deep reverb tails`, `stadium reverb`, `dusty vinyl texture`, `white noise risers`
+
+---
+
+## [v5.4.1] — 2026-06-09
+
+### 🗄️ Song Vault
+- Кнопка **↓ JSON** на Кроці 4 (`exportCurrentSongJson()`) — експорт поточної пісні у `.json` без попереднього збереження у Vault
+
+---
+
+## [v5.4.0] — 2026-06-08
+
+### 🎙️ 5-Parameter Vocal Builder
+- Triple-Stack Builder (3 параметри) → **5-Parameter Builder**: Register + Texture + Style + Delivery + Effects
+- 8 пресетів одним кліком: Bell-like Future House, Smoky Alto Lo-Fi, Breathy Bedroom Pop, Powerful Soul Belt, Raspy Indie Rock, Ethereal Cinematic, Warm Baritone Jazz, Dark Trip-Hop
+- 40+ нових опцій вокалу у всіх 5 категоріях
+- Новий артистичний стандарт style-prompt: описовий жанр + епоха, BPM з прикметником-настроєм, 5-параметровий вокал, наративна бас-прогресія
+- **Bass Budget**: максимум 1-2 директиви по басу на секцію в lyrics-prompt; повна архітектура — у style-prompt
+- `vocalDesc5()` — формує вокальний рядок нового стандарту для AI-контексту
+
+---
+
+## [v5.3.1] — 2026-06-08
+
+### ☁️ Supabase
+- Додано credentials проєкту Supabase (URL + publishable anon key) для синхронізації Song Vault
+
+---
+
+## [v5.3.0] — 2026-06-08
+
+### 🗄️ Song Vault — JSON Export/Import & Supabase Sync
+- Бібліотека перейменована на **Song Vault** з оновленим заголовком і кнопками 📂 Імпорт JSON / ☁️ Sync
+- `buildSongJson()` — повна структурована JSON-схема v1.0 (meta, structure/sequence, prompts, versions)
+- **↓ JSON** — експорт будь-якої пісні з Vault у `.json` файл
+- Імпорт `.json` → модальне вікно з прев'ю (мета-дані, lyrics, style, пілюлі структури)
+- Збереження імпортованого JSON у локальний Vault (`loadJsonIntoVault()`)
+- `prefillFromJson()` — заповнює Кроки 1-4 з JSON і відкриває Крок 4 готовим до перегенерації
+- `syncToSupabase()` — авто-upsert при збереженні в Vault (fire & forget)
+- `syncVaultFromSupabase()` — підтягує пісні з Supabase у локальний Vault
+
+---
+
 ## [v5.2.0] — 2026-06-06
 
 ### 🎤 Artist DNA System

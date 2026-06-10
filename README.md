@@ -28,17 +28,21 @@ LIPS by AVII генерує два типи промптів:
 
 ---
 
-## 🆕 Що нового у v5.2.0
+## 🆕 Що нового у v5.5.3
 
-- **🎤 Artist DNA (Vocal)** — 32 артисти у 5 табах (Vocal/Soul/R&B/Pop/Indie/World) з повними triple-stack описами
-- **🎛️ Artist DNA (Sound)** — 32 артисти у 5 табах (Electronic/Hip-Hop/EDM/Cinematic/Rock) з BPM, жанром і формулою продакшну
-- **🎙️ Triple-Stack Vocal Builder** — HookGenius: Character + Delivery + Effects з Tier 1/2/3 індикаторами
-- **🎼 Style Formula Builder** — 25 жанрових пресетів (House, Future Bass, Dubstep, DnB, Trance, Trap, Lo-Fi, Cinematic тощо)
-- **🚫 Negative Prompting** — 47 тегів у 3 групах (Vocal / Instruments / Production)
-- **🏆 TIER_RULES** — впроваджено у всі 7 AI-функцій, забороняє placebo-теги
-- **📋 Структурні теги** — 60+ секцій з описами, 5 згрупованих категорій
-- **🎚️ Продакшн-теги** — 90+ тегів у 11 іменованих секціях
-- **⏱️ BPM пресети** — розширено з 19 до 40+ значень з новими EDM піджанрами
+- **🎙️ 5-Parameter Vocal Builder** — Register + Texture + Style + Delivery + Effects, мульти-вибір до 2 опцій на групу, 8 пресетів одним кліком (Bell-like Future House, Smoky Alto Lo-Fi, Powerful Soul Belt тощо)
+- **🧬 Vocal DNA / Sound DNA** — розділені: Vocal DNA = лише характеристики голосу, Sound DNA = лише текстура продакшну; кнопка **⊕ Комбінувати з 5-param**
+- **🎯 Vocal-First Standard** — у style-prompt вокал тепер ставиться першим (максимальна вага токенізатора); `()` = заспіваний контент, `[]` = технічна директива
+- **🔢 Bass Budget** — контекстна таблиця по типу секції (Drop = повні 5 шарів, Verse = 1 простий шар, Build-up = послідовний re-entry)
+- **🗄️ Song Vault** — JSON-експорт/імпорт пісень (`buildSongJson()`, `prefillFromJson()`), повна структурована схема v1.0
+- **☁️ Supabase Sync** — авто-синхронізація бібліотеки з Supabase (`syncToSupabase()`, `syncVaultFromSupabase()`)
+- **🔢 Лічильник тегів** у Style-prompt (зелений 4-7 / жовтий 8-10 / червоний >10)
+- **⚡ Extend Protocol** — підказка для розширення треків у Suno
+- **🎚️ +14 нових продакшн-тегів**: swirling reverb, hazy reverb, tube-amp warmth, chest-rattling pulse, 808 sub floor, vocal-forward mix та інші
+- **🎤 Artist DNA** — 32+32 артисти (Vocal/Sound) у 5 табах з повними описами
+- **🎼 Style Formula Builder** — 25 жанрових пресетів
+- **🚫 Negative Prompting** — 47 тегів у 3 групах
+- **🏆 TIER_RULES** — у всіх AI-функціях, забороняє placebo-теги
 
 ---
 
@@ -55,6 +59,7 @@ LIPS by AVII генерує два типи промптів:
 - BPM (від → до, або пресет)
 - Тональність
 - Тип і стиль вокалу
+- **🎙️ 5-Parameter Vocal Builder** — Register / Texture / Style / Delivery / Effects з Tier 1/2/3 індикаторами та 8 пресетами одним кліком
 
 ### Крок 2 — Жанр і Структура
 - AI-аналіз жанру: опис, темп, продакшн, вокальні особливості
@@ -70,22 +75,27 @@ LIPS by AVII генерує два типи промптів:
 **Style Formula Builder** — 25 жанрових формул для швидкого налаштування стилю.
 
 ### Крок 4 — Генерація
-- AI формує обидва промпти
+- AI формує обидва промпти (вокал — першим у style-prompt, за новим стандартом)
 - Лічильники знаків з кольоровим індикатором (зелений / жовтий / червоний)
+- **Лічильник тегів** у Style-prompt (зелений 4-7 / жовтий 8-10 / червоний >10)
 - Кнопка Копіювати для кожного блоку
 - Кнопки: Регенерувати / Уточнити
-- **💾 Зберегти в бібліотеку** — зберігає пісню в бібліотеку
-- **↓ Зберегти HTML** — завантажує автономний HTML-файл з обома промптами
+- **💾 Зберегти у Vault** — зберігає пісню в Song Vault (+ авто-синхронізація з Supabase)
+- **↓ HTML** — завантажує автономний HTML-файл з обома промптами
+- **↓ JSON** — експортує поточну пісню у структурований `.json` файл
+- **⚡ Extend Protocol** — підказка, як коректно розширювати трек у Suno
 
 ---
 
-## 📚 Бібліотека пісень
+## 🗄️ Song Vault
 
-Натисніть кнопку **📚 Бібліотека** у шапці застосунку, щоб:
+Натисніть кнопку **🗄️ Song Vault** у шапці застосунку, щоб:
 - Переглянути всі збережені пісні
 - Завантажити промпти збереженої пісні назад у Step 4
-- Зберегти окрему пісню як HTML-файл (кнопка **↓ HTML** у кожній картці)
-- Видалити окрему пісню або очистити всю бібліотеку
+- Зберегти пісню як HTML (**↓ HTML**) або структурований JSON (**↓ JSON**)
+- **📂 Імпорт JSON** — завантажити `.json` файл пісні, переглянути у модальному вікні (мета, lyrics, style, структура) і зберегти у Vault або одразу перегенерувати (`prefillFromJson()`)
+- **☁️ Sync** — підтягнути пісні з Supabase у локальний Vault
+- Видалити окрему пісню або очистити весь Vault
 
 ---
 
@@ -293,7 +303,8 @@ Browser → api.anthropic.com/v1/messages
 
 - **Зберегти сесію** 💾 — зберігає всі налаштування в `localStorage`
 - **Завантажити сесію** 📂 — відновлює попередній стан
-- **📚 Бібліотека** — постійне сховище готових промптів (localStorage + Netlify Storage)
+- **🗄️ Song Vault** — постійне сховище готових промптів (localStorage + Netlify Storage), з опційною синхронізацією через Supabase
+- **JSON-експорт/імпорт** — повна структурована схема пісні (`schemaVersion: "1.0"`) для резервного копіювання та перенесення між пристроями
 - Автозбереження при введенні
 
 ---
@@ -326,6 +337,14 @@ lips-by-avii/
 
 | Версія | Що нового |
 |--------|-----------|
+| **v5.5.3** | DNA-розділення (Vocal/Sound), ⊕ Комбінувати з 5-param, мульти-вибір вокалу, відновлена щільність директив |
+| **v5.5.2** | Виправлення мета-відповідей style-prompt, дедуп Female/Male Vocal, контекстний Bass Budget |
+| **v5.5.1** | Виправлення TDZ-помилки vocalDesc5 |
+| **v5.5.0** | Vocal-First standard, правило `()`/`[]`, лічильник тегів, Extend Protocol, +14 продакшн-тегів |
+| **v5.4.1** | Кнопка ↓ JSON на Кроці 4 (exportCurrentSongJson) |
+| **v5.4.0** | 5-Parameter Vocal Builder, 8 пресетів, новий артистичний style-prompt, Bass Budget |
+| **v5.3.1** | Supabase credentials для синхронізації Vault |
+| **v5.3.0** | Song Vault: JSON-експорт/імпорт, Supabase sync, prefill для перегенерації |
 | **v5.2.0** | Artist DNA, Triple-Stack Vocal Builder, Style Formula Builder, Negative Prompting, TIER_RULES, +90 теги, 40+ BPM пресетів |
 | **v5.0.1** | Виправлення кольору [Section] тегів, 4-кольорові категорії tag-prompt у HTML-експорті |
 | **v5.0.0** | 5-шаровий бас, Infinite Embrace, Zifferblatt UA, інструментальний режим, Artist Reference, +54 теги, HTML-експорт redesign |
