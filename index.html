@@ -573,7 +573,8 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
         <div class="artist-pills-wrap" id="vocal-dna-pills"></div>
         <div class="artist-dna-preview" id="vocal-dna-preview" style="display:none"></div>
         <div class="artist-dna-apply-row" id="vocal-dna-apply" style="display:none">
-          <button class="btn sm pur" onclick="applyVocalDNA()">↓ Застосувати vocal triple-stack</button>
+          <button class="btn sm pur" onclick="applyVocalDNA()">↓ Застосувати vocal DNA</button>
+          <button class="btn sm" onclick="combineVocalDNA()" style="background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.3);color:var(--violet)" title="Комбінує DNA з вибраними 5-параметрами">⊕ Комбінувати з 5-param</button>
           <button class="btn sm" onclick="clearVocalDNA()">✕</button>
         </div>
 
@@ -2190,8 +2191,8 @@ async function initStep4(){
   const sectionTags=STRUCT.map(s=>`[${s}]\n[${STAGS[s]||autoTag(s)}]`).join('\n');
   const negP=getNegativePrompt();
   const styleF=window._styleFormula||'';
-  const vocalDNA=window._vocalDNA?`VOCAL DNA reference — "${window._vocalDNA.n}" style: ${window._vocalDNA.v}`:'';
-  const soundDNA=window._soundDNA?`SOUND DNA reference — "${window._soundDNA.n}" production: ${window._soundDNA.s}`:'';
+  const vocalDNA=window._vocalDNA?`VOCAL DNA — voice characteristics only (NOT the artist's genre/style — only HOW they sing): "${window._vocalDNA.n}": ${window._vocalDNA.v}`:'';
+  const soundDNA=window._soundDNA?`SOUND DNA — production style only (NOT genre, NOT tempo — those come from user settings): "${window._soundDNA.n}": ${window._soundDNA.s}`:'';
 
   // ── NEW STANDARD: style-prompt as artistic image, not tag concatenation ──
   const vocalDesc5 = (()=>{
@@ -2227,7 +2228,13 @@ ${lyrics&&lyricMode!=='ai'?`USER LYRICS:\n${lyrics}`:'GENERATE original lyrics f
 RULES:
 1. Total output MUST be ≤5000 chars. Absolute limit.
 2. Format:[SECTION NAME]\n[tag-prompt]\nlyrics
-3. Tags: commas and pipes, specific instruments (NOT "guitar" → "jangly Telecaster"), NO placebo tags like [Reverb:XX%]
+3. EACH tag-prompt should have 3-5 directives (NOT 1, NOT 8):
+   - Delivery/vocal change (if applicable): [Whispered] / [Belted] / [Falsetto]
+   - Bass layer (1 per section per budget rules)
+   - 1-2 production/texture/SFX tags
+   Example good: "[Whispered][L2 warm groove][reverb-drenched|cosmic pad drift]"
+   Example bad: "[Whispered]" (too sparse) or "[L1+L2+L3+SFX1+SFX2+prod1+prod2]" (overloaded)
+   Tags: commas and pipes, specific instruments (NOT "guitar" → "jangly Telecaster"), NO placebo tags like [Reverb:XX%]
 4. VOCAL — set ONCE at the start, then only on character changes:
    - In style-prompt: full 5-param vocal description (already handled separately)
    - In lyrics first section ONLY: state gender once e.g. [Female Vocal] or [Male Vocal]
@@ -2266,8 +2273,9 @@ NEW STANDARD — ORDER IS CRITICAL (tokenizer weights first tokens most):
 
 1. GENRE LINE: "[descriptive adjective]-inspired [genre] meets [subgenre], [decade/era]"
    Example: "cosmic bass-driven future house meets orchestral progressive house, 2020s"
-   ${soundDNA?'Sound DNA: '+soundDNA:''}
-   ${styleF?'Base formula: '+styleF:''}
+   Use USER'S genre setting — NOT the artist's genre from DNA!
+   ${soundDNA?'\nSOUND DNA (production texture only, ignore artist genre): '+soundDNA:''}
+   ${styleF?'\nBase formula: '+styleF:''}
 
 2. BPM WITH ADJECTIVE: "[mood-word] [number] BPM"
    Examples: driving / pulsing / floating / hypnotic / soaring / surging / gentle
@@ -2276,7 +2284,10 @@ NEW STANDARD — ORDER IS CRITICAL (tokenizer weights first tokens most):
 3. VOCAL — 5 criteria (register + texture + style + delivery + effect):
    Format: "[gender] [register] — [texture] [style] texture, [delivery] delivery, [effect]"
    Example: "female soprano — airy cinematic texture, soaring delivery, wide stereo shimmer reverb"
-   Reference: ${vocalDesc5}${vocalDNA?'\nVocal DNA: '+vocalDNA:''}
+   Build from 5-param: ${vocalDesc5}
+   ${vocalDNA?'Enrich with Vocal DNA characteristics (HOW they sing, NOT their genre): '+vocalDNA:''}
+   NEVER mention artist names. Translate DNA into technical descriptors only.
+   For duets: describe BOTH voices separately with their own 5-param.
 
 4. BASS — narrative progression (NOT a tag list):
    Describe as a journey: "sub drone awakens → warm groove enters → melodic stab drops → orbital bridge → shimmer finale"
@@ -3359,6 +3370,29 @@ function updateSoundDNAPreview(){
   }
 }
 
+function combineVocalDNA(){
+  if(!selVocalDNA) return showToast('Спочатку оберіть Vocal DNA пресет');
+  const vbs = VB_SEL;
+  const has5param = vbs.reg||vbs.char||vbs.style||vbs.deliv||vbs.eff;
+  if(!has5param) return showToast('Спочатку оберіть параметри у 5-param builder вище');
+  // Build 5-param string
+  const parts5=[];
+  if(vbs.reg) parts5.push(vbs.reg);
+  if(vbs.char) parts5.push(vbs.char);
+  if(vbs.style) parts5.push(vbs.style+' style');
+  if(vbs.deliv) parts5.push(vbs.deliv+' delivery');
+  if(vbs.eff) parts5.push(vbs.eff);
+  const param5str = parts5.join(', ');
+  // Merge: DNA gives base voice character, 5-param adds delivery/effect specifics
+  const combined = selVocalDNA.v + ', ' + param5str;
+  const inp = document.getElementById('vocal-extra');
+  if(inp) inp.value = combined;
+  const vbPrev = document.getElementById('vb-preview');
+  if(vbPrev) vbPrev.textContent = combined;
+  window._vocalDNA = { n: selVocalDNA.n+' + 5-param', v: combined };
+  showToast('⊕ Vocal DNA + 5-param скомбіновано');
+}
+
 function applyVocalDNA(){
   if(!selVocalDNA) return;
   const inp = document.getElementById('vocal-extra');
@@ -3549,11 +3583,24 @@ function initVocalBuilder(){
       const tierCol=tier===1?'var(--grn)':tier===2?'var(--gold)':'var(--t2)';
       p.innerHTML=`${t}<span class="vb-tier" style="color:${tierCol}">T${tier}</span>`;
       p.onclick=()=>{
-        if(VB_SEL[key]===t){VB_SEL[key]=null;p.classList.remove('on')}
-        else{
-          wrap.querySelectorAll('#'+id+' .vb-pill').forEach(x=>x.classList.remove('on'));
-          VB_SEL[key]=t;p.classList.add('on');
+        // Multi-select: allow up to 2 per group
+        const cur = VB_SEL[key] ? VB_SEL[key].split('+') : [];
+        const idx = cur.indexOf(t);
+        if(idx>=0){
+          cur.splice(idx,1);
+          p.classList.remove('on');
+        } else {
+          if(cur.length>=2){
+            // Remove oldest, deselect its pill
+            const removed=cur.shift();
+            wrap.querySelectorAll('.vb-pill').forEach(x=>{
+              if(x.textContent.replace(/T[123]$/,'').trim()===removed) x.classList.remove('on');
+            });
+          }
+          cur.push(t);
+          p.classList.add('on');
         }
+        VB_SEL[key] = cur.length ? cur.join('+') : null;
         updateVBPreview();
       };
       wrap.appendChild(p);
