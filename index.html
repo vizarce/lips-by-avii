@@ -2016,32 +2016,50 @@ async function callAI(prompt,maxTokens=2000){
     ||window.location.hostname.includes('github.io')
     ||window.location.protocol==='file:';
 
+  // Helper: fetch with timeout
+  async function fetchWithTimeout(url, options, timeoutMs=55000){
+    const ctrl = new AbortController();
+    const tid = setTimeout(()=>ctrl.abort(), timeoutMs);
+    try{
+      const r = await fetch(url, {...options, signal: ctrl.signal});
+      clearTimeout(tid);
+      return r;
+    }catch(e){
+      clearTimeout(tid);
+      if(e.name==='AbortError') throw new Error(getLang()==='uk'
+        ? 'Таймаут: запит тривав понад 55 сек. Спробуйте ще раз або скоротіть промпт.'
+        : 'Timeout: request took over 55s. Try again or shorten the prompt.');
+      throw e;
+    }
+  }
+
   // On deployed or local file: try proxy first, then direct
   if(isDeployed){
     try{
-      const r=await fetch(PROXY_URL,{
+      const r=await fetchWithTimeout(PROXY_URL,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({apiKey,body:payload})
-      });
+      }, 55000);
       if(r.ok){
         const d=await r.json();
         if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
         return d.content?.[0]?.text||'';
       }
     }catch(e){
-      // Proxy not available - fall through to direct
+      if(e.message&&e.message.includes('Таймаут'))throw e;
+      if(e.message&&e.message.includes('Timeout'))throw e;
       if(e.message&&!e.message.includes('fetch'))throw e;
     }
   }
 
-  // Direct call - works in Claude.ai artifact and when CORS allowed
+  // Direct call
   try{
-    const r=await fetch(DIRECT_URL,{
+    const r=await fetchWithTimeout(DIRECT_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
       body:JSON.stringify(payload)
-    });
+    }, 55000);
     const d=await r.json();
     if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
     return d.content?.[0]?.text||'';
@@ -2227,82 +2245,96 @@ ${lyrics&&lyricMode!=='ai'?`USER LYRICS:\n${lyrics}`:'GENERATE original lyrics f
 
 RULES:
 1. Total output MUST be ≤5000 chars. Absolute limit.
-2. Format:[SECTION NAME]\n[tag-prompt]\nlyrics
-3. EACH tag-prompt should have 3-5 directives (NOT 1, NOT 8):
-   - Delivery/vocal change (if applicable): [Whispered] / [Belted] / [Falsetto]
-   - Bass layer (1 per section per budget rules)
-   - 1-2 production/texture/SFX tags
-   Example good: "[Whispered][L2 warm groove][reverb-drenched|cosmic pad drift]"
-   Example bad: "[Whispered]" (too sparse) or "[L1+L2+L3+SFX1+SFX2+prod1+prod2]" (overloaded)
-   Tags: commas and pipes, specific instruments (NOT "guitar" → "jangly Telecaster"), NO placebo tags like [Reverb:XX%]
-4. VOCAL — set ONCE at the start, then only on character changes:
-   - In style-prompt: full 5-param vocal description (already handled separately)
-   - In lyrics first section ONLY: state gender once e.g. [Female Vocal] or [Male Vocal]
-   - In subsequent sections: use ONLY delivery changes [Whispered] / [Belted] / [Falsetto] / [Spoken Word]
-   - NEVER repeat [Female Vocal] / [Male Vocal] in every section — it wastes token budget
-   - 5-param reference: ${vocalDesc5||vd}. Use Vocal DNA as primary reference.
-5. ROUND BRACKETS ( ) = sung/spoken content (backing vocals, ad-libs, whispers, echoes).
-   Square brackets [ ] = structural/technical instructions (NEVER sung).
-   Example: "(whispered echo)" is sung. "[whispered]" is a directive.
-6. BASS BUDGET — contextual rules per section type:
-   Intro/Verse: 1 simple → "[L1 sub drone]" or "[L2 warm groove enters]"
-   Pre-Chorus: 1-2 max → "[L2+L3 building]" OK
-   Hook: 1 → "[L4 nebula wave]"
-   Drop 1/2: 1 powerful → "[full 5L bass]" — OK here
-   Bridge: 1 minimal → "[L1 sub only]"
-   Break: 0-1 → "[bass drops out]"
-   Build-up: 1 rising → "[L1→L5 sequential re-entry]" — OK here
-   Drop 3: 1 maximum → "[full 5L monumental]" — OK here
-   Outro: 1 fading → "[L1 final decay]"
-   NEVER stack 3+ bass directives in non-Drop/Build-up sections.
-7. Pre-Chorus 1,2,3 must have DIFFERENT lyrics each
-8. Chorus: minimum 4 lines (AI rushes short choruses — always pad to 4+ lines)
-9. Short drop/transition/hook tags — compress aggressively
-10. If near limit: shorten tags first, never cut lyrics mid-sentence
-11. NEVER ask questions or request clarification — generate directly.
-12. Output starts immediately with [First Section] — no preamble or explanation.
-13. Output ONLY the formatted lyrics-prompt.`;
+
+2. META-TAG FORMAT — one block per section, elements separated by |:
+   [vocal vocals|Bass Lx directive|instruments,SFX|bars if instrumental]
+   - Vocal FIRST with "vocals" suffix: [Whispered vocals] [Belted vocals] [Falsetto vocals] [Intimate vocals] [Spoken vocals]
+   - Bass SECOND: Bass L1, Bass L2, Full 5L Bass, Bass L1+L2, Bass L1→L5
+   - Instruments/SFX THIRD: comma-separated specific names
+   - Bars LAST (only for instrumental sections): 4 bars, 8 bars, 16 bars
+
+   GOOD EXAMPLES:
+   [Whispered vocals|Bass L2 warm groove|Rhodes electric piano,tape hiss]
+   [Belted vocals|Bass L1+L2 polymorphic lock|choir pad,wide stereo|sub impact]
+   [Falsetto|Full 5L Bass|wide stereo choir pad,saxophone woven|anthemic reverb]
+   [Full 5L Bass maximum|Moog synth lead soars|wide stereo|8 bars]
+   [Bass L1→L5 sequential re-entry|hi-hat accelerates,snare roll|orchestral riser|8 bars tension]
+
+   BAD: [Whispered] alone / [Male Vocal][L1][saxophone][reverb] in separate blocks
+
+3. VOCAL GENDER — set ONCE in style-prompt only. In lyrics: NEVER repeat [Male Vocal]/[Female Vocal]
+   EXCEPTION: duets — use [Male Vocal] / [Female Vocal] only when voice switches
+
+4. SECTION DURATIONS (use for instrumental sections only):
+   Intro instrumental: 8-16 bars | Instrumental transition: 4-8 bars
+   Bass Drop: 4 bars | Build-up dynamics: 8 bars
+   Hook instrumental: 4-8 bars | Drop (no vocals): 8 bars
+   Post-Chorus: 4-8 bars | Outro: fading, no bar count needed
+
+5. POST-CHORUS FORMULA (killer feature for house music):
+   [Falsetto|Full 5L Bass|wide stereo choir pad,saxophone woven|anthemic reverb]
+   Follow with backing vocals in round brackets: (not done...) (never done...)
+   This creates long-lasting vocal shimmer — always use this formula for Post-Chorus
+
+6. BASS BUDGET per section:
+   Intro/Verse: 1 simple → Bass L1 or Bass L2
+   Pre-Chorus: 1-2 → Bass L2+L3 building
+   Hook/Chorus: 1 → Bass L4 nebula wave or Full 5L Bass
+   Drop 1/2: Full 5L Bass — always
+   Bridge: Bass L1 sub only
+   Break: bass drops out
+   Build-up: Bass L1→L5 sequential re-entry
+   Drop 3: Full 5L Bass monumental
+   Outro: Bass L1 final decay
+
+7. VALID DROP TYPES (all work in Suno):
+   [Bass Drop] [Instrumental Drop] [Half-time Drop] [Vocal Drop] [Drop]
+   Always add bass directive + duration: [Full 5L Bass|sub impact|4 bars]
+
+8. Capitalize Bass layer names: Bass L1, Full 5L Bass, Bass L1→L5
+   SFX names poetic and specific: cosmic breath, gravitational wave SFX, stellar pulse SFX
+
+9. Pre-Chorus 1,2,3 MUST have DIFFERENT lyrics
+10. Chorus minimum 4 lines
+11. NEVER ask questions — generate directly
+12. Output ONLY the formatted lyrics-prompt.`;
 
     const sR=TIER_RULES+`
 You are an expert Suno/Udio style-prompt artist. Build the style-prompt as a UNIFIED ARTISTIC IMAGE.
 
-NEW STANDARD — ORDER IS CRITICAL (tokenizer weights first tokens most):
-0. VOCAL FIRST (before genre, for vocal tracks): "[gender] [register] — [texture] [style] texture, [delivery] delivery, [effect]"
-   This gets maximum tokenizer weight. Skip only for pure instrumental.
-   Reference: ${vocalDesc5||vd}
+STYLE-PROMPT PHILOSOPHY:
+Write as a UNIFIED ARTISTIC NARRATIVE — not a list of tags.
+A music producer describing a track to a session musician. Vivid, specific, evocative.
 
-1. GENRE LINE: "[descriptive adjective]-inspired [genre] meets [subgenre], [decade/era]"
-   Example: "cosmic bass-driven future house meets orchestral progressive house, 2020s"
-   Use USER'S genre setting — NOT the artist's genre from DNA!
-   ${soundDNA?'\nSOUND DNA (production texture only, ignore artist genre): '+soundDNA:''}
-   ${styleF?'\nBase formula: '+styleF:''}
+STRUCTURE (follow this exact order):
 
-2. BPM WITH ADJECTIVE: "[mood-word] [number] BPM"
-   Examples: driving / pulsing / floating / hypnotic / soaring / surging / gentle
-   Reference: ${bpm}${key?', Key:'+key:''}
+0. VOCAL FIRST (max tokenizer weight — always before genre):
+   "[gender] [register], [texture] [style], [delivery], [effect]"
+   Example: "soulful male baritone, warm smoky texture, confessional soul style, whispered-to-belted delivery, dry close-mic with deep shimmer reverb"
+   Build from: ${vocalDesc5||vd}
+   ${vocalDNA?'Voice DNA (HOW they sing only, never artist genre): '+vocalDNA:''}
+   NEVER mention artist names. For duets: describe BOTH voices in sequence.
 
-3. VOCAL — 5 criteria (register + texture + style + delivery + effect):
-   Format: "[gender] [register] — [texture] [style] texture, [delivery] delivery, [effect]"
-   Example: "female soprano — airy cinematic texture, soaring delivery, wide stereo shimmer reverb"
-   Build from 5-param: ${vocalDesc5}
-   ${vocalDNA?'Enrich with Vocal DNA characteristics (HOW they sing, NOT their genre): '+vocalDNA:''}
-   NEVER mention artist names. Translate DNA into technical descriptors only.
-   For duets: describe BOTH voices separately with their own 5-param.
+1. GENRE NARRATIVE (descriptive phrase, not just a label):
+   "[adjective]-[adjective] [genre] meets [subgenre], [era/decade]"
+   Example: "Head-nodding cosmic bass-driven Future House meets melodic progressive house, 2020s"
+   Use USER genre: ${genre} | ${bpm} | ${key?'Key: '+key:''}
+   ${soundDNA?'Production DNA (texture only, ignore artist genre): '+soundDNA:''}
+   ${styleF?'Formula base: '+styleF:''}
 
-4. BASS — narrative progression (NOT a tag list):
-   Describe as a journey: "sub drone awakens → warm groove enters → melodic stab drops → orbital bridge → shimmer finale"
-   MAX 2 bass descriptors in style-prompt. Full architecture lives HERE, not in lyrics.
-   ${bp?'Bass reference: '+bp:''}
+2. SONIC TEXTURE NARRATIVE (instruments + production as flowing description):
+   Describe HOW the track sounds, not list what's in it.
+   Example: "built on punchy four-on-the-floor kick, sidechained Moog bass, glossy synth plucks, and Rhodes chords with lush chorus. Melancholic topline synths, filtered arps, crisp claps, tight hats, and airy delay throws shape a polished emotional club groove"
+   References: ${instr||'piano,synth,bass'} | ${prod||'analog,layered'} | ${mood||'atmospheric,romantic'}
 
-5. INSTRUMENTS — specific names only:
-   NOT "guitar" → "jangly Telecaster" | NOT "piano" → "Rhodes electric" | NOT "strings" → "lush string quartet"
-   Reference: ${instr||'piano,strings,bass'}
+3. SFX — max 3, genre-defining only: ${sfx||'vinyl crackle,shimmer sweep'}
 
-6. PRODUCTION + MOOD: ${prod||'analog,warm,layered'} | ${mood||'romantic,atmospheric'}
+4. BASS ARCHITECTURE (always last, always this exact format):
+   BASS 5-Layer(L) polymorphic:L1-[sub description]|L2-[mid description]|L3-[high description]|L4-[orbital description]|L5-[harmonic description].[Sub/Bass behavior note].
+   Example: "BASS 5-Layer(L) polymorphic:L1-deep sub-bass floor stable|L2-mid punchy walking groove,melodic|L3-high syncopated stab,dynamic|L4-deep slow orbital wave dark sidechain undertow|L5-chronicle sub-harmonic drone finale only.Sub heartbeat half-time drop."
+   Reference: ${bp||'5-layer polymorphic bass'}
 
-7. SFX — only genre-defining, max 3: ${sfx||'vinyl crackle,shimmer sweep'}
-
-${negP?'8. NEGATIVE (always LAST): '+negP:''}
+${negP?'5. NEGATIVE (always LAST after bass): '+negP:''}
 
 HARD RULES:
 - NEVER: [Reverb:XX%] [Bass:XX%] [Stereo:Wide] — PLACEBO
