@@ -2139,7 +2139,7 @@ async function callAI(prompt,maxTokens=2000){
   try{
     const r=await fetchWithTimeout(DIRECT_URL,{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
       body:JSON.stringify(payload)
     }, 55000);
     const d=await r.json();
