@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026 v5.5.0</title>
+<title>ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ © 2026 v5.6.0</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap');
 :root{
@@ -247,7 +247,7 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
       </svg>
     </div>
     <div>
-      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span><span class="ver-badge">v5.5.0</span></div>
+      <div class="brand-name">ᯓ𝄞LIPS⋆by⋆AVII<span>ˎˊ˗</span> <span class="copy-badge">©</span><span class="copy-year">2026</span><span class="ver-badge">v5.6.0</span></div>
       <div class="brand-tag">Lyrics & Instrumentation Prompt Synthesizer · by @AVII</div>
     </div>
   </div>
@@ -369,6 +369,21 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
               <option value="City Pop, J-Pop">City Pop / J-Pop</option>
               <option value="Ambient">Ambient</option>
               <option value="Phonk">Phonk</option>
+              <option value="UK Garage">UK Garage (2-step, soulful, 130 BPM)</option>
+              <option value="Dub Techno">Dub Techno (atmospheric, echo-heavy)</option>
+              <option value="Space Disco">Space Disco (cosmic, groovy, 120 BPM)</option>
+              <option value="Psybient">Psybient (psychedelic ambient, 90–110 BPM)</option>
+              <option value="Nu Disco">Nu Disco (retro disco × modern electronic)</option>
+              <option value="Electro Swing">Electro Swing (jazz × electronic, 120–130 BPM)</option>
+              <option value="Vaporwave">Vaporwave (nostalgic, slowed, lo-fi aesthetic)</option>
+              <option value="Witch House">Witch House (dark, occult, slowed, atmospheric)</option>
+              <option value="Cyberpunk Electronic">Cyberpunk Electronic (dark, industrial, futuristic)</option>
+            </optgroup>
+            <optgroup label="── 🌴 Dancehall ──">
+              <option value="Dancehall">Dancehall (Jamaican, dembow rhythm)</option>
+              <option value="Dancehall Synthwave">Dancehall Synthwave (dembow × 80s synths, 95–115 BPM) ✦</option>
+              <option value="Dancehall Electronic">Dancehall Electronic (digital dembow, glossy mix)</option>
+              <option value="Moombahton">Moombahton (Dancehall × House, 108 BPM)</option>
             </optgroup>
             <optgroup label="── ⟨Z⟩ Zifferblatt ──">
               <option value="zifferblatt-fr-1">FR ① French Touch (Daft Punk×Air ~112BPM F-min)</option>
@@ -404,8 +419,75 @@ textarea.out{border:none;border-radius:0;background:var(--p1);font-family:var(--
           </select>
         </div>
         <div class="fld" id="sub-wrap" style="display:none"><label class="lbl" data-i18n="lbl.subgenre">Піджанр</label><select id="subgenre"><option value="">— не вибрано —</option></select></div>
+        <div class="fld">
+          <label class="lbl">🕰️ Епоха / Era <span class="badge" style="font-size:9px;background:rgba(62,201,201,.15);color:var(--teal);padding:1px 5px;border-radius:4px">production texture</span></label>
+          <select id="era-select" onchange="onEraChange()">
+            <option value="">— не вибрано (2020s за замовч.) —</option>
+            <option value="70s">1970s — analog warmth, tape saturation, Stax-era soul</option>
+            <option value="80s">1980s — gated reverb, DX7 synths, chorus-pedal, Simmons drums</option>
+            <option value="90s">1990s — raw garage production, dusty vinyl samples, boom bap</option>
+            <option value="2000s">2000s — polished digital, compressed mix, early EDM</option>
+            <option value="2010s">2010s — sidechain pump, glossy mix, festival EDM, trap hi-hats</option>
+            <option value="2020s">2020s — wide stereo, granular textures, lo-fi revival, hyperpop</option>
+            <option value="modern vintage">Modern Vintage — modern production + vintage [era] instrument tone</option>
+          </select>
+        </div>
       </div>
       <div class="fld" id="cg-wrap" style="display:none"><label class="lbl" data-i18n="lbl.customGenre">Жанр вручну</label><input type="text" id="cg" placeholder="напр. Synthwave, Melodic Dubstep…" data-i18n-ph="ph.customGenre"></div>
+      <div class="fld" style="background:rgba(62,201,201,.04);border:1px solid rgba(62,201,201,.15);border-radius:8px;padding:10px 12px">
+        <label class="lbl" style="color:var(--teal)">🎛️ Genre Combiner <span style="font-size:10px;color:var(--t2);font-weight:400">— max 2 жанри для Suno (3+ = конфлікт)</span></label>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px">
+          <select id="genre-combo-1" style="flex:1;min-width:120px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;color:var(--t1)">
+            <option value="">Жанр 1...</option>
+            <option value="Dancehall">Dancehall</option>
+            <option value="Synthwave">Synthwave</option>
+            <option value="Future House">Future House</option>
+            <option value="Deep House">Deep House</option>
+            <option value="Melodic Techno">Melodic Techno</option>
+            <option value="Trip Hop">Trip Hop</option>
+            <option value="Lo-Fi">Lo-Fi</option>
+            <option value="Trap">Trap</option>
+            <option value="R&B">R&B</option>
+            <option value="Jazz">Jazz</option>
+            <option value="Soul">Soul</option>
+            <option value="Reggaeton">Reggaeton</option>
+            <option value="Afrobeat">Afrobeat</option>
+            <option value="Flamenco">Flamenco</option>
+            <option value="Ambient">Ambient</option>
+            <option value="Drum and Bass">Drum and Bass</option>
+            <option value="UK Garage">UK Garage</option>
+            <option value="Nu Disco">Nu Disco</option>
+            <option value="Psybient">Psybient</option>
+            <option value="Moombahton">Moombahton</option>
+          </select>
+          <span style="color:var(--teal);font-weight:700;font-size:14px">×</span>
+          <select id="genre-combo-2" style="flex:1;min-width:120px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;color:var(--t1)">
+            <option value="">Жанр 2...</option>
+            <option value="Synthwave">Synthwave</option>
+            <option value="Electronic">Electronic</option>
+            <option value="Future House">Future House</option>
+            <option value="Melodic Techno">Melodic Techno</option>
+            <option value="Trip Hop">Trip Hop</option>
+            <option value="Cinematic">Cinematic</option>
+            <option value="Lo-Fi">Lo-Fi</option>
+            <option value="Neo-Soul">Neo-Soul</option>
+            <option value="Progressive House">Progressive House</option>
+            <option value="Ambient">Ambient</option>
+            <option value="Jazz">Jazz</option>
+            <option value="Classical">Classical</option>
+            <option value="Folk">Folk</option>
+            <option value="Pop">Pop</option>
+            <option value="Indie">Indie</option>
+            <option value="Afrobeat">Afrobeat</option>
+            <option value="Downtempo">Downtempo</option>
+            <option value="Drum and Bass">Drum and Bass</option>
+            <option value="Funk">Funk</option>
+            <option value="Reggae">Reggae</option>
+          </select>
+          <button class="btn sm" onclick="applyGenreCombo()" style="background:rgba(62,201,201,.1);border-color:rgba(62,201,201,.3);color:var(--teal)">⊕ Combine</button>
+        </div>
+        <div id="genre-combo-preview" style="display:none;margin-top:6px;font-size:11px;font-family:var(--mono);color:var(--teal);background:var(--surface);padding:4px 8px;border-radius:4px"></div>
+      </div>
       <div class="g3">
         <div class="fld"><label class="lbl" data-i18n="lbl.bpmFrom">BPM від</label><input type="number" id="bpm1" min="50" max="220" value="118" step="1"></div>
         <div class="fld"><label class="lbl" data-i18n="lbl.bpmTo">BPM до</label><input type="number" id="bpm2" min="50" max="220" placeholder="необов'язково" step="1"></div>
@@ -2210,6 +2292,7 @@ async function initStep4(){
   const negP=getNegativePrompt();
   const styleF=window._styleFormula||'';
   const vocalDNA=window._vocalDNA?`VOCAL DNA — voice characteristics only (NOT the artist's genre/style — only HOW they sing): "${window._vocalDNA.n}": ${window._vocalDNA.v}`:'';
+  const eraTag=window._eraTag||'';
   const soundDNA=window._soundDNA?`SOUND DNA — production style only (NOT genre, NOT tempo — those come from user settings): "${window._soundDNA.n}": ${window._soundDNA.s}`:'';
 
   // ── NEW STANDARD: style-prompt as artistic image, not tag concatenation ──
@@ -2325,7 +2408,7 @@ STRUCTURE (follow this exact order):
 2. SONIC TEXTURE NARRATIVE (instruments + production as flowing description):
    Describe HOW the track sounds, not list what's in it.
    Example: "built on punchy four-on-the-floor kick, sidechained Moog bass, glossy synth plucks, and Rhodes chords with lush chorus. Melancholic topline synths, filtered arps, crisp claps, tight hats, and airy delay throws shape a polished emotional club groove"
-   References: ${instr||'piano,synth,bass'} | ${prod||'analog,layered'} | ${mood||'atmospheric,romantic'}
+   References: ${instr||'piano,synth,bass'} | ${prod||'analog,layered'} | ${mood||'atmospheric,romantic'}${eraTag?' | ERA: '+eraTag:''}
 
 3. SFX — max 3, genre-defining only: ${sfx||'vinyl crackle,shimmer sweep'}
 
@@ -2466,7 +2549,7 @@ function exportAsHtml(entry){
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)} — LIPS by AVII v5.5.0</title>
+<title>${esc(title)} — LIPS by AVII v5.6.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Unbounded:wght@300;700&display=swap" rel="stylesheet">
 <style>
@@ -2524,7 +2607,7 @@ body{background:var(--bg);color:var(--white);font-family:'JetBrains Mono',monosp
     <div class="badge"><span>style</span><span class="val" id="activeStyleCount">—</span><span style="color:var(--muted)"> / 1000</span></div>
   </div>
 </div>
-<div class="meta-row">${esc(genre)} · ${esc(dateStr)} · LIPS by AVII v5.5.0</div>
+<div class="meta-row">${esc(genre)} · ${esc(dateStr)} · LIPS by AVII v5.6.0</div>
 <div class="layout">
 <div class="lyrics-wrap">
 <div class="code-block" id="lyricsBlock">${highlightLyrics(lyricsPrompt)}</div>
@@ -2721,7 +2804,7 @@ function buildSongJson(entry){
       bpm: st.bpm1||(entry.bpm)||'',
       key: st.key||'',
       mood: [...(SEL&&SEL.mood?SEL.mood:[])],
-      source: 'LIPS by AVII v5.5.0',
+      source: 'LIPS by AVII v5.6.0',
       createdAt: new Date(entry.ts).toISOString(),
       updatedAt: now
     },
@@ -3776,9 +3859,66 @@ const STYLE_FORMULAS = [
    tags:'epic orchestral, cinematic, brass fanfare, soaring strings, no vocals, no humming, instrumental only, wide reverb, powerful, building intensity'},
   {name:'Dark Cinematic',bpm:'85–100',cat:'cinematic',
    tags:'dark cinematic, thriller soundtrack, tense strings, low brass, haunting atmosphere, building dread, no vocals, minimal, atmospheric'},
+  // ── Dancehall ──
+  {name:'Dancehall Synthwave ✦',bpm:'95–115',cat:'dancehall',
+   tags:'glossy emotional dancehall meets 80s synthwave, syncopated dembow drums, Moog sidechained bass, warm Rhodes chords, glossy arpeggiated synths, gated delay throws, neon-drenched mix, punchy low end, shimmering highs, emotional, hypnotic'},
+  {name:'Dancehall Electronic',bpm:'100–110',cat:'dancehall',
+   tags:'electronic dancehall, digital dembow rhythm, punchy sub-bass, glossy synth layers, modern production, danceable groove, tropical energy, polished mix'},
+  {name:'Moombahton',bpm:'108',cat:'dancehall',
+   tags:'moombahton, 108 BPM, dancehall dembow rhythm, house bassline, tropical synths, club energy, sidechain pump, reggaeton influence'},
+  // ── Fusion / New ──
+  {name:'Space Disco',bpm:'118–122',cat:'electronic',
+   tags:'space disco, cosmic groove, funky bass, analog synths, galactic atmosphere, 4-on-the-floor, glittery production, retro-futuristic, wide stereo'},
+  {name:'Nu Disco',bpm:'116–122',cat:'electronic',
+   tags:'nu disco, retro disco vibes, modern production, funky bassline, lush strings, warm analog, danceable, glossy mix, uplifting groove'},
+  {name:'Psybient',bpm:'90–105',cat:'ambient',
+   tags:'psybient, psychedelic ambient, floating pads, organic textures, meditative groove, ethnic instruments, cosmic atmosphere, evolving soundscape'},
+  {name:'UK Garage',bpm:'130–132',cat:'electronic',
+   tags:'UK garage, 2-step rhythm, shuffled beats, soulful vocals, warm bassline, classic garage production, energetic, underground club feel'},
 ];
 
 let selectedFormula = null;
+
+// ── ERA PRODUCTION TAGS ──────────────────────────────────────
+const ERA_TAGS = {
+  '70s': 'analog warmth, tape saturation, Stax-era soul, warm tube-amp glow',
+  '80s': 'gated reverb, DX7 synths, chorus-pedal, Simmons drums, 80s production',
+  '90s': 'raw garage production, dusty vinyl samples, boom bap textures, 90s underground',
+  '2000s': 'polished digital mix, compressed tight, early EDM glossy, bright compressed',
+  '2010s': 'sidechain pump, glossy compressed mix, festival EDM, trap hi-hats, 2010s production',
+  '2020s': 'wide stereo image, granular shimmer, lo-fi revival, hyperpop textures, modern production',
+  'modern vintage': 'modern polished production with vintage instrument tones, warm analog meets digital precision',
+};
+
+function onEraChange(){
+  const era = document.getElementById('era-select')?.value || '';
+  // Зберігаємо для використання в AI промпті
+  window._eraTag = era ? ERA_TAGS[era] : '';
+  if(era) showToast('🕰️ Era: '+era+' — production теги додано до стилю');
+}
+
+// ── GENRE COMBINER ────────────────────────────────────────────
+function applyGenreCombo(){
+  const g1 = document.getElementById('genre-combo-1')?.value || '';
+  const g2 = document.getElementById('genre-combo-2')?.value || '';
+  if(!g1 && !g2){ showToast('Оберіть хоча б один жанр'); return; }
+  const combined = g1 && g2 ? g1+' '+g2 : (g1||g2);
+  // Підставляємо в поле custom genre і вибираємо custom
+  const genreSel = document.getElementById('genre');
+  if(genreSel){
+    genreSel.value = 'custom';
+    onGenre();
+  }
+  const cgInput = document.getElementById('cg');
+  if(cgInput) cgInput.value = combined;
+  // Preview
+  const prev = document.getElementById('genre-combo-preview');
+  if(prev){
+    prev.style.display='block';
+    prev.textContent = '→ "'+combined+'"';
+  }
+  showToast('⊕ Комбо: '+combined);
+}
 
 function initStyleFormulas(){
   const grid=document.getElementById('formula-grid');if(!grid)return;
