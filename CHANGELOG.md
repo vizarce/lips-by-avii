@@ -4,6 +4,36 @@ All notable changes to this project are documented here.
 
 ---
 
+## [v5.6.0] — 2026-06-13
+
+### 🌴 Dancehall, Era Selector & Genre Combiner
+- Новий жанровий розділ **🌴 Dancehall**: Dancehall, **Dancehall Synthwave ✦** (dembow × 80s synths), Dancehall Electronic, Moombahton
+- Нові жанри у World/Ambient: UK Garage, Dub Techno, Space Disco, Psybient, Nu Disco, Electro Swing, Vaporwave, Witch House, Cyberpunk Electronic
+- **🕰️ Era selector** (70s → 2020s + Modern Vintage) — додає production-текстуру епохи (`ERA_TAGS`) у style AI промпт
+- **🎛️ Genre Combiner** — два дропдауни → комбінований жанр (`applyGenreCombo()`), максимум 2 жанри для Suno
+- 8 нових пресетів Style Formula Builder: Dancehall Synthwave, Dancehall Electronic, Moombahton, Space Disco, Nu Disco, Psybient, UK Garage та інші
+
+---
+
+## [v5.5.5] — 2026-06-12
+
+### 🐛 Timeout Fix & Artistic Style-Prompt Rewrite
+- `AbortController` з 55-секундним таймаутом для proxy та прямого fetch — більше не "висне" на довгих запитах
+- Style AI: новий наративний стандарт ("музичний продюсер описує трек сесійному музиканту"), фіксований формат `BASS 5-Layer(L) polymorphic:L1-...|L2-...|...`
+- Lyrics AI: новий MT-формат — один блок на секцію `[vocal vocals|Bass Lx directive|instruments,SFX|bars]`
+- Документована формула Post-Chorus (killer feature для house) з backing vocals у круглих дужках
+- Валідовано всі типи Drop (`[Bass Drop]`, `[Half-time Drop]`, `[Vocal Drop]` тощо) + тривалості секцій у барах
+- Оновлена контекстна таблиця Bass Budget по типу секції
+
+---
+
+## [v5.5.4] — 2026-06-11
+
+### 🐛 Bug Fix
+- Виправлено назву моделі Anthropic: `claude-sonnet-4-5` → `claude-sonnet-4-5-20250929` (некоректний ID викликав помилки API)
+
+---
+
 ## [v5.5.3] — 2026-06-10
 
 ### 🧬 DNA Differentiation & Multi-Select Vocal

@@ -1,6 +1,6 @@
 # ᯓ𝄞LIPS⋆by⋆AVIIˎˊ˗ ⓒ 2026
 
-**Lyrics & Instrumentation Prompt Synthesizer** — веб-застосунок для створення професійних промптів для AI-музичних генераторів (Suno та ін.) з допомогою Claude Sonnet 4.
+**Lyrics & Instrumentation Prompt Synthesizer** — веб-застосунок для створення професійних промптів для AI-музичних генераторів (Suno та ін.) з допомогою Claude Sonnet 4.5.
 
 > AVII = **A**rtificial + **V**italiy + **I**ryna **I**ntelligence
 
@@ -28,19 +28,23 @@ LIPS by AVII генерує два типи промптів:
 
 ---
 
-## 🆕 Що нового у v5.5.3
+## 🆕 Що нового у v5.6.0
 
-- **🎙️ 5-Parameter Vocal Builder** — Register + Texture + Style + Delivery + Effects, мульти-вибір до 2 опцій на групу, 8 пресетів одним кліком (Bell-like Future House, Smoky Alto Lo-Fi, Powerful Soul Belt тощо)
-- **🧬 Vocal DNA / Sound DNA** — розділені: Vocal DNA = лише характеристики голосу, Sound DNA = лише текстура продакшну; кнопка **⊕ Комбінувати з 5-param**
-- **🎯 Vocal-First Standard** — у style-prompt вокал тепер ставиться першим (максимальна вага токенізатора); `()` = заспіваний контент, `[]` = технічна директива
-- **🔢 Bass Budget** — контекстна таблиця по типу секції (Drop = повні 5 шарів, Verse = 1 простий шар, Build-up = послідовний re-entry)
-- **🗄️ Song Vault** — JSON-експорт/імпорт пісень (`buildSongJson()`, `prefillFromJson()`), повна структурована схема v1.0
-- **☁️ Supabase Sync** — авто-синхронізація бібліотеки з Supabase (`syncToSupabase()`, `syncVaultFromSupabase()`)
+- **🌴 Dancehall** — новий жанровий розділ: Dancehall, **Dancehall Synthwave ✦** (dembow × 80s synths), Dancehall Electronic, Moombahton
+- **🌍 Нові жанри** — UK Garage, Dub Techno, Space Disco, Psybient, Nu Disco, Electro Swing, Vaporwave, Witch House, Cyberpunk Electronic
+- **🕰️ Era Selector** — 70s → 2020s + Modern Vintage, додає production-текстуру епохи в AI style-prompt
+- **🎛️ Genre Combiner** — комбінує до 2 жанрів у єдиний рядок для Suno
+- **📝 Новий MT-формат лірики** — один блок на секцію `[vocal vocals|Bass Lx|instruments,SFX|bars]`, формула Post-Chorus, валідовані типи Drop
+- **🎙️ Артистичний style-prompt** — наративний стандарт, вокал першим, фіксований `BASS 5-Layer(L) polymorphic` формат
+- **⏱️ AbortController timeout (55s)** — захист від "зависання" AI-запитів
+- **🎙️ 5-Parameter Vocal Builder** — Register + Texture + Style + Delivery + Effects, мульти-вибір до 2 опцій на групу, 8 пресетів одним кліком
+- **🧬 Vocal DNA / Sound DNA** — розділені: Vocal DNA = характеристики голосу, Sound DNA = текстура продакшну; кнопка **⊕ Комбінувати з 5-param**
+- **🔢 Bass Budget** — контекстна таблиця по типу секції
+- **🗄️ Song Vault** — JSON-експорт/імпорт пісень, повна структурована схема v1.0, **☁️ Supabase Sync**
 - **🔢 Лічильник тегів** у Style-prompt (зелений 4-7 / жовтий 8-10 / червоний >10)
 - **⚡ Extend Protocol** — підказка для розширення треків у Suno
-- **🎚️ +14 нових продакшн-тегів**: swirling reverb, hazy reverb, tube-amp warmth, chest-rattling pulse, 808 sub floor, vocal-forward mix та інші
 - **🎤 Artist DNA** — 32+32 артисти (Vocal/Sound) у 5 табах з повними описами
-- **🎼 Style Formula Builder** — 25 жанрових пресетів
+- **🎼 Style Formula Builder** — 33 жанрові пресети
 - **🚫 Negative Prompting** — 47 тегів у 3 групах
 - **🏆 TIER_RULES** — у всіх AI-функціях, забороняє placebo-теги
 
@@ -56,6 +60,8 @@ LIPS by AVII генерує два типи промптів:
 - Власна лірика (необов'язково — AI оформить у формат Suno з тегами)
 - Рима: точна / баланс / зміст пріоритет
 - Жанр та піджанр
+- **🕰️ Era Selector** — епоха продакшну (70s-2020s, Modern Vintage) додає текстуру в style-prompt
+- **🎛️ Genre Combiner** — комбінує до 2 жанрів у єдиний рядок (макс. 2 для Suno)
 - BPM (від → до, або пресет)
 - Тональність
 - Тип і стиль вокалу
@@ -165,6 +171,23 @@ LIPS by AVII генерує два типи промптів:
 | City Pop / J-Pop | Сіті-поп та j-pop |
 | Ambient | Ембієнт |
 | Phonk | Фонк |
+| UK Garage | 2-step, soulful, 130 BPM |
+| Dub Techno | Атмосферний, насичений ехо |
+| Space Disco | Космічний, грувовий, 120 BPM |
+| Psybient | Психоделічний ембієнт, 90–110 BPM |
+| Nu Disco | Ретро-діско × сучасна електроніка |
+| Electro Swing | Джаз × електроніка, 120–130 BPM |
+| Vaporwave | Ностальгійний, сповільнений, lo-fi |
+| Witch House | Темний, окультний, сповільнений, атмосферний |
+| Cyberpunk Electronic | Темний, індустріальний, футуристичний |
+
+### 🌴 Dancehall
+| Варіант | Опис |
+|---------|------|
+| Dancehall | Ямайський, ритм dembow |
+| Dancehall Synthwave ✦ | Dembow × синти 80-х, 95–115 BPM |
+| Dancehall Electronic | Цифровий dembow, глянцевий мікс |
+| Moombahton | Dancehall × House, 108 BPM |
 
 ### ⟨Z⟩ Zifferblatt (стилізовані по країнах)
 | Код | Опис |
@@ -273,7 +296,7 @@ LIPS by AVII генерує два типи промптів:
 
 ## 🤖 AI-інтеграція
 
-- **Модель:** Claude Sonnet 4 (`claude-sonnet-4-20250514`) від Anthropic
+- **Модель:** Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) від Anthropic
 - **API ключ:** вводиться вручну у верхній панелі, зберігається в `localStorage`
 - **Що робить AI:**
   - Аналізує жанр і дає рекомендації
@@ -337,6 +360,9 @@ lips-by-avii/
 
 | Версія | Що нового |
 |--------|-----------|
+| **v5.6.0** | Dancehall Synthwave, Era Selector, Genre Combiner, +9 жанрів, +8 Style Formula пресетів |
+| **v5.5.5** | Timeout (AbortController 55s), артистичний style-prompt, новий MT-формат лірики |
+| **v5.5.4** | Виправлення назви моделі (claude-sonnet-4-5-20250929) |
 | **v5.5.3** | DNA-розділення (Vocal/Sound), ⊕ Комбінувати з 5-param, мульти-вибір вокалу, відновлена щільність директив |
 | **v5.5.2** | Виправлення мета-відповідей style-prompt, дедуп Female/Male Vocal, контекстний Bass Budget |
 | **v5.5.1** | Виправлення TDZ-помилки vocalDesc5 |
