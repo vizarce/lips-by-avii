@@ -2094,9 +2094,8 @@ async function callAI(prompt,maxTokens=2000){
       :'API key not entered. Add your key in the top panel.');
   }
   const payload={model:'claude-sonnet-4-5-20250929',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]};
-  const isDeployed=window.location.hostname.includes('netlify.app')
-    ||window.location.hostname.includes('github.io')
-    ||window.location.protocol==='file:';
+  // Only Netlify has the proxy function — GitHub Pages + local use direct API call
+  const isDeployed=window.location.hostname.includes('netlify.app');
 
   // Helper: fetch with timeout
   async function fetchWithTimeout(url, options, timeoutMs=55000){
@@ -2132,6 +2131,7 @@ async function callAI(prompt,maxTokens=2000){
       if(e.message&&e.message.includes('Таймаут'))throw e;
       if(e.message&&e.message.includes('Timeout'))throw e;
       if(e.message&&!e.message.includes('fetch'))throw e;
+      // Fall through to direct call
     }
   }
 
